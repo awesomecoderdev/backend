@@ -61,7 +61,7 @@ class AuthController extends Controller
             "success" => true,
             "message" => "User successfully created!",
             "data" => $request->all(),
-            "token" => $user->createToken($request->input("name"))->plainTextToken,
+            // "token" => $user->createToken($request->input("name"))->plainTextToken,
         ], JsonResponse::HTTP_CREATED);
     }
 
@@ -74,13 +74,13 @@ class AuthController extends Controller
     {
         if (Auth::guard('web')->attempt(["email" => $request->email, "password" => $request->password])) {
             $user = Auth::user();
-            DB::table('personal_access_tokens')->where('tokenable_id', $user->id)->delete();
-            $token = $user->createToken($user->name)->plainTextToken;
+            // DB::table('personal_access_tokens')->where('tokenable_id', $user->id)->delete();
+            // $token = $user->createToken($user->name)->plainTextToken;
             return Response::json(
                 [
                     "success" => true,
                     "message" => "Successfully Authorized.",
-                    "token" => $token,
+                    // "token" => $token,
                     "user" => $user,
                 ],
                 JsonResponse::HTTP_OK

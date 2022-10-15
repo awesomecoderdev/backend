@@ -2,8 +2,14 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Http\Response as JsonResponse;
+use Illuminate\Support\Facades\Response;
 
 class Handler extends ExceptionHandler
 {
@@ -43,8 +49,39 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'message'   =>  "Not Found.",
+            ], JsonResponse::HTTP_NOT_FOUND);
+        });
+
+        $this->renderable(function (AuthenticationException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'message'   => "Unauthenticated.",
+            ], JsonResponse::HTTP_UNAUTHORIZED);
+        });
+
+        $this->renderable(function (HttpException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'message'   => "Unauthenticated.",
+            ], JsonResponse::HTTP_UNAUTHORIZED);
+        });
+
+        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'message'   =>  "Method Not Allowed.",
+            ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+        });
+
         $this->reportable(function (Throwable $e) {
-            //
+            return Response::json([
+                'success'   => false,
+                'message'   => $e->getMessage(),
+            ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
     }
 }
