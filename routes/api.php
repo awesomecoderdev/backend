@@ -29,4 +29,5 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     Route::get('/', 'index')->name('user');
     Route::post('register', 'store')->name('register');
     Route::post('login', 'auth')->name('login');
+    Route::post('logout', 'destroy')->name('logout');
 });

@@ -53,6 +53,7 @@ class Handler extends ExceptionHandler
             return Response::json([
                 'success'   => false,
                 'message'   =>  "Not Found.",
+                'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_NOT_FOUND);
         });
 
@@ -60,6 +61,7 @@ class Handler extends ExceptionHandler
             return Response::json([
                 'success'   => false,
                 'message'   => "Unauthenticated.",
+                'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
@@ -67,6 +69,7 @@ class Handler extends ExceptionHandler
             return Response::json([
                 'success'   => false,
                 'message'   => "Unauthenticated.",
+                'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
@@ -74,6 +77,7 @@ class Handler extends ExceptionHandler
             return Response::json([
                 'success'   => false,
                 'message'   =>  "Method Not Allowed.",
+                'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
 

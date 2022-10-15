@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\AuthUserRequest;
+use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Response as JsonResponse;
-
 
 class AuthController extends Controller
 {
@@ -27,10 +29,10 @@ class AuthController extends Controller
         return Response::json([
             "success" => true,
             "message" => "Index ",
+            "auth" => Auth::user(),
+            "status" => Auth::check(),
             "data" => User::all(),
-        ], JsonResponse::HTTP_OK, [
-            "X-AwesomeMailer" => true,
-        ], 0);
+        ], JsonResponse::HTTP_OK);
     }
 
     /**
@@ -51,17 +53,20 @@ class AuthController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-        $input = $request->only(["name", "email"]);
-        $input["password"] = bcrypt($request->input("password"));
+        event(new Registered($user));
 
-        $user = User::create($input);
+        Auth::login($user);
 
         return Response::json([
             "success" => true,
             "message" => "User successfully created!",
             "data" => $request->all(),
-            // "token" => $user->createToken($request->input("name"))->plainTextToken,
         ], JsonResponse::HTTP_CREATED);
     }
 
@@ -217,6 +222,16 @@ class AuthController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if (Session::flush() && Auth::logout()) {
+            return Response::json([
+                "success" => true,
+                "message" => "Successfully Logout.",
+            ], JsonResponse::HTTP_OK);
+        } else {
+            return Response::json([
+                'success'   => false,
+                'message'   => 'Something went wrong.',
+            ], JsonResponse::HTTP_BAD_REQUEST);
+        }
     }
 }
