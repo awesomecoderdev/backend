@@ -222,7 +222,7 @@ class AuthController extends Controller
      */
     public function destroy(User $user)
     {
-        if (Session::flush() && Auth::logout()) {
+        if (Session::flush() && Auth::guard('web')->logout()) {
             return Response::json([
                 "success" => true,
                 "message" => "Successfully Logout.",
