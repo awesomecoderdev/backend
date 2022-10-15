@@ -24,7 +24,7 @@ use Illuminate\Http\Response as JsonResponse;
 // generate csrf token
 Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf');
 
-// auth routes
+// protected routes
 Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
     Route::get('/', 'index')->middleware('auth')->name('user');
     Route::post('logout', 'destroy')->middleware('auth')->name('logout');

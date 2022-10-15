@@ -89,7 +89,10 @@ class AuthController extends Controller
                     "success" => true,
                     'status'    => JsonResponse::HTTP_ACCEPTED,
                     "message" => "Successfully Authorized.",
-                    "user" => $user,
+                    "auth" => UserResource::make(
+                        Auth::user()
+                    ),
+                    "notifications" => Auth::user()->notifications
                 ],
                 JsonResponse::HTTP_OK
             );
