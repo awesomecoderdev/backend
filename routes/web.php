@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\AuthController;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -88,3 +91,15 @@ Route::post('/login', function (Request $request) {
     //     echo "something went wrong";
     // }
 })->name("ll");
+
+
+// generate csrf token
+Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf');
+
+// protected routes
+Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
+    Route::get('/', 'index')->middleware('auth')->name('user');
+    Route::post('register', 'store')->middleware('guest')->name('register');
+    Route::post('login', 'auth')->middleware('guest')->name('login');
+    Route::post('logout', 'destroy')->middleware('auth')->name('logout');
+});

@@ -53,23 +53,23 @@ class Handler extends ExceptionHandler
             return Response::json([
                 'success'   => false,
                 'message'   =>  "Not Found.",
-                'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_NOT_FOUND);
         });
 
         $this->renderable(function (AuthenticationException $e, $request) {
             return Response::json([
                 'success'   => false,
-                'message'   => "Unauthenticated.",
-                'err'   => $e->getMessage(),
+                'message'   => "Unauthenticated Access.",
+                // 'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
         $this->renderable(function (HttpException $e, $request) {
             return Response::json([
                 'success'   => false,
-                'message'   => "Unauthenticated.",
-                'err'   => $e->getMessage(),
+                // 'message'   => "Unauthenticated.",
+                'message'   => "Method Not Allowed.",
+                // 'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
