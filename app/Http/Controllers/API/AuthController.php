@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
@@ -28,10 +29,13 @@ class AuthController extends Controller
     {
         return Response::json([
             "success" => true,
-            "check" => Auth::check(),
+            'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
-            "auth" => Auth::user(),
-        ], JsonResponse::HTTP_OK);
+            "auth" => UserResource::make(
+                Auth::user()
+            ),
+            "notifications" => Auth::user()->notifications
+        ], JsonResponse::HTTP_ACCEPTED);
     }
 
     /**
@@ -64,9 +68,9 @@ class AuthController extends Controller
 
         return Response::json([
             "success" => true,
+            'status'    => JsonResponse::HTTP_CREATED,
             "message" => "User successfully created!",
-            "data" => $request->all(),
-        ], JsonResponse::HTTP_CREATED);
+        ], JsonResponse::HTTP_OK);
     }
 
     /**
@@ -83,17 +87,17 @@ class AuthController extends Controller
             return Response::json(
                 [
                     "success" => true,
+                    'status'    => JsonResponse::HTTP_ACCEPTED,
                     "message" => "Successfully Authorized.",
-                    // "token" => $token,
                     "user" => $user,
                 ],
                 JsonResponse::HTTP_OK
             );
-            // )->withCookie(Cookie::make('next_cors', $token, (60 * 24), "/", "localhost",));
         }
         return Response::json([
             'success'   => false,
-            'message'   => 'Unauthorized access.',
+            'status'    => JsonResponse::HTTP_UNAUTHORIZED,
+            'message'   => 'Unauthorized Access.',
         ], JsonResponse::HTTP_OK);
     }
 
@@ -120,8 +124,9 @@ class AuthController extends Controller
 
         return Response::json([
             "success" => true,
+            'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
-            "user" => Auth::user(),
+            "auth" => Auth::user(),
         ], JsonResponse::HTTP_OK);
     }
 
@@ -142,16 +147,10 @@ class AuthController extends Controller
 
         return Response::json([
             "success" => true,
+            'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
             "data" => $notifications,
         ], JsonResponse::HTTP_OK);
-
-        // ->withHeaders(
-        //     [
-        //         // "Set-Cookie" =>  Cookie::make('NEXT-CSRF', $request->user()->currentAccessToken()->token, (60 * 24), "/", ".localhost", true, true, false, "strict")
-        //         "X-AwesomeCoder" => PersonalAccessToken::findToken($request->user()->currentAccessToken()->token),
-        //     ]
-        // )->withCookie(Cookie::make('NEXT-CSRF', $request->user()->currentAccessToken()->token, (60 * 24), "/", ".localhost", true, true, false, "strict"));
     }
 
 
@@ -174,6 +173,7 @@ class AuthController extends Controller
 
         return Response::json([
             "success" => true,
+            'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
             "data" => $notifications,
         ], JsonResponse::HTTP_OK);
@@ -224,13 +224,15 @@ class AuthController extends Controller
         if (Session::flush() && Auth::guard('web')->logout()) {
             return Response::json([
                 "success" => true,
+                'status'    => JsonResponse::HTTP_ACCEPTED,
                 "message" => "Successfully Logout.",
             ], JsonResponse::HTTP_OK);
         } else {
             return Response::json([
                 'success'   => false,
+                'status'    => JsonResponse::HTTP_BAD_REQUEST,
                 'message'   => 'Something went wrong.',
-            ], JsonResponse::HTTP_BAD_REQUEST);
+            ], JsonResponse::HTTP_OK);
         }
     }
 }

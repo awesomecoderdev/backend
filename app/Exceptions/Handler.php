@@ -52,6 +52,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return Response::json([
                 'success'   => false,
+                'status'    => JsonResponse::HTTP_NOT_FOUND,
                 'message'   =>  "Not Found.",
             ], JsonResponse::HTTP_NOT_FOUND);
         });
@@ -59,14 +60,15 @@ class Handler extends ExceptionHandler
         $this->renderable(function (AuthenticationException $e, $request) {
             return Response::json([
                 'success'   => false,
+                'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 'message'   => "Unauthenticated Access.",
-                // 'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
         $this->renderable(function (HttpException $e, $request) {
             return Response::json([
                 'success'   => false,
+                'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 // 'message'   => "Unauthenticated.",
                 'message'   => "Method Not Allowed.",
                 // 'err'   => $e->getMessage(),
@@ -76,6 +78,7 @@ class Handler extends ExceptionHandler
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return Response::json([
                 'success'   => false,
+                'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                 'message'   =>  "Method Not Allowed.",
                 'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
@@ -84,6 +87,7 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             return Response::json([
                 'success'   => false,
+                'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                 'message'   => $e->getMessage(),
             ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
