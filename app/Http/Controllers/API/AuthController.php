@@ -28,10 +28,9 @@ class AuthController extends Controller
     {
         return Response::json([
             "success" => true,
-            "message" => "Index ",
+            "check" => Auth::check(),
+            "message" => "Successfully Authorized.",
             "auth" => Auth::user(),
-            "status" => Auth::check(),
-            "data" => User::all(),
         ], JsonResponse::HTTP_OK);
     }
 

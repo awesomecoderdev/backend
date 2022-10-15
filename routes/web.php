@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Response as JsonResponse;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,87 +21,13 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
-Route::get('/', function () {
+// generate csrf token
+Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf');
 
-    // $user = [
-    //     'email' => "awesomecoder.dev@gmail.com",
-    //     'password' => "ibrahim21",
-    // ];
-
-
-    // echo '<pre>';
-    // print_r(Auth::user());
-    // echo '</pre>';
-
-    // if (!Auth::guard('web')->attempt([
-    //     "email" => "awesomecoder.org@gmail.com",
-    //     "password" => "ibrahim21"
-    // ], true)) {
-    //     // $user = User::create([
-    //     //     'name' => request('name'),
-    //     //     'email' => request('email'),
-    //     // ]);
-
-    //     // Auth::guard('web')->login($user);
-
-    //     echo "not Loged in";
-    // } else {
-    //     echo "loged in";
-    // }
-    // echo '<pre>';
-    // print_r(Auth::user()->name);
-    // echo '</pre>';
-
-    return view('welcome');
+// protected routes
+Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
+    Route::get('/', 'index')->middleware('auth')->name('user');
+    Route::post('register', 'store')->middleware('guest')->name('register');
+    Route::post('login', 'auth')->middleware('guest')->name('login');
+    Route::post('logout', 'destroy')->middleware('auth')->name('logout');
 });
-
-
-Route::post('/login', function (Request $request) {
-    // dd(Auth::guard('web')->attempt(['email' => $request['email'], 'password' => $request['password']]));
-
-    $userdata = array(
-        'password'  => $request->input('password'),
-        'email'     => $request->input('email')
-    );
-
-
-    // attempt to do the login
-    if (Auth::attempt($userdata, true)) {
-        // validation successful!
-        // redirect them to the secure section or whatever
-        // return Redirect::to('secure');
-        // for now we'll just echo success (even though echoing in a controller is bad)
-        //return Redirect::to('Home');
-        // echo 'SUCCESS!';
-        // echo  Auth::user()->uname;
-        return redirect("/");
-    } else {
-
-        // validation not successful, send back to form
-        echo "string";
-    }
-
-    if (!Auth::attempt(['email' => $request['email'], 'password' => $request['password']])) {
-        dd(['fail' => 'Could Not Log You In']);
-    }
-
-
-    // if (Auth::attempt($request->only("email", "password"), true)) {
-    //     return redirect("/");
-    //     // echo "loged in";
-    // } else {
-    //     echo "something went wrong";
-    // }
-})->name("ll");
-
-
-// // generate csrf token
-// Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf');
-
-// // protected routes
-// Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
-//     Route::get('/', 'index')->middleware('auth')->name('user');
-//     Route::post('register', 'store')->middleware('guest')->name('register');
-//     Route::post('login', 'auth')->middleware('guest')->name('login');
-//     Route::post('logout', 'destroy')->middleware('auth')->name('logout');
-// });
