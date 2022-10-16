@@ -26,10 +26,14 @@ Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->na
 
 // protected routes
 Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
-    Route::post('/', 'index')->middleware('auth')->name('user');
-    Route::post('logout', 'destroy')->middleware('auth')->name('logout');
+    // public routes
+    Route::post('login', 'login')->middleware('guest')->name('login');
+    Route::post('register', 'register')->middleware('guest')->name('register');
 
-    // protected routes
-    Route::post('login', 'auth')->middleware('guest')->name('login');
-    Route::post('register', 'store')->middleware('guest')->name('register');
+    // private routes
+    Route::post('/', 'user')->middleware('auth')->name('user');
+    Route::post('logout', 'logout')->middleware('auth')->name('logout');
+
+    // demo
+    Route::post("websites", "websites")->middleware('auth')->name('logout');
 });

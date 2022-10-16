@@ -25,7 +25,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function user(Request $request)
     {
         return Response::json([
             "success" => true,
@@ -39,22 +39,12 @@ class AuthController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function register(StoreUserRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
@@ -78,7 +68,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function auth(AuthUserRequest $request)
+    public function login(AuthUserRequest $request)
     {
         if (Auth::guard('web')->attempt(["email" => $request->email, "password" => $request->password])) {
             $user = Auth::user();
@@ -101,35 +91,6 @@ class AuthController extends Controller
             'success'   => false,
             'status'    => JsonResponse::HTTP_UNAUTHORIZED,
             'message'   => 'Unauthorized Access.',
-        ], JsonResponse::HTTP_OK);
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function user(Request $request)
-    {
-        // return $request->user()->notifications;
-        // $request->user()->notify(new UserRegisteredNotification($request->user()));
-        // Notification::send(User::all(), new UserNotification("Hello how are you."));
-
-        // return DB::table('notifications')->select(["id", "created_at", "read_at", "data"])->where("notifiable_id", $request->user()->id)->get();
-
-        // return new UserCollection(
-        //     Cache::remember("user_" . $request->user()->id, 60 * 60, function () use ($request) {
-        //         return $request->user();
-        //     })
-        // );
-
-        return Response::json([
-            "success" => true,
-            'status'    => JsonResponse::HTTP_ACCEPTED,
-            "message" => "Successfully Authorized.",
-            "auth" => Auth::user(),
         ], JsonResponse::HTTP_OK);
     }
 
@@ -183,28 +144,6 @@ class AuthController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateUserRequest  $request
@@ -222,7 +161,7 @@ class AuthController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function logout(User $user)
     {
         if (Session::flush() && Auth::guard('web')->logout()) {
             return Response::json([
