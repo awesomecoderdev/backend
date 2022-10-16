@@ -26,7 +26,7 @@ Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->na
 
 // protected routes
 Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
-    Route::get('/', 'index')->middleware('auth')->name('user');
+    Route::post('/', 'index')->middleware('auth')->name('user');
     Route::post('logout', 'destroy')->middleware('auth')->name('logout');
 
     // protected routes

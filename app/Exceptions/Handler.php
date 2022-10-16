@@ -69,9 +69,9 @@ class Handler extends ExceptionHandler
             return Response::json([
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
-                // 'message'   => "Unauthenticated.",
+                'message'   => "Unauthenticated.",
                 // 'message'   => "Method Not Allowed.",
-                'message'   => $e->getMessage(),
+                // 'message'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 

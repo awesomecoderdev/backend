@@ -34,7 +34,7 @@ class AuthController extends Controller
             "auth" => UserResource::make(
                 Auth::user()
             ),
-            "notifications" => Auth::user()->notifications
+            // "notifications" => Auth::user()->notifications
         ], JsonResponse::HTTP_ACCEPTED);
     }
 
@@ -92,7 +92,7 @@ class AuthController extends Controller
                     "auth" => UserResource::make(
                         Auth::user()
                     ),
-                    "notifications" => Auth::user()->notifications
+                    // "notifications" => Auth::user()->notifications
                 ],
                 JsonResponse::HTTP_OK
             );
