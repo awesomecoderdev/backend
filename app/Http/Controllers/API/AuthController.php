@@ -60,6 +60,9 @@ class AuthController extends Controller
             "success" => true,
             'status'    => JsonResponse::HTTP_CREATED,
             "message" => "User successfully created!",
+            "auth" => UserResource::make(
+                Auth::user()
+            ),
         ], JsonResponse::HTTP_OK);
     }
 
