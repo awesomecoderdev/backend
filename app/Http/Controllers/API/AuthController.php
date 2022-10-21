@@ -31,6 +31,7 @@ class AuthController extends Controller
             "success" => true,
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
+            "verified" => Auth::user()->hasVerifiedEmail(),
             "auth" => UserResource::make(
                 Auth::user()
             ),
@@ -60,6 +61,7 @@ class AuthController extends Controller
             "success" => true,
             'status'    => JsonResponse::HTTP_CREATED,
             "message" => "User successfully created!",
+            "verified" => Auth::user()->hasVerifiedEmail(),
             "auth" => UserResource::make(
                 Auth::user()
             ),
@@ -73,23 +75,34 @@ class AuthController extends Controller
      */
     public function login(AuthUserRequest $request)
     {
-        if (Auth::guard('web')->attempt(["email" => $request->email, "password" => $request->password])) {
-            $user = Auth::user();
-            // DB::table('personal_access_tokens')->where('tokenable_id', $user->id)->delete();
-            // $token = $user->createToken($user->name)->plainTextToken;
-            return Response::json(
-                [
-                    "success" => true,
-                    'status'    => JsonResponse::HTTP_ACCEPTED,
-                    "message" => "Successfully Authorized.",
-                    "auth" => UserResource::make(
-                        Auth::user()
-                    ),
-                    // "notifications" => Auth::user()->notifications
-                ],
-                JsonResponse::HTTP_OK
-            );
+
+        return Response::json([
+            'success'   => false,
+            'status'    => JsonResponse::HTTP_UNAUTHORIZED,
+            'message'   => 'Unauthorized Access.',
+        ], JsonResponse::HTTP_OK);
+
+        if (!Auth::check()) {
+            if (Auth::guard('web')->attempt(["email" => $request->email, "password" => $request->password])) {
+                $user = Auth::user();
+                // DB::table('personal_access_tokens')->where('tokenable_id', $user->id)->delete();
+                // $token = $user->createToken($user->name)->plainTextToken;
+                return Response::json(
+                    [
+                        "success" => true,
+                        'status'    => JsonResponse::HTTP_ACCEPTED,
+                        "message" => "Successfully Authorized.",
+                        "verified" => Auth::user()->hasVerifiedEmail(),
+                        "auth" => UserResource::make(
+                            Auth::user()
+                        ),
+                        // "notifications" => Auth::user()->notifications
+                    ],
+                    JsonResponse::HTTP_OK
+                );
+            }
         }
+
         return Response::json([
             'success'   => false,
             'status'    => JsonResponse::HTTP_UNAUTHORIZED,

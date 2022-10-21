@@ -2,10 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\Response as JsonResponse;
 
 class RedirectIfAuthenticated
 {
@@ -23,7 +26,16 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                // return redirect(RouteServiceProvider::HOME);
+                return Response::json([
+                    "success" => true,
+                    'status'    => JsonResponse::HTTP_ACCEPTED,
+                    "message" => "Successfully Authorized.",
+                    "verified" => Auth::user()->hasVerifiedEmail(),
+                    "auth" => UserResource::make(
+                        Auth::user()
+                    ),
+                ], JsonResponse::HTTP_ACCEPTED);
             }
         }
 

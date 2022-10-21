@@ -31,7 +31,7 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     Route::post('register', 'register')->middleware('guest')->name('register');
 
     // private routes
-    Route::post('/', 'user')->middleware('auth')->name('user');
+    Route::post('/', 'user')->middleware(['auth', 'verified'])->name('user');
     Route::post('logout', 'logout')->middleware('auth')->name('logout');
 
     // demo
