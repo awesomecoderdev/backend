@@ -5,11 +5,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\API\AuthController;
-use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
-
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\API\AuthController;
+
 use Illuminate\Http\Response as JsonResponse;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,5 +36,11 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     Route::post('logout', 'logout')->middleware('auth')->name('logout');
 
     // demo
-    Route::post("websites", "websites")->middleware('auth')->name('logout');
+    // Route::post("websites", "websites")->middleware('auth')->name('websites');
+
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        // return redirect('/home');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
 });
