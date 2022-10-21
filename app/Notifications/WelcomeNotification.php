@@ -44,7 +44,7 @@ class WelcomeNotification extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
+            ->subject("Amazing email's subject")
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }

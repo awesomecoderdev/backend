@@ -41,7 +41,9 @@ class SendVerificationEmail extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view("emails.auth.verify");
+        return (new MailMessage)
+            ->subject("Please Verify your account")
+            ->view("emails.auth.verify");
     }
 
     /**
