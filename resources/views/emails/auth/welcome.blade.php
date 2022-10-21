@@ -191,9 +191,7 @@
         <![endif]-->
                                 <div
                                     style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">
-                                    Welcome to WP Plagarism!
-                                    Verify your email address.
-                                </div>
+                                    Welcome to Discord!</div>
                                 <!--[if mso | IE]>
         </td></tr></table>
         <![endif]-->
