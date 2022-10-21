@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
+use App\Mail\VerificationEmail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Response as JsonResponse;
 
@@ -75,12 +76,6 @@ class AuthController extends Controller
      */
     public function login(AuthUserRequest $request)
     {
-
-        return Response::json([
-            'success'   => false,
-            'status'    => JsonResponse::HTTP_UNAUTHORIZED,
-            'message'   => 'Unauthorized Access.',
-        ], JsonResponse::HTTP_OK);
 
         if (!Auth::check()) {
             if (Auth::guard('web')->attempt(["email" => $request->email, "password" => $request->password])) {

@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use BadMethodCallException;
 use Throwable;
 use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -85,6 +86,15 @@ class Handler extends ExceptionHandler
         });
 
         $this->reportable(function (Throwable $e) {
+            return Response::json([
+                'success'   => false,
+                'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                'message'   => $e->getMessage(),
+            ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+        });
+
+
+        $this->reportable(function (BadMethodCallException $e) {
             return Response::json([
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,

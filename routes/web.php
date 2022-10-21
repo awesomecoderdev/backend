@@ -4,10 +4,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\API\AuthController;
-
 use Illuminate\Http\Response as JsonResponse;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
