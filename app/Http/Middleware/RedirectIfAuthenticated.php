@@ -24,20 +24,19 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                // return redirect(RouteServiceProvider::HOME);
-                return Response::json([
-                    "success" => true,
-                    'status'    => JsonResponse::HTTP_ACCEPTED,
-                    "message" => "Successfully Authorized.",
-                    "verified" => Auth::user()->hasVerifiedEmail(),
-                    "auth" => UserResource::make(
-                        Auth::user()
-                    ),
-                ], JsonResponse::HTTP_ACCEPTED);
-            }
-        }
+        // for production only
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->check()) {
+        //         // return redirect(RouteServiceProvider::HOME);
+
+        //         return Response::json([
+        //             "success" => true,
+        //             "status"    => JsonResponse::HTTP_NOT_ACCEPTABLE,
+        //             "message"   => "You are Already Logged in",
+        //             "redirect"  => true
+        //         ], JsonResponse::HTTP_OK);
+        //     }
+        // }
 
         return $next($request);
     }

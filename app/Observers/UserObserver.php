@@ -17,7 +17,6 @@ class UserObserver
     {
         // send welcome notification
         $user->notify(new WelcomeNotification());
-        // $user->sendEmailVerificationNotification();
     }
 
     /**

@@ -41,6 +41,11 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        // return redirect('/home');
+        return redirect('/home');
+        // echo '<pre>';
+        // print_r($request->all());
+        // echo '</pre>';
+
+        // $user->sendEmailVerificationNotification();
     })->middleware(['auth', 'signed'])->name('verification.verify');
 });
