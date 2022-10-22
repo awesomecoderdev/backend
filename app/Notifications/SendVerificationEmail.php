@@ -70,8 +70,8 @@ class SendVerificationEmail extends Notification implements ShouldQueue
             ]
         );
 
-        // return str_replace(route("user"), env("APP_FRONTEND_URL"), $url);
-        return $url;
+        return str_replace(route("user"), env("APP_FRONTEND_URL"), $url);
+        // return $url;
     }
 
     /**

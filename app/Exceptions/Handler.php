@@ -7,9 +7,11 @@ use Throwable;
 use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Http\Response as JsonResponse;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Facades\Response;
 
 class Handler extends ExceptionHandler
@@ -75,7 +77,7 @@ class Handler extends ExceptionHandler
                 // 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 'message'   => "Unauthenticated.",
                 // 'message'   => "Method Not Allowed.",
-                'message'   => $e->getMessage(),
+                // 'message'   => $e->getMessage(),
             ], JsonResponse::HTTP_OK);
             // ], JsonResponse::HTTP_UNAUTHORIZED);
         });
@@ -85,8 +87,26 @@ class Handler extends ExceptionHandler
                 'success'   => false,
                 // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                 'status'    => $e->getStatusCode(),
-                // 'message'   =>  "Method Not Allowed.",
-                'message'   => $e->getMessage(),
+                'message'   =>  "Method Not Allowed.",
+                // 'message'   => $e->getMessage(),
+            ], JsonResponse::HTTP_OK);
+            // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+        });
+
+        $this->renderable(function (InvalidSignatureException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'status'    => $e->getStatusCode(),
+                'message'   =>  "Method Not Allowed.",
+            ], JsonResponse::HTTP_OK);
+            // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+        });
+
+        $this->renderable(function (ThrottleRequestsException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'status'    => $e->getStatusCode(),
+                'message'   =>  "Unauthenticated Access.",
             ], JsonResponse::HTTP_OK);
             // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
