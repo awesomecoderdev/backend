@@ -28,6 +28,8 @@ class AuthController extends Controller
      */
     public function user(Request $request)
     {
+        // Auth::user()->sendEmailVerificationNotification();
+
         return Response::json([
             "success" => true,
             'status'    => JsonResponse::HTTP_ACCEPTED,

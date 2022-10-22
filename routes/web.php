@@ -38,12 +38,14 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
 
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return redirect('/home');
+        // http://plagiarism.test/v1/user/email/verify/2/4fe6d443880c32b97e6e852721c90a0309bd6472?expires=1666424297&signature=caaba964cd5fb96179ca92f7bf4528f3216204e2ea1ca587b862101044e1b2b4
+        // $request->fulfill();
+        // return redirect('/home');
         // echo '<pre>';
         // print_r($request->all());
         // echo '</pre>';
+        echo "sdfsdf";
 
         // $user->sendEmailVerificationNotification();
-    })->middleware(['auth', 'signed'])->name('verification.verify');
+    })->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');
 });

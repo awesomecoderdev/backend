@@ -63,6 +63,7 @@ class Handler extends ExceptionHandler
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 'message'   => "Unauthenticated Access.",
+                'err'   => $e->getMessage(),
             ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
