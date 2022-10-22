@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\VerifyEmailVerificationRequest;
 use App\Mail\VerificationEmail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Response as JsonResponse;
@@ -167,6 +168,40 @@ class AuthController extends Controller
     {
         //
     }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateUserRequest  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function verification(VerifyEmailVerificationRequest $request, User $user)
+    {
+        if ($request->user()->hasVerifiedEmail()) {
+            return Response::json([
+                "success" => true,
+                'status'    => JsonResponse::HTTP_OK,
+                "message" => "Your account is already verified.",
+                "verified" => $request->user()->hasVerifiedEmail(),
+                "redirect" => true,
+            ], JsonResponse::HTTP_ACCEPTED);
+        }
+
+        if ($request->user()->markEmailAsVerified()) {
+            $request->fulfill();
+        }
+
+        return Response::json([
+            "success" => true,
+            'status'    => JsonResponse::HTTP_OK,
+            "message" => "Your account has been successfully verified.",
+            "verified" => $request->user()->hasVerifiedEmail(),
+            "redirect" => true,
+        ], JsonResponse::HTTP_ACCEPTED);
+    }
+
 
     /**
      * Remove the specified resource from storage.

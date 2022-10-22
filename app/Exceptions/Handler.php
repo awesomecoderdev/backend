@@ -64,34 +64,41 @@ class Handler extends ExceptionHandler
                 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 'message'   => "Unauthenticated Access.",
                 'err'   => $e->getMessage(),
-            ], JsonResponse::HTTP_UNAUTHORIZED);
+                // ], JsonResponse::HTTP_UNAUTHORIZED);
+            ], JsonResponse::HTTP_OK);
         });
 
         $this->renderable(function (HttpException $e, $request) {
             return Response::json([
                 'success'   => false,
-                'status'    => JsonResponse::HTTP_UNAUTHORIZED,
+                'status'    => $e->getStatusCode(),
+                // 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 'message'   => "Unauthenticated.",
                 // 'message'   => "Method Not Allowed.",
-                // 'message'   => $e->getMessage(),
-            ], JsonResponse::HTTP_UNAUTHORIZED);
+                'message'   => $e->getMessage(),
+            ], JsonResponse::HTTP_OK);
+            // ], JsonResponse::HTTP_UNAUTHORIZED);
         });
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return Response::json([
                 'success'   => false,
-                'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                'message'   =>  "Method Not Allowed.",
-                'err'   => $e->getMessage(),
-            ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+                // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                'status'    => $e->getStatusCode(),
+                // 'message'   =>  "Method Not Allowed.",
+                'message'   => $e->getMessage(),
+            ], JsonResponse::HTTP_OK);
+            // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
 
         $this->reportable(function (Throwable $e) {
             return Response::json([
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                 'message'   => $e->getMessage(),
-            ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+            ], JsonResponse::HTTP_OK);
+            // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
 
 
@@ -100,7 +107,8 @@ class Handler extends ExceptionHandler
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                 'message'   => $e->getMessage(),
-            ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+            ], JsonResponse::HTTP_OK);
+            // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
     }
 }
