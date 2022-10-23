@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name.required' => 'The name field is required.',
+    'first_name.required' => 'First name field is required.',
+    'last_name.required' => 'Last name field is required.',
     'email.required' => 'The email field is required.',
     'email.exists' => 'No account associated with the email address.',
     'password.required' => 'The password field is required.',

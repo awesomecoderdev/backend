@@ -27,7 +27,8 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "required",
+            "first_name" => "required|string|min:2",
+            "last_name" => "required|string|min:2",
             "email" => "required|email|unique:users,email",
             "password" => "required|min:8|max:12",
             "confirmed" => "required|same:password",
@@ -57,7 +58,8 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
         return [
-            "name.required" => Lang::get("auth.name.required"),
+            "first_name.required" => Lang::get("auth.first_name.required"),
+            "last_name.required" => Lang::get("auth.last_name.required"),
             "email.required" => Lang::get("auth.email.required"),
             "password.required" => Lang::get("auth.password.required"),
             "confirmed.required" => Lang::get("auth.confirmed.required"),

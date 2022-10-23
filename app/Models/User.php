@@ -54,6 +54,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Return the user full name.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return "$this->first_name $this->last_name";
+    }
+
+    /**
      * Determine if the user has verified their email address.
      *
      * @return bool
