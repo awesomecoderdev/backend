@@ -45,7 +45,7 @@ class WelcomeNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject("Welcome to WP Plagiarism!")
-            ->greeting("Welcome {$notifiable->name}, We're excited you're joining us! Follow these expert tips as you spin up your first Plagiarism AI.")
+            ->greeting("Welcome {$notifiable->name()}, We're excited you're joining us! Follow these expert tips as you spin up your first Plagiarism AI.")
             ->view("emails.auth.welcome", ["user" => $notifiable]);
     }
 
