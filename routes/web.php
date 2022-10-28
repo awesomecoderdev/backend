@@ -26,6 +26,7 @@ Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->na
 // protected routes
 Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
     // public routes
+    Route::any('ping', 'ping')->name('ping');
     Route::post('login', 'login')->middleware('guest')->name('login');
     Route::post('register', 'register')->middleware('guest')->name('register');
 

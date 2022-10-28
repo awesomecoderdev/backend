@@ -23,6 +23,24 @@ use Illuminate\Http\Response as JsonResponse;
 class AuthController extends Controller
 {
     /**
+     * Display status of the ping.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ping(Request $request)
+    {
+        // Auth::user()->sendEmailVerificationNotification();
+
+        return Response::json([
+            "success" => true,
+            'status'  => JsonResponse::HTTP_OK,
+            "message" => "Successfully Authorized.",
+            "auth" => Auth::check(),
+            "theme" => Session::get("theme", "light"),
+        ], JsonResponse::HTTP_OK);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
