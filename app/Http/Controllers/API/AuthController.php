@@ -223,6 +223,34 @@ class AuthController extends Controller
 
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateUserRequest  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function resendVerification()
+    {
+        if (!Cache::has("resend-verification")) {
+            Auth::user()->sendEmailVerificationNotification();
+            Cache::remember('resend-verification', 60 * 1, function () {
+                return true;
+            });
+            return Response::json([
+                "success" => true,
+                'status'  => JsonResponse::HTTP_OK,
+                "message" => "We have sent an email with a confirmation link to your email address.",
+            ], JsonResponse::HTTP_OK);
+        }
+
+        return Response::json([
+            "success" => false,
+            'status'  => JsonResponse::HTTP_BAD_REQUEST,
+            "message" => 'Something went wrong. Please try again after few min.',
+        ], JsonResponse::HTTP_OK);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user

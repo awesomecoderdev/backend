@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Http\Response as JsonResponse;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class Handler extends ExceptionHandler
@@ -65,7 +66,7 @@ class Handler extends ExceptionHandler
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                 'message'   => "Unauthenticated Access.",
-                'err'   => $e->getMessage(),
+                // 'err'   => $e->getMessage(),
                 // ], JsonResponse::HTTP_UNAUTHORIZED);
             ], JsonResponse::HTTP_OK);
         });
