@@ -233,7 +233,7 @@ class AuthController extends Controller
     {
         if (!Cache::has("resend-verification")) {
             Auth::user()->sendEmailVerificationNotification();
-            Cache::remember('resend-verification', 60 * 1, function () {
+            Cache::remember('resend-verification', 60 * 2, function () { // disabled for 2 minutes
                 return true;
             });
             return Response::json([
