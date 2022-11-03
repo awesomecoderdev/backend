@@ -219,15 +219,17 @@ class AuthController extends Controller
 
                 event(new Registered($user));
 
-                if (Auth::login($user)) {
-                    return Redirect::to("http://localhost:3000/");
-                } else {
-                    return Redirect::to("http://localhost:3000/");
-                }
+                Auth::login($user);
+                return Redirect::to(env("APP_FRONTEND_URL"))->withErrors("hello", "How are you");
+                // if (Auth::login($user)) {
+                //     return Redirect::to(env("APP_FRONTEND_URL"));
+                // } else {
+                //     return Redirect::to(env("APP_FRONTEND_URL"));
+                // }
             }
         } catch (Exception $e) {
             $err = $e->getMessage();
-            return Redirect::to("http://localhost:3000/");
+            return Redirect::to(env("APP_FRONTEND_URL"))->withErrors("hello", "How are you");
         }
     }
 
