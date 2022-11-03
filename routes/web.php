@@ -20,6 +20,11 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
+// base route
+Route::get('/', function () {
+    echo route('oauth.login', 'google');
+})->name('welcome');
+
 // generate csrf token
 Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf');
 
@@ -38,4 +43,10 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
 
     // demo
     // Route::post("websites", "websites")->middleware('auth')->name('websites');
+});
+
+// oauth routes
+Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], function () {
+    Route::get('{driver}', 'oauth')->name('oauth.login');
+    Route::get('{driver}/callback', 'oauthCallback')->name('oauth.callback');
 });

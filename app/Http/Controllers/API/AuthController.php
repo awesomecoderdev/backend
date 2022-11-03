@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\VerificationEmail;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -15,13 +17,23 @@ use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Requests\VerifyEmailVerificationRequest;
-use App\Mail\VerificationEmail;
 use Illuminate\Support\Facades\Response;
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response as JsonResponse;
+use App\Http\Requests\VerifyEmailVerificationRequest;
 
 class AuthController extends Controller
 {
+
+    /**
+     * Return list of oauth providers.
+     *
+     * @return  array
+     */
+    protected $providers = [
+        'google'
+    ];
+
     /**
      * Display status of the ping.
      *
@@ -125,6 +137,37 @@ class AuthController extends Controller
             'status'    => JsonResponse::HTTP_UNAUTHORIZED,
             'message'   => 'Unauthorized Access.',
         ], JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * Process the oauth login.
+     *
+     * @param  \Laravel\Socialite\Facades\Socialite  $driver
+     * @return \Illuminate\Http\Response
+     */
+    public function oauth($driver)
+    {
+        if (!$this->oauthIsProviderAllowed($driver)) {
+            echo "{$driver} is not currently supported";
+        }
+
+        try {
+            return Socialite::driver($driver)->redirect();
+        } catch (Exception $e) {
+            // You should show something simple fail message
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * Check the specified driver.
+     *
+     * @param  \Laravel\Socialite\Facades\Socialite  $driver
+     * @return bool|Response
+     */
+    private function oauthIsProviderAllowed($driver)
+    {
+        return in_array($driver, $this->providers) && config()->has("services.{$driver}");
     }
 
     /**
@@ -258,18 +301,27 @@ class AuthController extends Controller
      */
     public function logout(User $user)
     {
-        if (Session::flush() && Auth::guard('web')->logout()) {
-            return Response::json([
-                "success" => true,
-                'status'    => JsonResponse::HTTP_ACCEPTED,
-                "message" => "Successfully Logout.",
-            ], JsonResponse::HTTP_OK);
-        } else {
-            return Response::json([
-                'success'   => false,
-                'status'    => JsonResponse::HTTP_BAD_REQUEST,
-                'message'   => 'Something went wrong.',
-            ], JsonResponse::HTTP_OK);
-        }
+        Session::flush();
+        Auth::guard('web')->logout();
+        return Response::json([
+            "success" => true,
+            'status'    => JsonResponse::HTTP_ACCEPTED,
+            "message" => "Successfully Logout.",
+        ], JsonResponse::HTTP_OK);
+
+
+        // if (Session::flush() && Auth::guard('web')->logout()) {
+        //     return Response::json([
+        //         "success" => true,
+        //         'status'    => JsonResponse::HTTP_ACCEPTED,
+        //         "message" => "Successfully Logout.",
+        //     ], JsonResponse::HTTP_OK);
+        // } else {
+        //     return Response::json([
+        //         'success'   => false,
+        //         'status'    => JsonResponse::HTTP_BAD_REQUEST,
+        //         'message'   => 'Something went wrong.',
+        //     ], JsonResponse::HTTP_OK);
+        // }
     }
 }
