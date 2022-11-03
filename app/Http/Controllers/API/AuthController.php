@@ -17,6 +17,7 @@ use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response as JsonResponse;
@@ -217,10 +218,28 @@ class AuthController extends Controller
                 }
 
                 event(new Registered($user));
-                Auth::login($user);
+
+                if (Auth::login($user)) {
+                    return Redirect::to("https://localhost:3000/");
+                    // ->withCookies([
+                    //     "success" => true,
+                    //     "err" => "hello world",
+                    // ]);
+                } else {
+                    return Redirect::to("https://localhost:3000/");
+                    // ->withCookies([
+                    //     "success" => false,
+                    //     "err" => "hello world",
+                    // ]);
+                }
             }
         } catch (Exception $e) {
-            echo $err = $e->getMessage();
+            $err = $e->getMessage();
+            return Redirect::to("https://localhost:3000/");
+            // ->withCookies([
+            //     "success" => false,
+            //     "err" => $err,
+            // ]);
         }
     }
 
