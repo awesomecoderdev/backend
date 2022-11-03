@@ -220,26 +220,14 @@ class AuthController extends Controller
                 event(new Registered($user));
 
                 if (Auth::login($user)) {
-                    return Redirect::to("https://localhost:3000/");
-                    // ->withCookies([
-                    //     "success" => true,
-                    //     "err" => "hello world",
-                    // ]);
+                    return Redirect::to("http://localhost:3000/");
                 } else {
-                    return Redirect::to("https://localhost:3000/");
-                    // ->withCookies([
-                    //     "success" => false,
-                    //     "err" => "hello world",
-                    // ]);
+                    return Redirect::to("http://localhost:3000/");
                 }
             }
         } catch (Exception $e) {
             $err = $e->getMessage();
-            return Redirect::to("https://localhost:3000/");
-            // ->withCookies([
-            //     "success" => false,
-            //     "err" => $err,
-            // ]);
+            return Redirect::to("http://localhost:3000/");
         }
     }
 
