@@ -18,7 +18,9 @@ class UserResource extends JsonResource
         // 'created_at',
         'updated_at',
         // 'email',
-        'email_verified_at'
+        'email_verified_at',
+        'access_token',
+        'provider_id',
     ];
 
     /**
@@ -32,6 +34,9 @@ class UserResource extends JsonResource
         if (Auth::check()) {
             if (!Auth::user()->isAdmin) {
                 $this->without = array_merge($this->without, ['isAdmin',]);
+            }
+            if (Auth::user()->provider == null) {
+                $this->without = array_merge($this->without, ['provider',]);
             }
         }
         return [

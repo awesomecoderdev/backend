@@ -140,7 +140,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Process the oauth login.
+     * Process the oauth.
      *
      * @param  \Laravel\Socialite\Facades\Socialite  $driver
      * @return \Illuminate\Http\Response
@@ -148,14 +148,79 @@ class AuthController extends Controller
     public function oauth($driver)
     {
         if (!$this->oauthIsProviderAllowed($driver)) {
-            echo "{$driver} is not currently supported";
+            return Response::json([
+                "success" => false,
+                'status'    => JsonResponse::HTTP_NOT_ACCEPTABLE,
+                "message" => "{$driver} is not currently supported",
+            ], JsonResponse::HTTP_OK);
         }
 
         try {
-            return Socialite::driver($driver)->redirect();
+            // return Socialite::driver($driver)->redirect();
+            // return Socialite::driver($driver);
+            $oauth = Socialite::driver($driver)->redirect()->getTargetUrl();
+            return Response::json([
+                "success" => true,
+                'status'    => JsonResponse::HTTP_ACCEPTED,
+                "message" => "Successfully Authorized.",
+                "oauth" => $oauth
+            ], JsonResponse::HTTP_OK);
         } catch (Exception $e) {
             // You should show something simple fail message
-            echo $e->getMessage();
+            return Response::json([
+                "success" => false,
+                'status'    => JsonResponse::HTTP_NOT_ACCEPTABLE,
+                "message" => $e->getMessage(),
+            ], JsonResponse::HTTP_OK);
+        }
+    }
+
+    /**
+     * Process the oauth callback.
+     *
+     * @param  \Laravel\Socialite\Facades\Socialite  $driver
+     * @return \Illuminate\Http\Response
+     */
+    public function oauthCallback($driver)
+    {
+        try {
+            $providerUser = Socialite::driver($driver)->user();
+            if (!empty($providerUser->email) && !empty($providerUser->user)) {
+                $user = User::where('email', $providerUser->getEmail())->first();
+                $first_name = $providerUser->user["given_name"] ? $providerUser->user["given_name"] : $providerUser->getName();
+                $last_name = $providerUser->user["family_name"] ? $providerUser->user["family_name"] : "";
+
+                // if user already found
+                if ($user) {
+                    // update the avatar and provider that might have changed
+                    $user->update([
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'avatar' => $providerUser->getAvatar(),
+                        'provider' => $driver,
+                        'provider_id' => $providerUser->getId(),
+                        'access_token' => $providerUser->token
+                    ]);
+                } else {
+                    // create a new user
+                    $user = User::create([
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'email' => $providerUser->getEmail(),
+                        'avatar' => $providerUser->getAvatar(),
+                        'provider' => $driver,
+                        'provider_id' => $providerUser->getId(),
+                        'access_token' => $providerUser->token,
+                        // user can use reset password to create a password
+                        'password' => Hash::make(md5($providerUser->getAvatar() . time() . $providerUser->getId())),
+                    ]);
+                }
+
+                event(new Registered($user));
+                Auth::login($user);
+            }
+        } catch (Exception $e) {
+            echo $err = $e->getMessage();
         }
     }
 
