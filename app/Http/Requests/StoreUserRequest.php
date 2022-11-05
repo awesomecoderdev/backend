@@ -76,7 +76,7 @@ class StoreUserRequest extends FormRequest
             'success'   => false,
             'message'   => 'Validation errors',
             'data'      => [],
-            'error'     => $validator->errors(),
+            'errors'     => $validator->errors(),
         ]));
     }
 }

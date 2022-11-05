@@ -220,12 +220,7 @@ class AuthController extends Controller
                 event(new Registered($user));
 
                 Auth::login($user);
-                return Redirect::to(env("APP_FRONTEND_URL"))->withErrors("hello", "How are you");
-                // if (Auth::login($user)) {
-                //     return Redirect::to(env("APP_FRONTEND_URL"));
-                // } else {
-                //     return Redirect::to(env("APP_FRONTEND_URL"));
-                // }
+                return Redirect::to(env("APP_FRONTEND_URL") . "/?oauth=true");
             }
         } catch (Exception $e) {
             $err = $e->getMessage();
