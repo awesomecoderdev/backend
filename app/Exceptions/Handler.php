@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use BadMethodCallException;
 use Throwable;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
@@ -61,6 +62,16 @@ class Handler extends ExceptionHandler
             ], JsonResponse::HTTP_NOT_FOUND);
         });
 
+
+        $this->renderable(function (QueryException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'status'    => JsonResponse::HTTP_UNAUTHORIZED,
+                'message'   => "Unauthenticated Access.",
+                'err'   => $e->getMessage(),
+            ], JsonResponse::HTTP_OK);
+        });
+
         $this->renderable(function (AuthenticationException $e, $request) {
             return Response::json([
                 'success'   => false,
@@ -111,6 +122,8 @@ class Handler extends ExceptionHandler
             ], JsonResponse::HTTP_OK);
             // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         });
+
+
 
         $this->reportable(function (Throwable $e) {
             return Response::json([
