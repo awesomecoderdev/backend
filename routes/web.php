@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Requests\VerifyEmailVerificationRequest;
 use Illuminate\Http\Response as JsonResponse;
+use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,8 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 // base route
 Route::get('/', function () {
-    echo route('oauth.login', 'google');
+    // echo route('oauth.login', 'google');
+    phpinfo();
 })->name('welcome');
 
 // generate csrf token
@@ -50,3 +51,4 @@ Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], func
     Route::post('{driver}', 'oauth')->name('oauth.login');
     Route::get('{driver}/callback', 'oauthCallback')->name('oauth.callback');
 });
+

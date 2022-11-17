@@ -11,7 +11,7 @@
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    <style>
+    {{-- <style>
         /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
         html {
             line-height: 1.15;
@@ -401,7 +401,7 @@
         body {
             font-family: 'Nunito', sans-serif;
         }
-    </style>
+    </style> --}}
 </head>
 
 <body class="antialiased">
@@ -577,10 +577,231 @@
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
+                    @foreach ($users as $user)
+                        <div class="user">
+                            <div class="container">
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tempore officiis
+                                                sapiente at velit modi harum nisi odit veniam eius rem error ut libero sed
+                                                cupiditate voluptates, sit enim maxime eos.</p>
+                                        </li>
+                                        <li>
+                                            <p>Doloremque temporibus amet iure ducimus consequatur esse asperiores debitis
+                                                quae veniam id voluptas placeat ipsum sapiente obcaecati, aliquam sed?
+                                                Facere repellendus mollitia ullam nihil magnam quisquam quidem fugit
+                                                excepturi consequuntur!</p>
+                                        </li>
+                                        <li>
+                                            <p>Atque iure maiores distinctio, earum sunt rerum veritatis, dolore inventore
+                                                quidem veniam quasi. Veniam eligendi unde soluta expedita dolorum assumenda
+                                                repellat aut ea, exercitationem culpa possimus, voluptatibus, recusandae
+                                                quia at?</p>
+                                        </li>
+                                        <li>
+                                            <p>Aut in voluptatem beatae quas debitis harum perspiciatis accusamus,
+                                                dignissimos hic totam culpa? Fugiat, voluptates. Blanditiis, voluptatem at,
+                                                soluta accusamus vero sunt recusandae quidem eligendi sint eum, quasi
+                                                doloremque repellendus.</p>
+                                        </li>
+                                        <li>
+                                            <p>Expedita sint sunt possimus nulla cupiditate minima sequi magni non. Ut,
+                                                dolorum quos magnam molestias fugit numquam nesciunt quia, eligendi pariatur
+                                                eveniet tenetur similique voluptatum necessitatibus accusantium id deleniti
+                                                laborum.</p>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias minima
+                                                blanditiis ducimus nobis laudantium distinctio quae quasi sed necessitatibus
+                                                possimus ut ex, totam, a minus molestiae nam facilis repudiandae illo.</p>
+                                        </li>
+                                        <li>
+                                            <p>Dolore velit temporibus quia placeat, itaque magnam expedita repudiandae
+                                                natus vel animi doloremque reiciendis tempora nostrum, sunt tenetur fuga eos
+                                                sed exercitationem iusto? Dicta alias fugit eligendi quidem vel et?</p>
+                                        </li>
+                                        <li>
+                                            <p>Culpa, ut illum repellendus error aliquam minima sunt. Voluptas fuga
+                                                assumenda fugit explicabo? A quas quis facilis sequi obcaecati, nulla
+                                                nesciunt dignissimos fugit nisi, cum quo voluptates illum dolore facere?</p>
+                                        </li>
+                                        <li>
+                                            <p>Sit excepturi, facilis vero beatae dignissimos fuga? Officia tempora vel
+                                                soluta ipsa maxime quasi illo consequuntur accusamus et voluptatum est,
+                                                dignissimos delectus nesciunt similique, ratione modi nisi fugiat. Officia,
+                                                delectus.</p>
+                                        </li>
+                                        <li>
+                                            <p>Illo est odit ea veritatis voluptate, error nihil nam repellat reiciendis
+                                                repellendus consequatur hic culpa esse labore beatae, necessitatibus
+                                                voluptatibus blanditiis perferendis natus nisi pariatur tenetur! Fuga
+                                                sapiente impedit a?</p>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae
+                                                assumenda quos porro nobis, quo quas accusamus placeat adipisci, deleniti
+                                                autem odio! Illo deserunt nihil in natus aperiam eveniet harum animi?</p>
+                                        </li>
+                                        <li>
+                                            <p>Alias provident expedita ad nihil atque. Quasi sunt asperiores quae incidunt
+                                                molestias in? Atque impedit quas voluptatibus eaque cum quae libero
+                                                reprehenderit rerum, beatae optio fugit voluptatum exercitationem. Illo,
+                                                sapiente!</p>
+                                        </li>
+                                        <li>
+                                            <p>A, quo voluptatum sint, aut ipsum maxime cum culpa placeat sunt nam nisi
+                                                voluptate. Placeat, fuga aspernatur. Magnam pariatur facilis, nam corrupti
+                                                earum aliquid! Ea eveniet molestias deleniti ad et.</p>
+                                        </li>
+                                        <li>
+                                            <p>Nobis tenetur inventore blanditiis labore illum fugit ducimus fuga! Pariatur
+                                                corrupti ullam at facilis ut asperiores voluptate ratione, doloremque, dolor
+                                                exercitationem quia ad. Saepe ut quaerat dolor necessitatibus iusto
+                                                blanditiis.</p>
+                                        </li>
+                                        <li>
+                                            <p>Esse quos doloribus, asperiores fugit delectus maiores debitis reiciendis
+                                                excepturi laborum. Officia amet non, deleniti, vel, dolores sunt aliquid
+                                                voluptatum itaque nostrum incidunt ipsa dolorum voluptatem assumenda
+                                                repellendus voluptate ab.</p>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae autem
+                                                amet, dolore debitis culpa possimus laudantium! Reprehenderit omnis vero
+                                                inventore voluptate, laborum dolores consequatur? Laborum aspernatur illo
+                                                error rem soluta?</p>
+                                        </li>
+                                        <li>
+                                            <p>Iure saepe labore rem, cumque doloremque natus, dicta eligendi velit iste
+                                                alias est dignissimos reiciendis! Dolorum obcaecati fugiat dignissimos
+                                                facere vero officia ipsam, recusandae quidem possimus. Porro nemo at sint?
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <p>Quia officia voluptas animi iure hic! Et voluptatibus quaerat quod aut, ea
+                                                totam quisquam rem veniam eius fuga eveniet consequatur ad recusandae
+                                                voluptas ducimus ab vero nisi aliquid praesentium unde?</p>
+                                        </li>
+                                        <li>
+                                            <p>Neque, veniam iusto porro temporibus, natus eaque assumenda amet minima fugit
+                                                adipisci harum. Dolore, suscipit quis excepturi at ut libero totam ducimus
+                                                laudantium culpa magnam earum perferendis obcaecati, sequi nulla.</p>
+                                        </li>
+                                        <li>
+                                            <p>Laudantium, a libero facere dolorum quia itaque dignissimos animi quod earum,
+                                                veniam corrupti, unde quos omnis incidunt sunt. Obcaecati sint labore velit
+                                                nisi quae dolore dolores eum fugit, explicabo nulla.</p>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore praesentium
+                                                sit esse voluptatibus tempora pariatur doloribus et aliquam provident, eaque
+                                                totam atque porro iusto explicabo animi obcaecati eligendi dolorem
+                                                accusamus.</p>
+                                        </li>
+                                        <li>
+                                            <p>Hic voluptate consequatur aspernatur praesentium ipsa amet est iusto neque
+                                                ullam veniam accusantium unde culpa repellendus totam delectus, perspiciatis
+                                                similique omnis. Saepe dolores sed illum asperiores maiores unde, ea
+                                                suscipit.</p>
+                                        </li>
+                                        <li>
+                                            <p>Cumque quis dolorem sapiente! Voluptates unde voluptatibus dolorem ipsa minus
+                                                dolorum qui mollitia officia animi, repellat cupiditate ullam perferendis
+                                                accusantium esse cumque expedita. Modi exercitationem nam tempora sunt
+                                                quisquam accusamus?</p>
+                                        </li>
+                                        <li>
+                                            <p>Quaerat, perferendis atque culpa aliquam hic voluptatibus rem optio, ad modi
+                                                quam deserunt, perspiciatis obcaecati reiciendis similique quisquam.
+                                                Corrupti soluta incidunt tenetur modi ipsum asperiores sequi! Similique id
+                                                quasi perferendis.</p>
+                                        </li>
+                                        <li>
+                                            <p>Porro libero expedita omnis reprehenderit autem officiis tenetur et ut ullam
+                                                aperiam ipsam inventore dolorem pariatur, similique, excepturi cupiditate
+                                                dignissimos non natus numquam atque nisi voluptatum saepe officia harum?
+                                                Fugit.</p>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+                                                consequatur id quis similique, minus accusamus vero hic quo nesciunt quod
+                                                quidem nobis enim, non pariatur beatae adipisci rem harum iure?</p>
+                                        </li>
+                                        <li>
+                                            <p>Quam doloremque accusantium, ipsa inventore ex est debitis, deserunt
+                                                consequuntur eos iusto quas natus commodi cum, aliquam expedita molestiae
+                                                provident in laborum suscipit quidem optio minima totam vitae? Delectus,
+                                                maiores?</p>
+                                        </li>
+                                        <li>
+                                            <p>Harum quod mollitia assumenda architecto commodi hic repellat, deleniti
+                                                eligendi sapiente doloremque saepe in nesciunt esse ea, praesentium,
+                                                corrupti tenetur. Ullam laboriosam possimus minus alias ab laudantium labore
+                                                quis incidunt!</p>
+                                        </li>
+                                        <li>
+                                            <p>Ipsa ex cupiditate deserunt? Exercitationem aperiam quia, modi deserunt
+                                                quaerat delectus fugit tempora eaque veritatis praesentium nulla recusandae
+                                                aliquid voluptas suscipit accusantium laborum totam maiores odio repellendus
+                                                dolorum earum quas.</p>
+                                        </li>
+                                        <li>
+                                            <p>Esse quod vel ipsum repellat beatae reprehenderit adipisci? Odio, labore
+                                                aspernatur ut rerum quaerat ducimus culpa? Nihil, expedita? Ea quo esse
+                                                alias? Dolorem eum, in aut qui nisi ullam temporibus!</p>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     @endauth
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium aperiam blanditiis adipisci,
+                    dicta quod quo, obcaecati dolorum reprehenderit, voluptatum enim perferendis cumque est veniam vero
+                    porro hic doloribus minima fugit!</p>
+            </div>
+            <div class="col-md-6">
+                <p>Dolorem neque, sit architecto, iste eius saepe minus nulla fugit harum at quia, nisi minima aliquid
+                    tempore optio placeat impedit earum delectus ad voluptatum numquam iusto! Obcaecati quidem nihil
+                    corporis.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Voluptatum ipsa, amet officiis maxime adipisci blanditiis, quo dolor quibusdam dolores sunt
+                    asperiores dolore architecto sint iure nisi accusantium beatae voluptate, pariatur natus iste
+                    dignissimos. Beatae tenetur iure assumenda odio.</p>
+            </div>
+            <div class="col-md-6">
+                <p>Quae sunt consequuntur consequatur! Soluta, consequuntur perspiciatis voluptates, reiciendis officia
+                    rerum laboriosam accusantium commodi, et alias maxime. Minus pariatur nesciunt id obcaecati modi
+                    saepe totam aliquam veniam? Harum, maiores illo.</p>
+            </div>
+            <div class="col-md-6">
+
+                <p>Nam quis est id laboriosam corporis quas vitae reprehenderit sapiente natus ullam modi minima,
+                    accusamus maxime! Illo, natus saepe quia consequatur aperiam magni totam exercitationem tenetur
+                    aliquid quibusdam ducimus rerum!</p>
+            </div>
+        </div>
+    </div>
 
 
 </body>
