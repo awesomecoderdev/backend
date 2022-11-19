@@ -9,7 +9,6 @@ use App\Notifications\ResendVerificationEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Notification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -85,10 +84,10 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    // public function notifications()
-    // {
-    //     return $this->morphMany(Notification::class, 'notifiable')->latest();
-    // }
+    public function notifications()
+    {
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->latest();
+    }
 
     /**
      * Determine if the user has verified their email address.

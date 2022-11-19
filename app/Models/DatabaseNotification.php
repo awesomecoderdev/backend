@@ -10,5 +10,10 @@ class DatabaseNotification extends Notification
 {
     use HasFactory;
 
-    protected $connection = 'custom_connection';
+    /**
+     * The guarded attributes on the model.
+     *
+     * @var array
+     */
+    protected $hidden = ["type", "notifiable_type", "notifiable_id"];
 }
