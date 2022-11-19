@@ -50,6 +50,8 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     // Route::post("websites", "websites")->middleware('auth')->name('websites');
 });
 
+
+
 // oauth routes
 Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], function () {
     Route::post('{driver}', 'oauth')->name('oauth.login');
