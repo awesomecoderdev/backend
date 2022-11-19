@@ -16,10 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        // You can use whatever name your want
-        Notification::extend('log', function ($app) {
-            return new LogChannel();
-        });
+
     }
 
     /**
@@ -29,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // // You can use whatever name your want
-        // Notification::extend('log', function ($app) {
-        //     return new LogChannel();
-        // });
+        // You can use whatever name your want
+        Notification::extend('log', function ($app) {
+            return new LogChannel();
+        });
     }
 }
