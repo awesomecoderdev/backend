@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Broadcasting\LogChannel;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Notification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        // You can use whatever name your want
+        Notification::extend('log', function ($app) {
+            return new LogChannel();
+        });
     }
 
     /**
@@ -23,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // // You can use whatever name your want
+        // Notification::extend('log', function ($app) {
+        //     return new LogChannel();
+        // });
     }
 }

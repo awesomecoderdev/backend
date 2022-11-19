@@ -46,13 +46,6 @@ class DatabaseNotification extends Model
     ];
 
     /**
-     * The guarded attributes on the model.
-     *
-     * @var array
-     */
-    protected $hidden = ["type", "notifiable_type", "notifiable_id"];
-
-    /**
      * Get the notifiable entity that the notification belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo

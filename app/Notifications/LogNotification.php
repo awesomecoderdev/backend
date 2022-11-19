@@ -7,9 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendNotification extends Notification
+class LogNotification extends Notification
 {
     use Queueable;
+
 
     /**
      * Create a new notification instance.
@@ -30,8 +31,8 @@ class SendNotification extends Notification
     public function via($notifiable)
     {
         return [
-            'database',
-            // 'log'
+            'log',
+            'database'
         ];
     }
 
@@ -39,28 +40,11 @@ class SendNotification extends Notification
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return array
      */
     public function toLog($notifiable)
     {
-        return [
-            'from'          => 'to-log',
-            'notifiable-id' => $notifiable->id,
-        ];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        // return (new MailMessage)
-        // ->line('The introduction to the notification.')
-        // ->action('Notification Action', url('/'))
-        // ->line('Thank you for using our application!');
+        return $this->notification;
     }
 
     /**
