@@ -256,22 +256,22 @@ class AuthController extends Controller
         //     "message" => "Hello how are you.",
         // ]));
 
-        $request->user()->notify(new LogNotification([
-            "title" => "User Notification",
-            "message" => "Hello how are you.",
-        ]));
+        // $request->user()->notify(new LogNotification([
+        //     "title" => "User Notification",
+        //     "message" => "Hello how are you.",
+        // ]));
 
 
-        // $notifications = Cache::remember("notifications_" . $request->user()->id, 60, function () use ($request) {
+        // $notifications = Cache::remember("notifications_" . $request->user()->id, 60 * 60, function () use ($request) {
         //     return $request->user()->notifications;
         // });
 
+        $notifications = $request->user()->notifications;
         return Response::json([
             "success" => true,
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
-            // "data" => $notifications,
-            "data" => $request->user()->notifications
+            "data" => $notifications,
         ], JsonResponse::HTTP_OK);
     }
 

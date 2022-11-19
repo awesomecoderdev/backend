@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Cache;
 
 class SendNotification extends Notification
 {
@@ -18,7 +19,6 @@ class SendNotification extends Notification
      */
     public function __construct(public array $notification = [])
     {
-        //
     }
 
     /**
@@ -43,10 +43,8 @@ class SendNotification extends Notification
      */
     public function toLog($notifiable)
     {
-        return [
-            'from'          => 'to-log',
-            'notifiable-id' => $notifiable->id,
-        ];
+        Cache::forget("notifications_" . $notifiable->id);
+        return $this->notification;
     }
 
     /**
@@ -71,6 +69,7 @@ class SendNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        Cache::forget("notifications_" . $notifiable->id);
         return $this->notification;
     }
 }

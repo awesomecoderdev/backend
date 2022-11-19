@@ -3,9 +3,10 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class LogNotification extends Notification
 {
@@ -44,6 +45,7 @@ class LogNotification extends Notification
      */
     public function toLog($notifiable)
     {
+        Cache::forget("notifications_" . $notifiable->id);
         return $this->notification;
     }
 
@@ -55,6 +57,7 @@ class LogNotification extends Notification
      */
     public function toArray($notifiable)
     {
+        Cache::forget("notifications_" . $notifiable->id);
         return $this->notification;
     }
 }
