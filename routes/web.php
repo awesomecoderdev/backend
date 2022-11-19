@@ -37,7 +37,7 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     Route::post('register', 'register')->middleware('guest')->name('register');
 
     // private routes
-    Route::post('/', 'user')->middleware(['auth', 'verified'])->name('user');
+    Route::post('/', 'user')->middleware(['auth',])->name('user');
     Route::post('logout', 'logout')->middleware('auth')->name('logout');
     Route::post('/verify-email/{id}/{hash}', "verification")->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');
     Route::post('/resend-verification', 'resendVerification')->middleware(['auth'])->name('verification.resend');
@@ -51,4 +51,3 @@ Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], func
     Route::post('{driver}', 'oauth')->name('oauth.login');
     Route::get('{driver}/callback', 'oauthCallback')->name('oauth.callback');
 });
-

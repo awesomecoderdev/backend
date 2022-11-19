@@ -15,6 +15,7 @@ use Illuminate\Http\Response as JsonResponse;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -55,6 +56,14 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->renderable(function (NotFoundHttpException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'status'    => JsonResponse::HTTP_NOT_FOUND,
+                'message'   =>  "Not Found.",
+            ], JsonResponse::HTTP_NOT_FOUND);
+        });
+
+        $this->renderable(function (RouteNotFoundException $e, $request) {
             return Response::json([
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_NOT_FOUND,
