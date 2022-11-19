@@ -42,6 +42,10 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     Route::post('/verify-email/{id}/{hash}', "verification")->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');
     Route::post('/resend-verification', 'resendVerification')->middleware(['auth'])->name('verification.resend');
 
+    // notifications
+    Route::post('notifications', 'notifications')->name('notifications');
+    Route::post('marknotification', 'markAsReadNotification')->name('markAsReadNotification');
+
     // demo
     // Route::post("websites", "websites")->middleware('auth')->name('websites');
 });

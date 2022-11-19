@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response as JsonResponse;
 use App\Http\Requests\VerifyEmailVerificationRequest;
+use App\Notifications\SendNotification;
 
 class AuthController extends Controller
 {
@@ -249,8 +250,13 @@ class AuthController extends Controller
     {
         // $request->user()->notify(new UserNotification("Hello how are you."));
         // Notification::send(User::all(), new UserNotification("Hello how are you."));
+        // $request->user()->notify(new SendNotification([
+        //     "title" => "User Notification",
+        //     "message" => "Hello how are you.",
+        // ]));
 
-        $notifications = Cache::remember("notifications_" . $request->user()->id, 60 * 60, function () use ($request) {
+
+        $notifications = Cache::remember("notifications_" . $request->user()->id, 60, function () use ($request) {
             return $request->user()->notifications;
         });
 
@@ -259,6 +265,7 @@ class AuthController extends Controller
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
             "data" => $notifications,
+            "data" => $request->user()->notifications
         ], JsonResponse::HTTP_OK);
     }
 
