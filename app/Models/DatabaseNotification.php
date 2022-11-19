@@ -15,5 +15,5 @@ class DatabaseNotification extends Notification
      *
      * @var array
      */
-    protected $hidden = ["type", "notifiable_type", "notifiable_id"];
+    protected $hidden = ["type", "notifiable_type", "notifiable_id", "updated_at"];
 }

@@ -55,12 +55,19 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        // $this->renderable(function (NotFoundHttpException $e, $request) {
+        //     return Response::json([
+        //         'success'   => false,
+        //         'status'    => JsonResponse::HTTP_NOT_FOUND,
+        //         'message'   =>  "Not Found.",
+        //     ], JsonResponse::HTTP_NOT_FOUND);
+        // });
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return Response::json([
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_NOT_FOUND,
                 'message'   =>  "Not Found.",
-            ], JsonResponse::HTTP_NOT_FOUND);
+            ], JsonResponse::HTTP_OK);
         });
 
         $this->renderable(function (RouteNotFoundException $e, $request) {
@@ -68,7 +75,7 @@ class Handler extends ExceptionHandler
                 'success'   => false,
                 'status'    => JsonResponse::HTTP_NOT_FOUND,
                 'message'   =>  "Not Found.",
-            ], JsonResponse::HTTP_NOT_FOUND);
+            ], JsonResponse::HTTP_OK);
         });
 
 
