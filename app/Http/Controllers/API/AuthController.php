@@ -69,6 +69,7 @@ class AuthController extends Controller
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
             "verified" => Auth::user()->hasVerifiedEmail(),
+            "alert" => Auth::user()->unreadNotifications()->count() !== 0,
             "auth" => UserResource::make(
                 Auth::user()
             ),
@@ -271,6 +272,7 @@ class AuthController extends Controller
             "success" => true,
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
+            "alert" => Auth::user()->unreadNotifications()->count() !== 0,
             "data" => $notifications,
         ], JsonResponse::HTTP_OK);
     }
@@ -297,6 +299,7 @@ class AuthController extends Controller
             "success" => true,
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
+            "alert" => Auth::user()->unreadNotifications()->count() !== 0,
             "data" => $notifications,
         ], JsonResponse::HTTP_OK);
     }
