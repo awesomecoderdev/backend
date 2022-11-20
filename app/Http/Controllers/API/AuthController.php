@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use Exception;
+use Faker\Factory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\VerificationEmail;
@@ -13,8 +14,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\AuthUserRequest;
+use App\Notifications\LogNotification;
 use Illuminate\Auth\Events\Registered;
 use App\Http\Requests\StoreUserRequest;
+use App\Notifications\SendNotification;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Redirect;
@@ -22,8 +25,6 @@ use Illuminate\Support\Facades\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response as JsonResponse;
 use App\Http\Requests\VerifyEmailVerificationRequest;
-use App\Notifications\LogNotification;
-use App\Notifications\SendNotification;
 
 class AuthController extends Controller
 {
@@ -250,17 +251,20 @@ class AuthController extends Controller
      */
     public function notifications(Request $request)
     {
-        // $request->user()->notify(new UserNotification("Hello how are you."));
         // Notification::send(User::all(), new UserNotification("Hello how are you."));
         // $request->user()->notify(new SendNotification([
         //     "title" => "User Notification",
         //     "message" => "Hello how are you.",
         // ]));
 
-        // $request->user()->notify(new LogNotification([
-        //     "title" => "User Notification",
-        //     "message" => "Hello how are you.",
-        // ]));
+        // $faker = Factory::create();
+
+        // for ($i = 0; $i < 10; $i++) {
+        //     $request->user()->notify(new SendNotification([
+        //         "title" => $faker->text,
+        //         "message" => $faker->text,
+        //     ]));
+        // }
 
 
         // $notifications = Cache::remember("notifications_" . $request->user()->id, 60 * 60, function () use ($request) {
