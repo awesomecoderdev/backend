@@ -46,8 +46,12 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     Route::post('notifications', 'notifications')->name('notifications');
     Route::post('marknotification', 'markAsReadNotification')->name('markAsReadNotification');
 
-    // demo
+    // websites
     // Route::post("websites", "websites")->middleware('auth')->name('websites');
+
+
+    // charts
+    Route::get("charts", "charts")->name('charts');
 });
 
 

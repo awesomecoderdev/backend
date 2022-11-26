@@ -413,4 +413,14 @@ class AuthController extends Controller
         //     ], JsonResponse::HTTP_OK);
         // }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function charts(Request $request)
+    {
+    }
 }
