@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use Exception;
+use Carbon\Carbon;
 use Faker\Factory;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Mail\VerificationEmail;
 use Illuminate\Support\Facades\DB;
@@ -422,5 +424,21 @@ class AuthController extends Controller
      */
     public function charts(Request $request)
     {
+
+        $orders = Order::where("user_id", 1)->select(DB::raw('count(id) as `count`'), DB::raw("CONCAT_WS('-',DAY(created_at),MONTH(created_at),YEAR(created_at)) as date"))
+            ->groupBy('date')
+            ->orderBy("count")
+            ->get();
+
+        $orders = $orders->groupBy(function ($date) {
+            return Carbon::parse($date->date)->format('M-Y');
+        }, false);
+
+        return Response::json([
+            "success" => true,
+            'status'    => JsonResponse::HTTP_ACCEPTED,
+            "message" => "Successfully Authorized.",
+            "data" => $orders
+        ], JsonResponse::HTTP_OK);
     }
 }
