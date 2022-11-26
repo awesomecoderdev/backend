@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+            // $table->foreignId("coupon_id")->constrained()->cascadeOnDelete();
+            $table->integer("coupon_id")->nullable();
+
+            $table->float('amount')->nullable();
+            $table->string('payment_method')->nullable();
+
             $table->timestamps();
         });
     }

@@ -17,7 +17,11 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'coupon_id' => null,
+            'amount' => fake()->unique()->numberBetween(10, 999),
+            'payment_method' => "card",
+            'created_at' => fake()->dateTimeBetween('+0 days', '+2 years')
         ];
     }
 }
