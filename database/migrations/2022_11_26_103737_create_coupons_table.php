@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->text("description")->nullable();
             $table->enum("type", ["percentage", "fixed"])->default("percentage");
-            $table->enum("status", ["active", "inactive"])->default("inactive");
+            $table->integer("value")->nullable();
+            $table->enum("status", ["active", "inactive", "expired"])->default("inactive");
             $table->timestamps();
         });
     }
