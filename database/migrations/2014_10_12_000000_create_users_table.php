@@ -19,11 +19,13 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->text("meta")->nullable();
             $table->string('avatar')->nullable();
             $table->string('provider', 20)->nullable();
             $table->string('provider_id')->nullable();
             $table->string('access_token')->nullable();
             $table->string('isAdmin')->nullable()->default(false);
+            $table->enum("status", ["activated", "pending", "deactivated"])->default("pending");
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

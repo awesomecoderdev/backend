@@ -13,18 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained()->cascadeOnDelete();
-            // $table->foreignId("coupon_id")->constrained()->cascadeOnDelete();
             $table->text("meta")->nullable();
-            $table->integer("coupon_id")->nullable();
-
-            $table->string('name')->nullable();
-            $table->text("description")->nullable();
-            $table->string("SUK")->nullable();
-            $table->float('price')->nullable();
-
+            $table->string("address_link_one")->nullable();
+            $table->string("address_link_two")->nullable();
+            $table->string("city")->nullable();
+            $table->string("postal_code")->nullable();
+            $table->string("country")->nullable();
+            $table->string("phone")->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('addresses');
     }
 };

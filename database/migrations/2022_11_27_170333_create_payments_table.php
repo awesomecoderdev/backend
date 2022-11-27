@@ -13,18 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->constrained()->cascadeOnDelete();
-            // $table->foreignId("coupon_id")->constrained()->cascadeOnDelete();
             $table->text("meta")->nullable();
-            $table->integer("coupon_id")->nullable();
-
-            $table->string('name')->nullable();
-            $table->text("description")->nullable();
-            $table->string("SUK")->nullable();
-            $table->float('price')->nullable();
-
+            $table->string("payment_type")->nullable();
+            $table->string("provider")->nullable();
+            $table->string("account_no")->nullable();
+            $table->timestamp("expiry")->nullable();
             $table->timestamps();
         });
     }
@@ -36,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('payments');
     }
 };

@@ -17,10 +17,12 @@ return new class extends Migration
             $table->uuid("id");
             // $table->foreignId("user_id")->constrained()->cascadeOnDelete();
             $table->integer("user_id")->nullable();
+            $table->text("meta")->nullable();
             $table->integer("coupon_id")->nullable();
 
             $table->float('amount')->nullable();
             $table->string('payment_method')->nullable();
+            $table->enum("status", ["approved", "pending", "cancelled"])->default("pending");
 
             $table->timestamps();
         });
