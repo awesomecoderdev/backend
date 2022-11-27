@@ -430,6 +430,8 @@ class AuthController extends Controller
             ->orderBy("count")
             ->get();
 
+
+
         $orders = $orders->groupBy(function ($date) {
             return Carbon::parse($date->date)->format('M-Y');
         }, false);
