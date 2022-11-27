@@ -51,7 +51,7 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
 
 
     // charts
-    Route::get("charts", "charts")->name('charts');
+    Route::post("charts", "charts")->name('charts');
 });
 
 

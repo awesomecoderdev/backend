@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->uuid("id");
-            // $table->foreignId("user_id")->constrained()->cascadeOnDelete();
-            $table->integer("user_id")->nullable();
-            $table->integer("coupon_id")->nullable();
-
-            $table->float('amount')->nullable();
-            $table->string('payment_method')->nullable();
-
             $table->timestamps();
         });
     }
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('invoices');
     }
 };
