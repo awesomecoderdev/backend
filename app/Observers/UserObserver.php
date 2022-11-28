@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Log;
 
 class UserObserver
 {
@@ -15,6 +16,8 @@ class UserObserver
      */
     public function created(User $user)
     {
+        Log::channel("user")->info("User created " . json_encode($user));
+
         // send welcome notification
         $user->notify(new WelcomeNotification());
     }
