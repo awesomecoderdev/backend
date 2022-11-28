@@ -63,4 +63,7 @@ Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], func
 });
 
 // cart routes
-Route::get("cart", [CartController::class, "cart"]);
+Route::post("cart", [CartController::class, "cart"])->name("cart");
+Route::post("cart/add", [CartController::class, "add"])->name("cart.add");
+Route::post("cart/update", [CartController::class, "update"])->name("cart.update");
+Route::post("cart/remove", [CartController::class, "remove"])->name("cart.remove");
