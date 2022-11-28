@@ -4,7 +4,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Response;
+use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Response as JsonResponse;
 use App\Http\Requests\VerifyEmailVerificationRequest;
@@ -49,11 +51,9 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     // websites
     // Route::post("websites", "websites")->middleware('auth')->name('websites');
 
-
     // charts
     Route::post("charts", "charts")->name('charts');
 });
-
 
 
 // oauth routes
@@ -61,3 +61,6 @@ Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], func
     Route::post('{driver}', 'oauth')->name('oauth.login');
     Route::get('{driver}/callback', 'oauthCallback')->name('oauth.callback');
 });
+
+// cart routes
+Route::get("cart", [CartController::class, "cart"]);
