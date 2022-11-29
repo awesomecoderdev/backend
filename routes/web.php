@@ -23,6 +23,8 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
-// base route
-Route::get('/', [FrontendController::class, "index"])->name('index');
+// change language
 Route::get('language/{lang?}', [FrontendController::class, "language"])->name("language.change");
+
+// index route
+Route::get('/', [FrontendController::class, "index"])->name('index');
