@@ -80,6 +80,26 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Return the user full name.
+     *
+     * @return string
+     */
+    public function admin(): bool
+    {
+        return ($this->isAdmin != null && $this->isAdmin == 1) ? true : false;
+    }
+
+    /**
+     * Return the user full name.
+     *
+     * @return string
+     */
+    public function supperadmin(): bool
+    {
+        return ($this->isSupperAdmin != null && $this->isSupperAdmin == 1) ? true : false;
+    }
+
+    /**
      * Get the entity's notifications.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany

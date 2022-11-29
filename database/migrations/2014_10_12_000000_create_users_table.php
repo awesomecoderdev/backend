@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('provider_id')->nullable();
             $table->string('access_token')->nullable();
             $table->boolean('isAdmin')->nullable()->default(false);
+            $table->boolean('isSupperAdmin')->nullable()->default(false);
             $table->enum("status", ["activated", "pending", "deactivated"])->default("pending");
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
