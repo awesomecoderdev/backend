@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 class IsAdmin
 {
@@ -17,7 +18,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        abort_if(!Auth::check() || !Auth::user()->isAdmin, 404);
+        abort_if(!Auth::check() || !Auth::user()->isAdmin, Response::HTTP_UNAUTHORIZED);
         return $next($request);
     }
 }
