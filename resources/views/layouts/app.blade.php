@@ -1,4 +1,3 @@
-</html>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -14,12 +13,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased relative ">
+<body class="font-sans relative w-full antialiased">
     {{-- start::navigation --}}
     @include('layouts.navigation')
     {{-- end::navigation --}}
-    <div class="font-sans text-gray-900 antialiased">
-        {{ $slot }}
-    </div>
+
+    {{-- start::content --}}
+    {{ $slot }}
+    {{-- end::content --}}
+
     <script defer src="{{ secure_asset('js/alpine.min.js') }}"></script>
 </body>
+
+</html>
