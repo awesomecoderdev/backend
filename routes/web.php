@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\FrontendController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,5 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 */
 
 // base route
-Route::get('/', function () {
-    // echo route('oauth.login', 'google');
-    phpinfo();
-})->name('welcome');
+Route::get('/', [FrontendController::class, "index"])->name('index');
+Route::get('language/{lang?}', [FrontendController::class, "language"])->name("language.change");

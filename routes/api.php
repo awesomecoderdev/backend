@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Response;
 use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Http\Response as JsonResponse;
 use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
@@ -26,6 +27,7 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 // generate csrf token
 Route::group(['prefix' => 'v1', "controller" => AuthController::class,], function () {
     Route::get('csrf', [CsrfCookieController::class, 'show'])->middleware('web')->name('csrf');
+    Route::get('language/{lang?}', [LanguageController::class, "change"])->name("change.language");
 });
 
 // protected routes
