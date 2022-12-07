@@ -31,7 +31,7 @@ Route::group(['prefix' => 'v1', "controller" => AuthController::class,], functio
 });
 
 // protected routes
-Route::group(['prefix' => 'v1/user', "controller" => AuthController::class,], function () {
+Route::group(['prefix' => 'user', "controller" => AuthController::class,], function () {
     // public routes
     Route::any('ping', 'user')->name('ping');
     Route::post('login', 'login')->middleware('guest')->name('login');
@@ -55,13 +55,13 @@ Route::group(['prefix' => 'v1/user', "controller" => AuthController::class,], fu
 });
 
 // oauth routes
-Route::group(['prefix' => 'v1/oauth', "controller" => AuthController::class,], function () {
+Route::group(['prefix' => 'oauth', "controller" => AuthController::class,], function () {
     Route::post('{driver}', 'oauth')->name('oauth.login');
     Route::get('{driver}/callback', 'oauthCallback')->name('oauth.callback');
 });
 
 // cart routes
-Route::group(['prefix' => 'v1/cart', "controller" => CartController::class,], function () {
+Route::group(['prefix' => 'cart', "controller" => CartController::class,], function () {
     Route::post("/",  "cart")->name("cart");
     Route::post("add",  "add")->name("cart.add");
     Route::post("update",  "update")->name("cart.update");
