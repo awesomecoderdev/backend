@@ -1,7 +1,6 @@
 <x-app-layout>
     @section('head')
-        <title>Users | Wp Plagirasm</title>
-        <meta name="description" content="akdfaldfj">
+        <title>{{ __('Users') }} | Wp Plagirasm</title>
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
@@ -72,7 +71,12 @@
 
                     <p
                         class="text-xs md:text-center text-start  md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80">
-                        {{ $user->created_at }}
+                        {{ $user->created_at->diffForHumans([
+                            // 'parts' => 2,
+                            // 'parts' => 3,
+                            // 'join' => ', ',
+                            // 'short' => true,
+                        ]) }}
                     </p>
                 </div>
             @endforeach

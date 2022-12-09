@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view("users.show", compact("user"));
     }
 
     /**
@@ -60,7 +60,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view("users.edit", compact("user"));
     }
 
     /**
@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        dd($request->all());
     }
 
     /**

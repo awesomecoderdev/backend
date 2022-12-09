@@ -67,6 +67,6 @@ module.exports = {
             display: ["group-hover"],
         },
     },
-    plugins: [],
+    plugins: [require("@tailwindcss/forms")],
 };
 // darkMode: "class", // or 'media' or 'class'
