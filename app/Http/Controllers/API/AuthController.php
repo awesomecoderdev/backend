@@ -225,7 +225,7 @@ class AuthController extends Controller
 
                 event(new Registered($user));
 
-                Auth::login($user);
+                Auth::login($user, true);
                 return Redirect::to(env("APP_FRONTEND_URL") . "/?oauth=true");
             }
         } catch (Exception $e) {

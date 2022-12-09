@@ -2,23 +2,36 @@
 
 namespace App\Exceptions;
 
-use BadMethodCallException;
 use Throwable;
-use Illuminate\Auth\AuthenticationException;
+use BadMethodCallException;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Response as JsonResponse;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
-use Illuminate\Http\Response as JsonResponse;
-use Illuminate\Routing\Exceptions\InvalidSignatureException;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class Handler extends ExceptionHandler
 {
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    // protected function __construct()
+    // {
+    // app()->setLocale("bn");
+    // }
+
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -55,13 +68,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        // $this->renderable(function (NotFoundHttpException $e, $request) {
-        //     return Response::json([
-        //         'success'   => false,
-        //         'status'    => JsonResponse::HTTP_NOT_FOUND,
-        //         'message'   =>  "Not Found.",
-        //     ], JsonResponse::HTTP_NOT_FOUND);
-        // });
+        // if (Session::has('locale')) {
+        //     App::setLocale(Session::get('locale'));
+        // }
+
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return Response::json([
                 'success'   => false,
@@ -99,11 +109,12 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (HttpException $e, $request) {
+            // app()->setLocale("bn");
             return Response::json([
                 'success'   => false,
                 'status'    => $e->getStatusCode(),
                 // 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
-                'message'   => "Unauthenticated.",
+                'message'   => __("Unauthenticated."),
                 // 'message'   => "Method Not Allowed.",
                 // 'message'   => $e->getMessage(),
             ], JsonResponse::HTTP_OK);

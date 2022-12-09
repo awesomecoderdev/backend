@@ -28,3 +28,9 @@ Route::get('language/{lang?}', [FrontendController::class, "language"])->name("l
 
 // index route
 Route::get('/', [FrontendController::class, "index"])->name('index');
+Route::get('websites', [FrontendController::class, "index"])->name('websites');
+Route::get('payments', [FrontendController::class, "index"])->name('payments');
+Route::get('invoice', [FrontendController::class, "index"])->name('invoice');
+Route::get('settings', [FrontendController::class, "index"])->name('settings');
+Route::get('inbox', [FrontendController::class, "index"])->name('inbox');
+Route::get('users', [FrontendController::class, "index"])->name('users');

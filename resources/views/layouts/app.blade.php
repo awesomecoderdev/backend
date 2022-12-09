@@ -15,7 +15,7 @@
 
 <body class="font-sans relative w-full antialiased">
     {{-- start::navigation --}}
-    @include('layouts.navigation')
+    {{-- @include('layouts.navigation') --}}
     {{-- end::navigation --}}
 
     {{-- start::content --}}
