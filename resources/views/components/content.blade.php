@@ -29,6 +29,21 @@
         <div class=" md:min-h-[90vh] md:max-h-[90vh] h-auto overflow-x-hidden overflow-y-scroll">
             <div class="relative text-slate-600 font-sans font-semibold">
                 @include('layouts.navigation')
+                {{-- <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a onclick="event.preventDefault();
+                            this.closest('form').submit();"
+                        class="fixed w-60 bottom-0 bg-red-50 dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer transition-colors flex-row items-center  border-r-2  ">
+                        <div class="flex flex-row items-center text-sm font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                            </svg>
+                            {{ __('Log Out') }}
+                        </div>
+                    </a>
+                </form> --}}
             </div>
         </div>
     </div>

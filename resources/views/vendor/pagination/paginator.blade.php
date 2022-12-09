@@ -127,7 +127,7 @@
                     @else
                         <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
                             <span
-                                class="bg-white bg-red-100 dark:bg-gray-700/50 relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500  border border-gray-100 dark:border-slate-800 cursor-default rounded-r-md leading-5"
+                                class="bg-red-50/30 dark:bg-gray-700/50 relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 border border-gray-100 dark:border-slate-800  cursor-default rounded-l-md leading-5"
                                 aria-hidden="true">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
