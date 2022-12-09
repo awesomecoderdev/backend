@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Broadcasting\LogChannel;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Notification;
 
@@ -30,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
         Notification::extend('log', function ($app) {
             return new LogChannel();
         });
+
+        // pagenation
+        Paginator::defaultView("vendor.pagination.paginator");
     }
 }
