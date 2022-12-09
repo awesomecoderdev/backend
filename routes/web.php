@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\FrontendController;
-use App\Http\Controllers\Admin\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
@@ -11,6 +10,8 @@ use Illuminate\Support\Facades\Response;
 use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Response as JsonResponse;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\FrontendController;
 use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 /*
@@ -24,6 +25,8 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
+URL::forceScheme('https');
+
 // change language
 Route::get('language/{lang?}', [FrontendController::class, "language"])->name("language.change");
 
@@ -32,6 +35,7 @@ Route::get('/', [FrontendController::class, "index"])->name('index');
 
 // users
 Route::resource("users", UserController::class);
+Route::post('logout', [FrontendController::class, 'logout'])->middleware('auth')->name('logout'); // logout
 
 Route::get('websites', [FrontendController::class, "index"])->name('websites');
 Route::get('payments', [FrontendController::class, "index"])->name('payments');

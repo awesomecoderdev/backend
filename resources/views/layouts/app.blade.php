@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans relative w-full antialiased">
+<body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800">
     {{-- start::navigation --}}
     {{-- @include('layouts.navigation') --}}
     {{-- end::navigation --}}

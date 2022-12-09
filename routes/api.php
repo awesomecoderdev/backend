@@ -39,7 +39,7 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
 
     // private routes
     Route::post('/', 'user')->middleware(['auth',])->name('user');
-    Route::post('logout', 'logout')->middleware('auth')->name('logout');
+    Route::post('logout', 'logout')->middleware('auth')->name('api.logout');
     Route::post('/verify-email/{id}/{hash}', "verification")->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');
     Route::post('/resend-verification', 'resendVerification')->middleware(['auth'])->name('verification.resend');
 
