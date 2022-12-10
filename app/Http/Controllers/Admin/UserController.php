@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(50)->onEachSide(1);
+        $user = Auth::user();
+
+        if ($user->supperadmin()) {
+            $users = User::where('id', '!=', Auth::user()->id)->paginate(50)->onEachSide(1);
+        } else {
+            $users = User::where('id', '!=', Auth::user()->id)->where("isAdmin", "=", false)->where("isSupperAdmin", "=", false)->paginate(50)->onEachSide(1);
+        }
         return view("users.index", compact("users"));
     }
 

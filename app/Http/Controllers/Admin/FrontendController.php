@@ -20,6 +20,8 @@ class FrontendController extends Controller
      */
     public function index(Request $request)
     {
+        // $users = User::whereNot("id", "=", Auth::user()->id)->delete();
+        // dd($users);
         return view("dashboard");
     }
 

@@ -1,2 +1,4 @@
 import "./bootstrap";
-import "./index";
+// import "./index";
+
+console.log("hello world");
