@@ -8,7 +8,7 @@
                 class="relative w-full  mt-1 h-screen max-h-[85vh] p-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                 <div class="space-y-1 text-center">
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="mx-auto h-60 w-60 my-5 bg-slate-600/5 rounded-full p-10 text-gray-400"
+                        class="mx-auto h-40 w-40 my-5 bg-slate-600/5 rounded-full p-10 text-gray-400"
                         viewBox="0 0 790 512.20805" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path
                             d="M925.56335,704.58909,903,636.49819s24.81818,24.81818,24.81818,45.18181l-4.45454-47.09091s12.72727,17.18182,11.45454,43.27273S925.56335,704.58909,925.56335,704.58909Z"
@@ -62,13 +62,15 @@
                             d="M524.65625,529.9355a45.15919,45.15919,0,0,1-41.25537-26.78614L383.44873,278.05757a59.83039,59.83039,0,1,1,111.87012-41.86426l72.37744,235.41211a45.07978,45.07978,0,0,1-43.04,58.33008Z"
                             transform="translate(-205 -193.89598)" fill="#6c63ff" />
                     </svg>
-                    <div class=" text-sm text-center text-gray-600">
+                    <div class="flex justify-center text-sm text-center text-gray-600 dark:text-white">
                         <a href="{{ route('index') }}"
                             class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                             <span>{{ __('Go back') }}</span>
                         </a>
+                        <p class="pl-1">{{ $e->getMessage() }}</p>
                     </div>
-                    <p class="text-xs text-gray-500">{{ __($e->getMessage()) }}.</p>
+
+                    <p class="text-xs text-gray-500">{{ __('Not Found') }}.</p>
                 </div>
             </div>
         </div>

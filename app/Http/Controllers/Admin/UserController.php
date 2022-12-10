@@ -67,6 +67,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, "Invalid user id.");
         return view("users.edit", compact("user"));
     }
 
