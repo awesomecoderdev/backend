@@ -20,6 +20,16 @@ class FrontendController extends Controller
      */
     public function index(Request $request)
     {
+        return view("dashboard");
+    }
+
+    /**
+     * Display a index page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function welcome(Request $request)
+    {
         return view("welcome");
     }
 

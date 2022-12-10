@@ -37,8 +37,8 @@ Route::get('/', [FrontendController::class, "index"])->name('index');
 Route::resource("users", UserController::class);
 Route::post('logout', [FrontendController::class, 'logout'])->middleware('auth')->name('logout'); // logout
 
-Route::get('websites', [FrontendController::class, "index"])->name('websites');
-Route::get('payments', [FrontendController::class, "index"])->name('payments');
-Route::get('invoice', [FrontendController::class, "index"])->name('invoice');
-Route::get('settings', [FrontendController::class, "index"])->name('settings');
-Route::get('inbox', [FrontendController::class, "index"])->name('inbox');
+Route::get('websites', [FrontendController::class, "welcome"])->name('websites');
+Route::get('payments', [FrontendController::class, "welcome"])->name('payments');
+Route::get('invoice', [FrontendController::class, "welcome"])->name('invoice');
+Route::get('settings', [FrontendController::class, "welcome"])->name('settings');
+Route::get('inbox', [FrontendController::class, "welcome"])->name('inbox');

@@ -67,3 +67,5 @@ Route::group(['prefix' => 'cart', "controller" => CartController::class,], funct
     Route::post("update",  "update")->name("cart.update");
     Route::post("remove",  "remove")->name("cart.remove");
 });
+
+// checkout routes
