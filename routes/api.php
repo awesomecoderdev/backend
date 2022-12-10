@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\WebHook\WebHookController;
 use Illuminate\Http\Response as JsonResponse;
 use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
@@ -68,4 +69,5 @@ Route::group(['prefix' => 'cart', "controller" => CartController::class,], funct
     Route::post("remove",  "remove")->name("cart.remove");
 });
 
-// checkout routes
+// webhook routes
+Route::any("webhook", [WebHookController::class, "handle"])->name("webhook");

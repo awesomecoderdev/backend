@@ -30,7 +30,7 @@
             </linearGradient>
         </defs>
     </svg>
-    <span class="font-bold text-lg font-poppins text-slate-700 text-ellipsis mx-2">
+    <span class="font-bold text-lg font-poppins text-slate-700 dark:text-white text-ellipsis mx-2">
         Plagiarism
     </span>
 </div>
