@@ -32,7 +32,8 @@
         x-transition:leave-end="transform opacity-0 scale-95"
         class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
         style="display: none;" @click="open = false">
-        <div {{ $attributes->merge(['class' => 'rounded-md ring-1 ring-black ring-opacity-5 overflow-hidden']) }}>
+        <div
+            {{ $attributes->merge(['class' => 'rounded-md bg-white dark:bg-slate-900 border border-gray-100 dark:border-slate-800 ring-1 ring-black ring-opacity-5 overflow-hidden']) }}>
             {{ $content }}
         </div>
     </div>

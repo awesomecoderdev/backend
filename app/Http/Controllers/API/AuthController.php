@@ -230,7 +230,7 @@ class AuthController extends Controller
             }
         } catch (Exception $e) {
             $err = $e->getMessage();
-            return Redirect::to(env("APP_FRONTEND_URL"))->withErrors("hello", "How are you");
+            return Redirect::to(env("APP_FRONTEND_URL"));
         }
     }
 

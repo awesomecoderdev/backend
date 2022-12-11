@@ -40,7 +40,7 @@
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
-                                class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-200 hover:dark:text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 ">
                                 <div>{{ Auth::user()->name() }}</div>
 
                                 <div class="ml-1">
@@ -54,10 +54,11 @@
                             </button>
                         </x-slot>
 
-                        <x-slot name="content">
-                            <x-dropdown-link href="{{ next_url('profile') }}">
+                        <x-slot name="content" class="bg-gray-100">
+                            <x-dropdown-link href="{{ next_url('profile') }}"
+                                class="hover:bg-gray-100 dark:hover:bg-gray-800 ">
                                 <div
-                                    class=" dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800 py-0.5 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center   ">
+                                    class=" dark:text-slate-300  border-transparent py-0.5 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center   ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                                         class="h-5 w-5 pointer-events-none mr-2">
@@ -71,10 +72,10 @@
                             <!-- Logout -->
                             <form method="POST" action="{{ route('logout') }}" class="m-0">
                                 @csrf
-                                <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link :href="route('logout')" class="hover:bg-gray-100 dark:hover:bg-gray-800"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
                                     <div
-                                        class=" dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800 py-0.5 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center   ">
+                                        class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center   ">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                                             class="h-5 w-5 pointer-events-none mr-2">
@@ -93,7 +94,7 @@
                 <!-- Hamburger -->
                 <div class="-mr-2 flex items-center sm:hidden">
                     <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none border bg-transparent border-gray-100 focus-visible:bg-transparent focus:bg-transparent focus-within:bg-transparent  dark:border-slate-700 transition duration-150 ease-in-out">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none border bg-transparent border-gray-100 focus-visible:bg-transparent focus:bg-transparent focus-within:bg-transparent  dark:border-slate-700 ">
                         <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                             <path class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16" />
