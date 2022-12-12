@@ -94,7 +94,7 @@
 
 
                         <p
-                            class="text-xs md:text-center text-start md:hidden block md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
+                            class="text-xs md:text-center text-start lg:block md:hidden block md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
                             {{ $user->created_at->diffForHumans([
                                 // 'parts' => 2,
                                 // 'parts' => 3,
