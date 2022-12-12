@@ -4,10 +4,10 @@
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
-            @if ($users->count() > 0)
+            @if (isset($users) && $users->count() > 0)
                 @foreach ($users as $user)
                     <div
-                        class="md:p-0 p-3 md:flex-row flex-col relative flex items-center justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
+                        class="relative md:p-0 p-3 md:flex-row flex-col relative flex items-center justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
                         <div
                             class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
                             <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
@@ -32,7 +32,7 @@
 
 
                         <div
-                            class="max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
+                            class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
                             <a href="{{ route('users.show', $user) }}" class="p-1 text-emerald-400 rounded-md mx-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -62,7 +62,7 @@
 
                         </div>
 
-                        <div class="relative flex flex-auto items-center justify-start">
+                        <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
                             <span
                                 class="{{ $user->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                 {{ $user->email_verified_at != null ? __('Verified') : __('Unverified') }}
@@ -94,7 +94,7 @@
 
 
                         <p
-                            class="text-xs md:text-center text-start  md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
+                            class="text-xs md:text-center text-start md:hidden block md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
                             {{ $user->created_at->diffForHumans([
                                 // 'parts' => 2,
                                 // 'parts' => 3,
