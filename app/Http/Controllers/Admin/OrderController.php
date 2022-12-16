@@ -53,7 +53,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        dd($order);
     }
 
     /**
@@ -64,7 +64,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        dd($order);
     }
 
     /**
