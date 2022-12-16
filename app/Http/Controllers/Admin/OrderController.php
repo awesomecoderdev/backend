@@ -53,7 +53,9 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        dd($order);
+        $order->load('user');
+        $order->user->load('products');
+        return $order->user;
     }
 
     /**
@@ -64,7 +66,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        dd($order);
+        return $order;
     }
 
     /**

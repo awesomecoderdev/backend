@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Order;
+use App\Models\Product;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\SendVerificationEmail;
@@ -117,5 +119,27 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasVerifiedEmail()
     {
         return !is_null($this->email_verified_at);
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @return  \App\Models\Order
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @return  \App\Models\Product
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'user_id');
     }
 }
