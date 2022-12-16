@@ -20,6 +20,7 @@ class OrderFactory extends Factory
             'user_id' => 1,
             'coupon_id' => null,
             'amount' => fake()->unique()->numberBetween(10, 999),
+            'status' => fake()->randomElement(['approved', 'pending', 'canceled']),
             'payment_method' => "card",
             'created_at' => fake()->dateTimeBetween('+0 days', '+2 years')
         ];

@@ -12,6 +12,7 @@ use App\Http\Controllers\API\AuthController;
 use Illuminate\Http\Response as JsonResponse;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FrontendController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
@@ -41,6 +42,8 @@ Route::post('logout', [FrontendController::class, 'logout'])->middleware('auth')
 // products
 Route::resource("products", ProductController::class);
 
+// orders
+Route::resource("orders", OrderController::class);
 
 
 // others
