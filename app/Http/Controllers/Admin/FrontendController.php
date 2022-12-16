@@ -46,7 +46,7 @@ class FrontendController extends Controller
             App::setLocale(strtolower($request->lang));
             Session::put('locale', strtolower($request->lang));
         }
-        return redirect()->back();
+        return redirect()->route("index");
     }
 
     /**
