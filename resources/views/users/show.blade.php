@@ -260,7 +260,7 @@
                                 <span>{{ __('Go back') }}</span>
                             </a>
                         </div>
-                        <p class="text-xs text-gray-500">{{ __('No Orders Available') }}.</p>
+                        <p class="text-xs text-gray-500">{{ __('No orders are available') }}.</p>
                     </div>
                 </div>
             </div>
