@@ -1,214 +1,203 @@
-class Chart extends React.PureComponent {
-    constructor() {
-        super();
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Loading from "./Loading";
 
-        this.c3Instance = c3;
-        this.chart = null;
-    }
+const Chart = () => {
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false);
+        }, 1800);
+    }, []);
 
-    ref = (el) => (this.chartContainer = el);
-
-    componentDidMount() {
-        this.setChart();
-    }
-    componentDidUpdate(prevProps) {
-        const { columns, type, config } = this.props.data;
-        console.log(columns);
-        this.chart.load({ columns, type, ...config });
-    }
-
-    setChart() {
-        const { data, onClick, onMouseOver, onMouseOut, type, config } =
-            this.props;
-
-        data["onclick"] = onClick;
-        data["onmouseover"] = onMouseOver;
-        data["onmouseout"] = onMouseOut;
-
-        this.chart = this.c3Instance.generate({
-            bindto: this.chartContainer,
-            data: { ...data, type: type || "pie" },
-            ...config,
-        });
-    }
-
-    render() {
-        return <div ref={this.ref}></div>;
-    }
-}
-
-const donut = {
-    data: {
-        columns: [
-            ["data", 30],
-            ["data 1", 80],
-        ],
-    },
-    config: {
-        donut: {
-            title: "Label",
-        },
-    },
-};
-const gauge = {
-    data: { columns: [["data", 30]] },
-    config: {
-        color: {
-            pattern: ["#FF0000"],
-        },
-    },
-};
-
-const gaugeMultiData = {
-    data: {
-        columns: [
-            ["data", 10],
-            ["data1", 50],
-            ["data2", 80],
-            ["data3", 100],
-        ],
-    },
-    config: {
-        color: {
-            pattern: ["#FF0000", "#8e61e4", "#3888c1", "#48c38a"],
-            threshold: {
-                values: [30, 60, 90, 100],
-            },
-        },
-    },
-};
-const bar = {
-    data: {
-        columns: [
-            ["data", 10, 20, 30, 40],
-            ["data 2", 40, 30, 20, 10],
-        ],
-    },
-};
-const barCombine = {
-    data: {
-        columns: [
-            ["data1", 30, 20, 50, 40, 60, 50],
-            ["data2", 200, 130, 90, 240, 130, 220],
-            ["data3", 300, 200, 160, 400, 250, 250],
-            ["data4", 200, 130, 90, 240, 130, 220],
-            ["data5", 130, 120, 150, 140, 160, 150],
-            ["data6", 90, 70, 20, 50, 60, 120],
-        ],
-        types: {
-            data3: "spline",
-            data4: "line",
-            data6: "area",
-        },
-        groups: [["data1", "data2"]],
-    },
-};
-
-const Div = ({ width, children }) => (
-    <div style={{ width: `${width}px`, display: "inline-block" }}>
-        {children}
-    </div>
-);
-
-class MainApp extends React.Component {
-    constructor() {
-        super();
-
-        this.realtimeChart();
-    }
-    state = {
-        changePie: {
-            columns: [
-                ["setosa", 50],
-                ["versicolor", 200],
-                ["virginica", 300],
-            ],
-        },
-        realtime: { columns: [] },
-    };
-
-    clickChart = (dataSet, index) => console.log("onclick", dataSet, index);
-    mouseOverchart = (dataSet, index) =>
-        console.log("onmouseover", dataSet, index);
-    mouseOutchart = (dataSet, index) =>
-        console.log("onmouseout", dataSet, index);
-
-    onChangeChart = () => {
-        this.setState({
-            changePie: {
-                columns: [
-                    ["test", 40],
-                    ["setosa", 100],
-                    ["versicolor", 50],
-                    ["virginica", 460],
-                ],
-            },
-        });
-    };
-
-    realtimeChart = () => {
-        setInterval(() => {
-            let data = [];
-
-            for (let i = 0; i <= 6; i++) {
-                data[i] = [`data ${i}`];
-                for (let n = 1; n <= 4; n++) {
-                    const number = Math.floor(Math.random() * 150) + 1;
-                    data[i][n] = number;
-                }
-            }
-
-            this.setState({
-                realtime: {
-                    columns: data,
-                },
-            });
-        }, 1500);
-    };
-
-    render() {
-        return (
-            <div>
-                <Div width={300}>
-                    <button onClick={this.onChangeChart}>Change</button>
-                    <Chart
-                        data={this.state.changePie}
-                        onClick={this.clickChart}
-                        onMouseOver={this.mouseOverchart}
-                        onMouseOut={this.mouseOutchart}
-                    />
-                </Div>
-                <Div width={300}>
-                    <Chart
-                        type="donut"
-                        data={donut.data}
-                        config={donut.config}
-                    />
-                </Div>
-                <Div width={300}>
-                    <Chart
-                        type="gauge"
-                        data={gauge.data}
-                        config={gauge.config}
-                    />
-                </Div>
-                <Div width={300}>
-                    <Chart
-                        type="gauge"
-                        data={gaugeMultiData.data}
-                        config={gaugeMultiData.config}
-                    />
-                </Div>
-                <Div width={400}>
-                    <Chart type="bar" data={bar.data} />
-                </Div>
-                <Div width={400}>
-                    <Chart type="bar" data={barCombine.data} />
-                </Div>
-                <Div width={500}>
-                    <Chart type="spline" data={this.state.realtime} />
-                </Div>
+    return (
+        <Fragment>
+            <div className="relative">
+                <AnimatePresence>
+                    {loading ? (
+                        <Fragment>
+                            <Loading
+                                variants={{
+                                    hidden: {
+                                        opacity: 0.3,
+                                        // scale: 0.5
+                                    },
+                                    visible: {
+                                        opacity: 1,
+                                        // scale: 1,
+                                        transition: {
+                                            delayChildren: 0.02,
+                                            staggerChildren: 0.05,
+                                        },
+                                    },
+                                }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 260,
+                                    damping: 20,
+                                }}
+                                initial="hidden"
+                                animate="visible"
+                            />
+                        </Fragment>
+                    ) : (
+                        <motion.section
+                            variants={{
+                                start: {
+                                    opacity: 0,
+                                },
+                                finished: {
+                                    opacity: 1,
+                                    transition: {
+                                        duration: 3,
+                                        ease: "easeInOut",
+                                        type: "spring",
+                                        stiffness: 2600,
+                                        damping: 260,
+                                    },
+                                },
+                                exit: {
+                                    opacity: 0,
+                                    transition: {
+                                        duration: 3,
+                                        ease: "easeInOut",
+                                        type: "spring",
+                                        stiffness: 2600,
+                                        damping: 260,
+                                    },
+                                },
+                            }}
+                            initial="start"
+                            animate="finished"
+                            exit="exit"
+                            className="relative w-full grid space-y-3"
+                        >
+                            <div
+                                role="status"
+                                class="relative mb-4 space-y-8 animate-pulse md:space-y-3 md:space-x-8 md:flex md:items-center"
+                            >
+                                <div class="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                                    <svg
+                                        class="w-12 h-12 text-gray-200"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 640 512"
+                                    >
+                                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+                                    </svg>
+                                </div>
+                                <div class="w-full">
+                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                                </div>
+                            </div>
+                            <div
+                                role="status"
+                                class="relative mb-4 space-y-8 animate-pulse md:space-y-3 md:space-x-8 md:flex md:items-center"
+                            >
+                                <div class="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                                    <svg
+                                        class="w-12 h-12 text-gray-200"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 640 512"
+                                    >
+                                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+                                    </svg>
+                                </div>
+                                <div class="w-full">
+                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                                </div>
+                            </div>
+                            <div
+                                role="status"
+                                class="relative mb-4 space-y-8 animate-pulse md:space-y-3 md:space-x-8 md:flex md:items-center"
+                            >
+                                <div class="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                                    <svg
+                                        class="w-12 h-12 text-gray-200"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 640 512"
+                                    >
+                                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+                                    </svg>
+                                </div>
+                                <div class="w-full">
+                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                                </div>
+                            </div>
+                            <div
+                                role="status"
+                                class="relative mb-4 space-y-8 animate-pulse md:space-y-3 md:space-x-8 md:flex md:items-center"
+                            >
+                                <div class="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                                    <svg
+                                        class="w-12 h-12 text-gray-200"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 640 512"
+                                    >
+                                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+                                    </svg>
+                                </div>
+                                <div class="w-full">
+                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                                </div>
+                            </div>
+                            <div
+                                role="status"
+                                class="relative mb-4 space-y-8 animate-pulse md:space-y-3 md:space-x-8 md:flex md:items-center"
+                            >
+                                <div class="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+                                    <svg
+                                        class="w-12 h-12 text-gray-200"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                        fill="currentColor"
+                                        viewBox="0 0 640 512"
+                                    >
+                                        <path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
+                                    </svg>
+                                </div>
+                                <div class="w-full">
+                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[480px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[440px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[460px] mb-2.5"></div>
+                                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                                </div>
+                            </div>
+                        </motion.section>
+                    )}
+                </AnimatePresence>
             </div>
-        );
-    }
-}
+        </Fragment>
+    );
+};
+
+export default Chart;
