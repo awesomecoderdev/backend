@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Website;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\SendVerificationEmail;
@@ -130,6 +131,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @return  \App\Models\Website
+     */
+    public function websites()
+    {
+        return $this->hasMany(Website::class);
     }
 
 
