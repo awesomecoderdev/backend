@@ -128,7 +128,7 @@
                             </div>
                             <div class="bg-gray-50  dark:bg-gray-700/10 px-4 py-3 text-right sm:px-6">
                                 <button type="submit"
-                                    class="inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">Save</button>
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">{{ __('Save') }}</button>
                             </div>
                         </div>
                     </form>

@@ -66,7 +66,6 @@
                             <span
                                 class="{{ $user->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                 {{ $user->email_verified_at != null ? __('Verified') : __('Unverified') }}
-
                             </span>
 
                             <div class="relative">
