@@ -55,7 +55,7 @@ class OrderController extends Controller
     {
         $order->load('user');
         $order->user->load('products');
-        return $order->user;
+        return $order;
     }
 
     /**

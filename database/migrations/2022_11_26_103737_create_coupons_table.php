@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
             $table->integer("user_id")->nullable();
+            // $table->foreignId("user_id")->constrained()->cascadeOnDelete();
+            $table->foreignId("product_id")->constrained()->cascadeOnDelete();
             $table->text("meta")->nullable();
             $table->string("name")->nullable();
             $table->text("description")->nullable();
