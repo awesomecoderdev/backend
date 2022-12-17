@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-if (!class_exists("CreateShoppingCartTable")) {
-    class CreateShoppingCartTable extends Migration
+if (!class_exists("CreateCartsTable")) {
+    class CreateCartsTable extends Migration
     {
         /**
          * Run the migrations.
