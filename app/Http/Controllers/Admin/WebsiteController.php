@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Website;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class WebsiteController extends Controller
 {
@@ -31,6 +32,7 @@ class WebsiteController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -52,7 +54,9 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        //
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        $website->load('user');
+        return $website;
     }
 
     /**
@@ -63,7 +67,9 @@ class WebsiteController extends Controller
      */
     public function edit(Website $website)
     {
-        //
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        $website->load('user');
+        return $website;
     }
 
     /**

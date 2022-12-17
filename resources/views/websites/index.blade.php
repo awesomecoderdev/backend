@@ -98,7 +98,7 @@
 
                         <div
                             class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
-                            <a href="{{ route('orders.show', $website) }}"
+                            <a href="{{ route('websites.show', $website) }}"
                                 class="p-1 text-emerald-400 rounded-md mx-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -110,7 +110,7 @@
 
                             </a>
                             @can('isSupperAdmin')
-                                <a href="{{ route('orders.edit', $website) }}"
+                                <a href="{{ route('websites.edit', $website) }}"
                                     class="p-1 text-indigo-400 rounded-md mx-1 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

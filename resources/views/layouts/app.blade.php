@@ -10,9 +10,10 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Scripts -->
-    <script src="{{ asset('js/turbolinks.js') }}"></script>
+    {{-- <script src="{{ asset('js/turbolinks.js') }}"></script> --}}
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
 
 <body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">

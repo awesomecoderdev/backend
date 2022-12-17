@@ -62,7 +62,7 @@ class UserController extends Controller
             $user->load('products',);
         }
         $user->load('websites', 'orders');
-        // return $user;
+        return $user;
         return view("users.show", compact("user"));
     }
 
