@@ -72,7 +72,6 @@
             </div>
 
             @if (isset($orders) && $orders->count() > 0)
-
                 @foreach ($orders as $order)
                     <div
                         class="relative md:p-0 p-3 md:flex-row flex-col flex items-center justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">

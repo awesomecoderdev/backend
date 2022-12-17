@@ -130,7 +130,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->orderBy('created_at', 'desc');
     }
 
 
@@ -141,7 +141,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function websites()
     {
-        return $this->hasMany(Website::class);
+        return $this->hasMany(Website::class)->orderBy('created_at', 'desc');
     }
 
 

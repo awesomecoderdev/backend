@@ -57,8 +57,12 @@ class UserController extends Controller
     public function show(User $user)
     {
         abort_if(!Auth::user()->supperadmin() || Auth::user()->id == $user->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, "Invalid user id.");
-        $user->load('websites', 'products', 'orders',);
-        return $user;
+        if (Auth::user()->supperadmin()) {
+            // $user->load('websites', 'products', 'orders');
+            $user->load('products',);
+        }
+        $user->load('websites', 'orders');
+        // return $user;
         return view("users.show", compact("user"));
     }
 
