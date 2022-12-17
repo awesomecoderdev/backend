@@ -1,93 +1,155 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __('Products') }} | Wp Plagirasm</title>
+        <title>{{ __('Websites') }} | Wp Plagirasm</title>
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
-            @if (isset($products) && $products->count() > 0)
-                @foreach ($products as $product)
+            <div class="border-b mb-4 border-gray-200 dark:border-gray-700 flex justify-between">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                    <li class="mr-2">
+                        <a href="{{ route('websites.index') }}"
+                            class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-primary-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z">
+                                </path>
+                            </svg>
+                            <span class="md:block hidden">{{ __('All') }}</span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="{{ route('websites.index', 'status=approved') }}"
+                            class=" {{ $status == 'approved' ? 'border-green-300' : 'border-transparent' }} hover:border-green-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-green-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="md:block hidden">{{ __('Approved') }}</span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="{{ route('websites.index', 'status=pending') }}"
+                            class=" {{ $status == 'pending' ? 'border-yellow-300' : 'border-transparent' }} hover:border-yellow-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-yellow-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="md:block hidden">{{ __('Pending') }}</span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="{{ route('websites.index', 'status=blocked') }}"
+                            class=" {{ $status == 'blocked' ? 'border-red-300' : 'border-transparent' }} hover:border-red-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-red-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+                            </svg>
+                            <span class="md:block hidden">{{ __('Blocked') }}</span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
+                    {!! __('Showing') !!}
+                    @if ($websites->firstItem())
+                        <span class="font-medium">{{ $websites->firstItem() }}</span>
+                        {!! __('to') !!}
+                        <span class="font-medium">{{ $websites->lastItem() }}</span>
+                    @else
+                        {{ $websites->count() }}
+                    @endif
+                    {!! __('of') !!}
+                    <span class="font-medium">{{ $websites->total() }}</span>
+                    {!! __('results') !!}
+                </p>
+            </div>
+
+
+            @if (isset($websites) && $websites->count() > 0)
+                @foreach ($websites as $website)
                     <div
                         class="md:p-0 p-3 md:flex-row flex-col relative flex items-start justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
                         <div
-                            class="relative lg:w-auto w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
-                            {{-- class="relative lg:w-1/2 md:w-2/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 "> --}}
-                            <div class="relative w-32 flex justify-start items-center ">
-                                <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
+                            class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
+                            <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                    class="h-5 w-5 pointer-events-none ">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                </svg>
+
+                            </h2>
+                            <span
+                                class="{{ $website->status == 'approved' ? 'bg-green-400' : ($website->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2 md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
+                            <a href="{{ $website->url }}" target="_blank"
+                                class="text-xs flex justify-center items-center md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
+                                {{ $website->title ?? 'Unavailable' }}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="h-4 w-4 mx-1 pointer-events-none ">
+
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                </svg>
+
+                            </a>
+                        </div>
+
+
+                        <div
+                            class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
+                            <a href="{{ route('orders.show', $website) }}"
+                                class="p-1 text-emerald-400 rounded-md mx-1 ">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+
+                            </a>
+                            @can('isSupperAdmin')
+                                <a href="{{ route('orders.edit', $website) }}"
+                                    class="p-1 text-indigo-400 rounded-md mx-1 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                        class="h-5 w-5 pointer-events-none ">
+                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z">
-                                        </path>
+                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                     </svg>
-                                </h2>
-                                <p
-                                    class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
-                                    {{ __($product->name) }}
-                                </p>
-                            </div>
-
-                            <div class="lg:relative absolute right-0 w-auto flex justify-start items-center ">
-                                @can('isSupperAdmin')
-                                    <a href="{{ route('products.show', $product) }}"
-                                        class="p-1 text-emerald-400 rounded-md mx-1 ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-
-                                    </a>
-                                    <a href="{{ route('products.edit', $product) }}"
-                                        class="p-1 text-indigo-400 rounded-md mx-1 ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                        </svg>
-                                    </a>
-                                    <a href="" class="p-1 text-red-400 rounded-md mx-1 ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
-                                        </svg>
-                                    </a>
-                                @endcan
-                            </div>
+                                </a>
+                                <a href="" class="p-1 text-red-400 rounded-md mx-1 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
+                                    </svg>
+                                </a>
+                            @endcan
                         </div>
 
-                        <div class="relative md:mt-0 mt-2 space-x-2 flex w-auto items-center justify-start mx-5">
+                        <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
                             <span
-                                class=" w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                {{ $product->description ?: __('Unknown') }}
+                                class="{{ $website->status == 'approved' ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : ($website->status == 'pending' ? 'bg-yellow-100 dark:bg-yellow-300 text-yellow-800' : 'bg-red-100 dark:bg-red-300 text-red-800') }}  w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
+                                {{ __(Str::ucfirst($website->status)) }}
                             </span>
                         </div>
-
-                        <div class="relative md:mt-0 mt-2 space-x-2 flex items-center justify-start mx-5">
-                            <span
-                                class="bg-emerald-100 dark:bg-emerald-300 text-green-800 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                {{ $product->SUK ?: __('Unknown') }}
-                            </span>
-
-                            <span
-                                class="bg-emerald-100 dark:bg-emerald-300 text-green-800  md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                {{ $product->price != null ? "$" . __($product->price) : __('Unknown') }}
-                            </span>
-                        </div>
-
-
-
                         <p
-                            class="text-xs lg:block hidden md:text-center text-start  md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
-                            {{ $product->created_at->diffForHumans([
+                            class="text-xs md:text-center text-start lg:block md:hidden block md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
+                            {{ $website->created_at->diffForHumans([
                                 // 'parts' => 2,
                                 // 'parts' => 3,
                                 // 'join' => ', ',
                                 // 'short' => true,
-                            ]) ?? __('Unknown') }}
+                            ]) }}
                         </p>
                     </div>
                 @endforeach
@@ -95,15 +157,15 @@
 
 
                 <div class="relative w-full">
-                    {{ $products->links() }}
+                    {{ $websites->links() }}
                 </div>
             @else
                 <div
                     class="mt-1 h-60 p-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                     <div class="space-y-1 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 my-5 text-gray-400"
-                            data-name="Layer 1" width="647.63626" height="632.17383" viewBox="0 0 647.63626 632.17383"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            data-name="Layer 1" width="647.63626" height="632.17383"
+                            viewBox="0 0 647.63626 632.17383" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path
                                 d="M687.3279,276.08691H512.81813a15.01828,15.01828,0,0,0-15,15v387.85l-2,.61005-42.81006,13.11a8.00676,8.00676,0,0,1-9.98974-5.31L315.678,271.39691a8.00313,8.00313,0,0,1,5.31006-9.99l65.97022-20.2,191.25-58.54,65.96972-20.2a7.98927,7.98927,0,0,1,9.99024,5.3l32.5498,106.32Z"
                                 transform="translate(-276.18187 -133.91309)" fill="#f2f2f2" />

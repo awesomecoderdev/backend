@@ -11,8 +11,8 @@
             {{ __('Dashboard') }}
         </div>
     </a>
-    <a href="{{ route('websites') }}"
-        class="{{ Route::currentRouteName() == 'websites' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center  border-r-2  ">
+    <a href="{{ route('websites.index') }}"
+        class="{{ Route::currentRouteName() == 'websites.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">

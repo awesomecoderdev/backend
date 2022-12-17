@@ -13,10 +13,15 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $websites = Website::paginate(50)->onEachSide(1);
-        return view("websites.index", compact("websites"));
+        $status = ($request->has('status') && in_array($request->input('status'), ['approved', 'pending', 'blocked'])) ? strtolower($request->input('status')) : false;
+
+        $websites = Website::when($status, function ($query) use ($status) {
+            return $query->where('status', $status);
+        })->orderBy("created_at", "DESC")->paginate(50)->onEachSide(1);
+
+        return view("websites.index", compact("websites", "status"));
     }
 
     /**
@@ -26,7 +31,6 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**

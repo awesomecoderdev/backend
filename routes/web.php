@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\FrontendController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 /*
@@ -45,9 +46,10 @@ Route::resource("products", ProductController::class);
 // orders
 Route::resource("orders", OrderController::class);
 
+// websites
+Route::resource("websites", WebsiteController::class);
 
 // others
-Route::get('websites', [FrontendController::class, "welcome"])->name('websites');
 Route::get('payments', [FrontendController::class, "welcome"])->name('payments');
 Route::get('invoice', [FrontendController::class, "welcome"])->name('invoice');
 Route::get('settings', [FrontendController::class, "welcome"])->name('settings');
