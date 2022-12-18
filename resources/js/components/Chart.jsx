@@ -85,12 +85,12 @@ const Chart = () => {
             });
         setTimeout(() => {
             setLoading(false);
-        }, 1000);
+        }, 2000);
     }, []);
 
     return (
         <Fragment>
-            <div className="p-4 w-full rounded border border-gray-200 shadow animate-pulse md:p-6 dark:border-gray-700">
+            <div className="p-4 w-full rounded border border-gray-200 shadow md:p-6 dark:border-gray-700">
                 <AnimatePresence>
                     {loading ? (
                         <Fragment>

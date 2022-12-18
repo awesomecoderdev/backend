@@ -68,7 +68,7 @@ const dropDownMotion = {
 
 const Loading = ({ ...props }) => {
     return (
-        <motion.div {...props} className="relative w-full">
+        <motion.div {...props} className="relative w-full  animate-pulse">
             {/* <motion.svg
                 variants={svgVariants}
                 initial="start"
