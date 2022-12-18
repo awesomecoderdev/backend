@@ -37,19 +37,30 @@ const Chart = () => {
     // const b = Object.keys(data).map((i) => console.log("i", data[i].length));
     // const b = Object.keys(data).map((i) => data[i].length ?? 0);
     // console.log("b", b);
-    console.log(
-        "label",
-        Object.keys(data).filter((item, key) => key)
-    );
+    // console.log(
+    //     "label",
+    //     Object.keys(data).filter((item, key) => item)
+    // );
+
+    // Object.values(data).map((item, key) => {
+    //     console.log("asfsdf", item);
+    // });
 
     const chart = {
-        labels: Object.keys(data).filter((item, key) => key),
+        labels: Object.values(data[Object.keys(data)[0]] ?? []).map(
+            (item) => item.date ?? 0
+        ),
         datasets: [
             {
-                label: "Orders",
-                data: Object.keys(data).map((i) => data[i].length ?? 0),
-                borderColor: "rgb(255, 99, 132)",
-                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                label: Object.keys(data)[0],
+                // data: Object.keys(data).map((i) => data[i].length ?? 0),
+                data: Object.values(data[Object.keys(data)[0]] ?? []).map(
+                    (item) =>
+                        item.count *
+                            faker.datatype.number({ min: 3, max: 9 }) ?? 0
+                ),
+                borderColor: "#a5b4fc",
+                backgroundColor: "#4f46e5",
             },
         ],
     };
@@ -165,13 +176,14 @@ const Chart = () => {
                                         return (
                                             <Fragment key={index}>
                                                 <option value={index}>
-                                                    {Object.keys(order)[0]} -{" "}
+                                                    {Object.keys(order)[0]}
+                                                    {/* -
                                                     {
                                                         Object.keys(order)[
                                                             Object.keys(order)
                                                                 .length - 1
                                                         ]
-                                                    }
+                                                    } */}
                                                 </option>
                                             </Fragment>
                                         );

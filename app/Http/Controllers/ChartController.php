@@ -30,7 +30,7 @@ class ChartController extends Controller
             return Carbon::parse($date->date)->format('M-Y');
         }, false)->toArray();
 
-        $orders = array_chunk($orders, 12, true);
+        $orders = array_chunk($orders, 1, true);
 
         return Response::json([
             "success" => true,
