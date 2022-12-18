@@ -146,8 +146,8 @@ const Chart = () => {
                             exit="exit"
                             className="relative w-full "
                         >
-                            <div className="w-full flex justify-between">
-                                <span className="block text-sm font-medium text-gray-700">
+                            <div className="w-full mb-3 flex sm:items-center items-start justify-between flex-col md:flex-row">
+                                <span className="flex items-center text-sm bg-gray-100 dark:bg-slate-800 px-3 py-1.5 rounded-full font-medium text-gray-700 dark:text-white">
                                     Orders
                                 </span>
                                 <select
@@ -155,7 +155,7 @@ const Chart = () => {
                                         console.log(orders[e.target.value]);
                                         setData(orders[e.target.value] ?? data);
                                     }}
-                                    className="mt-1 max-w-xs block w-full rounded-md border border-gray-200 dark:border-slate-800 bg-white py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 "
+                                    className=" md:mt-0 mt-2  max-w-xs block w-full rounded-md border border-gray-200 dark:border-slate-800 bg-white py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 "
                                 >
                                     {orders.map((order, index) => {
                                         return (
