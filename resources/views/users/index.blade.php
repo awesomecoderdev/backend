@@ -4,6 +4,73 @@
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
+            <div class="border-b mb-4 border-gray-200 dark:border-gray-700 flex justify-between">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+                    <li class="mr-2">
+                        <a href="{{ route('users.index') }}"
+                            class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-primary-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z">
+                                </path>
+                            </svg>
+                            <span class="md:block hidden">{{ __('All') }}</span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="{{ route('users.index', 'status=activated') }}"
+                            class=" {{ $status == 'activated' ? 'border-green-300' : 'border-transparent' }} hover:border-green-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-green-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="md:block hidden">{{ __('Activated') }}</span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="{{ route('users.index', 'status=pending') }}"
+                            class=" {{ $status == 'pending' ? 'border-yellow-300' : 'border-transparent' }} hover:border-yellow-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-yellow-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="md:block hidden">{{ __('Pending') }}</span>
+                        </a>
+                    </li>
+                    <li class="mr-2">
+                        <a href="{{ route('users.index', 'status=deactivated') }}"
+                            class=" {{ $status == 'deactivated' ? 'border-red-300' : 'border-transparent' }} hover:border-red-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true"
+                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-red-400">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+                            </svg>
+                            <span class="md:block hidden">{{ __('Deactivated') }}</span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
+                    {!! __('Showing') !!}
+                    @if ($users->firstItem())
+                        <span class="font-medium">{{ $users->firstItem() }}</span>
+                        {!! __('to') !!}
+                        <span class="font-medium">{{ $users->lastItem() }}</span>
+                    @else
+                        {{ $users->count() }}
+                    @endif
+                    {!! __('of') !!}
+                    <span class="font-medium">{{ $users->total() }}</span>
+                    {!! __('results') !!}
+                </p>
+            </div>
+
             @if (isset($users) && $users->count() > 0)
                 @foreach ($users as $user)
                     <div
@@ -114,8 +181,8 @@
                     class="mt-1 h-60 p-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                     <div class="space-y-1 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 my-5 text-gray-400"
-                            data-name="Layer 1" width="647.63626" height="632.17383" viewBox="0 0 647.63626 632.17383"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                            data-name="Layer 1" width="647.63626" height="632.17383"
+                            viewBox="0 0 647.63626 632.17383" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path
                                 d="M687.3279,276.08691H512.81813a15.01828,15.01828,0,0,0-15,15v387.85l-2,.61005-42.81006,13.11a8.00676,8.00676,0,0,1-9.98974-5.31L315.678,271.39691a8.00313,8.00313,0,0,1,5.31006-9.99l65.97022-20.2,191.25-58.54,65.96972-20.2a7.98927,7.98927,0,0,1,9.99024,5.3l32.5498,106.32Z"
                                 transform="translate(-276.18187 -133.91309)" fill="#f2f2f2" />

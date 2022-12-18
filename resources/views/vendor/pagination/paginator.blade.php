@@ -1,5 +1,5 @@
 @php
-    $que_attr = ['search', 'status'];
+    $que_attr = ['search', 'status', 'sort'];
     $que_req = $_GET;
     $extra_url_attr = '';
     foreach ($que_req as $key => $value) {
