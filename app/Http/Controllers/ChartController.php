@@ -27,7 +27,7 @@ class ChartController extends Controller
             ->get();
 
         $orders = $orders->groupBy(function ($date) {
-            return Carbon::parse($date->date)->format('M-Y');
+            return Carbon::parse($date->date)->format('F Y');
         }, false)->toArray();
 
         $orders = array_chunk($orders, 1, true);
