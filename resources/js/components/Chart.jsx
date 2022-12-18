@@ -90,7 +90,7 @@ const Chart = () => {
 
     return (
         <Fragment>
-            <div className="relative">
+            <div className="p-4 w-full rounded border border-gray-200 shadow animate-pulse md:p-6 dark:border-gray-700">
                 <AnimatePresence>
                     {loading ? (
                         <Fragment>

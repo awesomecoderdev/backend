@@ -5,7 +5,7 @@ module.exports = {
         "./resources/**/*.js",
         "./resources/**/*.vue",
     ],
-    // darkMode: "class", // or 'media' or 'class'
+    darkMode: "class", // or 'media' or 'class'
     theme: {
         screens: {
             sm: "640px",
