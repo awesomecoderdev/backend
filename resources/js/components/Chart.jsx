@@ -4,31 +4,68 @@ import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    BarElement,
+    PointElement,
+    LineElement,
     Title,
     Tooltip,
     Legend,
 } from "chart.js";
+import { Line } from "react-chartjs-2";
+import faker from "faker";
 import Loading from "./Loading";
 import Helper from "../lib/helper";
 
 ChartJS.register(
     CategoryScale,
     LinearScale,
-    BarElement,
+    PointElement,
+    LineElement,
     Title,
     Tooltip,
     Legend
 );
-
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 const Chart = () => {
     const { request, csrf } = Helper();
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
     const [data, setData] = useState([]);
-    const [paged, setPaged] = useState(0);
+
+    console.log("data", data);
+    // const a = labels.map(() => faker.datatype.number({ min: 0, max: 1000 }));
+    // console.log("a", a);
+    // const b = Object.keys(data).map((i) => console.log("i", data[i].length));
+    // const b = Object.keys(data).map((i) => data[i].length ?? 0);
+    // console.log("b", b);
+    console.log(
+        "label",
+        Object.keys(data).filter((item, key) => key)
+    );
+
+    const chart = {
+        labels: Object.keys(data).filter((item, key) => key),
+        datasets: [
+            {
+                label: "Orders",
+                data: Object.keys(data).map((i) => data[i].length ?? 0),
+                borderColor: "rgb(255, 99, 132)",
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+        ],
+    };
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                // position: 'top' as const,
+            },
+            title: {
+                display: false,
+                text: "Orders",
+            },
+        },
+    };
 
     useEffect(() => {
         request
@@ -37,7 +74,7 @@ const Chart = () => {
                 const res = response.data;
                 console.log("res", res);
                 if (res.success) {
-                    setOrders(res);
+                    setOrders(res.data);
                     setData(res.data[0]);
                 } else {
                     setOrders([]);
@@ -111,15 +148,37 @@ const Chart = () => {
                             initial="start"
                             animate="finished"
                             exit="exit"
-                            className="relative w-full grid space-y-3"
+                            className="relative w-full "
                         >
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quia dolor quasi at magnam,
-                                optio, laboriosam culpa et qui eaque nobis harum
-                                dolorem quis. Ut voluptatum architecto
-                                assumenda, minima dolorum eligendi.
-                            </p>
+                            <div className="w-full flex justify-between">
+                                <span className="block text-sm font-medium text-gray-700">
+                                    Orders
+                                </span>
+                                <select
+                                    onChange={(e) => {
+                                        console.log(orders[e.target.value]);
+                                        setData(orders[e.target.value] ?? data);
+                                    }}
+                                    className="mt-1 max-w-xs block w-full rounded-md border border-gray-200 dark:border-slate-800 bg-white py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 "
+                                >
+                                    {orders.map((order, index) => {
+                                        return (
+                                            <Fragment key={index}>
+                                                <option value={index}>
+                                                    {Object.keys(order)[0]} -{" "}
+                                                    {
+                                                        Object.keys(order)[
+                                                            Object.keys(order)
+                                                                .length - 1
+                                                        ]
+                                                    }
+                                                </option>
+                                            </Fragment>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                            <Line options={options} data={chart} />
                         </motion.section>
                     )}
                 </AnimatePresence>

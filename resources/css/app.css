@@ -6,3 +6,8 @@ html {
     scroll-behavior: smooth;
     @apply font-primary;
 }
+
+canvas {
+    max-height: 50vh !important;
+    min-height: 50vh !important;
+}
