@@ -38,7 +38,6 @@ const pathVariants = {
     finished: {
         opacity: [0.7, 1],
         pathLength: [0, 1],
-        pathLength: 1,
         transition: {
             // delay: 0.5,
             duration: 3,

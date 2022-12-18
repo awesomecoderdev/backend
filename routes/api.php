@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Response;
 use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WebHook\WebHookController;
 use Illuminate\Http\Response as JsonResponse;
@@ -51,8 +52,6 @@ Route::group(['prefix' => 'user', "controller" => AuthController::class,], funct
     // websites
     // Route::post("websites", "websites")->middleware('auth')->name('websites');
 
-    // charts
-    Route::post("charts", "charts")->name('charts');
 });
 
 // oauth routes
@@ -71,3 +70,9 @@ Route::group(['prefix' => 'cart', "controller" => CartController::class,], funct
 
 // webhook routes
 Route::any("webhook", [WebHookController::class, "handle"])->name("webhook");
+
+
+// charts routes
+Route::group(['prefix' => 'chart', 'as' => 'chart', "controller" => ChartController::class,], function () {
+    Route::any("orders", "orders")->name('orders');
+});

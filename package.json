@@ -22,6 +22,12 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
-        "@vitejs/plugin-react": "^3.0.0"
+        "@nivo/bar": "^0.80.0",
+        "@nivo/core": "^0.80.0",
+        "@nivo/geo": "^0.80.0",
+        "@nivo/line": "^0.80.0",
+        "@nivo/pie": "^0.80.0",
+        "@vitejs/plugin-react": "^3.0.0",
+        "faker": "5.5.3"
     }
 }
