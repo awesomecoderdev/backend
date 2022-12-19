@@ -22,7 +22,8 @@ class OrderFactory extends Factory
             'amount' => fake()->unique()->numberBetween(10, 999),
             'status' => fake()->randomElement(['approved', 'pending', 'canceled']),
             'payment_method' => "card",
-            'created_at' => fake()->dateTimeBetween('+0 days', '+2 years')
+            // 'created_at' => fake()->dateTimeBetween('+0 days', '+2 years'),
+            'created_at' => fake()->dateTimeBetween('-3 years', '- 7 days')
         ];
     }
 }

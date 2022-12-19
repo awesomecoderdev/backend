@@ -12,7 +12,13 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import faker from "faker";
-import { eachDayOfInterval, endOfMonth, format, startOfMonth } from "date-fns";
+import {
+    eachDayOfInterval,
+    eachMonthOfInterval,
+    endOfMonth,
+    format,
+    startOfMonth,
+} from "date-fns";
 import Loading from "./Loading";
 import Helper from "../lib/helper";
 
@@ -33,6 +39,11 @@ const Chart = () => {
     const [data, setData] = useState([]);
     const [chart, setChart] = useState({});
     const [days, setDays] = useState([]);
+    const [months, setMonths] = useState([]);
+    const [start, setStart] = useState(false);
+    const [chartLabel, setChartLabel] = useState(
+        `${format(months[months.length - 1] ?? new Date(), "MMMM yyyy")}`
+    );
 
     const options = {
         responsive: true,
@@ -70,10 +81,19 @@ const Chart = () => {
                 .post("chart/orders")
                 .then((response) => {
                     const res = response.data;
-                    console.log("res", res);
+                    // console.log("res", res);
                     if (res.success) {
                         setOrders(res.data);
                         setData(res.data[0]);
+                        setStart(new Date(res.start) ?? new Date());
+                        setMonths(
+                            eachMonthOfInterval({
+                                start: new Date(
+                                    new Date(res.start) ?? new Date()
+                                ),
+                                end: new Date(),
+                            })
+                        );
                     } else {
                         setOrders([]);
                     }
@@ -84,35 +104,31 @@ const Chart = () => {
             setTimeout(() => {
                 setLoading(false);
             }, 2000);
-        }
 
-        if (Object.keys(data).length > 0) {
-            const currentDate = new Date(Object.keys(data)[0])
-                ? new Date(Object.keys(data)[0])
-                : new Date();
-            // console.log("currentDate", currentDate);
-            const startDayOfMonth = startOfMonth(currentDate);
-            // console.log("startDayOfMonth", startDayOfMonth);
-            const endDayOfMonth = endOfMonth(currentDate);
-            // console.log("endDayOfMonth", endDayOfMonth);
-            const days = eachDayOfInterval({
-                start: startDayOfMonth,
-                end: endDayOfMonth,
-            });
-            setDays(days);
-            // console.log("days", days);
-        } else {
-            const days = eachDayOfInterval({
-                start: startOfMonth(new Date()),
-                end: endOfMonth(new Date()),
-            });
-            setDays(days);
+            if (Object.keys(data).length > 0) {
+                const startDayOfMonth = startOfMonth(start);
+                // console.log("startDayOfMonth", startDayOfMonth);
+                const endDayOfMonth = endOfMonth(start);
+                // console.log("endDayOfMonth", endDayOfMonth);
+                const days = eachDayOfInterval({
+                    start: startDayOfMonth,
+                    end: endDayOfMonth,
+                });
+                setDays(days);
+                // console.log("days", days);
+            } else {
+                const days = eachDayOfInterval({
+                    start: startOfMonth(new Date()),
+                    end: endOfMonth(new Date()),
+                });
+                setDays(days);
+            }
         }
 
         const formateDays = days.map((day) => {
             return {
                 count: 0,
-                date: format(day, "dd-MM-yyyy"),
+                date: format(day, "d-MM-yyyy"),
             };
         });
         console.log("formateDays", formateDays);
@@ -131,7 +147,7 @@ const Chart = () => {
             labels: formateDays.map((item) => item.date ?? 0),
             datasets: [
                 {
-                    label: Object.keys(data)[0],
+                    label: chartLabel ?? Object.keys(data)[0],
                     data: chartData,
                     borderColor: "#a5b4fc",
                     backgroundColor: "#4f46e5",
@@ -226,23 +242,47 @@ const Chart = () => {
                                 </span>
                                 <select
                                     onChange={(e) => {
-                                        // console.log(orders[e.target.value]);
+                                        setChartLabel(
+                                            format(
+                                                months[e.target.value] ??
+                                                    new Date(),
+                                                "MMMM yyyy"
+                                            )
+                                        );
                                         setData(orders[e.target.value] ?? data);
                                     }}
+                                    defaultValue={`${months.length - 1}`}
                                     className=" md:mt-0 mt-2  max-w-xs block w-full rounded-md border border-gray-200 dark:border-slate-800 bg-white py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 "
                                 >
-                                    {orders.map((order, index) => {
+                                    {/* {orders.map((order, index) => {
                                         return (
                                             <Fragment key={index}>
                                                 <option value={index}>
                                                     {Object.keys(order)[0]}
-                                                    {/* -
+                                                    -
                                                     {
                                                         Object.keys(order)[
                                                             Object.keys(order)
                                                                 .length - 1
                                                         ]
-                                                    } */}
+                                                    }
+                                                </option>
+                                            </Fragment>
+                                        );
+                                    })} */}
+                                    {months.map((month, index) => {
+                                        return (
+                                            <Fragment
+                                                key={format(month, "MMMM yyyy")}
+                                            >
+                                                <option
+                                                    value={index}
+                                                    data-label={format(
+                                                        month,
+                                                        "MMMM yyyy"
+                                                    )}
+                                                >
+                                                    {format(month, "MMMM yyyy")}
                                                 </option>
                                             </Fragment>
                                         );

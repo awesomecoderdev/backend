@@ -16,10 +16,11 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $status = ($request->has('status') && in_array($request->input('status'), ['approved', 'pending', 'canceled'])) ? strtolower($request->input('status')) : false;
+        $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'asc';
 
         $orders = Order::when($status, function ($query) use ($status) {
             return $query->where('status', $status);
-        })->orderBy("created_at", "DESC")->paginate(50)->onEachSide(1);
+        })->orderBy("created_at", $sort)->paginate(50)->onEachSide(1);
 
         return view("orders.index", compact("orders", "status"));
     }

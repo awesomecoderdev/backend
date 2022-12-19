@@ -32,11 +32,13 @@ class ChartController extends Controller
         }, false)->toArray();
 
         $orders = array_chunk($orders, 1, true);
+        $startPoint = Order::select('created_at')->orderBy('created_at', 'asc')->first();
 
         return Response::json([
             "success" => true,
             'status'    => JsonResponse::HTTP_ACCEPTED,
             "message" => "Successfully Authorized.",
+            "start" => $startPoint->created_at,
             "data" => $orders
         ], JsonResponse::HTTP_OK);
     }
