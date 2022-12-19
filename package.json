@@ -24,6 +24,7 @@
     "dependencies": {
         "@vitejs/plugin-react": "^3.0.0",
         "chart.js": "^4.1.1",
+        "date-fns": "^2.29.3",
         "faker": "5.5.3",
         "react-chartjs-2": "^5.0.1"
     }
