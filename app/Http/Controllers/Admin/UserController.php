@@ -20,16 +20,17 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $status = ($request->has('status') && in_array($request->input('status'), ['activated', 'pending', 'deactivated'])) ? strtolower($request->input('status')) : false;
-        $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'asc';
+        $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
+        $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'desc';
 
         if ($user->supperadmin()) {
             $users = User::where('id', '!=', Auth::user()->id)->when($status, function ($query) use ($status) {
                 return $query->where('status', $status);
-            })->orderBy("created_at",  $sort)->paginate(50)->onEachSide(1);
+            })->orderBy($by, $sort)->paginate(50)->onEachSide(1);
         } else {
             $users = User::where('id', '!=', Auth::user()->id)->where("isAdmin", "=", false)->where("isSupperAdmin", "=", false)->when($status, function ($query) use ($status) {
                 return $query->where('status', $status);
-            })->orderBy("created_at",  $sort)->paginate(50)->onEachSide(1);
+            })->orderBy("created_at", $sort)->paginate(50)->onEachSide(1);
         }
 
         return view("users.index", compact("users", "status"));

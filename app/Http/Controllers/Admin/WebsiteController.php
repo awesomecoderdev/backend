@@ -17,10 +17,12 @@ class WebsiteController extends Controller
     public function index(Request $request)
     {
         $status = ($request->has('status') && in_array($request->input('status'), ['approved', 'pending', 'blocked'])) ? strtolower($request->input('status')) : false;
+        $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
+        $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'desc';
 
         $websites = Website::when($status, function ($query) use ($status) {
             return $query->where('status', $status);
-        })->orderBy("created_at", "DESC")->paginate(50)->onEachSide(1);
+        })->orderBy($by, $sort)->paginate(50)->onEachSide(1);
 
         return view("websites.index", compact("websites", "status"));
     }
