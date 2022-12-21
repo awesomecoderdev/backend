@@ -27,11 +27,11 @@ class ChartController extends Controller
             ->get();
 
         $orders = $orders->groupBy(function ($date) {
+            return Carbon::parse($date->date)->format('m-Y');
             // return Carbon::parse($date->date)->format('F Y');
-            return Carbon::parse($date->date)->format('F Y');
         }, false)->toArray();
 
-        $orders = array_chunk($orders, 1, true);
+        // $orders = array_chunk($orders, 1, true);
         $startPoint = Order::select('created_at')->orderBy('created_at', 'asc')->first();
 
         return Response::json([
