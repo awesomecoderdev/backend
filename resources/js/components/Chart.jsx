@@ -168,6 +168,31 @@ const Chart = () => {
                 end: endOfMonth(new Date()),
             });
             setDays(days);
+
+            const formateDays = days.map((day) => {
+                return {
+                    count: 0,
+                    date: format(day, "d-MM-yyyy"),
+                };
+            });
+
+            // console.log("line", line);
+            const chartData = formateDays.map((day) => 0);
+            // console.log("chartData", chartData);
+
+            setChart({
+                labels: formateDays.map((item) => item.date ?? 0),
+                datasets: [
+                    {
+                        label:
+                            chartLabel ??
+                            `${format(new Date(day), "MMMM yyyy")}`,
+                        data: chartData,
+                        borderColor: "#a5b4fc",
+                        backgroundColor: "#4f46e5",
+                    },
+                ],
+            });
         }
     }, [data, currentMonth]);
 
