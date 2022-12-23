@@ -50,6 +50,17 @@ class FrontendController extends Controller
     }
 
     /**
+     * Display a settings page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings(Request $request)
+    {
+        $user = Auth::user();
+        return view("settings", compact("user"));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\User  $user

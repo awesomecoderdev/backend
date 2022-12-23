@@ -49,8 +49,10 @@ Route::resource("orders", OrderController::class);
 // websites
 Route::resource("websites", WebsiteController::class);
 
+// settings
+Route::get('settings', [FrontendController::class, "settings"])->name('settings');
+
 // others
 Route::get('payments', [FrontendController::class, "welcome"])->name('payments');
 Route::get('invoice', [FrontendController::class, "welcome"])->name('invoice');
-Route::get('settings', [FrontendController::class, "welcome"])->name('settings');
 Route::get('inbox', [FrontendController::class, "welcome"])->name('inbox');

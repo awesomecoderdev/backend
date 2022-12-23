@@ -74,5 +74,5 @@ Route::any("webhook", [WebHookController::class, "handle"])->name("webhook");
 
 // charts routes
 Route::group(['prefix' => 'chart', 'as' => 'chart', "controller" => ChartController::class,], function () {
-    Route::any("orders", "orders")->name('orders');
+    Route::post("orders", "orders")->name('orders');
 });
