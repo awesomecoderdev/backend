@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -10,10 +10,10 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Scripts -->
-    {{-- <script src="{{ asset('js/turbolinks.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
+    <script src="{{ route('chunk', ['time' => Cache::get('chunk', strtotime('+5 minutes'))]) }}"></script>
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 
 <body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">
@@ -60,7 +60,7 @@
                             <x-dropdown-link href="{{ next_url('profile') }}"
                                 class="hover:bg-gray-100 dark:hover:bg-gray-800 ">
                                 <div
-                                    class=" dark:text-slate-300  border-transparent py-0.5 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center   ">
+                                    class=" dark:text-slate-300  border-transparent py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                                         class="h-5 w-5 pointer-events-none mr-2">
@@ -77,7 +77,7 @@
                                 <x-dropdown-link :href="route('logout')" class="hover:bg-gray-100 dark:hover:bg-gray-800"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
                                     <div
-                                        class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer transition-colors flex-row items-center   ">
+                                        class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                                             class="h-5 w-5 pointer-events-none mr-2">
@@ -138,7 +138,7 @@
                             @csrf
                             <a onclick="event.preventDefault();
                                     this.closest('form').submit();"
-                                class="fixed w-[85vw] bottom-0 bg-red-50 dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer transition-colors flex-row items-center  border-r-2  ">
+                                class="fixed w-[85vw] bottom-0 bg-red-50 dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer flex-row items-center  border-r-2  ">
                                 <div class="flex flex-row items-center text-sm font-medium">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" aria-hidden="true"

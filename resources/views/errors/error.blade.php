@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __('Not Found') }} | Wp Plagirasm</title>
+        <title>{{ __('Not Found') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-content>
         <div class="relative w-full flex justify-center items-center overflow-x-hidden overflow-y-scroll ">

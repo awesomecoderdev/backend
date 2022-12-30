@@ -33,7 +33,7 @@
                     @csrf
                     <a onclick="event.preventDefault();
                             this.closest('form').submit();"
-                        class="fixed w-60 bottom-0 bg-red-50 dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer transition-colors flex-row items-center  border-r-2  ">
+                        class="fixed w-60 bottom-0 bg-red-50 dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer flex-row items-center  border-r-2  ">
                         <div class="flex flex-row items-center text-sm font-medium">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">

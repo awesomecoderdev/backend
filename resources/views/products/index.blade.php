@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __('Products') }} | Wp Plagirasm</title>
+        <title>{{ __('Products') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">

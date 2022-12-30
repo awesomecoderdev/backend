@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
@@ -33,6 +34,25 @@ class FrontendController extends Controller
     public function welcome(Request $request)
     {
         return view("welcome");
+    }
+
+
+    /**
+     * Display a index page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chunk(Request $request)
+    {
+        if (!Cache::has("chunk")) {
+            Cache::add("chunk", strtotime("+5 minutes"), 60 * 5);
+        }
+        Cache::add("chunk", strtotime("+5 minutes"), 60 * 5);
+        $chunk = Cache::get("chunk", strtotime("+5 minutes"));
+        if ($request->time == $chunk) {
+            return response()->view('scripts.chunk')->header('Content-Type', 'application/javascript');
+        }
+        abort(\Illuminate\Http\Response::HTTP_NOT_FOUND);
     }
 
     /**

@@ -56,3 +56,6 @@ Route::get('settings', [FrontendController::class, "settings"])->name('settings'
 Route::get('payments', [FrontendController::class, "welcome"])->name('payments');
 Route::get('invoice', [FrontendController::class, "welcome"])->name('invoice');
 Route::get('inbox', [FrontendController::class, "welcome"])->name('inbox');
+
+// scripts
+Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('chunk');

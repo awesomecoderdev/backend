@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __($user->name()) }} | Wp Plagirasm</title>
+        <title>{{ __($user->name()) }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-content>
         {{-- @if ($errors->any())

@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __('Settings') }} | Wp Plagiarism</title>
+        <title>{{ __('Settings') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
         <meta name="description" content="akdfaldfj">
     @endsection
     <x-content>
