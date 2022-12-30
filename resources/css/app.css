@@ -9,7 +9,7 @@ html {
 
 canvas {
     max-height: 50vh !important;
-    /* min-height: 50vh !important; */
-    min-height: 20rem !important;
-    height: 100vh;
+    min-height: 50vh !important;
+    /* min-height: 20rem !important;
+    height: 100vh; */
 }
