@@ -70,13 +70,13 @@ class StoreUserRequest extends FormRequest
     /**
      * @throws \HttpResponseException When the validation rules is not valid
      */
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => [],
-            'errors'     => $validator->errors(),
-        ]));
-    }
+    // public function failedValidation(Validator $validator)
+    // {
+    //     throw new HttpResponseException(response()->json([
+    //         'success'   => false,
+    //         'message'   => 'Validation errors',
+    //         'data'      => [],
+    //         'errors'     => $validator->errors(),
+    //     ]));
+    // }
 }

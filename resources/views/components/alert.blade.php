@@ -1,4 +1,4 @@
-@props(['type' => 'success', 'autoclose' => false, 'delay' => 1, 'end' => 5, 'title' => __('Success!'), 'message' => __('Successfully updated. Please try again after sometimes. Successfully updated. Please try again after sometimes.Successfully updated. Please try again after sometimes.')])
+@props(['type' => 'success', 'autoclose' => 'false', 'delay' => 1, 'end' => 5, 'title' => __('Success!'), 'message' => __('Successfully updated. Please try again after sometimes. Successfully updated. Please try again after sometimes.Successfully updated. Please try again after sometimes.')])
 
 @php
     $alertKey = 'alert_' . rand(rand(0, 99999), time());
@@ -16,12 +16,16 @@
     }
     
     $content = Str::limit(__($message), 65);
-    $open = 500 * intval($delay);
-    $close = $open + intval($end) * 1000;
+    $open = 250 * intval($delay);
+    $close = 450 * intval($delay);
+    $close = $close + intval($end) * 1000;
 @endphp
 {{-- :class="{ 'block': {{ $alertKey }}, 'hidden': !{{ $alertKey }} }" --}}
-<div x-data="{ '{{ $alertKey }}': false }" x-init="setTimeout(() => { {{ $alertKey }} = true; }, {{ $open }});
-@if($autoclose == true)
+<div x-data="{ '{{ $alertKey }}': false }" id="{{ $alertKey }}" x-init="setTimeout(() => {
+    document.getElementById('{{ $alertKey }}').classList.remove('hidden');
+    {{ $alertKey }} = true;
+}, {{ $open }});
+@if($autoclose == 'true')
 setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
 @endif" x-show="{{ $alertKey }}"
     x-transition:enter="transform ease-in-out duration-200 transition"
@@ -30,7 +34,7 @@ setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
     x-transition:leave="transform ease-in-out duration-200 transition"
     x-transition:leave-start="translate-y-0 md:translate-x-0 opacity-100"
     x-transition:leave-end="translate-y-5 md:translate-y-0 md:translate-x-2 opacity-0"
-    class="w-full z-50 max-w-sm bg-white dark:bg-gray-800 border-gray-100 dark:border-slate-800 dark:text-slate-300 shadow-lg rounded-lg transition-all duration-500 ring-1 ring-black ring-opacity-5 overflow-hidden cursor-text">
+    class="hidden w-full z-50 max-w-sm bg-white dark:bg-gray-800 border-gray-100 dark:border-slate-800 dark:text-slate-300 shadow-lg rounded-lg transition-all duration-500 ring-1 ring-black ring-opacity-5 overflow-hidden cursor-text">
     <div class="p-4">
         <div class="flex items-start">
             @if ($alert)

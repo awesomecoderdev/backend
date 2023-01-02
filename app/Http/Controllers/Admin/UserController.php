@@ -43,7 +43,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Unauthorized Access."));
+        return view("users.create");
     }
 
     /**
