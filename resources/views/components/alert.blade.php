@@ -15,7 +15,7 @@
             break;
     }
     
-    $content = Str::limit(__($message), 70);
+    $content = Str::limit(__($message), 65);
     $open = 500 * intval($delay);
     $close = $open + intval($end) * 1000;
 @endphp
@@ -30,12 +30,12 @@ setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
     x-transition:leave="transform ease-in-out duration-200 transition"
     x-transition:leave-start="translate-y-0 md:translate-x-0 opacity-100"
     x-transition:leave-end="translate-y-5 md:translate-y-0 md:translate-x-2 opacity-0"
-    class="w-full z-50 max-w-sm bg-white shadow-lg rounded-lg transition-all duration-500 ring-1 ring-black ring-opacity-5 overflow-hidden cursor-move">
+    class="w-full z-50 max-w-sm bg-white dark:bg-gray-800 border-gray-100 dark:border-slate-800 dark:text-slate-300 shadow-lg rounded-lg transition-all duration-500 ring-1 ring-black ring-opacity-5 overflow-hidden cursor-text">
     <div class="p-4">
         <div class="flex items-start">
             @if ($alert)
                 <div
-                    class=" bg-green-50 relative flex items-center justify-center rounded-full flex-shrink-0 w-10 h-10 ">
+                    class=" bg-green-50 dark:bg-slate-700 relative flex items-center justify-center rounded-full flex-shrink-0 w-10 h-10 ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" aria-hidden="true"
                         class="text-green-600 stroke-current w-6 h-6 font-bold z-20" role="img">
@@ -45,7 +45,7 @@ setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
                 </div>
             @else
                 <div
-                    class="  bg-red-50 relative flex items-center justify-center rounded-full flex-shrink-0 w-10 h-10 ">
+                    class="  bg-red-50 dark:bg-slate-700  relative flex items-center justify-center rounded-full flex-shrink-0 w-10 h-10 ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" aria-hidden="true"
                         class="stroke-current text-red-600 w-6 h-6 font-bold z-20" role="img">
@@ -56,15 +56,16 @@ setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
             @endif
 
             <div class="ml-3 w-0 flex-1 pt-0.5">
-                <p class="text-sm font-medium text-slate-900">{{ __($title) }}</p>
-                <p class="mt-1 text-sm text-gray-600">{{ $content }}</p>
+                <p class="text-sm font-medium text-slate-900 dark:text-white">{{ __($title) }}</p>
+                <p class="mt-1 text-sm text-gray-600 dark:text-slate-50">{{ $content }}</p>
             </div>
             <div class="flex-shrink-0 flex -mr-2 -mt-2">
                 <div @click="{{ $alertKey }} = false"
-                    class="flex flex-row w-auto justify-between items-center cursor-pointer transition-all ease-in-out duration-150 hover:bg-gray-50 p-1 rounded-full">
+                    class="flex flex-row w-auto justify-between items-center cursor-pointer transition-all ease-in-out duration-150 hover:bg-gray-50 hover:dark:bg-slate-700  p-1 rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" aria-hidden="true"
-                        class=" h-5 w-5 font-semibold text-slate-600 pointer-events-none" role="img">
+                        class=" h-5 w-5 font-semibold text-slate-600 dark:text-slate-300 pointer-events-none"
+                        role="img">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
