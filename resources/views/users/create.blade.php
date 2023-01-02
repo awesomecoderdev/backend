@@ -4,12 +4,12 @@
     @endsection
     <x-content>
         <x-slot name="notifications">
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 @foreach ($errors->all() as $key => $error)
                     <x-alert delay="{{ $key }}" end="4" autoclose='true' type="error" title="Error!"
                         message="{{ $error }}" />
                 @endforeach
-            @endif
+            @endif --}}
 
             {{-- @if ($errors->any())
                 {!! implode('', $errors->all('<div>:message</div>')) !!}

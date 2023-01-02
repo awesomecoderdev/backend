@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class StoreUserRequest extends FormRequest
 {
@@ -70,13 +72,17 @@ class StoreUserRequest extends FormRequest
     /**
      * @throws \HttpResponseException When the validation rules is not valid
      */
-    // public function failedValidation(Validator $validator)
-    // {
-    //     throw new HttpResponseException(response()->json([
-    //         'success'   => false,
-    //         'message'   => 'Validation errors',
-    //         'data'      => [],
-    //         'errors'     => $validator->errors(),
-    //     ]));
-    // }
+    public function failedValidation(Validator $validator)
+    {
+        if (!Auth::user()->admin()) {
+            throw new HttpResponseException(response()->json([
+                'success'   => false,
+                'message'   => 'Validation errors',
+                'data'      => [],
+                'errors'     => $validator->errors(),
+            ]));
+        } else {
+            throw new ValidationException($validator);
+        }
+    }
 }

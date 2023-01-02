@@ -22,6 +22,12 @@
         {{-- start::notifications --}}
         <x-notification>
             {!! $notifications ?? '' !!}
+            @if ($errors->any())
+                @foreach ($errors->all() as $key => $error)
+                    <x-alert delay="{{ $key }}" end="4" autoclose='true' type="error" title="Error!"
+                        message="{{ $error }}" />
+                @endforeach
+            @endif
         </x-notification>
         {{-- end::notifications --}}
 
