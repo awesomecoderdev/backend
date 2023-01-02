@@ -21,8 +21,14 @@
     }
 @endphp
 
+{{-- start::notifications --}}
+<x-slot name="notifications">
+    {!! $notifications ?? '' !!}
+</x-slot>
+{{-- end::notifications --}}
+
 <div
-    class="relative bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 flex mx-auto justify-between w-full h-fit">
+    class="relative bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 flex mx-auto justify-between w-full h-fit z-0">
     <div
         class="md:block hidden relative overflow-x-hidden w-72 h-auto max-h-[90vh] border-r border-gray-100 dark:border-slate-800">
         {{-- fixed w-60  --}}

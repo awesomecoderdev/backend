@@ -11,13 +11,20 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
-    <script src="{{ route('chunk', ['time' => Cache::get('chunk', strtotime('+5 minutes'))]) }}"></script>
-    @viteReactRefresh
+    <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
+    {{-- @viteReactRefresh --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">
     <div id="__next" data-reactroot="">
+
+        {{-- start::notifications --}}
+        <x-notification>
+            {!! $notifications ?? '' !!}
+        </x-notification>
+        {{-- end::notifications --}}
+
         {{-- start::navigation --}}
         <nav x-data="{ open: false }"
             class="bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">

@@ -23,6 +23,8 @@ class FrontendController extends Controller
     {
         // $users = User::whereNot("id", "=", Auth::user()->id)->delete();
         // dd($users);
+        // Cache::forget("chunk"); // clear chunk
+
         return view("dashboard");
     }
 
@@ -44,11 +46,13 @@ class FrontendController extends Controller
      */
     public function chunk(Request $request)
     {
+        // Cache::forget("chunk"); // clear chunk
+
         if (!Cache::has("chunk")) {
-            Cache::add("chunk", strtotime("+5 minutes"), 60 * 5);
+            Cache::add("chunk", md5(strtotime("+5 minutes")), 60 * 5);
         }
-        Cache::add("chunk", strtotime("+5 minutes"), 60 * 5);
-        $chunk = Cache::get("chunk", strtotime("+5 minutes"));
+        Cache::add("chunk", md5(strtotime("+5 minutes")), 60 * 5);
+        $chunk = Cache::get("chunk", md5(strtotime("+5 minutes")));
         if ($request->time == $chunk) {
             return response()->view('scripts.chunk')->header('Content-Type', 'application/javascript');
         }
