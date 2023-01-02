@@ -1,18 +1,19 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __('Dashboard') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}
-        </title>
-        <script src="{{ asset('js/chart.js') }}"></script>
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <title>{{ __('Dashboard') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
 
     <x-content>
+        <script src="{{ asset('js/chart.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+
+
         <x-slot name="notifications">
-            @foreach (range(1, 4) as $key => $item)
+            {{-- @foreach (range(1, 4) as $key => $item)
                 <x-alert delay="{{ $key }}" end="10"
                     type="{{ fake()->randomElement(['success', 'error']) }}"
                     title="{{ fake()->randomElement(['Success!', 'Error!']) }}" message="{{ fake()->text() }}" />
-            @endforeach
+            @endforeach --}}
         </x-slot>
 
         <div class="relative w-full h-screen min-h-[30rem]  max-h-[75vh] ">
