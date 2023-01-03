@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
 {
@@ -18,10 +19,17 @@ class OrderController extends Controller
         $status = ($request->has('status') && in_array($request->input('status'), ['approved', 'pending', 'canceled'])) ? strtolower($request->input('status')) : false;
         $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'asc';
         $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
+        $search = $request->has('search') ? $request->input('search') : false;
+        $per_page = Cache::get('per_page', 50);
 
         $orders = Order::when($status, function ($query) use ($status) {
             return $query->where('status', $status);
-        })->orderBy($by, $sort)->paginate(50)->onEachSide(1);
+        })->when($search, function ($query) use ($search, $status) {
+            if ($status) {
+                return $query->where('status', $status)->where('id', 'like', '%' . $search . '%');
+            }
+            return $query->where('id', 'like', '%' . $search . '%');
+        })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
 
         return view("orders.index", compact("orders", "status"));
     }

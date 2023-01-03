@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/chart.js') }}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
     <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
     {{-- @viteReactRefresh --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])

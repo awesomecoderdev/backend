@@ -71,6 +71,22 @@ return [
 
     'timezone' => 'UTC',
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Available Paginator Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application locale determines the list of locale that will be used
+    | by the translation service provider. You are free to set this value
+    | to any of the locales which will be supported by the application.
+    |
+    */
+
+    'per_page' => [
+        20, 50, 70, 100,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Available Languages Configuration

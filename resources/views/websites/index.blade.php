@@ -4,10 +4,10 @@
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
-            <div class="border-b mb-4 border-gray-200 dark:border-gray-700 flex justify-between">
+            <div class="border-b border-gray-200 dark:border-gray-700 flex justify-between">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                     <li class="mr-2">
-                        <a href="{{ route('websites.index') }}"
+                        <a href="{{ route('websites.index', ['search' => request('search')]) }}"
                             class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('websites.index', 'status=approved') }}"
+                        <a href="{{ route('websites.index', ['status' => 'approved', 'search' => request('search')]) }}"
                             class=" {{ $status == 'approved' ? 'border-green-300' : 'border-transparent' }} hover:border-green-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('websites.index', 'status=pending') }}"
+                        <a href="{{ route('websites.index', ['status' => 'pending', 'search' => request('search')]) }}"
                             class=" {{ $status == 'pending' ? 'border-yellow-300' : 'border-transparent' }} hover:border-yellow-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" aria-hidden="true"
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('websites.index', 'status=blocked') }}"
+                        <a href="{{ route('websites.index', ['status' => 'blocked', 'search' => request('search')]) }}"
                             class=" {{ $status == 'blocked' ? 'border-red-300' : 'border-transparent' }} hover:border-red-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -70,6 +70,8 @@
                     {!! __('results') !!}
                 </p>
             </div>
+
+            <x-filter />
 
 
             @if (isset($websites) && $websites->count() > 0)
@@ -118,8 +120,8 @@
                                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                     </svg>
                                 </a>
-                                <a onclick="popupAction('destroy_website_id_{{ $website->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete your account? All of your data will be permanently removed.') }}','{{ __('Delete') }}', )"
-                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer">
+                                {{-- <a onclick="popupAction('destroy_website_id_{{ $website->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete your account? All of your data will be permanently removed.') }}','{{ __('Delete') }}', )" --}}
+                                <a onclick="javascript:void(0)" class="p-1 text-red-400 rounded-md mx-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -198,7 +200,7 @@
                 </div>
             @endif
         </div>
-        <x-popup />
     </x-content>
+    <x-popup />
 
 </x-app-layout>

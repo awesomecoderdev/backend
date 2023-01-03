@@ -33,6 +33,9 @@ URL::forceScheme('https');
 // change language
 Route::get('language/{lang?}', [FrontendController::class, "language"])->name("language.change");
 
+// change paginator
+Route::get('paginator/{per_page?}', [FrontendController::class, "paginator"])->name("paginator.change");
+
 // index route
 Route::get('/', [FrontendController::class, "index"])->name('index');
 

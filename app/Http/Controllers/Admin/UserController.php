@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -22,15 +23,27 @@ class UserController extends Controller
         $status = ($request->has('status') && in_array($request->input('status'), ['activated', 'pending', 'deactivated'])) ? strtolower($request->input('status')) : false;
         $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
         $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'desc';
+        $search = $request->has('search') ? $request->input('search') : false;
+        $per_page = Cache::get('per_page', 50);
 
         if ($user->supperadmin()) {
-            $users = User::where('id', '!=', Auth::user()->id)->when($status, function ($query) use ($status) {
+            $users = User::where('id', '!=', Auth::user()->id)->when($search, function ($query) use ($search, $status) {
+                if ($status) {
+                    return $query->where('status', $status)->where('first_name', 'like', '%' . $search . '%')->orWhere('last_name', 'like', '%' . $search . '%');
+                }
+                return $query->where('first_name', 'like', '%' . $search . '%')->orWhere('last_name', 'like', '%' . $search . '%');
+            })->when($status, function ($query) use ($status) {
                 return $query->where('status', $status);
-            })->orderBy($by, $sort)->paginate(50)->onEachSide(1);
+            })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
         } else {
-            $users = User::where('id', '!=', Auth::user()->id)->where("isAdmin", "=", false)->where("isSupperAdmin", "=", false)->when($status, function ($query) use ($status) {
+            $users = User::where('id', '!=', Auth::user()->id)->where("isAdmin", "=", false)->where("isSupperAdmin", "=", false)->when($search, function ($query) use ($search, $status) {
+                if ($status) {
+                    return $query->where('status', $status)->where('first_name', 'like', '%' . $search . '%')->orWhere('last_name', 'like', '%' . $search . '%');
+                }
+                return $query->where('first_name', 'like', '%' . $search . '%')->orWhere('last_name', 'like', '%' . $search . '%');
+            })->when($status, function ($query) use ($status) {
                 return $query->where('status', $status);
-            })->orderBy("created_at", $sort)->paginate(50)->onEachSide(1);
+            })->orderBy("created_at", $sort)->paginate($per_page)->onEachSide(1);
         }
 
         return view("users.index", compact("users", "status", "sort"));

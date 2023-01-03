@@ -5,23 +5,52 @@
 ])
 
 @php
-    $form = 'form_id_' . rand(rand(0, 99999), time());
+    // $form = 'form_id_' . rand(rand(0, 99999), time());
 @endphp
+
+<script>
+    function popupAction(submitForm = "", title = "{{ __($title) }}", message = "{{ __($message) }}", button =
+        "{{ __($button) }}") {
+        const popup = document.getElementById("closePopup");
+        const popupMessage = document.getElementById("popupMessage");
+        const popupTitle = document.getElementById("popupTitle");
+        const popupButton = document.getElementById("popupButton");
+
+        popupTitle.innerText = title;
+        popupMessage.innerText = message;
+        popupButton.innerText = button;
+
+        popup.click(); // show the popup
+
+        // set submit form
+        localStorage.setItem("submitForm", submitForm);
+
+    }
+
+    function submitPopupAction() {
+        let submitForm = localStorage.getItem("submitForm");
+        let form = document.getElementById(submitForm);
+        if (form) {
+            form.submit();
+        }
+    }
+</script>
+
 <div x-data="{ popup: false }" id="popup" x-show="popup" @click.outside="popup = false" @close.stop="popup = false"
     class="relative hidden z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" {{-- :class="{ 'block': popup, 'hidden': !popup }" --}}
-    x-init="setTimeout(() => {
+    :class="{ 'z-10': popup, '-z-10': !popup }" x-init="setTimeout(() => {
         document.getElementById('popup').classList.remove('hidden');
         {{-- popup = true; --}}
-    }, 1000);" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+    }, 1000);" x-transition:enter="ease-out duration-300"
+    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
     <div x-show="popup" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
         class="fixed inset-0 bg-slate-900 dark:bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity"></div>
 
-    <div class="fixed inset-0 z-10 overflow-y-auto">
-        <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+    <div class="fixed inset-0 z-10 overflow-y-auto" :class="{ 'z-10': popup, '-z-10': !popup }">
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <div x-show="popup" x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -56,7 +85,7 @@
                     class="bg-gray-50 dark:bg-gray-800/80 border-gray-100 dark:border-slate-600 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                     <button type="button" @click="submitPopupAction()" id="popupButton"
                         class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">{{ __($button) }}</button>
-                    <button type="button" @click="popup= !popup; console.log('popup close clicked'); " id="closePopup"
+                    <button type="button" @click="popup= !popup;" id="closePopup"
                         class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">{{ __('Cancel') }}</button>
                 </div>
             </div>
@@ -64,31 +93,3 @@
     </div>
 
 </div>
-
-
-{{-- <script>
-    let {{ $form }} = null;
-
-    function popupAction(submitForm = "", title = "{{ __($title) }}", message = "{{ __($message) }}", button =
-        "{{ __($button) }}") {
-        const popup = document.getElementById("closePopup");
-        const popupMessage = document.getElementById("popupMessage");
-        const popupTitle = document.getElementById("popupTitle");
-        const popupButton = document.getElementById("popupButton");
-
-        popupTitle.innerText = title;
-        popupMessage.innerText = message;
-        popupButton.innerText = button;
-
-        popup.click(); // show the popup
-
-        // set submit form
-        {{ $form }} = document.getElementById(submitForm);
-    }
-
-    function submitPopupAction() {
-        if ({{ $form }}) {
-            {{ $form }}.submit();
-        }
-    }
-</script> --}}

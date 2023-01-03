@@ -74,6 +74,20 @@ class FrontendController extends Controller
     }
 
     /**
+     * Display a index page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function paginator(Request $request)
+    {
+        if (isset($request->per_page) && in_array($request->per_page, config("app.per_page"))) {
+            Cache::forever("per_page", $request->per_page);
+        }
+        return redirect()->route("index");
+    }
+
+
+    /**
      * Display a settings page of the admin panel.
      *
      * @return \Illuminate\Http\Response

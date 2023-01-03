@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Website;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class WebsiteController extends Controller
 {
@@ -22,12 +23,16 @@ class WebsiteController extends Controller
         $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
         $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'desc';
         $search = $request->has('search') ? $request->input('search') : false;
+        $per_page = Cache::get('per_page', 50);
 
-        $websites = Website::when($status, function ($query) use ($status) {
-            return $query->where('status', $status);
-        })->when($search, function ($query) use ($search) {
+        $websites = Website::when($search, function ($query) use ($search, $status) {
+            if ($status) {
+                return $query->where('status', $status)->where('title', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
+            }
             return $query->where('title', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
-        })->orderBy($by, $sort)->paginate(50)->onEachSide(1);
+        })->when($status, function ($query) use ($status) {
+            return $query->where('status', $status);
+        })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
 
         return view("websites.index", compact("websites", "status"));
     }

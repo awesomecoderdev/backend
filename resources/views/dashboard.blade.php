@@ -5,7 +5,7 @@
 
     <x-content>
         <script src="{{ asset('js/chart.js') }}"></script>
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        {{-- <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
 
 
         <x-slot name="notifications">
@@ -66,11 +66,15 @@
         {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
         <script>
             // hello world console.log('first');
-            $(document).ready(function() {
-                setTimeout(() => {
-                    $("#chart").html(`<canvas id="ordersChart"></canvas>`);
-                }, 1000);
-            });
+
+            // $(document).ready(function() {
+            //     setTimeout(() => {
+            //         $("#chart").html(`<canvas id="ordersChart"></canvas>`);
+            //     }, 1000);
+            // });
+            setTimeout(() => {
+                document.getElementById("chart").innerHTML = `<canvas id="ordersChart"></canvas>`;
+            }, 1000);
 
             setTimeout(() => {
                 new Chart(document.getElementById("ordersChart"), {

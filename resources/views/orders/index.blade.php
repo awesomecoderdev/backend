@@ -4,10 +4,10 @@
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
-            <div class="border-b mb-4 border-gray-200 dark:border-gray-700 flex justify-between">
+            <div class="border-b border-gray-200 dark:border-gray-700 flex justify-between">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                     <li class="mr-2">
-                        <a href="{{ route('orders.index') }}"
+                        <a href="{{ route('orders.index', ['search' => request('search')]) }}"
                             class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', 'status=approved') }}"
+                        <a href="{{ route('orders.index', ['status' => 'approved', 'search' => request('search')]) }}"
                             class=" {{ $status == 'approved' ? 'border-green-300' : 'border-transparent' }} hover:border-green-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', 'status=pending') }}"
+                        <a href="{{ route('orders.index', ['status' => 'pending', 'search' => request('search')]) }}"
                             class=" {{ $status == 'pending' ? 'border-yellow-300' : 'border-transparent' }} hover:border-yellow-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" aria-hidden="true"
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', 'status=canceled') }}"
+                        <a href="{{ route('orders.index', ['status' => 'canceled', 'search' => request('search')]) }}"
                             class=" {{ $status == 'canceled' ? 'border-red-300' : 'border-transparent' }} hover:border-red-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -70,6 +70,8 @@
                     {!! __('results') !!}
                 </p>
             </div>
+
+            <x-filter />
 
             @if (isset($orders) && $orders->count() > 0)
                 @foreach ($orders as $order)
