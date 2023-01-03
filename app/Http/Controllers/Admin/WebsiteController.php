@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Website;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WebsiteController extends Controller
 {
@@ -19,9 +21,12 @@ class WebsiteController extends Controller
         $status = ($request->has('status') && in_array($request->input('status'), ['approved', 'pending', 'blocked'])) ? strtolower($request->input('status')) : false;
         $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
         $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'desc';
+        $search = $request->has('search') ? $request->input('search') : false;
 
         $websites = Website::when($status, function ($query) use ($status) {
             return $query->where('status', $status);
+        })->when($search, function ($query) use ($search) {
+            return $query->where('title', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
         })->orderBy($by, $sort)->paginate(50)->onEachSide(1);
 
         return view("websites.index", compact("websites", "status"));
@@ -34,7 +39,7 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        //
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
     }
 
     /**
@@ -45,6 +50,8 @@ class WebsiteController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         //
     }
 
@@ -83,6 +90,8 @@ class WebsiteController extends Controller
      */
     public function update(Request $request, Website $website)
     {
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         //
     }
 
@@ -94,6 +103,8 @@ class WebsiteController extends Controller
      */
     public function destroy(Website $website)
     {
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         //
     }
 }
