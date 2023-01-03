@@ -33,7 +33,7 @@ class UserController extends Controller
             })->orderBy("created_at", $sort)->paginate(50)->onEachSide(1);
         }
 
-        return view("users.index", compact("users", "status"));
+        return view("users.index", compact("users", "status", "sort"));
     }
 
     /**

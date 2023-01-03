@@ -20,6 +20,7 @@ class SpeedBooster
     public function handle(Request $request, Closure $next)
     {
         $output = $next($request);
+
         $buffer = $output->getContent();
         if (strpos($buffer, '<pre>') !== false) {
             $replace = array(
@@ -53,8 +54,6 @@ class SpeedBooster
 
         return $output;
     }
-
-
 
     /**
      * Replace spaces from content response.

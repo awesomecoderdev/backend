@@ -75,7 +75,7 @@
             @if (isset($websites) && $websites->count() > 0)
                 @foreach ($websites as $website)
                     <div
-                        class="md:p-0 p-3 md:flex-row flex-col relative flex items-start justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
+                        class="md:p-0 p-3 md:flex-row flex-col relative flex items-center justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
                         <a href="{{ $website->url }}" target="_blank"
                             class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
                             <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">

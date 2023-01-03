@@ -21,11 +21,11 @@
                                         <input type="text" name="first_name" id="first_name"
                                             autocomplete="given-name" value="{{ $user->first_name }}"
                                             class="mt-1 block w-full rounded-md @error('first_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        @error('first_name')
+                                        {{-- @error('first_name')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
@@ -34,12 +34,12 @@
                                         <input type="text" name="last_name" id="last_name" autocomplete="family-name"
                                             value="{{ $user->last_name }}"
                                             class="mt-1 block w-full rounded-md @error('last_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
-
+                                        {{--
                                         @error('last_name')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
@@ -65,11 +65,11 @@
                                             'id' => 'country',
                                             'autocomplete' => 'country-name',
                                         ]) !!}
-                                        @error('country')
+                                        {{-- @error('country')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6">
@@ -92,11 +92,11 @@
                                             autocomplete="address-level2"
                                             class="mt-1 block w-full rounded-md @error('city') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
 
-                                        @error('city')
+                                        {{-- @error('city')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -105,11 +105,11 @@
                                         <input type="text" name="region" id="region"
                                             autocomplete="address-level1"
                                             class="mt-1 block w-full rounded-md @error('state') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800  shadow-sm  sm:text-sm">
-                                        @error('state')
+                                        {{-- @error('state')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -118,25 +118,23 @@
                                         <input type="text" name="postal-code" id="postal-code"
                                             autocomplete="postal-code"
                                             class="mt-1 block w-full rounded-md @error('zip') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        @error('zip')
+                                        {{-- @error('zip')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                             </div>
                             <div class="bg-gray-50  dark:bg-gray-700/10 px-4 py-3 text-right sm:px-6">
                                 <button type="submit"
-                                    class="inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">{{ __('Save') }}</button>
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">{{ __('Update') }}</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
     </x-content>
 
 </x-app-layout>

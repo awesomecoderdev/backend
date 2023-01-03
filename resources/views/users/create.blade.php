@@ -21,8 +21,8 @@
             <div class="mt-10 sm:mt-0 ">
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <div class="mt-5 md:col-span-6 md:mt-0">
-                        <div class="overflow-hidden sm:rounded-md border-gray-200 dark:border-slate-800 ">
-                            <div class="relative p-2">
+                        <div class="overflow-hidden sm:rounded-md border border-gray-200 dark:border-slate-800">
+                            <div class="relative p-5">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="first_name"
@@ -74,11 +74,11 @@
                                             'autocomplete' => 'country',
                                             // 'disabled' => true,
                                         ]) !!}
-                                        @error('country')
+                                        {{-- @error('country')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
@@ -114,11 +114,11 @@
                                         <input type="text" name="street-address" id="street-address"
                                             autocomplete="street-address"
                                             class="mt-1 block w-full rounded-md @error('address') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        @error('address')
+                                        {{-- @error('address')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-6 lg:col-span-2">
@@ -128,11 +128,11 @@
                                             autocomplete="address-level2"
                                             class="mt-1 block w-full rounded-md @error('city') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
 
-                                        @error('city')
+                                        {{-- @error('city')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -141,11 +141,11 @@
                                         <input type="text" name="region" id="region"
                                             autocomplete="address-level1"
                                             class="mt-1 block w-full rounded-md @error('state') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800  shadow-sm  sm:text-sm">
-                                        @error('state')
+                                        {{-- @error('state')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3 lg:col-span-2">
@@ -154,11 +154,11 @@
                                         <input type="text" name="postal-code" id="postal-code"
                                             autocomplete="postal-code"
                                             class="mt-1 block w-full rounded-md @error('zip') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        @error('zip')
+                                        {{-- @error('zip')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                                 <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
                                             </p>
-                                        @enderror
+                                        @enderror --}}
                                     </div>
                                 </div>
                             </div>
