@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="darks">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="darkk">
 
 <head>
     <meta charset="utf-8">
@@ -179,6 +179,7 @@
         {{-- start::content --}}
         {{ $slot }}
         {{-- end::content --}}
+
     </div>
 
     <script defer src="{{ secure_asset('js/alpine.min.js') }}"></script>

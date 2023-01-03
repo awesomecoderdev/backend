@@ -21,35 +21,37 @@ class SpeedBooster
     {
         $output = $next($request);
 
-        $buffer = $output->getContent();
-        if (strpos($buffer, '<pre>') !== false) {
-            $replace = array(
-                '/<!--[^\[](.*?)[^\]]-->/s' => '',
-                "/<\?php/"                  => '<?php ',
-                "/\r/"                      => '',
-                "/>\n</"                    => '><',
-                "/>\s+\n</"                 => '><',
-                "/>\n\s+</"                 => '><',
-            );
-        } else {
-            $replace = array(
-                '/<!--[^\[](.*?)[^\]]-->/s' => '',
-                "/<\?php/"                  => '<?php ',
-                "/\n([\S])/"                => '$1',
-                "/\r/"                      => '',
-                "/\n/"                      => '',
-                "/\t/"                      => '',
-                "/ +/"                      => ' ',
-            );
-        }
-        $buffer = $this->filter($buffer);
-        // $buffer = $this->filter(preg_replace(array_keys($replace), array_values($replace), $buffer));
-        $buffer = $this->replace($replace, $buffer);
+        if (config("speedbooster.enable")) {
+            $buffer = $output->getContent();
+            if (strpos($buffer, '<pre>') !== false) {
+                $replace = array(
+                    '/<!--[^\[](.*?)[^\]]-->/s' => '',
+                    "/<\?php/"                  => '<?php ',
+                    "/\r/"                      => '',
+                    "/>\n</"                    => '><',
+                    "/>\s+\n</"                 => '><',
+                    "/>\n\s+</"                 => '><',
+                );
+            } else {
+                $replace = array(
+                    '/<!--[^\[](.*?)[^\]]-->/s' => '',
+                    "/<\?php/"                  => '<?php ',
+                    "/\n([\S])/"                => '$1',
+                    "/\r/"                      => '',
+                    "/\n/"                      => '',
+                    "/\t/"                      => '',
+                    "/ +/"                      => ' ',
+                );
+            }
+            $buffer = $this->filter($buffer);
+            // $buffer = $this->filter(preg_replace(array_keys($replace), array_values($replace), $buffer));
+            $buffer = $this->replace($replace, $buffer);
 
-        $output->setContent($buffer);
+            $output->setContent($buffer);
 
-        if (config("speedbooster.gzip")) {
-            ini_set('zlib.output_compression', 'On'); // If you like to enable GZip, too!
+            if (config("speedbooster.gzip")) {
+                ini_set('zlib.output_compression', 'On'); // If you like to enable GZip, too!
+            }
         }
 
         return $output;
