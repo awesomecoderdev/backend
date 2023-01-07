@@ -5,15 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="preload" href="{{ secure_asset('js/alpine.min.js') }}" as="script" />
-    {{-- start::body --}} @yield('head') {{-- end::body --}}
+    {{-- start::head --}} @yield('head') {{-- end::head --}}
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Scripts -->
+    {{--  start::preload:js --}}
+    <link rel="preload" href="{{ secure_asset('js/alpine.min.js') }}" as="script" type="text/javascript" />
+    <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" />
+    {{-- end::preload:js --}}
     {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/chart.js') }}"></script>
-    <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
+    {{-- start::chunk --}}
     <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
+    {{-- end::chunk --}}
+
+    <!-- Node.js -->
     {{-- @viteReactRefresh --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -185,6 +191,7 @@
     </div>
 
     <script defer src="{{ secure_asset('js/alpine.min.js') }}"></script>
+    <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script>
 </body>
 
 </html>

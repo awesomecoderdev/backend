@@ -39,7 +39,9 @@
 <div x-data="{ popup: false }" id="popup" x-show="popup" @click.outside="popup = false" @close.stop="popup = false"
     class="relative hidden z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" {{-- :class="{ 'block': popup, 'hidden': !popup }" --}}
     :class="{ 'z-10': popup, '-z-10': !popup }" x-init="setTimeout(() => {
-        document.getElementById('popup').classList.remove('hidden');
+        if (document.getElementById('popup')) {
+            document.getElementById('popup').classList.remove('hidden');
+        }
         {{-- popup = true; --}}
     }, 1000);" x-transition:enter="ease-out duration-300"
     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
