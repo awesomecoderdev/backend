@@ -26,7 +26,6 @@
 
 <body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">
     <div id="__next" data-reactroot="">
-
         {{-- start::notifications --}}
         <x-notification>
             {!! $notifications ?? '' !!}
@@ -35,6 +34,11 @@
                     <x-alert delay="{{ $key }}" end="4" autoclose='true' type="error" title="Error!"
                         message="{{ $error }}" />
                 @endforeach
+            @endif
+
+            @if (Session::has('success'))
+                <x-alert delay="{{ $errors->any() ? count($errors->all()) + 1 : 1 }}" end="4" autoclose='true'
+                    type="success" title="Success!" message="{{ __(Session::get('success')) }}" />
             @endif
         </x-notification>
         {{-- end::notifications --}}

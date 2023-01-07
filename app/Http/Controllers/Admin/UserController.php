@@ -97,7 +97,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, "Invalid user id.");
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Invalid user id."));
         return view("users.edit", compact("user"));
     }
 
@@ -110,7 +110,17 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        return $request->all();
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        try {
+            $user->save();
+            return redirect()->route("users.edit", $user)->with([
+                "success" => __("User successfully updated.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("users.edit", $user)->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -121,6 +131,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        return $user;
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        try {
+            $user->delete();
+            return redirect()->route("users.index")->with([
+                "success" => __("User successfully deleted.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("users.index")->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 }

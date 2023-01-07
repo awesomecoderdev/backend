@@ -97,7 +97,16 @@ class WebsiteController extends Controller
     {
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
 
-        //
+        try {
+            $website->save();
+            return redirect()->route("websites.edit", $website)->with([
+                "success" => __("Website successfully updated.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("websites.edit", $website)->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -110,6 +119,15 @@ class WebsiteController extends Controller
     {
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
 
-        //
+        try {
+            $website->delete();
+            return redirect()->route("websites.index")->with([
+                "success" => __("Website successfully deleted.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("websites.index")->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 }

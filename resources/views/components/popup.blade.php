@@ -4,14 +4,15 @@
     'button' => __('Deactivate'),
 ])
 
-@php
-    // $form = 'form_id_' . rand(rand(0, 99999), time());
-@endphp
-
 <script>
+    function closePopup() {
+        const popup = document.getElementById("popup") ?? false;
+        popup.classList.add("hidden", "-z-10");
+    }
+
     function popupAction(submitForm = "", title = "{{ __($title) }}", message = "{{ __($message) }}", button =
         "{{ __($button) }}") {
-        const popup = document.getElementById("closePopup");
+        const popup = document.getElementById("popup") ?? false;
         const popupMessage = document.getElementById("popupMessage");
         const popupTitle = document.getElementById("popupTitle");
         const popupButton = document.getElementById("popupButton");
@@ -20,11 +21,11 @@
         popupMessage.innerText = message;
         popupButton.innerText = button;
 
-        popup.click(); // show the popup
-
         // set submit form
         localStorage.setItem("submitForm", submitForm);
 
+
+        popup.classList.remove("hidden", "-z-10");
     }
 
     function submitPopupAction() {
@@ -36,22 +37,9 @@
     }
 </script>
 
-<div x-data="{ popup: false }" id="popup" x-show="popup" @click.outside="popup = false" @close.stop="popup = false"
-    class="relative hidden z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" {{-- :class="{ 'block': popup, 'hidden': !popup }" --}}
-    :class="{ 'z-10': popup, '-z-10': !popup }" x-init="setTimeout(() => {
-        if (document.getElementById('popup')) {
-            document.getElementById('popup').classList.remove('hidden');
-        }
-        {{-- popup = true; --}}
-    }, 1000);" x-transition:enter="ease-out duration-300"
-    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-    <div x-show="popup" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
-        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-        class="fixed inset-0 bg-slate-900 dark:bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity"></div>
-
-    <div class="fixed inset-0 z-10 overflow-y-auto" :class="{ 'z-10': popup, '-z-10': !popup }">
+<div id="popup" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 bg-slate-900 dark:bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <div x-show="popup" x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -85,9 +73,9 @@
                 </div>
                 <div
                     class="bg-gray-50 dark:bg-gray-800/80 border-gray-100 dark:border-slate-600 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button type="button" @click="submitPopupAction()" id="popupButton"
+                    <button type="button" onclick="submitPopupAction()" id="popupButton"
                         class="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">{{ __($button) }}</button>
-                    <button type="button" @click="popup= !popup;" id="closePopup"
+                    <button type="button" onclick="closePopup()"
                         class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">{{ __('Cancel') }}</button>
                 </div>
             </div>
