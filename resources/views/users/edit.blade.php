@@ -19,7 +19,8 @@
                                         <label for="first_name"
                                             class="block text-sm font-medium text-gray-700">{{ __('First name') }}</label>
                                         <input type="text" name="first_name" id="first_name"
-                                            autocomplete="given-name" value="{{ $user->first_name }}"
+                                            autocomplete="given-name"
+                                            value="{{ old('first_name') ?? $user->first_name }}"
                                             class="mt-1 block w-full rounded-md @error('first_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800 shadow-sm  sm:text-sm">
                                         {{-- @error('first_name')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -32,7 +33,7 @@
                                         <label for="last_name"
                                             class="block text-sm font-medium text-gray-700">{{ __('Last name') }}</label>
                                         <input type="text" name="last_name" id="last_name" autocomplete="family-name"
-                                            value="{{ $user->last_name }}"
+                                            value="{{ old('last_name') ?? $user->last_name }}"
                                             class="mt-1 block w-full rounded-md @error('last_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
                                         {{--
                                         @error('last_name')
@@ -43,10 +44,10 @@
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="email-address"
+                                        <label for="email"
                                             class="block text-sm font-medium text-gray-700">{{ __('Email address') }}</label>
-                                        <input type="text" name="email-address" id="email-address"
-                                            autocomplete="email" value="{{ $user->email }}" disabled
+                                        <input type="text" name="email" id="email" autocomplete="email"
+                                            readonly value="{{ $user->email }}" disabled
                                             class="mt-1 block w-full rounded-md border-gray-200 dark:border-slate-800 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 "
                                             {{-- class="mt-1 block w-full rounded-md @error('email') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm" --}}>
                                         {{-- @error('email')

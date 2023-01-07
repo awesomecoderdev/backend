@@ -52,9 +52,9 @@
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="email-address"
+                                        <label for="email"
                                             class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Email address') }}</label>
-                                        <input type="text" name="email" id="email-address" autocomplete="email"
+                                        <input type="text" name="email" id="email" autocomplete="email"
                                             value="{{ old('email') }}" {{-- class="mt-1 block w-full rounded-md border-gray-200 dark:border-slate-800 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 " --}}
                                             class="mt-1 block w-full rounded-md @error('email') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
                                         {{-- @error('email')

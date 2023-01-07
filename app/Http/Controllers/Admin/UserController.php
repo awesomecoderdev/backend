@@ -114,7 +114,7 @@ class UserController extends Controller
         try {
             $user->save();
             return redirect()->route("users.edit", $user)->with([
-                "success" => __("User successfully updated.")
+                "success" => __("The user successfully updated.")
             ]);
         } catch (\Exception $e) {
             return redirect()->route("users.edit", $user)->withErrors([
@@ -132,10 +132,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         try {
             $user->delete();
             return redirect()->route("users.index")->with([
-                "success" => __("User successfully deleted.")
+                "success" => __("The user successfully deleted.")
             ]);
         } catch (\Exception $e) {
             return redirect()->route("users.index")->withErrors([
