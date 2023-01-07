@@ -7,12 +7,50 @@
 <script>
     function closePopup() {
         const popup = document.getElementById("popup") ?? false;
-        popup.classList.add("hidden", "-z-10");
+        const modals = document.getElementById("modals") ?? false;
+
+        if (popup) {
+            popup.classList.add("ease-out", "duration-200");
+            setTimeout(() => {
+                popup.classList.add("opacity-100");
+            }, 100);
+            setTimeout(() => {
+                popup.classList.add("opacity-0");
+            }, 150);
+            setTimeout(() => {
+                popup.classList.remove("opacity-100");
+            }, 200);
+            setTimeout(() => {
+                popup.classList.add("hidden", "-z-10");
+                popup.classList.remove("ease-out", "duration-200");
+                popup.classList.remove("opacity-0");
+            }, 250);
+        }
+
+        if (modals) {
+            modals.classList.add("ease-out", "duration-300");
+            setTimeout(() => {
+                modals.classList.add("opacity-0", "translate-y-4", "sm:translate-y-0", "sm:scale-95");
+            }, 300);
+            setTimeout(() => {
+                modals.classList.add("opacity-100", "translate-y-0", "sm:scale-100");
+            }, 320);
+
+            setTimeout(() => {
+                modals.classList.remove("opacity-0", "translate-y-4", "sm:translate-y-0", "sm:scale-95");
+            }, 350);
+
+            setTimeout(() => {
+                modals.classList.add("hidden", "-z-10");
+            }, 400);
+        }
+
     }
 
     function popupAction(submitForm = "", title = "{{ __($title) }}", message = "{{ __($message) }}", button =
         "{{ __($button) }}") {
         const popup = document.getElementById("popup") ?? false;
+        const modals = document.getElementById("modals") ?? false;
         const popupMessage = document.getElementById("popupMessage");
         const popupTitle = document.getElementById("popupTitle");
         const popupButton = document.getElementById("popupButton");
@@ -24,8 +62,39 @@
         // set submit form
         localStorage.setItem("submitForm", submitForm);
 
+        if (popup) {
+            popup.classList.add("ease-in-out", "duration-200");
 
-        popup.classList.remove("hidden", "-z-10");
+            setTimeout(() => {
+                popup.classList.add("opacity-0");
+            }, 100);
+            setTimeout(() => {
+                popup.classList.remove("hidden", "-z-10");
+            }, 150);
+            setTimeout(() => {
+                popup.classList.add("opacity-100");
+            }, 200);
+            setTimeout(() => {
+                popup.classList.remove("opacity-0");
+            }, 250);
+        }
+
+        if (modals) {
+            modals.classList.remove("ease-out", "duration-300");
+            setTimeout(() => {
+                modals.classList.add("opacity-0", "translate-y-4", "sm:translate-y-0", "sm:scale-95");
+            }, 300);
+            setTimeout(() => {
+                modals.classList.remove("hidden", "-z-10");
+            }, 320);
+            setTimeout(() => {
+                modals.classList.add("opacity-100", "translate-y-0", "sm:scale-100");
+            }, 350);
+            setTimeout(() => {
+                modals.classList.remove("opacity-0", "translate-y-4", "sm:translate-y-0", "sm:scale-95");
+            }, 400);
+        }
+
     }
 
     function submitPopupAction() {
@@ -37,17 +106,13 @@
     }
 </script>
 
-<div id="popup" class="relative z-10 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div id="popup" class="relative hidden z-10  duration-200 transition-all" aria-labelledby="modal-title" role="dialog"
+    aria-modal="true">
     <div class="fixed inset-0 bg-slate-900 dark:bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
-            <div x-show="popup" x-transition:enter="ease-out duration-300"
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave="ease-in duration-200"
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="relative transform overflow-hidden rounded-lg  border-gray-100 dark:border-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div id="modals"
+                class="hidden z-10 relative transform overflow-hidden rounded-lg  border-gray-100 dark:border-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div
                     class="bg-white dark:bg-slate-800 dark:text-white border-gray-100 dark:border-slate-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
