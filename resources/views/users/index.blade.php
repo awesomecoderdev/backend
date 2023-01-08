@@ -94,6 +94,7 @@
                 @foreach ($users as $user)
                     <div
                         class="relative md:p-0 p-3 md:flex-row flex-col flex items-center justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
+
                         <div
                             class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
                             <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
@@ -107,15 +108,13 @@
                                 </svg>
                             </h2>
                             <span
-                                class="{{ $user->status == 'activated' ? 'bg-green-400' : ($user->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2
-                        md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
+                                class="{{ $user->status == 'activated' ? 'bg-green-400' : ($user->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2 md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
 
                             <p
                                 class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
                                 {{ $user->name() }}
                             </p>
                         </div>
-
 
                         <div
                             class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
@@ -152,10 +151,9 @@
                                 </form>
                                 {{-- <x-popup /> --}}
                             @endcan
-
                         </div>
 
-                        <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
+                        <div class="relative flex items-center justify-between w-[30%]">
                             <span
                                 class="{{ $user->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                 {{ $user->email_verified_at != null ? __('Verified') : __('Unverified') }}
@@ -181,19 +179,23 @@
                                 @endif
                             </div>
 
+
+                            <span
+                                class="{{ $user->status == 'activated' ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : ($user->status == 'pending' ? 'bg-yellow-100 dark:bg-yellow-300 text-yellow-800' : 'bg-red-100 dark:bg-red-300 text-red-800') }}  w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
+                                {{ __(Str::ucfirst($user->status)) }}
+                            </span>
                         </div>
 
-
-
-                        <p
-                            class="text-xs md:text-center text-start lg:block md:hidden block md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
+                        <span
+                            class=" text-xs md:text-center text-start lg:block md:hidden block md:w-auto md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
                             {{ $user->created_at->diffForHumans([
                                 // 'parts' => 2,
                                 // 'parts' => 3,
                                 // 'join' => ', ',
                                 // 'short' => true,
                             ]) }}
-                        </p>
+                        </span>
+
                     </div>
                 @endforeach
 
