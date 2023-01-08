@@ -1,16 +1,5 @@
-{{-- @php
-    $que_attr = ['search', 'page', 'status', 'by', 'sort'];
-    $que_req = $_GET;
-    $extra_url_attr = '';
-    foreach ($que_req as $key => $value) {
-        $req = strtolower($key);
-        if (in_array($req, $que_attr)) {
-            $extra_url_attr .= '&' . $req . '=' . $value;
-        }
-    }
-@endphp --}}
-<div class="relative flex justify-between items-center">
-    <div class="flex items-center relative my-3 border border-transparent dark:text-white">
+<div {{ $attributes->merge(['class' => 'relative flex justify-between items-center my-3']) }}>
+    <div class="flex items-center relative border border-transparent dark:text-white">
         <button
             class="px-3 h-full py-2 mr-3 flex justify-between items-center rounded-md ring-1 ring-transparent focus:border-primary-500 focus:ring-primary-500 border-gray-200 border dark:border-slate-800 dark:bg-gray-800 shadow-sm sm:text-sm">
             <span>{{ __('Filter') }}</span>
@@ -35,6 +24,10 @@
                 </svg>
             </button>
         </form>
+
+        @isset($left)
+            {!! $left !!}
+        @endisset
     </div>
 
     <div class="relative flex justify-between items-center">

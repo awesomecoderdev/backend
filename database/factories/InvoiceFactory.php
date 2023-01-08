@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            'order_id' => 1,
+            'order_id' =>  Order::first()->id,
             'meta' => fake()->text(),
             'created_at' => fake()->dateTimeBetween('-3 years', '- 7 days')
         ];

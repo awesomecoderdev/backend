@@ -26,8 +26,8 @@ class InvoiceController extends Controller
         $search = $request->has('search') ? $request->input('search') : false;
         $per_page = Cache::get('per_page', 50);
 
-        $invoices = Invoice::when($search, function ($query) use ($search) {
-            return $query->where('title', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
+        $invoices = Invoice::with('order')->when($search, function ($query) use ($search) {
+            return $query->where('id', 'like', '%' . $search . '%');
         })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
 
 
@@ -41,6 +41,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
+
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Unauthorized Access."));
         return view("invoices.create");
     }
@@ -53,6 +55,8 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
+        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
+
         return $request->all();
     }
 
@@ -65,11 +69,7 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice)
     {
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
-        // if (Auth::user()->supperadmin()) {
-        //     // $user->load('websites', 'products', 'orders');
-        //     $user->load('products',);
-        // }
-        // $user->load('websites', 'orders');
+        $invoice->load('order');
         return $invoice;
         return view("invoices.show", compact("invoice"));
     }
@@ -82,6 +82,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
+        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         return view("invoices.edit", compact("invoice"));
     }
@@ -95,6 +96,8 @@ class InvoiceController extends Controller
      */
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
+        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
+
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         try {
             $invoice->save();

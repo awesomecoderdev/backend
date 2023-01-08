@@ -116,7 +116,7 @@
 
                             </a>
                             @can('isSupperAdmin')
-                                <a href="{{ route('orders.edit', $order) }}" class="p-1 text-indigo-400 rounded-md mx-1 ">
+                                <a href="{{ route('orders.edit', $order) }}" class="p-1 text-primary-400 rounded-md mx-1 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -131,8 +131,8 @@
                                     </svg>
                                 </a> --}}
                                 <a onclick="popupAction('destroy_order_id_{{ $order->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this order ? All of this order data will be permanently removed.') }}','{{ __('Delete') }}', )"
-                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer"> <svg
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
@@ -200,7 +200,7 @@
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
                             <a href="{{ route('orders.index') }}"
-                                class="relative cursor-pointer rounded-md  font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                class="relative cursor-pointer rounded-md  font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
                         </div>

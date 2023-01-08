@@ -187,7 +187,7 @@
                             </a>
                             @can('isSupperAdmin')
                                 <a href="{{ route('orders.edit', $order) }}"
-                                    class="p-1 text-indigo-400 rounded-md mx-1 ">
+                                    class="p-1 text-primary-400 rounded-md mx-1 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -258,7 +258,7 @@
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
                             <a href="{{ route('orders.index') }}"
-                                class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                class="relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
                         </div>

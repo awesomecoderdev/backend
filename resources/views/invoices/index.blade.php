@@ -4,7 +4,23 @@
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
-            {{-- <x-filter /> --}}
+            <x-filter class="mt-0 mb-4">
+                @if (isset($invoices) && $invoices->count() > 0)
+                    <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
+                        {!! __('Showing') !!}
+                        @if ($invoices->firstItem())
+                            <span class="font-medium">{{ $invoices->firstItem() }}</span>
+                            {!! __('to') !!}
+                            <span class="font-medium">{{ $invoices->lastItem() }}</span>
+                        @else
+                            {{ $invoices->count() }}
+                        @endif
+                        {!! __('of') !!}
+                        <span class="font-medium">{{ $invoices->total() }}</span>
+                        {!! __('results') !!}
+                    </p>
+                @endif
+            </x-filter>
 
 
             @if (isset($invoices) && $invoices->count() > 0)
@@ -14,19 +30,17 @@
                         <div
                             class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
                             <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                    class="h-5 w-5 pointer-events-none ">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="0.5"
+                                    stroke="white" aria-hidden="true"
+                                    class="h-5 w-5 pointer-events-none text-slate-500 dark:text-white fill-primary-400 dark:fill-transparent">
+                                    <path
+                                        d="M8.267 14.68c-.184 0-.308.018-.372.036v1.178c.076.018.171.023.302.023.479 0 .774-.242.774-.651 0-.366-.254-.586-.704-.586zm3.487.012c-.2 0-.33.018-.407.036v2.61c.077.018.201.018.313.018.817.006 1.349-.444 1.349-1.396.006-.83-.479-1.268-1.255-1.268z">
+                                    </path>
+                                    <path
+                                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM9.498 16.19c-.309.29-.765.42-1.296.42a2.23 2.23 0 0 1-.308-.018v1.426H7v-3.936A7.558 7.558 0 0 1 8.219 14c.557 0 .953.106 1.22.319.254.202.426.533.426.923-.001.392-.131.723-.367.948zm3.807 1.355c-.42.349-1.059.515-1.84.515-.468 0-.799-.03-1.024-.06v-3.917A7.947 7.947 0 0 1 11.66 14c.757 0 1.249.136 1.633.426.415.308.675.799.675 1.504 0 .763-.279 1.29-.663 1.615zM17 14.77h-1.532v.911H16.9v.734h-1.432v1.604h-.906V14.03H17v.74zM14 9h-1V4l5 5h-4z">
                                     </path>
                                 </svg>
                             </h2>
-                            <span
-                                class="{{ $invoice->status == 'activated' ? 'bg-green-400' : ($invoice->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2
-                        md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
-
                             <p
                                 class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
                                 {{ $invoice->id }}
@@ -36,7 +50,7 @@
 
                         <div
                             class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
-                            <a href="{{ route('invoices.show', $invoice) }}"
+                            <a href="{{ route('invoices.show', $invoice) }}" title="{{ __('View Invoice') }}"
                                 class="p-1 text-emerald-400 rounded-md mx-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -47,15 +61,17 @@
                                 </svg>
                             </a>
                             @can('isSupperAdmin')
-                                <a href="{{ route('users.edit', $invoice) }}" class="p-1 text-indigo-400 rounded-md mx-1 ">
+                                <a href="{{ route('invoices.edit', $invoice) }}"
+                                    class="p-1 text-primary-400 rounded-md mx-1 " title="{{ __('Download Invoice') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                            d="M9 13.5l3 3m0 0l3-3m-3 3v-6m1.06-4.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
                                     </svg>
                                 </a>
                                 <a onclick="popupAction('destroy_user_id_{{ $invoice->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this account? All of your data will be permanently removed.') }}','{{ __('Delete') }}', )"
-                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer">
+                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer"
+                                    title="{{ __('Delete Invoice') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -63,22 +79,60 @@
                                     </svg>
                                 </a>
                                 <form id="destroy_user_id_{{ $invoice->id }}"
-                                    action="{{ route('users.destroy', $invoice) }}" method="post">
+                                    action="{{ route('invoices.destroy', $invoice) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 </form>
-                                {{-- <x-popup /> --}}
                             @endcan
 
                         </div>
 
-                        <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
+                        {{-- <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
                             <span
                                 class="{{ $invoice->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                 {{ $invoice->email_verified_at != null ? __('Verified') : __('Unverified') }}
                             </span>
+                        </div> --}}
 
-                        </div>
+                        @if ($invoice->order)
+                            <a href="{{ route('orders.show', $invoice->order) }}"
+                                class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
+                                <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                        class="h-5 w-5 pointer-events-none ">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                    </svg>
+
+                                </h2>
+                                <span
+                                    class="{{ $invoice->order->status == 'approved' ? 'bg-green-400' : ($invoice->order->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2 md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
+                                <p
+                                    class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
+                                    {{ $invoice->order->id ?? __('Unavailable') }}
+                                </p>
+                            </a>
+                        @else
+                            <a href="javascript:void(0);"
+                                class="relative md:w-1/5 w-full md:p-0 flex justify-start items-center md:m-3 w-15 h-15 rounded-full text-primary-500 ">
+                                <h2 class="text-slate-600 font-semibold text-sm flex justify-center items-center ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                        class="h-5 w-5 pointer-events-none ">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                    </svg>
+
+                                </h2>
+                                <span
+                                    class="bg-red-400 absolute md:-left-1 left-2 md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
+                                <p
+                                    class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
+                                    {{ __('Unavailable') }}
+                                </p>
+                            </a>
+                        @endif
 
 
 
@@ -131,7 +185,7 @@
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
                             <a href="{{ route('invoices.index') }}"
-                                class="relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                class="relative cursor-pointer rounded-md font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
                         </div>

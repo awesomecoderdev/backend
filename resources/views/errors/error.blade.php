@@ -64,7 +64,7 @@
                     </svg>
                     <div class="flex justify-center text-sm text-center text-gray-600 dark:text-white">
                         <a href="{{ route('index') }}"
-                            class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                            class="relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                             <span>{{ __('Go back') }}</span>
                         </a>
                         <p class="pl-1">{{ $e->getMessage() }}</p>
