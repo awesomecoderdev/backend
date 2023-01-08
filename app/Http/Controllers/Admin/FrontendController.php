@@ -70,7 +70,7 @@ class FrontendController extends Controller
             App::setLocale(strtolower($request->lang));
             Session::put('locale', strtolower($request->lang));
         }
-        return redirect()->route("index");
+        return redirect()->back();
     }
 
     /**
@@ -83,7 +83,7 @@ class FrontendController extends Controller
         if (isset($request->per_page) && in_array($request->per_page, config("app.per_page"))) {
             Cache::forever("per_page", $request->per_page);
         }
-        return redirect()->route("index");
+        return redirect()->back();
     }
 
 

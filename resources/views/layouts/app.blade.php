@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="darkk">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="darks">
 
 <head>
     <meta charset="utf-8">
@@ -140,19 +140,20 @@
                     x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
                     x-transition:leave="transition ease-in-out duration-300 transform"
                     x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-                    class="hidden sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 bg-slate-900/10">
+                    class="hidden sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 bg-slate-900/10 dark:bg-primary-900/10">
                     <!-- Responsive Settings Options -->
                     <div
-                        class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-t border-gray-100 dark:border-slate-700">
+                        class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-rr border-gray-100 dark:border-slate-700">
                         <div class="px-4 border-b py-3 border-gray-100 dark:border-slate-700 ">
                             <div class="font-medium text-base text-gray-800 dark:text-white">{{ Auth::user()->name() }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500 dark:text-gray-200">{{ Auth::user()->email }}
+                            <div class="font-medium text-sm text-gray-500 dark:text-gray-200">
+                                {{ Str::limit(Auth::user()->email, 22) }}
                             </div>
                         </div>
 
                         <button @click="open = ! open"
-                            class="absolute right-4 top-4 inline-flex items-center justify-center p-2 rounded-md text-gray-400 focus:outline-none border bg-transparent border-gray-100 focus-visible:bg-transparent focus:bg-transparent focus-within:bg-transparent  dark:border-slate-700 transition duration-150 ease-in-out">
+                            class="absolute right-4 top-4 z-10 inline-flex items-center justify-center p-2 rounded-md  text-gray-400 focus:outline-none border bg-white dark:bg-slate-800 border-gray-100  focus-visible:bg-transparent focus:bg-transparent focus-within:bg-transparent  dark:border-slate-700 transition duration-150 ease-in-out">
                             <svg class="h-6 w-6 pointer-events-none" stroke="currentColor" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -167,7 +168,7 @@
                                 @csrf
                                 <a onclick="event.preventDefault();
                                     this.closest('form').submit();"
-                                    class="fixed w-[85vw] bottom-0 bg-red-50 dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+                                    class="fixed w-[85vw] bottom-0 bg-red-50 dark:bg-gray-900/20 dark:text-white dark:hover:bg-slate-700 px-2 py-3 border-red-500  flex cursor-pointer flex-row items-center  border-r-2  ">
                                     <div class="flex flex-row items-center text-sm font-medium">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true"

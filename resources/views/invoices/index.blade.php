@@ -1,84 +1,14 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __('Users') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
+        <title>{{ __('Invoices') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-content>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
-            <div class="border-b border-gray-200 dark:border-gray-700  flex justify-between">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-                    <li class="mr-2">
-                        <a href="{{ route('users.index', ['search' => request('search')]) }}"
-                            class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true"
-                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-primary-400">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z">
-                                </path>
-                            </svg>
-                            <span class="md:block hidden">{{ __('All') }}</span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="{{ route('users.index', ['status' => 'activated', 'search' => request('search')]) }}"
-                            class=" {{ $status == 'activated' ? 'border-green-300' : 'border-transparent' }} hover:border-green-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true"
-                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-green-400">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <span class="md:block hidden">{{ __('Activated') }}</span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="{{ route('users.index', ['status' => 'pending', 'search' => request('search')]) }}"
-                            class=" {{ $status == 'pending' ? 'border-yellow-300' : 'border-transparent' }} hover:border-yellow-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-yellow-400">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span class="md:block hidden">{{ __('Pending') }}</span>
-                        </a>
-                    </li>
-                    <li class="mr-2">
-                        <a href="{{ route('users.index', ['status' => 'deactivated', 'search' => request('search')]) }}"
-                            class=" {{ $status == 'deactivated' ? 'border-red-300' : 'border-transparent' }} hover:border-red-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" aria-hidden="true"
-                                class="mr-2 pointer-events-none w-5 h-5 transition-all text-red-400">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
-                            </svg>
-                            <span class="md:block hidden">{{ __('Deactivated') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            {{-- <x-filter /> --}}
 
-            <x-filter>
-                @if (isset($users) && $users->count() > 0)
 
-                    <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
-                        {!! __('Showing') !!}
-                        @if ($users->firstItem())
-                            <span class="font-medium">{{ $users->firstItem() }}</span>
-                            {!! __('to') !!}
-                            <span class="font-medium">{{ $users->lastItem() }}</span>
-                        @else
-                            {{ $users->count() }}
-                        @endif
-                        {!! __('of') !!}
-                        <span class="font-medium">{{ $users->total() }}</span>
-                        {!! __('results') !!}
-                    </p>
-                @endif
-            </x-filter>
-
-            @if (isset($users) && $users->count() > 0)
-                @foreach ($users as $user)
+            @if (isset($invoices) && $invoices->count() > 0)
+                @foreach ($invoices as $invoice)
                     <div
                         class="relative md:p-0 p-3 md:flex-row flex-col flex items-center justify-between w-full border mb-3 border-gray-100 dark:border-slate-800 rounded-md">
                         <div
@@ -94,19 +24,19 @@
                                 </svg>
                             </h2>
                             <span
-                                class="{{ $user->status == 'activated' ? 'bg-green-400' : ($user->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2
+                                class="{{ $invoice->status == 'activated' ? 'bg-green-400' : ($invoice->status == 'pending' ? 'bg-yellow-400' : 'bg-red-400') }} absolute md:-left-1 left-2
                         md:top-0 top-3 h-2.5 w-2.5 border-white dark:border-slate-700 border-2 rounded-full"></span>
 
                             <p
                                 class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
-                                {{ $user->name() }}
+                                {{ $invoice->name() }}
                             </p>
                         </div>
 
 
                         <div
                             class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
-                            <a href="{{ route('users.show', $user) }}" class="p-1 text-emerald-400 rounded-md mx-1 ">
+                            <a href="{{ route('users.show', $invoice) }}" class="p-1 text-emerald-400 rounded-md mx-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -117,14 +47,14 @@
 
                             </a>
                             @can('isSupperAdmin')
-                                <a href="{{ route('users.edit', $user) }}" class="p-1 text-indigo-400 rounded-md mx-1 ">
+                                <a href="{{ route('users.edit', $invoice) }}" class="p-1 text-indigo-400 rounded-md mx-1 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                     </svg>
                                 </a>
-                                <a onclick="popupAction('destroy_user_id_{{ $user->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this account? All of your data will be permanently removed.') }}','{{ __('Delete') }}', )"
+                                <a onclick="popupAction('destroy_user_id_{{ $invoice->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this account? All of your data will be permanently removed.') }}','{{ __('Delete') }}', )"
                                     class="p-1 text-red-400 rounded-md mx-1 cursor-pointer">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
@@ -132,8 +62,8 @@
                                             d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
                                     </svg>
                                 </a>
-                                <form id="destroy_user_id_{{ $user->id }}"
-                                    action="{{ route('users.destroy', $user) }}" method="post">
+                                <form id="destroy_user_id_{{ $invoice->id }}"
+                                    action="{{ route('users.destroy', $invoice) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -144,18 +74,18 @@
 
                         <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
                             <span
-                                class="{{ $user->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                {{ $user->email_verified_at != null ? __('Verified') : __('Unverified') }}
+                                class="{{ $invoice->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
+                                {{ $invoice->email_verified_at != null ? __('Verified') : __('Unverified') }}
                             </span>
 
                             <div class="relative">
 
-                                @if ($user->admin() && $user->supperadmin())
+                                @if ($invoice->admin() && $invoice->supperadmin())
                                     <span
                                         class="bg-yellow-100 dark:bg-yellow-300 text-yellow-800 md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                         {{ __('Supper Admin') }}
                                     </span>
-                                @elseif ($user->admin())
+                                @elseif ($invoice->admin())
                                     <span
                                         class="bg-green-100 dark:bg-emerald-300 text-green-800 md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                         {{ __('Admin') }}
@@ -174,7 +104,7 @@
 
                         <p
                             class="text-xs md:text-center text-start lg:block md:hidden block md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
-                            {{ $user->created_at->diffForHumans([
+                            {{ $invoice->created_at->diffForHumans([
                                 // 'parts' => 2,
                                 // 'parts' => 3,
                                 // 'join' => ', ',
@@ -184,16 +114,18 @@
                     </div>
                 @endforeach
 
+
+
                 <div class="relative w-full">
-                    {{ $users->links() }}
+                    {{ $invoices->links() }}
                 </div>
             @else
                 <div
                     class="mt-1 h-60 p-4 flex justify-center items-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                     <div class="space-y-1 text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 my-5 text-gray-400"
-                            data-name="Layer 1" width="647.63626" height="632.17383"
-                            viewBox="0 0 647.63626 632.17383" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            data-name="Layer 1" width="647.63626" height="632.17383" viewBox="0 0 647.63626 632.17383"
+                            xmlns:xlink="http://www.w3.org/1999/xlink">
                             <path
                                 d="M687.3279,276.08691H512.81813a15.01828,15.01828,0,0,0-15,15v387.85l-2,.61005-42.81006,13.11a8.00676,8.00676,0,0,1-9.98974-5.31L315.678,271.39691a8.00313,8.00313,0,0,1,5.31006-9.99l65.97022-20.2,191.25-58.54,65.96972-20.2a7.98927,7.98927,0,0,1,9.99024,5.3l32.5498,106.32Z"
                                 transform="translate(-276.18187 -133.91309)" fill="#f2f2f2" />
@@ -218,7 +150,7 @@
                             <circle cx="433.63626" cy="105.17383" r="12.18187" fill="#fff" />
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
-                            <a href="{{ route('users.index') }}"
+                            <a href="{{ route('invoices.index') }}"
                                 class="relative cursor-pointer rounded-md font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>

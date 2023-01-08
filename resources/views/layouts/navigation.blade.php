@@ -1,6 +1,6 @@
 <div class="relative grid gap-2 py-1">
     <a href="{{ route('index') }}"
-        class="{{ Route::currentRouteName() == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -12,7 +12,7 @@
         </div>
     </a>
     <a href="{{ route('websites.index') }}"
-        class="{{ Route::currentRouteName() == 'websites.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'websites.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -25,7 +25,7 @@
     </a>
     @can('isSupperAdmin')
         <a href="{{ route('products.index') }}"
-            class="{{ Route::currentRouteName() == 'products.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+            class="{{ Route::currentRouteName() == 'products.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
             <div class="flex flex-row items-center text-sm font-medium">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -37,7 +37,7 @@
         </a>
     @endcan
     <a href="{{ route('orders.index') }}"
-        class="{{ Route::currentRouteName() == 'orders.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'orders.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -49,7 +49,7 @@
         </div>
     </a>
     <a href="{{ route('payments') }}"
-        class="{{ Route::currentRouteName() == 'payments' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'payments' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -60,8 +60,8 @@
             {{ __('Payments') }}
         </div>
     </a>
-    <a href="{{ route('invoice') }}"
-        class="{{ Route::currentRouteName() == 'invoice' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+    <a href="{{ route('invoices.index') }}"
+        class="{{ Route::currentRouteName() == 'invoices.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -69,11 +69,11 @@
                     d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z">
                 </path>
             </svg>
-            {{ __('Invoice') }}
+            {{ __('Invoices') }}
         </div>
     </a>
     <a href="{{ route('users.index') }}"
-        class="{{ Route::currentRouteName() == 'users.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'users.index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -84,7 +84,7 @@
             {{ __('Users') }}
         </div>
     </a>
-    {{-- <a class="{{ Route::currentRouteName() == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  "
+    {{-- <a class="{{ Route::currentRouteName() == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  "
 
         href="/notifications">
         <div class="relative flex flex-row items-center text-sm font-medium"><svg
@@ -96,7 +96,7 @@
             </svg>Notifications</div>
     </a> --}}
     <a href="{{ route('settings') }}"
-        class="{{ Route::currentRouteName() == 'settings' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'settings' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                 class="h-5 w-5 pointer-events-none mx-3">
@@ -110,7 +110,7 @@
         </div>
     </a>
     <a href="{{ route('inbox') }}"
-        class="{{ Route::currentRouteName() == 'inbox' ? 'border-primary-500 bg-gray-100 dark:bg-slate-800  dark:text-white hover:bg-gray-100 ' : ' dark:text-slate-300  border-transparent' }} hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        class="{{ Route::currentRouteName() == 'inbox' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                 class="h-5 w-5 pointer-events-none mx-3">

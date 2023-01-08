@@ -56,22 +56,26 @@
                         </a>
                     </li>
                 </ul>
-                <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
-                    {!! __('Showing') !!}
-                    @if ($websites->firstItem())
-                        <span class="font-medium">{{ $websites->firstItem() }}</span>
-                        {!! __('to') !!}
-                        <span class="font-medium">{{ $websites->lastItem() }}</span>
-                    @else
-                        {{ $websites->count() }}
-                    @endif
-                    {!! __('of') !!}
-                    <span class="font-medium">{{ $websites->total() }}</span>
-                    {!! __('results') !!}
-                </p>
+
             </div>
 
-            <x-filter />
+            <x-filter>
+                @if (isset($websites) && $websites->count() > 0)
+                    <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
+                        {!! __('Showing') !!}
+                        @if ($websites->firstItem())
+                            <span class="font-medium">{{ $websites->firstItem() }}</span>
+                            {!! __('to') !!}
+                            <span class="font-medium">{{ $websites->lastItem() }}</span>
+                        @else
+                            {{ $websites->count() }}
+                        @endif
+                        {!! __('of') !!}
+                        <span class="font-medium">{{ $websites->total() }}</span>
+                        {!! __('results') !!}
+                    </p>
+                @endif
+            </x-filter>
 
 
             @if (isset($websites) && $websites->count() > 0)
@@ -120,7 +124,7 @@
                                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                     </svg>
                                 </a>
-                                <a onclick="popupAction('destroy_website_id_{{ $website->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete your account? All of your data will be permanently removed.') }}','{{ __('Delete') }}', )"
+                                <a onclick="popupAction('destroy_website_id_{{ $website->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this website ? All of this website data will be permanently removed.') }}','{{ __('Delete') }}', )"
                                     class="p-1 text-red-400 rounded-md mx-1 cursor-pointer"> <svg
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
@@ -191,7 +195,7 @@
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
                             <a href="{{ route('websites.index') }}"
-                                class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                class="relative cursor-pointer rounded-md  font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
                         </div>

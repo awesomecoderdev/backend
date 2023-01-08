@@ -106,8 +106,7 @@
     }
 </script>
 
-<div id="popup" class="relative hidden z-10  duration-200 transition-all" aria-labelledby="modal-title" role="dialog"
-    aria-modal="true">
+<div id="popup" class="relative hidden z-10  " aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div class="fixed inset-0 bg-slate-900 dark:bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">

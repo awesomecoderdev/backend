@@ -2,76 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Mpdf\Mpdf;
+use App\Models\Invoice;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\View;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
-use App\Models\Invoice;
 
 class InvoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreInvoiceRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreInvoiceRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Invoice $invoice)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Invoice $invoice)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateInvoiceRequest  $request
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateInvoiceRequest $request, Invoice $invoice)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -79,8 +18,32 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function invoice(Request $request)
     {
-        //
+        // $orders = Order::limit(50)->get();
+        $fileName = 'Orders_List.pdf';
+        $invoice = new Mpdf([
+            'mode' => 'utf-8',
+            'mode' => 'utf-8',
+            // 'format' => 'A4-L',
+            // 'format' => 'A4-L',
+            'format' => [400, 180],
+            // 'format' => 'A4-L',
+            // 'format' => 'Legal',
+            // 'margin_left' => 10,
+            // 'margin_right' => 10,
+            // 'margin_top' => 15,
+            // "margin_bottom" => 20,
+            // 'margin_header' => 10,
+            // 'margin_footer' => 10,
+            // 'margin_left' => 0,
+            // 'margin_right' => 0,
+            // 'margin_top' => 0,
+            // "margin_bottom" => 0,
+        ]);
+        $html = View::make("pdf.demo");
+        $html = $html->render();
+        $invoice->WriteHTML($html);
+        $invoice->Output($fileName, "D");
     }
 }

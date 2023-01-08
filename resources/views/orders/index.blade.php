@@ -56,22 +56,25 @@
                         </a>
                     </li>
                 </ul>
-                <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
-                    {!! __('Showing') !!}
-                    @if ($orders->firstItem())
-                        <span class="font-medium">{{ $orders->firstItem() }}</span>
-                        {!! __('to') !!}
-                        <span class="font-medium">{{ $orders->lastItem() }}</span>
-                    @else
-                        {{ $orders->count() }}
-                    @endif
-                    {!! __('of') !!}
-                    <span class="font-medium">{{ $orders->total() }}</span>
-                    {!! __('results') !!}
-                </p>
             </div>
 
-            <x-filter />
+            <x-filter>
+                @if (isset($orders) && $orders->count() > 0)
+                    <p class="text-sm lg:block mx-2 hidden text-gray-500 font-medium dark:text-white leading-5">
+                        {!! __('Showing') !!}
+                        @if ($orders->firstItem())
+                            <span class="font-medium">{{ $orders->firstItem() }}</span>
+                            {!! __('to') !!}
+                            <span class="font-medium">{{ $orders->lastItem() }}</span>
+                        @else
+                            {{ $orders->count() }}
+                        @endif
+                        {!! __('of') !!}
+                        <span class="font-medium">{{ $orders->total() }}</span>
+                        {!! __('results') !!}
+                    </p>
+                @endif
+            </x-filter>
 
             @if (isset($orders) && $orders->count() > 0)
                 @foreach ($orders as $order)
@@ -120,13 +123,26 @@
                                             d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                     </svg>
                                 </a>
-                                <a href="" class="p-1 text-red-400 rounded-md mx-1 ">
+                                {{-- <a href="" class="p-1 text-red-400 rounded-md mx-1 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
                                     </svg>
+                                </a> --}}
+                                <a onclick="popupAction('destroy_order_id_{{ $order->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this order ? All of this order data will be permanently removed.') }}','{{ __('Delete') }}', )"
+                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer"> <svg
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
+                                    </svg>
                                 </a>
+                                <form id="destroy_order_id_{{ $order->id }}"
+                                    action="{{ route('orders.destroy', $order) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                </form>
                             @endcan
                         </div>
 
@@ -184,7 +200,7 @@
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
                             <a href="{{ route('orders.index') }}"
-                                class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                class="relative cursor-pointer rounded-md  font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
                         </div>
@@ -194,5 +210,6 @@
             @endif
         </div>
     </x-content>
+    <x-popup />
 
 </x-app-layout>

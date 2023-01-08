@@ -46,7 +46,7 @@ class UserController extends Controller
             })->orderBy("created_at", $sort)->paginate($per_page)->onEachSide(1);
         }
 
-        return view("users.index", compact("users", "status", "sort"));
+        return view("users.index", compact("users", "status", "sort", "by"));
     }
 
     /**
