@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class OrderController extends Controller
@@ -63,9 +64,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         $order->load('user');
         $order->user->load('products');
-        return $order;
+        // return $order;
+
+        return view("orders.show", compact("order"));
     }
 
     /**
@@ -76,7 +81,13 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        return $order;
+        $order->load('user');
+        $order->user->load('products');
+
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
+        // return $order;
+        return view("orders.edit", compact("order"));
     }
 
     /**
@@ -88,7 +99,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
     }
 
     /**
@@ -99,6 +110,17 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
+        try {
+            $order->delete();
+            return redirect()->route("orders.index")->with([
+                "success" => __("The order is successfully deleted.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("orders.index")->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 }

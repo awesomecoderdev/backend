@@ -1,15 +1,12 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __($user->name()) }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
+        <title>{{ __($order->id) }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-content>
-        {{-- @if ($errors->any())
-            {!! implode('', $errors->all('<div>:message</div>')) !!}
-        @endif --}}
         <div class="mt-10 sm:mt-0">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="mt-5 md:col-span-6 md:mt-0">
-                    <form action="{{ route('users.update', $user) }}" method="POST">
+                    <form action="{{ route('users.update', $order) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="overflow-hidden sm:rounded-md border border-gray-200 dark:border-slate-800 ">
@@ -19,7 +16,7 @@
                                         <label for="first_name"
                                             class="block text-sm font-medium text-gray-700">{{ __('First name') }}</label>
                                         <input type="text" name="first_name" id="first_name"
-                                            autocomplete="given-name" value="{{ $user->first_name }}"
+                                            autocomplete="given-name" value="{{ $order->first_name }}"
                                             class="mt-1 block w-full rounded-md @error('first_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800 shadow-sm  sm:text-sm">
                                         @error('first_name')
                                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
@@ -32,7 +29,7 @@
                                         <label for="last_name"
                                             class="block text-sm font-medium text-gray-700">{{ __('Last name') }}</label>
                                         <input type="text" name="last_name" id="last_name" autocomplete="family-name"
-                                            value="{{ $user->last_name }}"
+                                            value="{{ $order->last_name }}"
                                             class="mt-1 block w-full rounded-md @error('last_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
 
                                         @error('last_name')
@@ -46,7 +43,7 @@
                                         <label for="email-address"
                                             class="block text-sm font-medium text-gray-700">{{ __('Email address') }}</label>
                                         <input type="text" name="email-address" id="email-address"
-                                            autocomplete="email" value="{{ $user->email }}" disabled
+                                            autocomplete="email" value="{{ $order->email }}" disabled
                                             class="mt-1 block w-full rounded-md border-gray-200 dark:border-slate-800 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 "
                                             {{-- class="mt-1 block w-full rounded-md @error('email') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm" --}}>
                                         {{-- @error('email')
