@@ -17,7 +17,9 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'order_id' => 1,
+            'meta' => fake()->text(),
+            'created_at' => fake()->dateTimeBetween('-3 years', '- 7 days')
         ];
     }
 }

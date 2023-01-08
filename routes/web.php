@@ -21,4 +21,4 @@ URL::forceScheme('https');
 // invoice
 // Route::post('invoices/{id}/{hash}', "verification")->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');
 // Route::get('invoices/{id}/{hash}', [InvoiceController::class, "invoice"])->middleware(['auth', 'throttle:6,1'])->name('invoices.demo');
-Route::any('invoice/download/', [InvoiceController::class, "invoice"])->middleware(['auth', 'throttle:6,1'])->name('invoices.demo');
+// Route::any('invoice/download/', [InvoiceController::class, "invoice"])->middleware(['auth', 'throttle:6,1'])->name('invoices.demo');

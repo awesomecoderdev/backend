@@ -29,14 +29,15 @@
 
                             <p
                                 class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
-                                {{ $invoice->name() }}
+                                {{ $invoice->id }}
                             </p>
                         </div>
 
 
                         <div
                             class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
-                            <a href="{{ route('users.show', $invoice) }}" class="p-1 text-emerald-400 rounded-md mx-1 ">
+                            <a href="{{ route('invoices.show', $invoice) }}"
+                                class="p-1 text-emerald-400 rounded-md mx-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -44,7 +45,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-
                             </a>
                             @can('isSupperAdmin')
                                 <a href="{{ route('users.edit', $invoice) }}" class="p-1 text-indigo-400 rounded-md mx-1 ">
@@ -77,26 +77,6 @@
                                 class="{{ $invoice->email_verified_at != null ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : 'bg-red-100 dark:bg-red-300 text-red-800' }} md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
                                 {{ $invoice->email_verified_at != null ? __('Verified') : __('Unverified') }}
                             </span>
-
-                            <div class="relative">
-
-                                @if ($invoice->admin() && $invoice->supperadmin())
-                                    <span
-                                        class="bg-yellow-100 dark:bg-yellow-300 text-yellow-800 md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                        {{ __('Supper Admin') }}
-                                    </span>
-                                @elseif ($invoice->admin())
-                                    <span
-                                        class="bg-green-100 dark:bg-emerald-300 text-green-800 md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                        {{ __('Admin') }}
-                                    </span>
-                                @else
-                                    <span
-                                        class="bg-blue-50 dark:bg-blue-100 text-blue-800 md:truncate md:w-1/5 w-auto md:m-3 md:text-center text-start rounded-full px-3 py-1 text-xs font-medium">
-                                        {{ __('User') }}
-                                    </span>
-                                @endif
-                            </div>
 
                         </div>
 

@@ -30,6 +30,7 @@ class InvoiceController extends Controller
             return $query->where('title', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
         })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
 
+
         return view("invoices.index", compact("invoices", "sort", "by"));
     }
 
