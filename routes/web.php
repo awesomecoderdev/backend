@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 URL::forceScheme('https');
 
+Route::any('/', function () {
+    return "Hello world";
+});
 
 // invoice
 // Route::post('invoices/{id}/{hash}', "verification")->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');

@@ -1,19 +1,13 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
-use Illuminate\Support\Facades\Response;
 use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\WebHook\WebHookController;
-use Illuminate\Http\Response as JsonResponse;
-use App\Http\Requests\VerifyEmailVerificationRequest;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
@@ -27,7 +21,7 @@ use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 |
 */
 
-Route::any('/', [FrontendController::class, 'index'])->middleware("throttle:60,1", "json.response")->name('api.index');
+Route::any('/', [FrontendController::class, 'index'])->middleware("throttle:60,1")->name('api.index');
 
 // generate csrf token
 Route::group(['prefix' => 'v1', "controller" => AuthController::class,], function () {
@@ -74,7 +68,6 @@ Route::group(['prefix' => 'v1/cart', "controller" => CartController::class,], fu
 
 // webhook routes
 Route::any("v1/webhook", [WebHookController::class, "handle"])->middleware("throttle:60,1")->name("webhook");
-
 
 // charts routes
 Route::group(['prefix' => 'v1/chart', 'as' => 'chart', "controller" => ChartController::class,], function () {

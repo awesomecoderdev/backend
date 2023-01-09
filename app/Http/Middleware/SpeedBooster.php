@@ -22,7 +22,7 @@ class SpeedBooster
         $output = $next($request);
 
         if (config("speedbooster.enable")) {
-            $buffer = $output->getContent();
+            $buffer = $output->getContent() ?? "<h1></h1>";
             if (strpos($buffer, '<pre>') !== false) {
                 $replace = array(
                     '/<!--[^\[](.*?)[^\]]-->/s' => '',

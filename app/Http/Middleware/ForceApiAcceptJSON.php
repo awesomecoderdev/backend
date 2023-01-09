@@ -34,6 +34,7 @@ class ForceApiAcceptJSON
         // First, set the header so any other middleware knows we're
         // dealing with a should-be JSON response.
         $request->headers->set('Accept', 'application/json');
+        $request->headers->set('Content-Type', 'application/json');
 
         // Get the response
         $response = $next($request);

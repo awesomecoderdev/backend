@@ -5,10 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Throwable;
 use BadMethodCallException;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Response as JsonResponse;
@@ -23,17 +20,6 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class Handler extends ExceptionHandler
 {
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    // protected function __construct()
-    // {
-    // app()->setLocale("bn");
-    // }
-
     /**
      * A list of exception types with their corresponding custom log levels.
      *
@@ -70,37 +56,44 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        // if (Session::has('locale')) {
-        //     App::setLocale(Session::get('locale'));
-        // }
+        //
+    }
 
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $exception
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, Throwable $e)
+    {
+        $subdomain = strtok(preg_replace('#^https?://#', '', rtrim($request->url(), '/')), '.');
+        $error = $subdomain == "api";
 
-        $this->renderable(function (NotFoundHttpException $e, $request) {
-            return Response::json([
-                'success'   => false,
-                'status'    => JsonResponse::HTTP_NOT_FOUND,
-                'message'   =>  "Not Found.",
-            ], JsonResponse::HTTP_NOT_FOUND);
-        });
-        $this->renderable(function (NotFoundHttpException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_NOT_FOUND);
-            } else {
+        if ($e instanceof NotFoundHttpException || $e instanceof RouteNotFoundException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_NOT_FOUND,
                     'message'   =>  "Not Found.",
-                    'err'   => $e->getMessage(),
-                ], JsonResponse::HTTP_OK);
+                    'request' =>  $subdomain,
+                ], JsonResponse::HTTP_NOT_FOUND);
             }
-        });
+        }
 
+        if ($e instanceof MethodNotAllowedHttpException) {
+            if ($error) {
+                return Response::json([
+                    'success'   => false,
+                    'status'    => JsonResponse::HTTP_NOT_FOUND,
+                    'message'   =>  "Not Found.",
+                ], JsonResponse::HTTP_NOT_FOUND);
+            }
+        }
 
-
-        $this->renderable(function (ModelNotFoundException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_NOT_FOUND);
-            } else {
+        if ($e instanceof ModelNotFoundException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_NOT_FOUND,
@@ -108,26 +101,11 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
             }
-        });
+        }
 
 
-        $this->renderable(function (RouteNotFoundException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_NOT_FOUND);
-            } else {
-                return Response::json([
-                    'success'   => false,
-                    'status'    => JsonResponse::HTTP_NOT_FOUND,
-                    'message'   =>  "Not Found.",
-                ], JsonResponse::HTTP_OK);
-            }
-        });
-
-
-        $this->renderable(function (QueryException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_UNAUTHORIZED);
-            } else {
+        if ($e instanceof QueryException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_UNAUTHORIZED,
@@ -135,117 +113,85 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
             }
-        });
+        }
 
-        $this->renderable(function (AuthenticationException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_UNAUTHORIZED);
-            } else {
+
+        if ($e instanceof AuthenticationException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                     'message'   => "Unauthenticated Access.",
-                    // 'err'   => $e->getMessage(),
-                    // ], JsonResponse::HTTP_UNAUTHORIZED);
-                ], JsonResponse::HTTP_OK);
+                    'err'   => $e->getMessage(),
+                ], JsonResponse::HTTP_OK); // HTTP_UNAUTHORIZED
             }
-        });
+        }
 
-        $this->renderable(function (HttpException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), $e->getStatusCode());
-            } else {
-                // app()->setLocale("bn");
+
+        if ($e instanceof HttpException || $e instanceof InvalidSignatureException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => $e->getStatusCode(),
-                    // 'status'    => JsonResponse::HTTP_UNAUTHORIZED,
                     'message'   => __("Unauthenticated."),
-                    // 'message'   => "Method Not Allowed.",
                     // 'message'   => $e->getMessage(),
+                    'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
-                // ], JsonResponse::HTTP_UNAUTHORIZED);
             }
-        });
+        }
 
-        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
-            return Response::json([
-                'success'   => false,
-                // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                'status'    => $e->getStatusCode(),
-                'message'   =>  "Method Not Allowed.",
-                'sdf' => $request,
-                // 'message'   => $e->getMessage(),
-            ], JsonResponse::HTTP_OK);
 
-            // if (Auth::check() && Auth::user()->admin()) {
-            //     return response()->view('errors.error', compact("e"), $e->getStatusCode());
-            // } else {
-            //     return Response::json([
-            //         'success'   => false,
-            //         // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-            //         'status'    => $e->getStatusCode(),
-            //         'message'   =>  "Method Not Allowed.",
-            //         // 'message'   => $e->getMessage(),
-            //     ], JsonResponse::HTTP_OK);
-            //     // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
-            // }
-        });
-
-        $this->renderable(function (InvalidSignatureException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), $e->getStatusCode());
-            } else {
+        if ($e instanceof MethodNotAllowedHttpException || $e instanceof BadMethodCallException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
+                    // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                     'status'    => $e->getStatusCode(),
                     'message'   =>  "Method Not Allowed.",
+                    // 'message'   => $e->getMessage(),
+                    'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
-                // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
             }
-        });
+        }
 
-        $this->renderable(function (ThrottleRequestsException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), $e->getStatusCode());
-            } else {
+
+        if ($e instanceof ThrottleRequestsException) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => $e->getStatusCode(),
                     'message'   =>  "Unauthenticated Access.",
-                ], JsonResponse::HTTP_OK);
-                // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+                    // "message"   => $e->getMessage(),
+                    'err'   => $e->getMessage(),
+                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
             }
-        });
+        }
 
 
-
-        $this->reportable(function (Throwable $e) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_METHOD_NOT_ALLOWED);
-            } else {
-                return Response::json([
-                    'success'   => false,
-                    'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                    // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                    'message'   => $e->getMessage(),
-                ], JsonResponse::HTTP_OK);
-                // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
-            }
-        });
-
-
-        $this->reportable(function (BadMethodCallException $e) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), JsonResponse::HTTP_METHOD_NOT_ALLOWED);
-            } else {
+        if ($e instanceof Throwable) {
+            if ($error) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
                     'message'   => $e->getMessage(),
-                ], JsonResponse::HTTP_OK);
-                // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+                    'err'   => $e->getMessage(),
+                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
             }
-        });
+        }
+
+
+        if ($e instanceof Throwable) {
+            if ($error) {
+                return Response::json([
+                    'success'   => false,
+                    'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                    'message'   => $e->getMessage(),
+                    'err'   => $e->getMessage(),
+                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
+            }
+        }
+
+
+        return parent::render($request, $e);
     }
 }
