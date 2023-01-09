@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Throwable;
 use BadMethodCallException;
 use Illuminate\Database\QueryException;
