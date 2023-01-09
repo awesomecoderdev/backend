@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Throwable;
 use BadMethodCallException;
 use Illuminate\Support\Facades\App;
@@ -74,13 +75,13 @@ class Handler extends ExceptionHandler
         // }
 
 
-        // $this->renderable(function (NotFoundHttpException $e, $request) {
-        //     return Response::json([
-        //         'success'   => false,
-        //         'status'    => JsonResponse::HTTP_NOT_FOUND,
-        //         'message'   =>  "Not Found.",
-        //     ], JsonResponse::HTTP_NOT_FOUND);
-        // });
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            return Response::json([
+                'success'   => false,
+                'status'    => JsonResponse::HTTP_NOT_FOUND,
+                'message'   =>  "Not Found.",
+            ], JsonResponse::HTTP_NOT_FOUND);
+        });
         $this->renderable(function (NotFoundHttpException $e, $request) {
             if (Auth::check() && Auth::user()->admin()) {
                 return response()->view('errors.error', compact("e"), JsonResponse::HTTP_NOT_FOUND);
@@ -168,18 +169,27 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
-            if (Auth::check() && Auth::user()->admin()) {
-                return response()->view('errors.error', compact("e"), $e->getStatusCode());
-            } else {
-                return Response::json([
-                    'success'   => false,
-                    // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                    'status'    => $e->getStatusCode(),
-                    'message'   =>  "Method Not Allowed.",
-                    // 'message'   => $e->getMessage(),
-                ], JsonResponse::HTTP_OK);
-                // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
-            }
+            return Response::json([
+                'success'   => false,
+                // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                'status'    => $e->getStatusCode(),
+                'message'   =>  "Method Not Allowed.",
+                'sdf' => $request,
+                // 'message'   => $e->getMessage(),
+            ], JsonResponse::HTTP_OK);
+
+            // if (Auth::check() && Auth::user()->admin()) {
+            //     return response()->view('errors.error', compact("e"), $e->getStatusCode());
+            // } else {
+            //     return Response::json([
+            //         'success'   => false,
+            //         // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+            //         'status'    => $e->getStatusCode(),
+            //         'message'   =>  "Method Not Allowed.",
+            //         // 'message'   => $e->getMessage(),
+            //     ], JsonResponse::HTTP_OK);
+            //     // ], JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+            // }
         });
 
         $this->renderable(function (InvalidSignatureException $e, $request) {

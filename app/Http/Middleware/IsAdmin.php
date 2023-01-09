@@ -18,7 +18,7 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        abort_if(!Auth::check() || !Auth::user()->admin(), Response::HTTP_UNAUTHORIZED);
+        abort_if(!Auth::check() || !Auth::user()->admin(), Response::HTTP_NOT_FOUND);
         return $next($request);
     }
 }

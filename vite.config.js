@@ -4,13 +4,15 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
     server: {
-        host: "api.wpplagiarism.one",
+        host: "wpplagiarism.one",
+        // host: "api.wpplagiarism.one",
     },
     plugins: [
         laravel({
             input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
-            valetTls: "api.wpplagiarism.one",
+            valetTls: "wpplagiarism.one",
+            // valetTls: "api.wpplagiarism.one",
         }),
         react(),
     ],
