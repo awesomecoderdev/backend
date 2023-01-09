@@ -8,6 +8,7 @@
     function closePopup() {
         const popup = document.getElementById("popup") ?? false;
         const modals = document.getElementById("modals") ?? false;
+        const backdrop = document.getElementById("backdrop") ?? false;
 
         if (popup) {
             popup.classList.add("ease-out", "duration-200");
@@ -52,6 +53,8 @@
         const popup = document.getElementById("popup") ?? false;
         const modals = document.getElementById("modals") ?? false;
         const popupMessage = document.getElementById("popupMessage");
+        const backdrop = document.getElementById("backdrop") ?? false;
+
         const popupTitle = document.getElementById("popupTitle");
         const popupButton = document.getElementById("popupButton");
 
@@ -107,13 +110,12 @@
 </script>
 
 <div id="popup" class="relative hidden z-10  " aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div
-        class="fixed inset-0 bg-slate-900 dark:bg-black bg-opacity-25 dark:bg-opacity-50 transition-opacity duration-150">
+    <div id="backdrop" class="fixed inset-0 bg-slate-900/30 dark:bg-black/50 transition-all duration-300 ">
     </div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
             <div id="modals"
-                class="hidden z-10 relative transform overflow-hidden rounded-lg  border-gray-100 dark:border-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                class="hidden z-10 relative transform overflow-hidden rounded-lg border drop-shadow-2xl border-gray-100 dark:border-slate-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div
                     class="bg-white dark:bg-slate-800 dark:text-white border-gray-100 dark:border-slate-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">

@@ -34,7 +34,7 @@ setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
     x-transition:leave="transform ease-in-out duration-200 transition"
     x-transition:leave-start="translate-y-0 md:translate-x-0 opacity-100"
     x-transition:leave-end="translate-y-5 md:translate-y-0 md:translate-x-2 opacity-0"
-    class="hidden w-full z-50 max-w-sm bg-white dark:bg-gray-800 border-gray-100 dark:border-slate-800 dark:text-slate-300 shadow-lg rounded-lg transition-all duration-500 ring-1 ring-black ring-opacity-5 overflow-hidden cursor-text">
+    class="hidden w-full z-50 max-w-sm bg-white dark:bg-gray-800 border-gray-100 dark:border-slate-800 dark:text-slate-300 shadow-lg drop-shadow-sm shadow-black/10 rounded-lg transition-all duration-500 ring-1 ring-black ring-opacity-5 overflow-hidden cursor-text">
     <div class="p-4">
         <div class="flex items-start">
             @if ($alert)
