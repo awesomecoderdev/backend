@@ -170,27 +170,23 @@ class Handler extends ExceptionHandler
 
         if ($e instanceof Throwable) {
             if ($error) {
-                return Response::json([
-                    'success'   => false,
-                    'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                    'message'   => $e->getMessage(),
-                    'err'   => $e->getMessage(),
-                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
+                if ($e->getCode() == 0) {
+                    return Response::json([
+                        'success'   => false,
+                        'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                        'message'   => "Unauthenticated Access.",
+                        'err'   => $e->getMessage(),
+                    ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
+                } else {
+                    return Response::json([
+                        'success'   => false,
+                        'status'    => $e->getCode(),
+                        'message'   => $e->getMessage(),
+                        'err'   => $e->getMessage(),
+                    ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
+                }
             }
         }
-
-
-        if ($e instanceof Throwable) {
-            if ($error) {
-                return Response::json([
-                    'success'   => false,
-                    'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
-                    'message'   => $e->getMessage(),
-                    'err'   => $e->getMessage(),
-                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
-            }
-        }
-
 
         return parent::render($request, $e);
     }

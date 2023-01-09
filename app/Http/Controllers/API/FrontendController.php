@@ -23,8 +23,6 @@ class FrontendController extends Controller
             'status'    => JsonResponse::HTTP_OK,
             "message" => "Successfully Authorized.",
             "data" => null,
-            "header" => $request->header('accept'),
-            "headers" => $request->header('content-type'),
         ], JsonResponse::HTTP_OK);
     }
 
