@@ -90,7 +90,7 @@
         }
 
         #invoice-top {
-            border-bottom: 2px solid #00a63f;
+            border-bottom: 2px solid #96F;
         }
 
         #invoice-mid {

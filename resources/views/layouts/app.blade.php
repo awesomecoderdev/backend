@@ -11,7 +11,7 @@
     <!-- Scripts -->
     {{--  start::preload:js --}}
     <link rel="preload" href="{{ secure_asset('js/alpine.min.js') }}" as="script" type="text/javascript" />
-    <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" />
+    {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
     {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
@@ -196,7 +196,7 @@
     </div>
 
     <script defer src="{{ secure_asset('js/alpine.min.js') }}"></script>
-    <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script>
+    {{-- <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script> --}}
 </body>
 
 </html>
