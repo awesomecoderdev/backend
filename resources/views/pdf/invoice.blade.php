@@ -401,8 +401,7 @@
                     <x-tablelogo />
                 </div>
                 <div class="title">
-                    <h5 style="text-align: right;">Invoice ID #<span
-                            class="invoiceVal invoice_num">{{ $invoice->id }}</span></h5>
+                    <h5>Invoice ID #<span class="invoiceVal invoice_num">{{ $invoice->id }}</span></h5>
                     <h6 style="text-align: right;">Order ID #<span
                             class="invoiceVal invoice_num">{{ $invoice->order->id }}</span></h6>
                     <p>Invoice Date: <span id="invoice_date">{{ $invoice->created_at }}</span><br>
@@ -415,7 +414,7 @@
 
             <div id="invoice-mid">
                 <div id="message">
-                    <h2>{{ $invoice->order->user->name() }}</h2>
+                    <h2>Hello, {{ $invoice->order->user->name() }}</h2>
                     <p>An invoice with invoice number #<span id="invoice_num">{{ $invoice->id }}</span> is created for
                         <span id="supplier_name">TESI S.P.A.</span> which is 100% matched with PO and is waiting for
                         your
