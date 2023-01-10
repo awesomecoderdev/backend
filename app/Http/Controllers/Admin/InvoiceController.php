@@ -41,7 +41,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
+        abort(\Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));  // disable access
 
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Unauthorized Access."));
         return view("invoices.create");
@@ -55,7 +55,7 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
+        abort(\Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));  // disable access
 
         return $request->all();
     }
@@ -82,7 +82,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        abort(\Illuminate\Http\Response::HTTP_OK, __("Not Found."));  // disable access
+        abort(\Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));  // disable access
         abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         return view("invoices.edit", compact("invoice"));
     }

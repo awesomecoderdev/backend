@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -69,9 +70,9 @@ class Handler extends ExceptionHandler
     {
         $subdomain = strtok(preg_replace('#^https?://#', '', rtrim($request->url(), '/')), '.');
         $error = $subdomain == "api";
+        if ($error) {
 
-        if ($e instanceof NotFoundHttpException || $e instanceof RouteNotFoundException) {
-            if ($error) {
+            if ($e instanceof NotFoundHttpException || $e instanceof RouteNotFoundException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_NOT_FOUND,
@@ -79,20 +80,16 @@ class Handler extends ExceptionHandler
                     'request' =>  $subdomain,
                 ], JsonResponse::HTTP_NOT_FOUND);
             }
-        }
 
-        if ($e instanceof MethodNotAllowedHttpException) {
-            if ($error) {
+            if ($e instanceof MethodNotAllowedHttpException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_NOT_FOUND,
                     'message'   =>  "Not Found.",
                 ], JsonResponse::HTTP_NOT_FOUND);
             }
-        }
 
-        if ($e instanceof ModelNotFoundException) {
-            if ($error) {
+            if ($e instanceof ModelNotFoundException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_NOT_FOUND,
@@ -100,11 +97,9 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
             }
-        }
 
 
-        if ($e instanceof QueryException) {
-            if ($error) {
+            if ($e instanceof QueryException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_UNAUTHORIZED,
@@ -112,11 +107,9 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
             }
-        }
 
 
-        if ($e instanceof AuthenticationException) {
-            if ($error) {
+            if ($e instanceof AuthenticationException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_UNAUTHORIZED,
@@ -124,11 +117,9 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK); // HTTP_UNAUTHORIZED
             }
-        }
 
 
-        if ($e instanceof HttpException || $e instanceof InvalidSignatureException) {
-            if ($error) {
+            if ($e instanceof HttpException || $e instanceof InvalidSignatureException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => $e->getStatusCode(),
@@ -137,11 +128,9 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
             }
-        }
 
 
-        if ($e instanceof MethodNotAllowedHttpException || $e instanceof BadMethodCallException) {
-            if ($error) {
+            if ($e instanceof MethodNotAllowedHttpException || $e instanceof BadMethodCallException) {
                 return Response::json([
                     'success'   => false,
                     // 'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
@@ -151,11 +140,9 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK);
             }
-        }
 
 
-        if ($e instanceof ThrottleRequestsException) {
-            if ($error) {
+            if ($e instanceof ThrottleRequestsException) {
                 return Response::json([
                     'success'   => false,
                     'status'    => $e->getStatusCode(),
@@ -164,11 +151,9 @@ class Handler extends ExceptionHandler
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
             }
-        }
 
 
-        if ($e instanceof Throwable) {
-            if ($error) {
+            if ($e instanceof Throwable) {
                 if ($e->getCode() == 0) {
                     return Response::json([
                         'success'   => false,
@@ -184,6 +169,16 @@ class Handler extends ExceptionHandler
                         'err'   => $e->getMessage(),
                     ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
                 }
+            }
+
+
+            if ($e instanceof BindingResolutionException) {
+                return Response::json([
+                    'success'   => false,
+                    'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                    'message'   => "Unauthenticated Access.",
+                    'err'   => $e->getMessage(),
+                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
             }
         }
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\FrontendController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\InvoiceController as ClientInvoiceController;
 use App\Http\Requests\VerifyEmailVerificationRequest;
 use App\Models\Order;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
@@ -57,6 +58,7 @@ Route::resource("websites", WebsiteController::class);
 
 // invoice
 Route::resource("invoices", InvoiceController::class);
+Route::get("invoices/{invoice}/print/", [ClientInvoiceController::class, "print"])->name("invoices.print");
 
 // settings
 Route::get('settings', [FrontendController::class, "settings"])->name('settings');

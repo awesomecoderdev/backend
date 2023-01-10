@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 URL::forceScheme('https');
 
 Route::any('/', function () {
-    return "Hello world";
+    $img = file_get_contents(public_path("logo.png"));
+    // $img = file_get_contents("https://awesomecoderdev.github.io/img/profile.jpg");
+    $img = base64_encode($img);
+    return "<img  id='base64image'
+    src='data:image/svg;base64,$img' />";
 });
 
 // invoice
