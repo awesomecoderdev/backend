@@ -137,7 +137,8 @@
 
             <!-- Responsive Navigation Menu -->
             @auth
-                <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+                <div x-show="open" style="display: none;" x-show="open" :class="{ 'z-10': open, ' -z-10': !open }"
+                    x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
                     x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
                     x-description="Background backdrop, show/hide based on modal state."
@@ -149,7 +150,7 @@
                     x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
                     x-transition:leave="transition ease-in-out duration-300 transform"
                     x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-                    class="sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 ">
+                    class="sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 " style="display: none;">
                     <!-- Responsive Settings Options -->
                     <div
                         class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-rr border-gray-100 dark:border-slate-700">
