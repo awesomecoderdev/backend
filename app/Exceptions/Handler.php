@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Throwable;
 use BadMethodCallException;
+use InvalidArgumentException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Auth\AuthenticationException;
@@ -176,6 +177,16 @@ class Handler extends ExceptionHandler
                 return Response::json([
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_METHOD_NOT_ALLOWED,
+                    'message'   => "Unauthenticated Access.",
+                    'err'   => $e->getMessage(),
+                ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED
+            }
+
+
+            if ($e instanceof InvalidArgumentException) {
+                return Response::json([
+                    'success'   => false,
+                    'status'    => $e->getCode(),
                     'message'   => "Unauthenticated Access.",
                     'err'   => $e->getMessage(),
                 ], JsonResponse::HTTP_OK); // HTTP_METHOD_NOT_ALLOWED

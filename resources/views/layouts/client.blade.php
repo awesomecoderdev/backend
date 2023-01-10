@@ -1,5 +1,8 @@
+@php
+    $path = strtok(Route::currentRouteName(), '.');
+@endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="darks">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
     <meta charset="utf-8">
@@ -51,9 +54,9 @@
         <nav x-data="{ open: false }"
             class="bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
             <!-- Primary Navigation Menu -->
-            <div class="relative max-w-7xl w-full mx-auto px-5 md:px-4">
+            <div class="relative w-full mx-auto px-5 md:px-4">
                 <div class="flex justify-between h-16">
-                    <a href="{{ route('index') }}" class="flex">
+                    <a href="{{ config('app.url') }}" class="flex">
                         <!-- Logo -->
                         <div class="shrink-0 flex items-center">
                             {{-- <a href="{{ route('dashboard') }}"> --}}
@@ -64,64 +67,96 @@
 
                     {{-- dropdown --}}
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
-                        @include('client.nav.public')
-
+                        {{-- navigation --}}
                         @auth
-                            <x-dropdown align="right" width="48">
-                                <x-slot name="trigger">
-                                    <button
-                                        class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-200 hover:dark:text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 ">
-                                        <div>{{ Auth::user()->name() }}</div>
-
-                                        <div class="ml-1">
-                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20">
-                                                <path fill-rule="evenodd"
-                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </x-slot>
-
-                                <x-slot name="content" class="bg-gray-100">
-                                    <x-dropdown-link href="{{ next_url('profile') }}"
-                                        class="hover:bg-gray-100 dark:hover:bg-gray-800 ">
-                                        <div
-                                            class=" dark:text-slate-300  border-transparent py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                class="h-5 w-5 pointer-events-none mr-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z">
-                                                </path>
-                                            </svg>
-                                            {{ __('Profile') }}
-                                        </div>
-                                    </x-dropdown-link>
-                                    <!-- Logout -->
-                                    <form method="POST" action="{{ route('logout') }}" class="m-0">
-                                        @csrf
-                                        <x-dropdown-link :href="route('logout')" class="hover:bg-gray-100 dark:hover:bg-gray-800"
-                                            onclick="event.preventDefault(); this.closest('form').submit();">
+                            @if ($path != 'client')
+                                @include('client.nav.public')
+                                <a href="{{ route('client.dashboard') }}"
+                                    class="md:bg-transparent bg-primary-50/20 dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500 flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2">
+                                    <div class="flex flex-row items-center text-sm font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                            class="h-5 w-5 pointer-events-none mx-1">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                                        </svg>
+                                        {{ __('Dashboard') }}
+                                    </div>
+                                </a>
+                            @else
+                                {{-- dropdown --}}
+                                <div class="hidden sm:flex sm:items-center sm:ml-6 ">
+                                    <x-dropdown align="right" width="48">
+                                        <x-slot name="trigger">
                                             <div
-                                                class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                    class="h-5 w-5 pointer-events-none mr-2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75">
-                                                    </path>
-                                                </svg>
-                                                {{ __('Log Out') }}
+                                                class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-200 hover:dark:text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 ">
+                                                <button
+                                                    class="relative  w-9 h-9 rounded-full overflow-hidden border-primary-500 bg-slate-500 dark:bg-slate-700  ">
+                                                    @if (Auth::user()->avatar)
+                                                        <img src="https://awesomecoderdev.github.io/img/profile.jpg"
+                                                            alt="">
+                                                    @else
+                                                        <h2 class="text-slate-100 font-semibold text-sm ">
+                                                            {{ strtoupper(substr(Auth::user()->first_name ?? Auth::user()->email, 0, 1)) }}
+                                                        </h2>
+                                                    @endif
+                                                </button>
                                             </div>
-                                        </x-dropdown-link>
-                                    </form>
-                                </x-slot>
-                            </x-dropdown>
+                                        </x-slot>
+
+                                        <x-slot name="content" class="bg-gray-100">
+                                            <x-dropdown-link href="{{ next_url('profile') }}"
+                                                class="hover:bg-gray-100 dark:hover:bg-gray-800 ">
+                                                <div
+                                                    class=" dark:text-slate-300  border-transparent py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        aria-hidden="true" class="h-5 w-5 pointer-events-none mr-2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                    </svg>
+                                                    {{ __('Profile') }}
+                                                </div>
+                                            </x-dropdown-link>
+                                            <!-- Logout -->
+                                            <form method="POST" action="{{ route('logout') }}" class="m-0">
+                                                @csrf
+                                                <x-dropdown-link :href="route('logout')"
+                                                    class="hover:bg-gray-100 dark:hover:bg-gray-800"
+                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                    <div
+                                                        class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            aria-hidden="true" class="h-5 w-5 pointer-events-none mr-2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75">
+                                                            </path>
+                                                        </svg>
+                                                        {{ __('Log Out') }}
+                                                    </div>
+                                                </x-dropdown-link>
+                                            </form>
+                                        </x-slot>
+                                    </x-dropdown>
+                                </div>
+                            @endif
                         @else
-                            <a class="border-slate-300 border rounded-lg px-5 py-2.5 focus-visible:outline-none ml-auto text-sm font-medium hover:underline text-transparent bg-clip-text bg-gradient-to-r to-primary-800 from-slate-900"
-                                href="/login">Login</a>
+                            @include('client.nav.public')
+                            <a href="{{ route('login') }}"
+                                class="md:bg-transparent bg-primary-50/20 dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500 flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2">
+                                <div class="flex flex-row items-center text-sm font-medium">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                        class="h-5 w-5 pointer-events-none mx-1">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+                                    {{ __('Login') }}
+                                </div>
+                            </a>
                         @endauth
                     </div>
 

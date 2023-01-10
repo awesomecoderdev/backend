@@ -41,11 +41,11 @@ Route::any('language/{lang?}', [FrontendController::class, "language"])->name("l
 Route::any('paginator/{per_page?}', [FrontendController::class, "paginator"])->name("paginator.change");
 
 // index route
-Route::get('/', [FrontendController::class, "index"])->name('index');
+Route::get('/', [FrontendController::class, "index"])->name('admin.index');
 
 // users
 Route::resource("users", UserController::class);
-Route::post('logout', [FrontendController::class, 'logout'])->middleware('auth')->name('logout'); // logout
+Route::post('logout', [FrontendController::class, 'logout'])->middleware('auth')->name('admin.logout'); // logout
 
 // products
 Route::resource("products", ProductController::class);
@@ -69,4 +69,5 @@ Route::get('payments', [FrontendController::class, "welcome"])->name('payments')
 Route::get('inbox', [FrontendController::class, "welcome"])->name('inbox');
 
 // scripts
-Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('chunk');
+Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('admin.chunk');
+Route::any('js/props_{time}.js', [FrontendController::class, "alpine"])->withoutMiddleware("speedbooster")->name('admin.alpine');

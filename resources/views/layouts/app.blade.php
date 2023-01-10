@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Scripts -->
     {{--  start::preload:js --}}
-    <link rel="preload" href="{{ route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"
+    <link rel="preload"
+        href="{{ route('admin.alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"
         as="script" type="text/javascript" />
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
     {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
     {{-- start::chunk --}}
-    <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
+    <script src="{{ route('admin.chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
     {{-- end::chunk --}}
 
     <!-- Node.js -->
@@ -99,9 +100,9 @@
                                     </div>
                                 </x-dropdown-link>
                                 <!-- Logout -->
-                                <form method="POST" action="{{ route('logout') }}" class="m-0">
+                                <form method="POST" action="{{ route('admin.logout') }}" class="m-0">
                                     @csrf
-                                    <x-dropdown-link :href="route('logout')" class="hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    <x-dropdown-link :href="route('admin.logout')" class="hover:bg-gray-100 dark:hover:bg-gray-800"
                                         onclick="event.preventDefault(); this.closest('form').submit();">
                                         <div
                                             class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">
@@ -196,7 +197,8 @@
 
     </div>
 
-    <script defer src="{{ route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"></script>
+    <script defer src="{{ route('admin.alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}">
+    </script>
     {{-- <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script> --}}
 </body>
 

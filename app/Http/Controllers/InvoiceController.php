@@ -5,12 +5,46 @@ namespace App\Http\Controllers;
 use Mpdf\Mpdf;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 
 class InvoiceController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $by = ($request->has('by') && in_array($request->input('by'), ['created_at', 'id',])) ? strtolower($request->input('by')) : 'created_at';
+        $sort = ($request->has('sort') && in_array($request->input('sort'), ['asc', 'desc',])) ? strtolower($request->input('sort')) : 'desc';
+        $search = $request->has('search') ? $request->input('search') : false;
+        $per_page = Cache::get('per_page', 50);
+
+        $invoices = Invoice::with('order')->when($search, function ($query) use ($search) {
+            return $query->where('id', 'like', '%' . $search . '%');
+        })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
+
+        return view("client.invoices.index", compact("invoices", "sort", "by"));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Invoice  $invoice
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Invoice $invoice)
+    {
+        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        $invoice->load('order');
+        return $invoice;
+        return view("invoices.show", compact("invoice"));
+    }
 
     /**
      * Remove the specified resource from storage.

@@ -3,7 +3,7 @@
 @endphp
 
 <div class="relative grid gap-2 py-1">
-    <a href="{{ route('index') }}"
+    <a href="{{ route('admin.index') }}"
         class="{{ $current == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

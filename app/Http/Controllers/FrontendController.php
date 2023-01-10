@@ -19,6 +19,15 @@ class FrontendController extends Controller
     }
 
 
+    /**
+     * Display a dashboard page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard(Request $request)
+    {
+        return view("client.dashboard");
+    }
 
     /**
      * Display a index page of the admin panel.

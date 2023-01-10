@@ -1,10 +1,10 @@
 @php
-    $current = strtok(Route::currentRouteName(), '.');
+    $current = strtok(str_replace('client.', '', Route::currentRouteName()), '.');
 @endphp
 
 <div class="relative grid gap-2 py-1">
-    <a href="{{ route('index') }}"
-        class="{{ $current == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+    <a href="{{ route('client.dashboard') }}"
+        class="{{ $current == 'dashboard' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700 dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
@@ -15,7 +15,7 @@
             {{ __('Dashboard') }}
         </div>
     </a>
-    <a href="{{ route('websites.index') }}"
+    <a href="{{ route('client.websites.index') }}"
         class="{{ $current == 'websites' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -27,20 +27,7 @@
             {{ __('Websites') }}
         </div>
     </a>
-    @can('isSupperAdmin')
-        <a href="{{ route('products.index') }}"
-            class="{{ $current == 'products' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
-            <div class="flex flex-row items-center text-sm font-medium">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                </svg>
-                {{ __('Products') }}
-            </div>
-        </a>
-    @endcan
-    <a href="{{ route('orders.index') }}"
+    <a href="{{ route('client.orders.index') }}"
         class="{{ $current == 'orders' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -52,7 +39,7 @@
             {{ __('Orders') }}
         </div>
     </a>
-    <a href="{{ route('payments') }}"
+    <a href="{{ route('client.payments.index') }}"
         class="{{ $current == 'payments' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -64,7 +51,7 @@
             {{ __('Payments') }}
         </div>
     </a>
-    <a href="{{ route('invoices.index') }}"
+    <a href="{{ route('client.invoices.index') }}"
         class="{{ $current == 'invoices' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -76,30 +63,7 @@
             {{ __('Invoices') }}
         </div>
     </a>
-    <a href="{{ route('users.index') }}"
-        class="{{ $current == 'users' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
-        <div class="flex flex-row items-center text-sm font-medium">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z">
-                </path>
-            </svg>
-            {{ __('Users') }}
-        </div>
-    </a>
-    {{-- <a class="{{ $current == 'index' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  "
-
-        href="/notifications">
-        <div class="relative flex flex-row items-center text-sm font-medium"><svg
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0">
-                </path>
-            </svg>Notifications</div>
-    </a> --}}
-    <a href="{{ route('settings') }}"
+    <a href="{{ route('client.settings') }}"
         class="{{ $current == 'settings' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
@@ -113,8 +77,8 @@
             {{ __('Settings') }}
         </div>
     </a>
-    <a href="{{ route('inbox') }}"
-        class="{{ $current == 'inbox' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+    <a href="{{ route('client.support') }}"
+        class="{{ $current == 'support' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                 class="h-5 w-5 pointer-events-none mx-3">
@@ -122,7 +86,7 @@
                     d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z">
                 </path>
             </svg>
-            {{ __('Inbox') }}
+            {{ __('Support') }}
         </div>
     </a>
 </div>
