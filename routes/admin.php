@@ -69,5 +69,5 @@ Route::get('payments', [FrontendController::class, "welcome"])->name('payments')
 Route::get('inbox', [FrontendController::class, "welcome"])->name('inbox');
 
 // scripts
-// Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('admin.chunk');
-// Route::any('js/props_{time}.js', [FrontendController::class, "alpine"])->withoutMiddleware("speedbooster")->name('admin.alpine');
+Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('admin.chunk');
+Route::any('js/props_{time}.js', [FrontendController::class, "alpine"])->withoutMiddleware(["speedbooster", "admin"])->name('admin.alpine');
