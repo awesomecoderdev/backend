@@ -54,8 +54,9 @@ class InvoiceController extends Controller
      */
     public function print(Invoice $invoice)
     {
-        $invoice->load("order");
-        $invoice->order->load("user");
+        $invoice->load(["order", "user"]);
+        // $invoice->order->load("user");
+        // return $invoice;
         $fileName = "{$invoice->id}.pdf";
         $pdf = new Mpdf([
             'mode' => 'utf-8',

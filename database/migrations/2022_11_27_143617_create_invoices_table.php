@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->uuid("id");
             $table->string("order_id")->nullable();
+            $table->string("user_id")->nullable();
             $table->text("meta")->nullable();
             $table->timestamps();
         });
