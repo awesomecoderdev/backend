@@ -25,7 +25,7 @@ class InvoiceController extends Controller
         $search = $request->has('search') ? $request->input('search') : false;
         $per_page = Cache::get('per_page', 50);
 
-        $invoices = Invoice::with('order')->when($search, function ($query) use ($search) {
+        $invoices = Invoice::with('order')->where("user_id", "=", Auth::user()->id)->when($search, function ($query) use ($search) {
             return $query->where('id', 'like', '%' . $search . '%');
         })->orderBy($by, $sort)->paginate($per_page)->onEachSide(1);
 
@@ -40,7 +40,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        // abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         $invoice->load('order');
         return $invoice;
         return view("invoices.show", compact("invoice"));

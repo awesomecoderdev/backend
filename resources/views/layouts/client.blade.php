@@ -72,7 +72,7 @@
                             @if ($path != 'client')
                                 @include('client.nav.public')
                                 <a href="{{ route('client.dashboard') }}"
-                                    class="md:bg-transparent bg-primary-50/20 dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500 flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2">
+                                    class="md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
                                     <div class="flex flex-row items-center text-sm font-medium">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true"
@@ -145,7 +145,7 @@
                         @else
                             @include('client.nav.public')
                             <a href="{{ route('login') }}"
-                                class="md:bg-transparent bg-primary-50/20 dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500 flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2">
+                                class="md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
                                 <div class="flex flex-row items-center text-sm font-medium">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" aria-hidden="true"
@@ -174,36 +174,61 @@
                 </div>
             </div>
 
+
+
+            <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                x-description="Background backdrop, show/hide based on modal state."
+                class=" sm:hidden fixed inset-0 h-screen z-10 bg-slate-900/10 dark:bg-primary-900/10 transition-opacity">
+            </div>
+
             <!-- Responsive Navigation Menu -->
-            @auth
-                <div :class="{ 'block': open, 'hidden': !open }" x-show="open"
-                    x-transition:enter="transition ease-in-out duration-300 transform"
-                    x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-                    x-transition:leave="transition ease-in-out duration-300 transform"
-                    x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-                    class="hidden sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 bg-slate-900/10 dark:bg-primary-900/10">
-                    <!-- Responsive Settings Options -->
+            <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform"
+                x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
+                x-transition:leave="transition ease-in-out duration-300 transform"
+                x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
+                class="sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 ">
+                <!-- Responsive Settings Options -->
+                <div
+                    class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-rr border-gray-100 dark:border-slate-700">
                     <div
-                        class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-rr border-gray-100 dark:border-slate-700">
-                        <div class="px-4 border-b py-3 border-gray-100 dark:border-slate-700 ">
-                            <div class="font-medium text-base text-gray-800 dark:text-white">{{ Auth::user()->name() }}
-                            </div>
-                            <div class="font-medium text-sm text-gray-500 dark:text-gray-200">
-                                {{ Str::limit(Auth::user()->email, 22) }}
+                        class="relative flex items-center justify-between border-b border-gray-100 dark:border-slate-700 h-16">
+                        <div class="px-4  py-3 ">
+                            <div class="font-medium text-base text-gray-800 dark:text-white">
+                                <x-application-logo />
                             </div>
                         </div>
 
                         <button @click="open = ! open"
-                            class="absolute right-4 top-4 z-10 inline-flex items-center justify-center p-2 rounded-md  text-gray-400 focus:outline-none border bg-white dark:bg-slate-800 border-gray-100  focus-visible:bg-transparent focus:bg-transparent focus-within:bg-transparent  dark:border-slate-700 transition duration-150 ease-in-out">
+                            class=" mr-3 top-4 z-10 inline-flex items-center justify-center p-2 rounded-md  text-gray-400 focus:outline-none border bg-white dark:bg-slate-800 border-gray-100  focus-visible:bg-transparent focus:bg-transparent focus-within:bg-transparent  dark:border-slate-700 transition duration-150 ease-in-out">
                             <svg class="h-6 w-6 pointer-events-none" stroke="currentColor" fill="none"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
+                    </div>
 
-                        <div class="relative text-slate-600 font-sans font-semibold">
-                            @include('client.nav.public')
+                    <div class="relative text-slate-600 font-sans font-semibold">
+                        @auth
+                            @if ($path != 'client')
+                                <a href="{{ route('client.dashboard') }}"
+                                    class="md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
+                                    <div class="flex flex-row items-center text-sm font-medium">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                            class="h-5 w-5 pointer-events-none mx-3">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                                        </svg>
+                                        {{ __('Dashboard') }}
+                                    </div>
+                                </a>
+                                @include('client.nav.public')
+                            @else
+                                @include('client.nav.dashboard')
+                            @endif
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
@@ -222,9 +247,25 @@
                                     </div>
                                 </a>
                             </form>
-                        </div>
+                        @else
+                            @include('client.nav.public')
+                            <a href="{{ route('login') }}"
+                                class="fixed w-[85vw] bottom-0 bg-primary-50 dark:bg-gray-900/20 dark:text-white dark:hover:bg-slate-700 px-2 py-3 border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+                                <div class="flex flex-row items-center text-sm font-medium">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                        class="h-5 w-5 pointer-events-none mx-3">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+                                    {{ __('Log In') }}
+                                </div>
+                            </a>
+                        @endauth
+
                     </div>
-                @endauth
+                </div>
 
             </div>
         </nav>

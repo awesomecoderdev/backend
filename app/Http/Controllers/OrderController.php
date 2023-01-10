@@ -24,7 +24,7 @@ class OrderController extends Controller
         $search = $request->has('search') ? $request->input('search') : false;
         $per_page = Cache::get('per_page', 50);
 
-        $orders = Order::when($status, function ($query) use ($status) {
+        $orders = Order::where("user_id", "=", Auth::user()->id)->when($status, function ($query) use ($status) {
             return $query->where('status', $status);
         })->when($search, function ($query) use ($search, $status) {
             if ($status) {

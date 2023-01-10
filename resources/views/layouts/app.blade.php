@@ -137,12 +137,19 @@
 
             <!-- Responsive Navigation Menu -->
             @auth
-                <div :class="{ 'block': open, 'hidden': !open }" x-show="open"
-                    x-transition:enter="transition ease-in-out duration-300 transform"
+                <div x-show="open" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200"
+                    x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    x-description="Background backdrop, show/hide based on modal state."
+                    class="sm:hidden fixed inset-0 h-screen z-10 bg-slate-900/10 dark:bg-primary-900/10 transition-opacity">
+                </div>
+
+                <!-- Responsive Navigation Menu -->
+                <div x-show="open" x-transition:enter="transition ease-in-out duration-300 transform"
                     x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
                     x-transition:leave="transition ease-in-out duration-300 transform"
                     x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-                    class="hidden sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 bg-slate-900/10 dark:bg-primary-900/10">
+                    class="sm:hidden fixed top-0 bottom-0 right-0 left-0 z-10 ">
                     <!-- Responsive Settings Options -->
                     <div
                         class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-rr border-gray-100 dark:border-slate-700">
