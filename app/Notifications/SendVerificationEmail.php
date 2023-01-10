@@ -62,7 +62,7 @@ class SendVerificationEmail extends Notification implements ShouldQueue
     protected function verificationUrl($notifiable)
     {
         $url = URL::temporarySignedRoute(
-            'verification.verify',
+            'api.verification.verify',
             Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
             [
                 'id' => $notifiable->getKey(),

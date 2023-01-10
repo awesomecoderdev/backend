@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\InvoiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -18,15 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 URL::forceScheme('https');
 
-Route::any('/', function () {
-    $img = file_get_contents(public_path("logo.png"));
-    // $img = file_get_contents("https://awesomecoderdev.github.io/img/profile.jpg");
-    $img = base64_encode($img);
-    return "<img  id='base64image'
-    src='data:image/svg;base64,$img' />";
-});
+// Index route
+Route::any('/', [FrontendController::class, "index"])->name("index");
 
-// invoice
-// Route::post('invoices/{id}/{hash}', "verification")->middleware(['auth', 'signed', 'throttle:6,1'])->name('verification.verify');
-// Route::get('invoices/{id}/{hash}', [InvoiceController::class, "invoice"])->middleware(['auth', 'throttle:6,1'])->name('invoices.demo');
-// Route::any('invoice/download/', [InvoiceController::class, "invoice"])->middleware(['auth', 'throttle:6,1'])->name('invoices.demo');
+// scripts
+Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('chunk');
+
+Route::any('getting-started', [FrontendController::class, "index"])->name("getting-started");
+Route::any('blog', [FrontendController::class, "index"])->name("blog");
+Route::any('featured', [FrontendController::class, "index"])->name("featured");
+Route::any('pricing', [FrontendController::class, "index"])->name("pricing");
