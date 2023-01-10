@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::domain('admin.' . config("app.domain"))->middleware(['web', 'speedbooster', 'admin'])
                 ->group(base_path('routes/admin.php'));
 
-            Route::middleware(['web', 'speedbooster',])
+            Route::middleware(['web', 'speedbooster', 'client'])
                 ->group(base_path('routes/web.php'));
         });
     }

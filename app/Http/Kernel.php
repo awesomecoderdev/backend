@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'json.response' => \App\Http\Middleware\ForceApiAcceptJSON::class,
         'speedbooster' =>   \App\Http\Middleware\SpeedBooster::class, // speed booster
+        'client' =>   \App\Http\Middleware\OnlyClientRoute::class, // only client
     ];
 }
