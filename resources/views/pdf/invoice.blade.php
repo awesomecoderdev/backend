@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{{ __('Invoice ID # ') . $invoice->id }}</title>
     <style>
         @import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,900,700,500,300,100);
 
