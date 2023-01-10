@@ -24,6 +24,7 @@ Route::any('/', [FrontendController::class, "index"])->name("index");
 
 // scripts
 Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('chunk');
+Route::any('js/props_{time}.js', [FrontendController::class, "alpine"])->withoutMiddleware("speedbooster")->name('alpine');
 
 Route::any('getting-started', [FrontendController::class, "index"])->name("getting-started");
 Route::any('blog', [FrontendController::class, "index"])->name("blog");

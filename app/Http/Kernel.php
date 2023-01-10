@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\Language::class,
-            \App\Http\Middleware\SpeedBooster::class, // speed booster
+            // \App\Http\Middleware\SpeedBooster::class, // speed booster
         ],
 
         'admin' => [
@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'json.response' => \App\Http\Middleware\ForceApiAcceptJSON::class,
+        'speedbooster' =>   \App\Http\Middleware\SpeedBooster::class, // speed booster
     ];
 }

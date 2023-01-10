@@ -30,13 +30,13 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
 
-            Route::domain('api.' . config("app.domain"))->middleware(['web', "json.response"])
+            Route::domain('api.' . config("app.domain"))->middleware(['web',  "json.response"])
                 ->group(base_path('routes/api.php'));
 
-            Route::domain('admin.' . config("app.domain"))->middleware(['web', 'admin'])
+            Route::domain('admin.' . config("app.domain"))->middleware(['web', 'speedbooster', 'admin'])
                 ->group(base_path('routes/admin.php'));
 
-            Route::middleware(['web'])
+            Route::middleware(['web', 'speedbooster',])
                 ->group(base_path('routes/web.php'));
         });
     }

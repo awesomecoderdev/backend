@@ -354,12 +354,7 @@
     }
     function J(e, t, r = void 0) {
         Object.assign(e, { el: t, expression: r }),
-            console.warn(
-                `Alpine Expression Error: ${e.message} ${
-                    r ? 'Expression: "' + r + `"` : ""
-                }`,
-                t
-            ),
+            console.warn("", t),
             setTimeout(() => {
                 throw e;
             }, 0);
@@ -644,9 +639,7 @@
     }
     function lr() {
         document.body ||
-            O(
-                "Unable to initialize. Trying to load Alpine before `<body>` is available. Did you forget to add `defer` in Alpine's `<script>` tag?"
-            ),
+            O("Unable to initialize. Trying to load Alpine before body tag"),
             z(document, "alpine:init"),
             z(document, "alpine:initializing"),
             rt(),
@@ -930,9 +923,21 @@
                 : o();
             return;
         }
-
-        if ((!e._x_hidePromise = e._x_transition)) {
-            Promise.resolve(n);
+        (e._x_hidePromise = e._x_transition
+            ? new Promise((s, a) => {
+                  e._x_transition.out(
+                      () => {},
+                      () => s(n)
+                  ),
+                      e._x_transitioning.beforeCancel(() => {
+                          //   try {
+                          //       return a({ isFromCancelledTransition: !0 });
+                          //   } catch (error) {
+                          //       return false;
+                          //   }
+                      });
+              })
+            : Promise.resolve(n)),
             queueMicrotask(() => {
                 let s = hr(e);
                 s
@@ -940,32 +945,27 @@
                       s._x_hideChildren.push(e))
                     : i(() => {
                           let a = (c) => {
-                              try {
-                                  let l = Promise.all([
-                                      c._x_hidePromise,
-                                      ...(c._x_hideChildren || []).map(a),
-                                  ]).then(([u]) => u);
-                              } catch (e) {
-                                  //
-                              }
-
+                              let l = Promise.all([
+                                  c._x_hidePromise,
+                                  ...(c._x_hideChildren || []).map(a),
+                              ]).then(([u]) => {
+                                  if (typeof u == "function") {
+                                      return u();
+                                  } else {
+                                      return U;
+                                  }
+                              });
                               return (
                                   delete c._x_hidePromise,
                                   delete c._x_hideChildren,
                                   l
                               );
                           };
-
-                          try {
-                              a(e).catch((c) => {
-                                  if (!c.isFromCancelledTransition) throw c;
-                              });
-                          } catch (e) {
-                              //
-                          }
+                          a(e).catch((c) => {
+                              if (!c.isFromCancelledTransition) throw c;
+                          });
                       });
             });
-        }
     };
     function hr(e) {
         let t = e.parentNode;

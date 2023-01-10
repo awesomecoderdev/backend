@@ -12,7 +12,10 @@
     <!-- Scripts -->
 
     {{--  start::preload:js --}}
-    <link rel="preload" href="{{ secure_asset('js/alpine.min.js') }}" as="script" type="text/javascript" />
+    {{-- <link rel="preload" href="{{ secure_asset('js/alpine.min.js') }}" as="script" type="text/javascript" /> --}}
+    <link rel="preload" href="{{ route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"
+        as="script" type="text/javascript" />
+    {{-- <link rel="preload" href="{{ route('alpine', ['time' => time()]) }}" as="script" type="text/javascript" /> --}}
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
 
@@ -198,7 +201,7 @@
 
     </div>
 
-    <script defer src="{{ secure_asset('js/alpine.min.js') }}"></script>
+    <script defer src="{{ route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"></script>
     {{-- <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script> --}}
 </body>
 
