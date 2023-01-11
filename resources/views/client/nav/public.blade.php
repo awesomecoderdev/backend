@@ -5,7 +5,7 @@
 {{-- @json([$path, $current, Request::url()]) --}}
 
 <a href="{{ base(route('getting-started')) }}"
-    class="{{ $current == 'getting-started' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5">
+    class="{{ $current == 'getting-started' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5 h-full">
     <div class="flex flex-row items-center text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             aria-hidden="true" class="h-5 w-5 pointer-events-none mx-1">
@@ -15,7 +15,7 @@
     </div>
 </a>
 <a href="{{ base(route('blog')) }}"
-    class="{{ $current == 'blog' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
+    class="{{ $current == 'blog' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5 h-full">
     <div class="flex flex-row items-center text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-1">
@@ -26,7 +26,7 @@
     </div>
 </a>
 <a href="{{ base(route('featured')) }}"
-    class="{{ $current == 'featured' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
+    class="{{ $current == 'featured' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5 h-full">
     <div class="flex flex-row items-center text-sm font-medium">
         {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-1">
@@ -44,7 +44,7 @@
     </div>
 </a>
 <a href="{{ base(route('pricing')) }}"
-    class="{{ $current == 'pricing' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5">
+    class="{{ $current == 'pricing' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5 h-full">
     <div class="flex flex-row items-center text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-1">
