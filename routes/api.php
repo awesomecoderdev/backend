@@ -54,7 +54,7 @@ Route::group(['prefix' => 'v1/user', "controller" => AuthController::class,], fu
 
 // oauth routes
 Route::group(['prefix' => 'v1/oauth', "controller" => AuthController::class,], function () {
-    Route::post('{driver}', 'oauth')->name('api.oauth.login');
+    Route::any('{driver}', 'oauth')->name('api.oauth.login');
     Route::get('{driver}/callback', 'oauthCallback')->name('api.oauth.callback');
 });
 

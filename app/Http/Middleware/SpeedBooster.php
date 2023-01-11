@@ -21,7 +21,7 @@ class SpeedBooster
     {
         $output = $next($request);
 
-        if (config("speedbooster.enable")) {
+        if (config("speedbooster.enable") && $output->status() != 500) { // env("APP_DEBUG") == true
             $buffer = $output->getContent() ?? "<h1></h1>";
             if (strpos($buffer, '<pre>') !== false) {
                 $replace = array(

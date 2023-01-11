@@ -277,7 +277,11 @@
         {{ $slot }}
         {{-- end::content --}}
 
+        @if ($path != 'client')
+            @include('client.footer')
+        @endif
     </div>
+
 
     <script defer src="{{ base(route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))])) }}">
     </script>

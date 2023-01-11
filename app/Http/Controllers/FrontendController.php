@@ -30,6 +30,47 @@ class FrontendController extends Controller
     }
 
     /**
+     * Display a featured page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gettingstarted(Request $request)
+    {
+        return view("client.getting-started");
+    }
+
+    /**
+     * Display a getting-started page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function featured(Request $request)
+    {
+        return view("client.featured");
+    }
+
+
+    /**
+     * Display a blog page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function blog(Request $request)
+    {
+        return view("client.blog");
+    }
+
+    /**
+     * Display a pricing page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pricing(Request $request)
+    {
+        return view("client.pricing");
+    }
+
+    /**
      * Display a index page of the admin panel.
      *
      * @return \Illuminate\Http\Response
