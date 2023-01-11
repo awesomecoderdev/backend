@@ -65,7 +65,7 @@
                 Welcome back!
             </p>
 
-            <a href="{{ route('api.oauth.login', ['driver' => 'google']) }}"
+            <a href="{{ route('oauth.login', ['driver' => 'google']) }}"
                 class="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <div class="px-4 py-2">
                     <svg class="w-6 h-6" viewBox="0 0 40 40">

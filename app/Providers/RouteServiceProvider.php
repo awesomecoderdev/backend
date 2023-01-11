@@ -33,6 +33,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::domain('api.' . config("app.domain"))->middleware(['web',  "json.response"])
                 ->group(base_path('routes/api.php'));
 
+            Route::domain('oauth.' . config("app.domain"))->middleware(['web', 'guest'])
+                ->group(base_path('routes/oauth.php'));
+
             Route::domain('admin.' . config("app.domain"))->middleware(['web', 'speedbooster', 'admin'])
                 ->group(base_path('routes/admin.php'));
 
