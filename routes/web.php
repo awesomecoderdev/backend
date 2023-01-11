@@ -82,10 +82,11 @@ Route::middleware('auth')->group(function () {
     // orders
     Route::resource("orders", OrderController::class, ["as" => "client"])->only(["index", "show"]);
     // websites
-    Route::resource("websites", WebsiteController::class, ["as" => "client"])->only(["index", "show"]);
+    Route::resource("websites", WebsiteController::class, ["as" => "client"]);
     // invoice
     Route::resource("invoices", InvoiceController::class, ["as" => "client"])->only(["index", "show"]);
-    Route::get("invoices/{invoice}/download/", [InvoiceController::class, "print"])->name("invoices.download");
+    Route::get("invoices/{invoice}/print/", [InvoiceController::class, "print"])->name("client.invoices.print");
+    Route::get("invoices/{invoice}/download/", [InvoiceController::class, "download"])->name("client.invoices.download");
     // payments
     Route::resource("payments", PaymentController::class, ["as" => "client"])->only(["index", "show"]);
     // settings

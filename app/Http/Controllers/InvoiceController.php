@@ -40,7 +40,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        // abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->supperadmin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         $invoice->load('order');
         return $invoice;
         return view("invoices.show", compact("invoice"));
@@ -54,9 +54,12 @@ class InvoiceController extends Controller
      */
     public function print(Invoice $invoice)
     {
+        abort_if(!Auth::user()->supperadmin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         $invoice->load(["order", "user"]);
-        // $invoice->order->load("user");
-        // return $invoice;
+        $invoice->order->load("user");
+        $invoice->user = $invoice->order->user;
+
         $fileName = "{$invoice->id}.pdf";
         $pdf = new Mpdf([
             'mode' => 'utf-8',
@@ -69,9 +72,41 @@ class InvoiceController extends Controller
             'margin_footer' => 0,
         ]);
         $html = View::make('pdf.invoice', compact('invoice'));
-        // return $html = View::make('pdf.invoice', compact('invoice'));
+        $html = View::make('pdf.invoice', compact('invoice'));
         $html = $html->render();
         $pdf->WriteHTML($html);
         $pdf->Output($fileName, "I");
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Invoice  $invoice
+     * @return \Illuminate\Http\Response
+     */
+    public function download(Invoice $invoice)
+    {
+        abort_if(!Auth::user()->supperadmin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
+        $invoice->load(["order", "user"]);
+        $invoice->order->load("user");
+        $invoice->user = $invoice->order->user;
+
+        $fileName = "{$invoice->id}.pdf";
+        $pdf = new Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4', // A4, [400, 180], 'Legal',
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 0,
+            "margin_bottom" => 0,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+        ]);
+        $html = View::make('pdf.invoice', compact('invoice'));
+        $html = View::make('pdf.invoice', compact('invoice'));
+        $html = $html->render();
+        $pdf->WriteHTML($html);
+        $pdf->Output($fileName, "D");
     }
 }

@@ -1,13 +1,13 @@
 <x-client-layout>
     @section('head')
-        <title>{{ __('Orders') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
+        <title>{{ __('client.Orders') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-client>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">
             <div class="border-b border-gray-200 dark:border-gray-700 flex justify-between">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', ['search' => request('search')]) }}"
+                        <a href="{{ route('client.orders.index', ['search' => request('search')]) }}"
                             class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -20,7 +20,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', ['status' => 'approved', 'search' => request('search')]) }}"
+                        <a href="{{ route('client.orders.index', ['status' => 'approved', 'search' => request('search')]) }}"
                             class=" {{ $status == 'approved' ? 'border-green-300' : 'border-transparent' }} hover:border-green-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -32,7 +32,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', ['status' => 'pending', 'search' => request('search')]) }}"
+                        <a href="{{ route('client.orders.index', ['status' => 'pending', 'search' => request('search')]) }}"
                             class=" {{ $status == 'pending' ? 'border-yellow-300' : 'border-transparent' }} hover:border-yellow-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" aria-hidden="true"
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="mr-2">
-                        <a href="{{ route('orders.index', ['status' => 'canceled', 'search' => request('search')]) }}"
+                        <a href="{{ route('client.orders.index', ['status' => 'canceled', 'search' => request('search')]) }}"
                             class=" {{ $status == 'canceled' ? 'border-red-300' : 'border-transparent' }} hover:border-red-400  text-slate-500 hover:text-slate-600 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all  group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"
@@ -105,7 +105,9 @@
 
                         <div
                             class="relative max-w-xs text-xs md:text-center text-start md:w-1/5 w-full md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 flex md:justify-center justify-start items-center">
-                            <a href="{{ route('orders.show', $order) }}" class="p-1 text-emerald-400 rounded-md mx-1 ">
+
+                            <a href="{{ route('client.orders.show', $order) }}"
+                                class="p-1 text-emerald-400 rounded-md mx-1 ">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -113,37 +115,18 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-
                             </a>
-                            @can('isSupperAdmin')
-                                <a href="{{ route('orders.edit', $order) }}" class="p-1 text-primary-400 rounded-md mx-1 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                    </svg>
-                                </a>
-                                {{-- <a href="" class="p-1 text-red-400 rounded-md mx-1 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
-                                    </svg>
-                                </a> --}}
-                                <a onclick="popupAction('destroy_order_id_{{ $order->id }}', '{{ __('Delete') }}', '{{ __('Are you sure you want to delete this order ? All of this order data will be permanently removed.') }}','{{ __('Delete') }}', )"
-                                    class="p-1 text-red-400 rounded-md mx-1 cursor-pointer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="w-4 h-4 pointer-events-none">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
-                                    </svg>
-                                </a>
-                                <form id="destroy_order_id_{{ $order->id }}"
-                                    action="{{ route('orders.destroy', $order) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                            @endcan
+
+                            <a href="{{ $order->invoice ? route('client.invoices.print', $order->invoice->id) : 'javascript:void(0);' }}"
+                                {{ $order->invoice ? 'target="_blank"' : '' }}
+                                class="p-1 text-primary-400 rounded-md mx-1 " title="{{ __('Download Invoice') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                                </svg>
+                            </a>
+
                         </div>
 
                         <div class="relative flex flex-auto items-center justify-start md:w-auto w-full">
@@ -199,7 +182,7 @@
                             <circle cx="433.63626" cy="105.17383" r="12.18187" fill="#fff" />
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
-                            <a href="{{ route('orders.index') }}"
+                            <a href="{{ route('client.orders.index') }}"
                                 class="relative cursor-pointer rounded-md  font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
@@ -210,6 +193,5 @@
             @endif
         </div>
     </x-client>
-    <x-popup />
 
 </x-client-layout>

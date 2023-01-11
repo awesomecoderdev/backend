@@ -24,7 +24,7 @@ class OrderController extends Controller
         $search = $request->has('search') ? $request->input('search') : false;
         $per_page = Cache::get('per_page', 50);
 
-        $orders = Order::where("user_id", "=", Auth::user()->id)->when($status, function ($query) use ($status) {
+        $orders = Order::where("user_id", "=", Auth::user()->id)->with('invoice')->when($status, function ($query) use ($status) {
             return $query->where('status', $status);
         })->when($search, function ($query) use ($search, $status) {
             if ($status) {
@@ -67,13 +67,13 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->supperadmin() && $order->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
 
         $order->load('user');
         $order->user->load('products');
         // return $order;
 
-        return view("orders.show", compact("order"));
+        return view("client.orders.show", compact("order"));
     }
 
 

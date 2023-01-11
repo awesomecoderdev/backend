@@ -24,7 +24,7 @@ class WebsiteController extends Controller
         $search = $request->has('search') ? $request->input('search') : false;
         $per_page = Cache::get('per_page', 50);
 
-        $websites = Website::when($search, function ($query) use ($search, $status) {
+        $websites = Website::where("user_id", "=", Auth::user()->id)->when($search, function ($query) use ($search, $status) {
             if ($status) {
                 return $query->where('status', $status)->where('title', 'like', '%' . $search . '%')->orWhere('url', 'like', '%' . $search . '%');
             }
@@ -43,20 +43,23 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        //
+
+        // abort_if(!Auth::user()->supperadmin() && $website->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreWebsiteRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreWebsiteRequest $request)
+    public function store(Request $request)
     {
+
+        // abort_if(!Auth::user()->supperadmin() && $website->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
         //
     }
-
 
     /**
      * Display the specified resource.
@@ -66,10 +69,11 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        // abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->supperadmin() && $website->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         $website->load('user');
         return $website;
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -78,19 +82,32 @@ class WebsiteController extends Controller
      */
     public function edit(Website $website)
     {
-        //
+        abort_if(!Auth::user()->supperadmin() && $website->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        $website->load('user');
+        return $website;
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateWebsiteRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Website  $website
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateWebsiteRequest $request, Website $website)
+    public function update(Request $request, Website $website)
     {
-        //
+        abort_if(!Auth::user()->supperadmin() && $website->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
+        try {
+            $website->save();
+            return redirect()->route("client.websites.edit", $website)->with([
+                "success" => __("Website successfully updated.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("client.websites.edit", $website)->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -101,6 +118,17 @@ class WebsiteController extends Controller
      */
     public function destroy(Website $website)
     {
-        //
+        abort_if(!Auth::user()->supperadmin() && $website->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+
+        try {
+            $website->delete();
+            return redirect()->back()->with([
+                "success" => __("Website successfully deleted.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
     }
 }

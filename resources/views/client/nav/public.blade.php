@@ -1,6 +1,9 @@
 @php
     $current = strtok(Route::currentRouteName(), '.');
+    $path = strtok(preg_replace('#^https?://#', '', rtrim(Request::url(), '/')), '.');
 @endphp
+{{-- @json([$path, $current, Request::url()]) --}}
+
 <a href="{{ route('getting-started') }}"
     class="{{ $current == 'getting-started' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5">
     <div class="flex flex-row items-center text-sm font-medium">
