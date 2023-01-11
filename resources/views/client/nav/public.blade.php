@@ -4,7 +4,7 @@
 @endphp
 {{-- @json([$path, $current, Request::url()]) --}}
 
-<a href="{{ route('getting-started') }}"
+<a href="{{ base(route('getting-started')) }}"
     class="{{ $current == 'getting-started' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5">
     <div class="flex flex-row items-center text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -14,7 +14,7 @@
         {{ __('Getting Started') }}
     </div>
 </a>
-<a href="{{ route('blog') }}"
+<a href="{{ base(route('blog')) }}"
     class="{{ $current == 'blog' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
     <div class="flex flex-row items-center text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -25,7 +25,7 @@
         {{ __('Blog') }}
     </div>
 </a>
-<a href="{{ route('featured') }}"
+<a href="{{ base(route('featured')) }}"
     class="{{ $current == 'featured' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
     <div class="flex flex-row items-center text-sm font-medium">
         {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -43,7 +43,7 @@
         {{ __('Featured') }}
     </div>
 </a>
-<a href="{{ route('pricing') }}"
+<a href="{{ base(route('pricing')) }}"
     class="{{ $current == 'pricing' ? 'border-primary-500 md:bg-transparent bg-gray-100 dark:bg-slate-700  dark:text-white md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 ' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center md:border-b-2 md:border-r-0 border-r-2 my-0.5">
     <div class="flex flex-row items-center text-sm font-medium">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

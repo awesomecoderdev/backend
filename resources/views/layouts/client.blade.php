@@ -16,16 +16,17 @@
 
     {{--  start::preload:js --}}
     {{-- <link rel="preload" href="{{ secure_asset('js/alpine.min.js') }}" as="script" type="text/javascript" /> --}}
-    <link rel="preload" href="{{ route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"
+    <link rel="preload"
+        href="{{ base(route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))])) }}"
         as="script" type="text/javascript" />
     {{-- <link rel="preload" href="{{ route('alpine', ['time' => time()]) }}" as="script" type="text/javascript" /> --}}
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
 
     {{-- start::chunk --}}
-    <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
+    {{-- <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script> --}}
+    <script src="{{ base(route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))])) }}"></script>
     {{-- end::chunk --}}
-
     <!-- Node.js -->
     {{-- @viteReactRefresh --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -278,8 +279,10 @@
 
     </div>
 
-    <script defer src="{{ route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"></script>
+    <script defer src="{{ base(route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))])) }}">
+    </script>
     {{-- <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script> --}}
+
 </body>
 
 </html>
