@@ -54,7 +54,7 @@ class InvoiceController extends Controller
      */
     public function print(Invoice $invoice)
     {
-        abort_if(!Auth::user()->supperadmin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->admin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
 
         $invoice->load(["order", "user"]);
         $invoice->order->load("user");
@@ -86,7 +86,7 @@ class InvoiceController extends Controller
      */
     public function download(Invoice $invoice)
     {
-        abort_if(!Auth::user()->supperadmin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->admin() && $invoice->user_id != Auth::user()->id, \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
 
         $invoice->load(["order", "user"]);
         $invoice->order->load("user");

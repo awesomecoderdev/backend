@@ -51,7 +51,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->admin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         $product->load("coupon");
         $product->coupon->load('user');
         return $product;

@@ -145,7 +145,7 @@
                             @endif
                         @else
                             @include('client.nav.public')
-                            <a href="{{ route('login') }}"
+                            <a href="{{ base(route('login')) }}"
                                 class="md:bg-transparent dark:text-slate-300  border-transparent md:hover:bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  md:border-b-2 md:border-r-0 border-r-2 my-0.5">
                                 <div class="flex flex-row items-center text-sm font-medium">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -232,7 +232,7 @@
                                 @include('client.nav.dashboard')
                             @endif
 
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ base(route('logout')) }}">
                                 @csrf
                                 <a onclick="event.preventDefault();
                                     this.closest('form').submit();"
@@ -251,7 +251,7 @@
                             </form>
                         @else
                             @include('client.nav.public')
-                            <a href="{{ route('login') }}"
+                            <a href="{{ base(route('login')) }}"
                                 class="fixed w-[85vw] bottom-0 bg-primary-50 dark:bg-gray-900/20 dark:text-white dark:hover:bg-slate-700 px-2 py-3 border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
                                 <div class="flex flex-row items-center text-sm font-medium">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

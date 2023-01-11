@@ -99,9 +99,9 @@
                                     </div>
                                 </x-dropdown-link>
                                 <!-- Logout -->
-                                <form method="POST" action="{{ route('admin.logout') }}" class="m-0">
+                                <form method="POST" action="{{ base(route('admin.logout')) }}" class="m-0">
                                     @csrf
-                                    <x-dropdown-link :href="route('admin.logout')" class="hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    <x-dropdown-link :href="base(route('admin.logout'))" class="hover:bg-gray-100 dark:hover:bg-gray-800"
                                         onclick="event.preventDefault(); this.closest('form').submit();">
                                         <div
                                             class=" dark:text-slate-300  border-transparent  py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">

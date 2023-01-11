@@ -68,7 +68,7 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        abort_if(!Auth::user()->supperadmin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        abort_if(!Auth::user()->admin(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         $website->load('user');
         return $website;
     }

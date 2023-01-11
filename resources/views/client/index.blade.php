@@ -1,6 +1,6 @@
 <x-client-layout>
     @section('head')
-        <title>{{ __('AI plagiarism checker for wordpress') }} {{ config('settings.separator') }}
+        <title>{{ __('AI assistant for checke plagiarism for wordpress') }} {{ config('settings.separator') }}
             {{ __(config('settings.title')) }}</title>
     @endsection
 
