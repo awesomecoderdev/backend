@@ -25,6 +25,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\EncryptCookies::class,
         \App\Http\Middleware\ValidSubDomain::class,
         \App\Http\Middleware\OauthMiddleware::class,
+        \App\Http\Middleware\SpeedBooster::class, // speed booster
+
     ];
 
     /**
