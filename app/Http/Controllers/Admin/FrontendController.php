@@ -81,6 +81,7 @@ class FrontendController extends Controller
         abort(\Illuminate\Http\Response::HTTP_NOT_FOUND);
     }
 
+
     /**
      * Display a index page of the admin panel.
      *
@@ -92,7 +93,9 @@ class FrontendController extends Controller
             App::setLocale(strtolower($request->lang));
             Session::put('locale', strtolower($request->lang));
         }
-        return redirect()->back();
+        return redirect()->back()->with([
+            "success" => __("Language successfully changed.")
+        ]);
     }
 
     /**
@@ -105,7 +108,9 @@ class FrontendController extends Controller
         if (isset($request->per_page) && in_array($request->per_page, config("app.per_page"))) {
             Cache::forever("per_page", $request->per_page);
         }
-        return redirect()->back();
+        return redirect()->back()->with([
+            "success" => __("Show per page successfully changed.")
+        ]);
     }
 
 

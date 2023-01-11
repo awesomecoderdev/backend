@@ -35,6 +35,14 @@ use App\Http\Controllers\InvoiceController as ClientInvoiceController;
 
 URL::forceScheme('https');
 
+
+// change language
+Route::any('language/{lang?}', [FrontendController::class, "language"])->name("client.language.change");
+
+// change paginator
+Route::any('paginator/{per_page?}', [FrontendController::class, "paginator"])->name("client.paginator.change");
+
+
 // Index route
 Route::any('/', [FrontendController::class, "index"])->name("index");
 

@@ -3,10 +3,43 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
+
+    /**
+     * Display a index page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function language(Request $request)
+    {
+        if (isset($request->lang) && in_array($request->lang, config("app.available_locales"))) {
+            App::setLocale(strtolower($request->lang));
+            Session::put('locale', strtolower($request->lang));
+        }
+        return redirect()->back()->with([
+            "success" => __("Language successfully changed.")
+        ]);
+    }
+
+    /**
+     * Display a index page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function paginator(Request $request)
+    {
+        if (isset($request->per_page) && in_array($request->per_page, config("app.per_page"))) {
+            Cache::forever("per_page", $request->per_page);
+        }
+        return redirect()->back()->with([
+            "success" => __("Show per page successfully changed.")
+        ]);
+    }
 
     /**
      * Display a index page of the admin panel.

@@ -1,3 +1,6 @@
+@php
+    $path = strtok(Route::currentRouteName(), '.');
+@endphp
 <div {{ $attributes->merge(['class' => 'relative flex justify-between items-center my-3 h-auto']) }}>
     <div class="flex items-center relative border border-transparent dark:text-white">
         <button
@@ -56,19 +59,35 @@
             </x-slot>
 
             <x-slot name="content">
-                @foreach (config('app.per_page') as $page)
-                    <form method="POST" action="{{ route('paginator.change', $page) }}">
-                        @csrf
-                        <button type="submit"
-                            class="relative w-full bg-white dark:bg-slate-900  dark:text-white  dark:hover:bg-slate-700/50 block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
-                            <div class="flex items-center ">
-                                <span class="text-center pointer-events-none">
-                                    {{ $page }}
-                                </span>
-                            </div>
-                        </button>
-                    </form>
-                @endforeach
+                @if ($path != 'client')
+                    @foreach (config('app.per_page') as $page)
+                        <form method="POST" action="{{ route('paginator.change', $page) }}">
+                            @csrf
+                            <button type="submit"
+                                class="relative w-full bg-white dark:bg-slate-900  dark:text-white  dark:hover:bg-slate-700/50 block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                <div class="flex items-center ">
+                                    <span class="text-center pointer-events-none">
+                                        {{ $page }}
+                                    </span>
+                                </div>
+                            </button>
+                        </form>
+                    @endforeach
+                @else
+                    @foreach (config('app.per_page') as $page)
+                        <form method="POST" action="{{ route('client.paginator.change', $page) }}">
+                            @csrf
+                            <button type="submit"
+                                class="relative w-full bg-white dark:bg-slate-900  dark:text-white  dark:hover:bg-slate-700/50 block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                <div class="flex items-center ">
+                                    <span class="text-center pointer-events-none">
+                                        {{ $page }}
+                                    </span>
+                                </div>
+                            </button>
+                        </form>
+                    @endforeach
+                @endif
             </x-slot>
         </x-dropdown>
     </div>

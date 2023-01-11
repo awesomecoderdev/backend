@@ -1,6 +1,6 @@
 <x-client-layout>
     @section('head')
-        <title>{{ __('client.Orders') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
+        <title>{{ __('Orders') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-client>
         <div class="relative w-full overflow-x-hidden overflow-y-scroll ">

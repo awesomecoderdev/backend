@@ -33,19 +33,31 @@ class AuthController extends Controller
      * @param  \Laravel\Socialite\Facades\Socialite  $driver
      * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        return redirect()->to(base(route("login")))->withErrors([
+            "error" => __("Something went wrong. Please try after sometimes.")
+        ]);
+    }
+    /**
+     * Process the oauth.
+     *
+     * @param  \Laravel\Socialite\Facades\Socialite  $driver
+     * @return \Illuminate\Http\Response
+     */
     public function oauth($driver)
     {
         if (!$this->oauthIsProviderAllowed($driver)) {
-            return redirect()->back()->with([
-                "success" => __("Something went wrong. Please try after sometimes.")
+            return redirect()->to(base(route("login")))->withErrors([
+                "error" => __("Something went wrong. Please try after sometimes.")
             ]);
         }
 
         try {
             return Socialite::driver($driver)->redirect();
         } catch (Exception $e) {
-            return redirect()->back()->with([
-                "success" => __("Something went wrong. Please try after sometimes.")
+            return redirect()->to(base(route("login")))->withErrors([
+                "error" => __("Something went wrong. Please try after sometimes.")
             ]);
         }
     }
@@ -94,10 +106,15 @@ class AuthController extends Controller
                 event(new Registered($user));
 
                 Auth::login($user, true);
-                return Redirect::to(RouteServiceProvider::HOME);
+
+                return redirect()->to(base(route("client.dashboard")))->with([
+                    "success" => __("You have successfully logged in.")
+                ]);
             }
         } catch (Exception $e) {
-            return Redirect::to(RouteServiceProvider::HOME);
+            return redirect()->to(base(route("login")))->withErrors([
+                "error" => __("Something went wrong. Please try after sometimes.")
+            ]);
         }
     }
 

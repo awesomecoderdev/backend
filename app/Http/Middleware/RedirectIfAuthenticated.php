@@ -35,7 +35,7 @@ class RedirectIfAuthenticated
                         "redirect"  => true
                     ],  \Illuminate\Http\Response::HTTP_OK);
                 } else {
-                    return redirect(RouteServiceProvider::HOME);
+                    return redirect(config("app.url"));
                 }
             }
         }

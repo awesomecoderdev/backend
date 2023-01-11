@@ -7,7 +7,7 @@
             <div class="border-b border-gray-200 dark:border-gray-700 flex justify-between">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
                     <li class="mr-2">
-                        <a href="{{ route('websites.index', ['search' => request('search')]) }}"
+                        <a href="{{ route('client.websites.index', ['search' => request('search')]) }}"
                             class=" {{ !$status ? 'border-primary-300' : 'border-transparent' }} hover:border-primary-400 inline-flex p-2 pt-0 rounded-t-lg border-b-2  transition-all group"><svg
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" aria-hidden="true"

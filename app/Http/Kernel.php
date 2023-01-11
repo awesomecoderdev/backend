@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\StartSession::class,
         \App\Http\Middleware\EncryptCookies::class,
         \App\Http\Middleware\ValidSubDomain::class,
+        \App\Http\Middleware\OauthMiddleware::class,
     ];
 
     /**
@@ -71,5 +72,6 @@ class Kernel extends HttpKernel
         'speedbooster' =>   \App\Http\Middleware\SpeedBooster::class, // speed booster
         'client' =>   \App\Http\Middleware\OnlyClientRoute::class, // only client
         'admin' =>  \App\Http\Middleware\IsAdmin::class,
+        'oauth' =>  \App\Http\Middleware\OauthMiddleware::class,
     ];
 }
