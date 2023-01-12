@@ -4,9 +4,6 @@
         <meta name="description" content="akdfaldfj">
     @endsection
     <x-content>
-        {{-- @if ($errors->any())
-            {!! implode('', $errors->all('<div>:message</div>')) !!}
-        @endif --}}
         <div class="mt-10 sm:mt-0 ">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="mt-5 md:col-span-6 md:mt-0">
@@ -142,7 +139,6 @@
                 </div>
             </div>
         </div>
-
         @if (isset($user->orders) && $user->orders->count() > 0)
             <div class="relative p-2 w-full">
                 <h1 class=" text-sm font-medium text-gray-700 dark:text-white block mb-2 mx-1 ">{{ __('Orders') }}
@@ -267,7 +263,5 @@
                 </div>
             </div>
         @endif
-
-
     </x-content>
 </x-app-layout>

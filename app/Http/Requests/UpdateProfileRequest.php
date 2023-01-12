@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateUserRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +18,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->admin();
+        return Auth::user();
     }
 
     /**
@@ -34,6 +34,13 @@ class UpdateUserRequest extends FormRequest
             // "email" => "required|email|unique:users,email",
             // "password" => "required|min:8|max:12",
             // "confirmed" => "required|same:password",
+            "about" => "required",
+            // "avatar" => "required",
+            "address" => "required",
+            "country" => "required",
+            "state" => "required",
+            "city" => "required",
+            "zip" => "required",
         ];
     }
 

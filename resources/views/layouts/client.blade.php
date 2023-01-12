@@ -121,7 +121,7 @@
                                         </x-slot>
 
                                         <x-slot name="content" class="bg-gray-100">
-                                            <x-dropdown-link href="{{ next_url('profile') }}"
+                                            <x-dropdown-link href="{{ base(route('client.profile')) }}"
                                                 class="hover:bg-gray-100 dark:hover:bg-gray-800 ">
                                                 <div
                                                     class=" dark:text-slate-300  border-transparent py-0.5 hover:border-primary-500  flex cursor-pointer flex-row items-center   ">

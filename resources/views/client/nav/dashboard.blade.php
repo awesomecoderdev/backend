@@ -62,6 +62,19 @@
             {{ __('Invoices') }}
         </div>
     </a>
+
+    <a href="{{ base(route('client.profile')) }}"
+        class="{{ $current == 'profile' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                class="h-5 w-5 pointer-events-none mx-3">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z">
+                </path>
+            </svg>
+            {{ __('Profile') }}
+        </div>
+    </a>
     <a href="{{ base(route('client.settings')) }}"
         class="{{ $current == 'settings' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"

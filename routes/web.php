@@ -92,7 +92,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // payments
     Route::resource("payments", PaymentController::class, ["as" => "client"])->only(["index", "show"]);
     // settings
-    Route::get('settings', [FrontendController::class, "dashboard"])->name('client.settings');
-    // others
-    Route::get('chat', [FrontendController::class, "dashboard"])->name('client.chat');
+    Route::get('settings', [FrontendController::class, "settings"])->name('client.settings');
+    Route::post('settings', [FrontendController::class, "updateSettings"])->name('client.settings.update');
+    // profile
+    Route::get('profile', [FrontendController::class, "profile"])->name('client.profile');
+    Route::post('profile', [FrontendController::class, "updateProfile"])->name('client.profile.update');
+    // chat
+    Route::get('chat', [FrontendController::class, "chat"])->name('client.chat');
 });

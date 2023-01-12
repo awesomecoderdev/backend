@@ -9,7 +9,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateUserRequest extends FormRequest
+
+class UpdateSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,7 +19,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check() && Auth::user()->admin();
+        return Auth::user();
     }
 
     /**
@@ -29,11 +30,8 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "first_name" => "required|string|min:2",
-            "last_name" => "required|string|min:2",
-            // "email" => "required|email|unique:users,email",
-            // "password" => "required|min:8|max:12",
-            // "confirmed" => "required|same:password",
+            // "first_name" => "required|string|min:2",
+            // "last_name" => "required|string|min:2",
         ];
     }
 
@@ -57,16 +55,16 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array
      */
-    public function messages()
-    {
-        return [
-            "first_name.required" => Lang::get("auth.first_name.required"),
-            "last_name.required" => Lang::get("auth.last_name.required"),
-            "email.required" => Lang::get("auth.email.required"),
-            "password.required" => Lang::get("auth.password.required"),
-            "confirmed.required" => Lang::get("auth.confirmed.required"),
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         "first_name.required" => Lang::get("auth.first_name.required"),
+    //         "last_name.required" => Lang::get("auth.last_name.required"),
+    //         "email.required" => Lang::get("auth.email.required"),
+    //         "password.required" => Lang::get("auth.password.required"),
+    //         "confirmed.required" => Lang::get("auth.confirmed.required"),
+    //     ];
+    // }
 
 
     /**

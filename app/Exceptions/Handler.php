@@ -72,7 +72,6 @@ class Handler extends ExceptionHandler
         $subdomain = strtok(preg_replace('#^https?://#', '', rtrim($request->url(), '/')), '.');
         $error = $subdomain == "api";
         if ($error) {
-
             if ($e instanceof NotFoundHttpException || $e instanceof RouteNotFoundException) {
                 return Response::json([
                     'success'   => false,

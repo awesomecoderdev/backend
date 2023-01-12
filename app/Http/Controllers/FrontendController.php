@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateSettingsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
@@ -101,6 +104,79 @@ class FrontendController extends Controller
     public function pricing(Request $request)
     {
         return view("client.pricing");
+    }
+
+    /**
+     * Display a settings page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings(Request $request)
+    {
+        $user = Auth::user();
+        return view("client.settings", compact("user"));
+    }
+
+    /**
+     * Display a settings page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateSettings(UpdateSettingsRequest $request)
+    {
+        abort_if(!Auth::user(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        try {
+            return redirect()->route("client.settings")->with([
+                "success" => __("Settings successfully updated.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("client.settings")->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
+        return $request->all();
+    }
+
+    /**
+     * Display a profile page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile(Request $request)
+    {
+        $user = Auth::user();
+        return view("client.profile", compact("user"));
+    }
+
+    /**
+     * Display a settings page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProfile(UpdateProfileRequest $request)
+    {
+        abort_if(!Auth::user(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
+        try {
+            return redirect()->route("client.profile")->with([
+                "success" => __("Profile successfully updated.")
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route("client.profile")->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
+        return $request->all();
+    }
+
+
+    /**
+     * Display a chat page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chat(Request $request)
+    {
+        return view("client.chat");
     }
 
     /**
