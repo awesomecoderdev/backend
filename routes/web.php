@@ -79,8 +79,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::any('dashboard', [FrontendController::class, "dashboard"])->name("client.dashboard");
     // orders
@@ -96,5 +94,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // settings
     Route::get('settings', [FrontendController::class, "dashboard"])->name('client.settings');
     // others
-    Route::get('support', [FrontendController::class, "dashboard"])->name('client.support');
+    Route::get('chat', [FrontendController::class, "dashboard"])->name('client.chat');
 });
