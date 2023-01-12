@@ -3,185 +3,141 @@
         <title>{{ __('Chat') }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-client>
-        <x-slot name="notifications">
-            {{-- @if ($errors->any())
-                @foreach ($errors->all() as $key => $error)
-                    <x-alert delay="{{ $key }}" end="4" autoclose='true' type="error" title="Error!"
-                        message="{{ $error }}" />
-                @endforeach
-            @endif --}}
-
-            {{-- @if ($errors->any())
-                {!! implode('', $errors->all('<div>:message</div>')) !!}
-            @endif --}}
-        </x-slot>
-
-        <form action="{{ route('users.store') }}" method="post">
-            @csrf
-            <div class="mt-10 sm:mt-0 ">
-                <div class="md:grid md:grid-cols-3 md:gap-6">
-                    <div class="mt-5 md:col-span-6 md:mt-0">
-                        <div class="overflow-hidden sm:rounded-md border border-gray-200 dark:border-slate-800">
-                            <div class="relative p-5">
-                                <div class="grid grid-cols-6 gap-6">
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="first_name"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('First name') }}</label>
-                                        <input type="text" name="first_name" id="first_name"
-                                            autocomplete="given-name" value="{{ old('first_name') }}"
-                                            class="mt-1 block w-full rounded-md @error('first_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        {{-- @error('first_name')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="last_name"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Last name') }}</label>
-                                        <input type="text" name="last_name" id="last_name" autocomplete="family-name"
-                                            value="{{ old('last_name') }}"
-                                            class="mt-1 block w-full rounded-md @error('last_name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
-
-                                        {{-- @error('last_name')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="email"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Email address') }}</label>
-                                        <input type="text" name="email" id="email" autocomplete="email"
-                                            value="{{ old('email') }}" {{-- class="mt-1 block w-full rounded-md border-gray-200 dark:border-slate-800 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 " --}}
-                                            class="mt-1 block w-full rounded-md @error('email') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
-                                        {{-- @error('email')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="country"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Country') }}</label>
-                                        {!! Form::select('country', Arr::pluck(config('country.list'), 'name', 'name'), 'Bangladesh', [
-                                            'class' =>
-                                                ' mt-1 block w-full rounded-md border border-gray-200 dark:border-slate-800 bg-white py-2 px-3 shadow-sm focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm  dark:bg-gray-800 ',
-                                            'id' => 'country',
-                                            'autocomplete' => 'country',
-                                            // 'disabled' => true,
-                                        ]) !!}
-                                        {{-- @error('country')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="password"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Password') }}</label>
-                                        <input type="password" name="password" id="password" autocomplete="password"
-                                            value="{{ old('password') }}"
-                                            class="mt-1 block w-full rounded-md @error('password') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        {{-- @error('password')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="confirmed"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Confirm password') }}</label>
-                                        <input type="password" name="confirmed" id="confirmed" autocomplete="confirmed"
-                                            value="{{ old('confirmed') }}"
-                                            class="mt-1 block w-full rounded-md @error('confirmed') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
-
-                                        {{-- @error('confirmed')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6">
-                                        <label for="street-address"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Street address') }}</label>
-                                        <input type="text" name="street-address" id="street-address"
-                                            autocomplete="street-address"
-                                            class="mt-1 block w-full rounded-md @error('address') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        {{-- @error('address')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                                        <label for="city"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('City') }}</label>
-                                        <input type="text" name="city" id="city"
-                                            autocomplete="address-level2"
-                                            class="mt-1 block w-full rounded-md @error('city') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm">
-
-                                        {{-- @error('city')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                        <label for="region"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('State / Province') }}</label>
-                                        <input type="text" name="region" id="region"
-                                            autocomplete="address-level1"
-                                            class="mt-1 block w-full rounded-md @error('state') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror dark:bg-gray-800  shadow-sm  sm:text-sm">
-                                        {{-- @error('state')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                                        <label for="postal-code"
-                                            class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('ZIP / Postal code') }}</label>
-                                        <input type="text" name="postal-code" id="postal-code"
-                                            autocomplete="postal-code"
-                                            class="mt-1 block w-full rounded-md @error('zip') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
-                                        {{-- @error('zip')
-                                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                                <span class="font-medium">{{ __('Oops!') }} </span>{{ __($message) }}
-                                            </p>
-                                        @enderror --}}
-                                    </div>
+        <div class="min-w-full rounded lg:grid lg:grid-cols-4">
+            <div class="relative border-r border-gray-200 dark:border-slate-800 lg:col-span-1 pr-4">
+                <form method="GET"
+                    action="{{ base(route(Route::currentRouteName(), ['search' => request('search')])) }}"
+                    class="relative flex justify-center items-center pb-4 mb-2 border-b border-gray-200 dark:border-slate-800 ">
+                    <input type="text" name="search" id="search" value="{{ request('search') }}"
+                        placeholder="{{ __('Search') }}..."
+                        class="block lg:w-screen w-auto max-w-sm pr-8 rounded-md focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 dark:bg-gray-800 shadow-sm sm:text-sm">
+                    <button type="submit" class="absolute right-2 mt-0.5 rounded-full ">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                            class="w-5 h-5 pointer-events-none">
+                            <path fill-rule="evenodd"
+                                d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </form>
+                <div class="overflow-auto h-[32rem]">
+                    {{-- <h2 class="my-2 mb-2 ml-2 text-sm text-gray-600 dark:text-slate-200">{{ __('Chats') }}</h2> --}}
+                    <div class="relative">
+                        <a
+                            class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
+                            <img class="object-cover w-10 h-10 rounded-full"
+                                src="https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
+                                alt="username" />
+                            <div class="w-full pb-2">
+                                <div class="flex justify-between">
+                                    <span class="block ml-2 font-semibold text-gray-600">Jhon Don</span>
+                                    <span class="block ml-2 text-sm text-gray-600">25 minutes</span>
                                 </div>
+                                <span class="block ml-2 text-sm text-gray-600">bye</span>
                             </div>
-                            <div class=" bg-gray-50  dark:bg-gray-700/10 px-4 py-3 text-right sm:px-6">
-                                <button type="submit"
-                                    class="inline-flex items-center justify-center rounded-md border border-transparent bg-primary-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-                                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                                </svg> --}}
-                                    <span class="mx-2">
-                                        {{ __('Save') }}
-                                    </span>
-                                </button>
+                        </a>
+                        <a
+                            class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out bg-gray-100 border-b border-gray-300 cursor-pointer focus:outline-none">
+                            <img class="object-cover w-10 h-10 rounded-full"
+                                src="https://cdn.pixabay.com/photo/2016/06/15/15/25/loudspeaker-1459128__340.png"
+                                alt="username" />
+                            <div class="w-full pb-2">
+                                <div class="flex justify-between">
+                                    <span class="block ml-2 font-semibold text-gray-600">Same</span>
+                                    <span class="block ml-2 text-sm text-gray-600">50 minutes</span>
+                                </div>
+                                <span class="block ml-2 text-sm text-gray-600">Good night</span>
                             </div>
-                        </div>
+                        </a>
+                        <a
+                            class="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
+                            <img class="object-cover w-10 h-10 rounded-full"
+                                src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+                                alt="username" />
+                            <div class="w-full pb-2">
+                                <div class="flex justify-between">
+                                    <span class="block ml-2 font-semibold text-gray-600">Emma</span>
+                                    <span class="block ml-2 text-sm text-gray-600">6 hour</span>
+                                </div>
+                                <span class="block ml-2 text-sm text-gray-600">Good Morning</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="hidden lg:col-span-3 lg:block">
+                <div class="w-full">
+                    <div class="relative flex items-center p-3 border-b border-gray-300">
+                        <img class="object-cover w-10 h-10 rounded-full"
+                            src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
+                            alt="username" />
+                        <span class="block ml-2 font-bold text-gray-600">Emma</span>
+                        <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
+                        </span>
+                    </div>
+                    <div class="relative w-full p-6 overflow-y-auto h-auto min-h-[50vh]">
+                        <ul class="space-y-2">
+                            <li class="flex justify-start">
+                                <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
+                                    <span class="block">Hi</span>
+                                </div>
+                            </li>
+                            <li class="flex justify-end">
+                                <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                                    <span class="block">Hiiii</span>
+                                </div>
+                            </li>
+                            <li class="flex justify-end">
+                                <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
+                                    <span class="block">how are you?</span>
+                                </div>
+                            </li>
+                            <li class="flex justify-start">
+                                <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
+                                    <span class="block">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
+                    <div class="flex items-center justify-between w-full p-3 border-t border-gray-300">
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                            </svg>
+                        </button>
 
+                        <input type="text" placeholder="Message"
+                            class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
+                            name="message" required />
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                            </svg>
+                        </button>
+                        <button type="submit">
+                            <svg class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
+                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </x-client>
 
 </x-client-layout>

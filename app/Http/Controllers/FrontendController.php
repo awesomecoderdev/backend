@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Requests\UpdateSettingsRequest;
+use App\Models\Chat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -176,7 +177,9 @@ class FrontendController extends Controller
      */
     public function chat(Request $request)
     {
-        return view("client.chat");
+        $per_page = Cache::get('per_page', 50);
+        $chats = Chat::where('user_id', "=", Auth::user()->id)->paginate($per_page)->onEachSide(1);
+        return view("client.chat", compact("chats"));
     }
 
     /**

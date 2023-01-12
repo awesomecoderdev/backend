@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,6 +27,23 @@ class FrontendController extends Controller
         // Cache::forget("chunk"); // clear chunk
 
         return view("dashboard");
+    }
+
+    /**
+     * Display a inbox page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inbox(Request $request)
+    {
+        // return $request->all();
+        $per_page = Cache::get('per_page', 50);
+        // $chats = Chat::where('user_id', "=", Auth::user()->id)->paginate($per_page)->onEachSide(1);
+        $chats = [];
+        $users = Chat::select('user_id')->distinct()->pluck('user_id');
+        $users = User::select("id", "avatar", "first_name", "last_name", 'created_at')->whereIn('id', $users)->get();
+
+        return view("inbox", compact("chats", "users"));
     }
 
     /**

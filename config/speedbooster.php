@@ -67,6 +67,7 @@ return [
     */
     'excerpt' => [
         'alpine',
+        'admin.alpine',
     ],
 
 
