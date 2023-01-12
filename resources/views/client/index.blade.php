@@ -13,7 +13,7 @@
             <x-container class=" flex flex-col flex-1 px-6 py-12 mx-auto">
                 <div class="flex-1 lg:flex lg:items-center lg:-mx-6">
                     <div class="text-white lg:w-1/2 lg:mx-6">
-                        <h1 class="text-3xl font-semibold capitalize lg:text-4xl">Ultimate design solution</h1>
+                        <h1 class="text-3xl font-semibold capitalize lg:text-4xl">Content plagiarism solution</h1>
 
                         <p class="max-w-xl mt-6">
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem quo
@@ -77,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 lg:w-1/2 lg:mx-6">
+                    <div class="mt-8 lg:w-1/2 lg:mx-6 opacity-0 pointer-events-none lg:block hidden">
                         <div
                             class="w-full px-8 py-10 mx-auto overflow-hidden bg-white shadow-2xl rounded-xl dark:bg-gray-900 lg:max-w-xl">
                             <h1 class="text-2xl font-medium text-gray-700 dark:text-gray-200">Contact form</h1>

@@ -53,9 +53,9 @@
 
         {{-- start::navigation --}}
         <nav x-data="{ open: false }"
-            class="relative z-50 bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
+            class="relative w-full z-50 bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
             <!-- Primary Navigation Menu -->
-            <div class="relative w-full mx-auto px-5 md:px-4">
+            <div class="relative w-full {{ $path == 'client' ?: 'max-w-7xl ' }} mx-auto px-5 md:px-4">
                 <div class="flex justify-between h-16">
                     <a href="{{ config('app.url') }}" class="flex">
                         <!-- Logo -->
