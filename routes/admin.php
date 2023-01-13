@@ -67,7 +67,7 @@ Route::get('settings', [FrontendController::class, "settings"])->name('settings'
 // others
 Route::get('payments', [FrontendController::class, "welcome"])->name('payments');
 Route::get('inbox', [FrontendController::class, "inbox"])->name('inbox');
-Route::get('inbox/{user}', [FrontendController::class, "inbox"])->name('inbox.show');
+Route::get('inbox/{user}', [FrontendController::class, "messages"])->name('inbox.show');
 
 // scripts
 Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('admin.chunk');

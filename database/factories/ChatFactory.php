@@ -16,8 +16,12 @@ class ChatFactory extends Factory
      */
     public function definition()
     {
+        $sender_id = 2;
         return [
-            //
+            'user_id' => fake()->randomElement([$sender_id, fake()->randomElement([3, 5, 6, 7, 8, 9])]),
+            'receiver_id' => fake()->randomElement([$sender_id, fake()->randomElement([3, 5, 6, 7, 8, 9])]),
+            'message' => fake()->text(),
+            'created_at' => fake()->dateTimeBetween('-3 years', 'today')
         ];
     }
 }

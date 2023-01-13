@@ -75,53 +75,79 @@
             </div>
             <div class="relative hidden lg:col-span-3 lg:block">
                 <div class="w-full">
-                    <div class="relative flex items-center p-3 border-b border-gray-300">
-                        <img class="object-cover w-10 h-10 rounded-full"
-                            src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg"
-                            alt="username" />
-                        <span class="block ml-2 font-bold text-gray-600">Emma</span>
-                        <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
-                        </span>
-                    </div>
-                    <div class="relative w-full p-6 overflow-y-auto h-auto min-h-[50vh]">
-                        <ul class="space-y-2">
-                            <li class="flex justify-start">
-                                <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                                    <span class="block">Hi</span>
-                                </div>
-                            </li>
-                            <li class="flex justify-end">
-                                <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                                    <span class="block">Hiiii</span>
-                                </div>
-                            </li>
-                            <li class="flex justify-end">
-                                <div class="relative max-w-xl px-4 py-2 text-gray-700 bg-gray-100 rounded shadow">
-                                    <span class="block">how are you?</span>
-                                </div>
-                            </li>
-                            <li class="flex justify-start">
-                                <div class="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
-                                    <span class="block">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    @if (isset($receiver) && $receiver != null)
+                        <div class="relative flex items-center p-3 border-y border-gray-200 dark:border-slate-800">
+                            <div
+                                class="relative w-10 h-10 rounded-full overflow-hidden border-primary-500 bg-slate-500 dark:bg-slate-700  ">
+                                @if ($receiver->avatar)
+                                    <img loading="lazy" class="h-full object-cover w-auto"
+                                        src="{{ $receiver->avatar }}" alt="{{ $receiver->name() ?? 'Unknown' }}">
+                                @else
+                                    <div class="flex items-center justify-center h-full">
+                                        <h2 class="text-slate-100 font-semibold text-sm ">
+                                            {{ strtoupper(substr($receiver->first_name ?? $receiver->email, 0, 1)) }}
+                                        </h2>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="flex flex-col">
+                                <span
+                                    class="block ml-2 font-bold text-sm text-gray-600 dark:text-white">{{ $receiver->name() ?? 'Unknown' }}</span>
 
-                    <div
-                        class="absolute bottom-0 w-full flex items-center justify-between w-full p-3 border-t border-gray-300">
-                        <input type="text" placeholder="Message"
-                            class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
-                            name="message" required />
-                        <button type="submit">
-                            <svg class="w-5 h-5 text-gray-500 origin-center transform rotate-90"
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                            </svg>
-                        </button>
-                    </div>
+                                <span
+                                    class="{{ $user->status == 'activated' ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : ($user->status == 'pending' ? 'bg-yellow-100 dark:bg-yellow-300 text-yellow-800' : 'bg-red-100 dark:bg-red-300 text-red-800') }}  w-fit ml-2 md:text-center text-start rounded-full px-3 py-1 text-[8px] font-medium">
+                                    {{ __(Str::ucfirst($user->status)) }}
+                                </span>
+                            </div>
+
+                            <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
+                            </span>
+                        </div>
+                        <div class="relative w-full p-6 overflow-y-auto h-auto max-h-[65vh]">
+                            <div class="space-y-4">
+                                @foreach ($chats as $msg)
+                                    <div
+                                        class="relative group cursor-text w-full flex {{ $msg->user_id == Auth::user()->id ? 'justify-end' : 'justify-start' }}">
+                                        <div class="relative flex items-end">
+                                            @if ($msg->user_id == Auth::user()->id)
+                                                <span
+                                                    class="block opacity-50 group-hover:opacity-100 transition-all duration-150 text-xs text-gray-600 dark:text-slate-500 mx-2 py-1">{{ $msg->created_at->diffForHumans() }}</span>
+                                                <div
+                                                    class="relative max-w-xl text-sm px-4 py-2 text-gray-700 dark:text-slate-50 bg-slate-300 dark:bg-slate-800 rounded-lg shadow">
+                                                    <span class="block">{{ $msg->message }}</span>
+                                                </div>
+                                            @else
+                                                <div
+                                                    class="relative max-w-xl text-sm px-4 py-2 text-gray-700 dark:text-slate-50 bg-slate-300 dark:bg-slate-800 rounded-lg shadow">
+                                                    <span class="block">{{ $msg->message }}</span>
+                                                </div>
+                                                <span
+                                                    class="block opacity-50 group-hover:opacity-100 transition-all duration-150 text-xs text-gray-600 dark:text-slate-500 mx-2 py-1">{{ $msg->created_at->diffForHumans() }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div
+                            class="absolute bottom-0 w-full flex items-center justify-between p-3 border-y border-gray-200 dark:border-slate-800">
+                            <input type="text" placeholder="Message"
+                                class="block w-full py-2 pl-4 text-sm mx-3 bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-white placeholder:text-gray-500 dark:placeholder:text-slate-100 rounded-full outline-none focus:text-gray-700"
+                                name="message" required />
+                            <button type="submit">
+                                <svg class="w-8 h-8 text-gray-500 dark:text-slate-100 origin-center transform rotate-90"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path
+                                        d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                                </svg>
+                            </button>
+                        </div>
+                    @else
+                        <div class="flex justify-center items-center">
+                            <h2>Not found </h2>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -41,10 +41,31 @@ class FrontendController extends Controller
         // $chats = Chat::where('user_id', "=", Auth::user()->id)->paginate($per_page)->onEachSide(1);
         $chats = [];
         $users = Chat::select('user_id')->distinct()->pluck('user_id');
-        $users = User::select("id", "avatar", "first_name", "last_name", 'created_at')->whereIn('id', $users)->get();
-
-        return view("inbox", compact("chats", "users"));
+        $users = User::select("id", "avatar", "first_name", "last_name", 'status', 'created_at')->whereIn('id', $users)->where('id', '!=', Auth::user()->id)->get();
+        $receiver = null;
+        return view("inbox", compact("chats", "users", 'receiver'));
     }
+
+
+    /**
+     * Display a messages page of the admin panel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function messages(Request $request)
+    {
+        $per_page = Cache::get('per_page', 50);
+        // $chats = Chat::where('user_id', "=", Auth::user()->id)->paginate($per_page)->onEachSide(1);
+        $chats = [];
+        $users = Chat::select('user_id')->distinct()->pluck('user_id');
+        $users = User::select("id", "avatar", "first_name", "last_name", 'status', 'created_at')->whereIn('id', $users)->where('id', '!=', Auth::user()->id)->get();
+        $receiver = User::select("id", "avatar", "first_name", "last_name", 'status', 'created_at')->where("id", '=', $request->user)->where('id', '!=', Auth::user()->id)->first();
+        if (isset($receiver->id)) {
+            $chats = Chat::where("user_id", "=", $receiver->id)->orWhere("receiver_id", "=", $receiver->id)->paginate($per_page)->onEachSide(1);
+        }
+        return view("inbox", compact("chats", "users", 'receiver'));
+    }
+
 
     /**
      * Display a index page of the admin panel.
