@@ -58,7 +58,6 @@ class InvoiceController extends Controller
 
         $invoice->load(["order", "user"]);
         $invoice->order->load("user");
-        $invoice->user = $invoice->order->user;
 
         $fileName = "{$invoice->id}.pdf";
         $pdf = new Mpdf([
@@ -90,7 +89,6 @@ class InvoiceController extends Controller
 
         $invoice->load(["order", "user"]);
         $invoice->order->load("user");
-        $invoice->user = $invoice->order->user;
 
         $fileName = "{$invoice->id}.pdf";
         $pdf = new Mpdf([

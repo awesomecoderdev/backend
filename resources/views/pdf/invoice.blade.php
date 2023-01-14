@@ -415,11 +415,13 @@
             <div id="invoice-mid">
                 <div id="message">
                     <h2>Hello, {{ $invoice->user->name() ?? __('there') }}</h2>
-                    <p>An invoice with invoice number #<span id="invoice_num">{{ $invoice->id }}</span> is created for
-                        <span id="supplier_name">TESI S.P.A.</span> which is 100% matched with PO and is waiting for
-                        your
-                        approval. <a href="javascript:void(0);">Click here</a> to login to view the invoice.
+                    <p>An invoice with invoice number #<span id="invoice_num">{{ $invoice->id }}</span>
+                        <a href="javascript:void(0);">Click here</a> to login to view the
+                        invoice.
                     </p>
+                    <pre>
+                        {{ json_encode($invoice, JSON_PRETTY_PRINT) }}
+                    </pre>
                 </div>
                 <div class="cta-group mobile-btn-group">
                     <a href="javascript:void(0);" class="btn-primary">Approve</a>
