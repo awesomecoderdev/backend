@@ -113,7 +113,7 @@
 
                             <p
                                 class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
-                                {{ $user->name() }}
+                                {{ $user->name() ?? $user->email }}
                             </p>
                         </div>
 
@@ -188,7 +188,7 @@
                         </div>
 
                         <span
-                            class=" text-xs md:text-center text-start lg:block md:hidden block md:w-auto md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
+                            class="relative text-xs md:text-center text-start lg:block md:hidden block md:w-20 md:m-3 md:p-0 p-1.5 font-semibold text-slate-500/80 dark:text-slate-300 ">
                             {{ $user->created_at->diffForHumans([
                                 // 'parts' => 2,
                                 // 'parts' => 3,
