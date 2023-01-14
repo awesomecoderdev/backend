@@ -414,7 +414,7 @@
 
             <div id="invoice-mid">
                 <div id="message">
-                    <h2>Hello, {{ $invoice->user->name() ?? __('there') }}</h2>
+                    <h2>Hello, {{ $invoice->user ? $invoice->user->name() : __('there') }}</h2>
                     <p>An invoice with invoice number #<span id="invoice_num">{{ $invoice->id }}</span>
                         <a href="javascript:void(0);">Click here</a> to login to view the
                         invoice.

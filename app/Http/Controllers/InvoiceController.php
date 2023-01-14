@@ -58,7 +58,6 @@ class InvoiceController extends Controller
 
         $invoice->load(["order", "user"]);
         $invoice->order->load("user");
-
         $fileName = "{$invoice->id}.pdf";
         $pdf = new Mpdf([
             'mode' => 'utf-8',
@@ -70,7 +69,7 @@ class InvoiceController extends Controller
             'margin_header' => 0,
             'margin_footer' => 0,
         ]);
-        $html = View::make('pdf.invoice', compact('invoice'));
+        // $html = View::make('pdf.invoice', compact('invoice'));
         $html = View::make('pdf.invoice', compact('invoice'));
         $html = $html->render();
         $pdf->WriteHTML($html);
