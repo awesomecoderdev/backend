@@ -102,6 +102,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return ($this->isSupperAdmin != null && $this->isSupperAdmin == 1) ? true : false;
     }
 
+
     /**
      * Get the entity's notifications.
      *
@@ -133,6 +134,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Order::class)->orderBy('created_at', 'desc');
     }
 
+    /**
+     * Return the user full name.
+     *
+     * @return string
+     */
+    public function chats()
+    {
+        return $this->hasOne(Chat::class)->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+    }
 
     /**
      * Display the specified resource.
