@@ -53,7 +53,7 @@
                                     </div>
                                     <span
                                         class="block ml-2 text-xs text-gray-600 dark:text-slate-500 absolute bottom-0 right-0 p-2">{{ Str::limit(
-                                            $user->created_at->diffForHumans([
+                                            $user->chats->created_at->diffForHumans([
                                                 // 'parts' => 2,
                                                 // 'parts' => 3,
                                                 // 'join' => ', ',
@@ -94,13 +94,11 @@
                             <div class="flex flex-col">
                                 <span
                                     class="block ml-2 font-bold text-sm text-gray-600 dark:text-white">{{ $receiver->name() ?? 'Unknown' }}</span>
-
                                 <span
                                     class="{{ $receiver->status == 'activated' ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : ($receiver->status == 'pending' ? 'bg-yellow-100 dark:bg-yellow-300 text-yellow-800' : 'bg-red-100 dark:bg-red-300 text-red-800') }}  w-fit ml-2 md:text-center text-start rounded-full px-2 py-0.5 text-[8px] font-medium">
                                     {{ __(Str::ucfirst($receiver->status)) }}
                                 </span>
                             </div>
-
                             <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
                             </span>
                         </div>
