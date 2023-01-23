@@ -19,6 +19,10 @@
     <link rel="preload"
         href="{{ base(route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))])) }}"
         as="script" type="text/javascript" />
+    <script>
+        const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)") && window.matchMedia(
+            "(prefers-color-scheme:dark)").matches ? true : false;
+    </script>
     {{-- <link rel="preload" href="{{ route('alpine', ['time' => time()]) }}" as="script" type="text/javascript" /> --}}
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
@@ -30,6 +34,10 @@
     <!-- Node.js -->
     {{-- @viteReactRefresh --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- stripe --}}
+    <script src="https://js.stripe.com/v3/"></script>
+
 </head>
 
 <body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">
@@ -316,6 +324,9 @@
     <script defer src="{{ base(route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))])) }}">
     </script>
     {{-- <script defer src="{{ secure_asset('js/jquery.min.js') }}"></script> --}}
+    <script>
+        // console.clear();
+    </script>
 
 </body>
 

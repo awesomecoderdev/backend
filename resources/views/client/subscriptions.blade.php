@@ -1,3 +1,6 @@
+@php
+    $key = time();
+@endphp
 <x-client-layout>
     @section('head')
         <title>{{ __('Subscriptions') }} {{ config('settings.separator') }}
@@ -5,14 +8,14 @@
     @endsection
     <x-client>
         <div class="relative">
-            <form action="" method="post">
+            <form action="{{ route('client.subscriptions.payment') }}" id="checkout" method="post">
                 @csrf
                 <ul class="grid w-full gap-6 md:grid-cols-3">
-                    <li>
-                        <input type="radio" id="free" name="plan" value="plan" class="hidden peer">
+                    <li x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                        <input type="radio" id="free" name="plan" @checked(true) value="free"
+                            class="hidden peer">
                         <label for="free"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-
+                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
                             <div class="relative">
                                 <div class="p-3">
                                     <h1
@@ -34,15 +37,27 @@
                                         Monthly payment
                                     </p>
 
-                                    <button
-                                        class="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80">
-                                        Start Now
-                                    </button>
+                                    <span @click="open = !open"
+                                        class="w-full block text-center px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80">
+                                        {{ __('Choose Plan') }}
+                                    </span>
                                 </div>
 
-                                <hr class="border-gray-200 dark:border-gray-700">
+                                <hr class="border-gray-200 dark:border-gray-700" style="display: none;" x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
 
-                                <div class="p-3">
+                                <div class="p-3 " style="display: none;" x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
                                     <h1 class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
                                         What’s included:</h1>
 
@@ -118,11 +133,12 @@
                             </div>
                         </label>
                     </li>
-                    <li>
+                    <li x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+
                         <input type="radio" id="essential" name="plan" value="price_1MTSfvIX4CRni5u3wdGvV2c2"
                             class="hidden peer">
                         <label for="essential"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
 
                             <div class="relative">
                                 <div class="p-3">
@@ -145,16 +161,30 @@
                                         Monthly payment
                                     </p>
 
-                                    <button
-                                        class="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80">
-                                        Start Now
-                                    </button>
+
+                                    <span @click="open = !open"
+                                        class="w-full block text-center px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80">
+                                        {{ __('Choose Plan') }}
+                                    </span>
                                 </div>
 
-                                <hr class="border-gray-200 dark:border-gray-700">
+                                <hr class="border-gray-200 dark:border-gray-700" style="display: none;"
+                                    x-show="open" x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
 
-                                <div class="p-3">
-                                    <h1 class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
+                                <div class="p-3 " style="display: none;" x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
+                                    <h1
+                                        class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
                                         What’s included:</h1>
 
                                     <div class="mt-8 space-y-4">
@@ -231,14 +261,14 @@
                             </div>
                         </label>
                     </li>
-                    <li>
+                    <li x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
                         <input type="radio" id="premium" name="plan" value="price_1MTSfvIX4CRni5u37Kpj3wLK"
                             class="hidden peer">
                         <label for="premium"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
 
                             <div class="relative">
-                                <div class="p-3">
+                                <div class="p-3 hi">
                                     <h1
                                         class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                                         <h1
@@ -260,15 +290,27 @@
                                         Monthly payment
                                     </p>
 
-                                    <button
-                                        class="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80">
-                                        Start Now
-                                    </button>
+                                    <span @click="open = !open"
+                                        class="w-full block text-center px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80">
+                                        {{ __('Choose Plan') }}
+                                    </span>
                                 </div>
 
-                                <hr class="border-gray-200 dark:border-gray-700">
+                                <hr class="border-gray-200 dark:border-gray-700" style="display: none;"
+                                    x-show="open" x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
 
-                                <div class="p-3">
+                                <div class="p-3 " style="display: none;" x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
                                     <h1
                                         class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
                                         What’s included:</h1>
@@ -349,12 +391,100 @@
                     </li>
                 </ul>
 
+                <div class="relative my-2 p-2 text-gray-900 dark:text-white">
+                    <label for="card" class="contents text-base font-medium py-2">
+                        {{ __('Credit or debit card') }}
+                    </label>
+                    <div id="card"
+                        class="max-w-xs bg-white dark:bg-slate-800 border text-red p-3 mt-1 block w-full rounded-md focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 shadow-sm sm:text-sm">
+                        <!-- A Stripe Element will be inserted here. -->
+                    </div>
+
+                    <!-- Used to display Element errors. -->
+                    <div role="alert">
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                            <span id="card-errors" class="font-medium">
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+
                 <div class="relative">
                     <button type="submit"
+                        class="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80"
                         data-secret="{{ $intent->client_secret }}">{{ __('Subscribe Now') }}</button>
                 </div>
             </form>
         </div>
+        <script>
+            let stripe{{ $key }} = Stripe("{{ config('cashier.key') }}");
+            let elements{{ $key }} = stripe{{ $key }}.elements();
+            console.log('darkMode', isDarkMode);
+
+            // Create an instance of the card Element.
+            let card{{ $key }} = elements{{ $key }}.create('card', {
+                style: {
+                    base: {
+                        iconColor: isDarkMode ? '#fff' : "#1e293b",
+                        color: isDarkMode ? '#fff' : "#1e293b",
+                        fontWeight: '500',
+                        fontFamily: '"Poppins",Roboto, Open Sans, Segoe UI, sans-serif',
+                        fontSize: '14px',
+                        fontSmoothing: 'antialiased',
+                        ':-webkit-autofill': {
+                            color: isDarkMode ? '#fff' : "#fce883",
+                        },
+                        '::placeholder': {
+                            color: isDarkMode ? '#fff' : "#1e293b",
+                        },
+                    },
+                    invalid: {
+                        // iconColor: '#FFC7EE',
+                        // color: '#FFC7EE',
+                    },
+                },
+            });
+            // Add an instance of the card Element into the `card` <div>.
+            card{{ $key }}.mount('#card');
+
+            // Create a token or display an error when the form is submitted.
+            let form{{ $key }} = document.getElementById('checkout');
+            form{{ $key }}
+                .addEventListener('submit', async (event) => {
+                    event.preventDefault();
+
+                    let {
+                        token,
+                        error
+                    } = await stripe{{ $key }}.createToken(card{{ $key }});
+
+                    if (error) {
+                        // Inform the customer that there was an error.
+                        let errorElement{{ $key }} = document.getElementById('card-errors');
+                        let notifications{{ $key }} = document.getElementById('notifications');
+                        errorElement{{ $key }}.innerText = `{{ __('Oops!') }} ${error.message}`;
+                        notifications{{ $key }}.innerHTML =
+                            `<x-alert delay="4" end="4" autoclose='true' type="error" title="Error!" message="${error.message}" />`;
+                    } else {
+                        // Send the token to your server.
+                        stripe{{ $key }}TokenHandler(token);
+                    }
+                });
+
+            let stripe{{ $key }}TokenHandler = (token) => {
+                // Insert the token ID into the form so it gets submitted to the server
+                let form{{ $key }} = document.getElementById('checkout');
+                let hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', token.id);
+                form{{ $key }}.appendChild(hiddenInput);
+
+                // Submit the form
+                form{{ $key }}.submit();
+            }
+        </script>
     </x-client>
 
 </x-client-layout>
