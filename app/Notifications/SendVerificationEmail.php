@@ -48,7 +48,7 @@ class SendVerificationEmail extends Notification // implements ShouldQueue
 
         return (new MailMessage)
             ->subject("WP Plagiarism Email Verification")
-            ->greeting("{$notifiable->name()}, please verify your email address Thanks for starting the new WP Plagiarism account creation process. Let's begin with WP Plagiarism AI.")
+            ->greeting("{$notifiable->fullname()}, please verify your email address Thanks for starting the new WP Plagiarism account creation process. Let's begin with WP Plagiarism AI.")
             ->view("emails.auth.verify", ["user" => $notifiable, "url" => $url]);
     }
 

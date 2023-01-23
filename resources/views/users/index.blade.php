@@ -113,7 +113,7 @@
 
                             <p
                                 class="text-xs md:truncate pl-3  w-auto font-semibold text-slate-500/80 dark:text-slate-50">
-                                {{ $user->name() ?? $user->email }}
+                                {{ $user->fullname() ?? $user->email }}
                             </p>
                         </div>
 

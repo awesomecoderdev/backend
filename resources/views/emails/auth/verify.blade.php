@@ -240,7 +240,7 @@
 
                                                         <h2
                                                             style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">
-                                                            Hey {{ $user->name() }},</h2>
+                                                            Hey {{ $user->fullname() }},</h2>
                                                         <p>Wowwee! Thanks for registering an account with Discord!
                                                             You're the coolest person in all the land (and I've met a
                                                             lot of really cool people).</p>

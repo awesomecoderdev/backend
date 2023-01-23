@@ -385,7 +385,7 @@
                             <label for="card-holder-name"
                                 class="block text-sm mb-1.5 font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
                             <input type="text" name="card-holder-name" id="card-holder-name"
-                                autocomplete="address" placeholder="{{ __('Cardholder\'s name') }}"
+                                placeholder="{{ __('Cardholder\'s name') }}"
                                 class="my-1 p-2 block w-full rounded-md @error('card-holder-name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
                         </div>
 
@@ -473,18 +473,19 @@
                     } else {
                         // The card has been verified successfully...
                         errorElement{{ $key }}.innerText = ``;
-                        console.log('setupIntent', setupIntent)
+                        console.log('setupIntent', setupIntent);
+                        stripe{{ $key }}TokenHandler(setupIntent);
                     }
                 });
 
 
-            let stripe{{ $key }}TokenHandler = (token) => {
+            let stripe{{ $key }}TokenHandler = (setupIntent) => {
                 // Insert the token ID into the form so it gets submitted to the server
                 let form{{ $key }} = document.getElementById('checkout');
                 let hiddenInput = document.createElement('input');
                 hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'stripeToken');
-                hiddenInput.setAttribute('value', token.id);
+                hiddenInput.setAttribute('name', 'paymentMethod');
+                hiddenInput.setAttribute('value', setupIntent.payment_method);
                 form{{ $key }}.appendChild(hiddenInput);
 
                 // Submit the form

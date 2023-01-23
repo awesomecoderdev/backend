@@ -27,6 +27,23 @@ class SubscriptionsController extends Controller
      */
     public function payment(Request $request)
     {
+        try {
+            Auth::user()->newSubscription(
+                'Plagiarism',
+                $request->plan,
+            )->create($request->paymentMethod);
+
+            return redirect()->route("client.subscriptions")->with([
+                "success" => __("Plan successfully created.")
+            ]);
+        } catch (\Exception $e) {
+            dd($e);
+            return redirect()->route("client.subscriptions")->withErrors([
+                "warning" => $e->getMessage(),
+            ]);
+        }
+
+
         dd($request->all());
         return view("client.subscriptions");
     }

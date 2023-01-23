@@ -20,9 +20,9 @@ class WebsiteFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'user_id' => rand(1, 399),
-            'title' => fake()->name(),
-            'url' => "https://" . Str::slug(fake()->name()) . fake()->randomElement(['.com', '.org', '.net']),
-            'rest' => "https://" . Str::slug(fake()->name()) . fake()->randomElement(['.com', '.org', '.net']),
+            'title' => fake()->fullname(),
+            'url' => "https://" . Str::slug(fake()->fullname()) . fake()->randomElement(['.com', '.org', '.net']),
+            'rest' => "https://" . Str::slug(fake()->fullname()) . fake()->randomElement(['.com', '.org', '.net']),
             'status' => fake()->randomElement(['approved', 'pending', 'blocked']),
         ];
     }

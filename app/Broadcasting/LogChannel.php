@@ -35,7 +35,7 @@ class LogChannel
             return;
         }
 
-        Log::info("Send notification to {$notifiable->name()}[$notifiable->id] " . json_encode($data));
+        Log::info("Send notification to {$notifiable->fullname()}[$notifiable->id] " . json_encode($data));
 
         return true;
     }

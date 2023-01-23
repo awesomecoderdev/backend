@@ -32,7 +32,7 @@
                                             class="relative w-8 h-8 rounded-full overflow-hidden border-primary-500 bg-slate-500 dark:bg-slate-700  ">
                                             @if ($user->avatar)
                                                 <img loading="lazy" class="h-full w-auto" src="{{ $user->avatar }}"
-                                                    alt="{{ $user->name() ?? 'Unknown' }}">
+                                                    alt="{{ $user->fullname() ?? 'Unknown' }}">
                                             @else
                                                 <div class="flex items-center justify-center h-full">
                                                     <h2 class="text-slate-100 font-semibold text-sm ">
@@ -46,7 +46,7 @@
                                     <div class="w-full pb-2">
                                         <div class="flex justify-between">
                                             <span
-                                                class="block ml-2 font-semibold text-gray-600 dark:text-slate-100">{{ Str::limit($user->name() ?? 'Unknown', 18) }}</span>
+                                                class="block ml-2 font-semibold text-gray-600 dark:text-slate-100">{{ Str::limit($user->fullname() ?? 'Unknown', 18) }}</span>
                                         </div>
                                         <span
                                             class="block ml-2 text-sm text-gray-600 dark:text-slate-50">{{ Str::limit($user->chats->message, 18) }}</span>
@@ -82,7 +82,7 @@
                                 class="relative w-10 h-10 rounded-full overflow-hidden border-primary-500 bg-slate-500 dark:bg-slate-700  ">
                                 @if ($receiver->avatar)
                                     <img loading="lazy" class="h-full object-cover w-auto"
-                                        src="{{ $receiver->avatar }}" alt="{{ $receiver->name() ?? 'Unknown' }}">
+                                        src="{{ $receiver->avatar }}" alt="{{ $receiver->fullname() ?? 'Unknown' }}">
                                 @else
                                     <div class="flex items-center justify-center h-full">
                                         <h2 class="text-slate-100 font-semibold text-sm ">
@@ -93,7 +93,7 @@
                             </div>
                             <div class="flex flex-col">
                                 <a href="{{ route('users.show', $receiver) }}"
-                                    class="block ml-2 font-bold text-sm text-gray-600 dark:text-white">{{ $receiver->name() ?? 'Unknown' }}</a>
+                                    class="block ml-2 font-bold text-sm text-gray-600 dark:text-white">{{ $receiver->fullname() ?? 'Unknown' }}</a>
                                 <span
                                     class="{{ $receiver->status == 'activated' ? 'bg-green-100 dark:bg-emerald-300 text-green-800' : ($receiver->status == 'pending' ? 'bg-yellow-100 dark:bg-yellow-300 text-yellow-800' : 'bg-red-100 dark:bg-red-300 text-red-800') }}  w-fit ml-2 md:text-center text-start rounded-full px-2 py-0.5 text-[8px] font-medium">
                                     {{ __(Str::ucfirst($receiver->status)) }}

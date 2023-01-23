@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return string
      */
-    public function name()
+    public function fullname(): string
     {
         return $this->first_name != null ? "$this->first_name $this->last_name" : null;
     }

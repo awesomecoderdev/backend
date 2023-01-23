@@ -28,7 +28,7 @@
                             <div
                                 class="relative h-12 w-12 flex justify-center items-center rounded-full overflow-hidden border-primary-500 bg-slate-500 dark:bg-slate-700  ">
                                 @if ($user->avatar)
-                                    <img loading="lazy" src="{{ $user->avatar }}" alt="{{ $user->name() }}">
+                                    <img loading="lazy" src="{{ $user->avatar }}" alt="{{ $user->fullname() }}">
                                 @else
                                     <h2 class="text-slate-100 font-semibold text-sm ">
                                         {{ strtoupper(substr($user->first_name ?? $user->email, 0, 1)) }}

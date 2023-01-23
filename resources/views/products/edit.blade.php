@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('head')
-        <title>{{ __($user->name()) }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
+        <title>{{ __($user->fullname()) }} {{ config('settings.separator') }} {{ __(config('settings.title')) }}</title>
     @endsection
     <x-content>
         {{-- @if ($errors->any())

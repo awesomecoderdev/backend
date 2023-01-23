@@ -70,7 +70,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="flex items-center text-sm font-medium text-gray-500 dark:text-gray-200 hover:dark:text-white hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 ">
-                                    <div>{{ Auth::user()->name() }}</div>
+                                    <div>{{ Auth::user()->fullname() }}</div>
 
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,8 @@
                     <div
                         class="relative w-[85vw] h-screen bg-white dark:bg-slate-800 border-rr border-gray-100 dark:border-slate-700">
                         <div class="px-4 border-b py-3 border-gray-100 dark:border-slate-700 ">
-                            <div class="font-medium text-base text-gray-800 dark:text-white">{{ Auth::user()->name() }}
+                            <div class="font-medium text-base text-gray-800 dark:text-white">
+                                {{ Auth::user()->fullname() }}
                             </div>
                             <div class="font-medium text-sm text-gray-500 dark:text-gray-200">
                                 {{ Str::limit(Auth::user()->email, 22) }}

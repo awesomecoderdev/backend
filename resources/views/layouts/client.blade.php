@@ -118,7 +118,7 @@
                                                     class="relative  w-9 h-9 rounded-full overflow-hidden border-primary-500 bg-slate-500 dark:bg-slate-700  ">
                                                     @if (Auth::user()->avatar)
                                                         <img loading="lazy" src="{{ Auth::user()->avatar }}"
-                                                            alt="{{ Auth::user()->name() }}">
+                                                            alt="{{ Auth::user()->fullname() }}">
                                                     @else
                                                         <h2 class="text-slate-100 font-semibold text-sm ">
                                                             {{ strtoupper(substr(Auth::user()->first_name ?? Auth::user()->email, 0, 1)) }}
