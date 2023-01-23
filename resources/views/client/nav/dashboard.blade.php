@@ -63,6 +63,20 @@
         </div>
     </a>
 
+
+
+    <a href="{{ base(route('client.subscriptions')) }}"
+        class="{{ $current == 'subscriptions' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
+        <div class="flex flex-row items-center text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" aria-hidden="true" class="h-5 w-5 pointer-events-none mx-3">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M14.25 7.756a4.5 4.5 0 100 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+            </svg>
+            {{ __('Subscriptions') }}
+        </div>
+    </a>
     <a href="{{ base(route('client.profile')) }}"
         class="{{ $current == 'profile' ? 'border-primary-500 bg-gray-100 dark:bg-slate-700  dark:text-white hover:bg-gray-100 dark:hover:bg-slate-700 ' : ' dark:text-slate-300  border-transparent hover:bg-gray-100 dark:hover:bg-gray-800' }}  px-2 py-3 hover:border-primary-500  flex cursor-pointer flex-row items-center  border-r-2  ">
         <div class="flex flex-row items-center text-sm font-medium"><svg xmlns="http://www.w3.org/2000/svg"

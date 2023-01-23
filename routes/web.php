@@ -22,6 +22,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\InvoiceController as ClientInvoiceController;
+use App\Http\Controllers\SubscriptionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +96,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // settings
     Route::get('settings', [FrontendController::class, "settings"])->name('client.settings');
     Route::post('settings', [FrontendController::class, "updateSettings"])->name('client.settings.update');
+    // subscriptions
+    Route::get('subscriptions', [SubscriptionsController::class, "subscriptions"])->name('client.subscriptions');
+    Route::post('subscriptions', [SubscriptionsController::class, "payment"])->name('client.subscriptions.payment');
     // profile
     Route::get('profile', [FrontendController::class, "profile"])->name('client.profile');
     Route::post('profile', [FrontendController::class, "updateProfile"])->name('client.profile.update');
