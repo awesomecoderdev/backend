@@ -380,34 +380,32 @@
                 <div class="grid w-full gap-6 md:grid-cols-3">
                     <div class="col-span-2 relative p-5">
                     </div>
-                    <div class="relative my-2 p-1 text-gray-900 dark:text-white">
-                        <div class="relative">
+                    <div class="relative my-5 p-1 text-gray-900 dark:text-white">
+                        <div class="relative py-2">
                             <label for="card-holder-name"
-                                class="block text-sm font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
+                                class="block text-sm mb-1.5 font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
                             <input type="text" name="card-holder-name" id="card-holder-name"
                                 autocomplete="address" placeholder="{{ __('Cardholder\'s name') }}"
                                 class="my-1 p-2 block w-full rounded-md @error('card-holder-name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
                         </div>
 
-                        <label for="card" class="contents text-base font-medium py-2">
-                            {{ __('Credit or debit card') }}
-                        </label>
-                        <div id="card"
-                            class=" bg-white dark:bg-slate-800 border text-red p-2.5 mt-2 block w-full rounded-md focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 shadow-sm sm:text-sm">
-                            <!-- A Stripe Element will be inserted here. -->
-                        </div>
-                        <!-- Used to display Element errors. -->
-                        <div role="alert">
+                        <div class="relative  py-2">
+                            <label for="card" class="block text-sm font-medium text-gray-700 dark:text-white">
+                                {{ __('Credit or debit card') }}
+                            </label>
+                            <div id="card"
+                                class=" bg-white dark:bg-slate-800 border text-red p-2.5 mt-2 block w-full rounded-md focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 shadow-sm sm:text-sm">
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
                             <p class="mt-2 text-sm text-red-600 dark:text-red-500">
                                 <span id="card-errors" class="font-medium">
                                 </span>
                             </p>
+
                         </div>
-
-
-                        <div class="relative">
+                        <div class="relative  py-2">
                             <button type="submit" id="checkoutBtn"
-                                class="w-full px-4 py-2 mt-6 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80"
+                                class="w-full px-4 py-2 mt-2 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80"
                                 data-secret="{{ $intent->client_secret }}">{{ __('Subscribe Now') }}</button>
                         </div>
 
@@ -421,7 +419,7 @@
             let elements{{ $key }} = stripe{{ $key }}.elements();
             var cardHolderName = document.getElementById('card-holder-name');
             var clientSecret = document.getElementById('checkoutBtn').dataset.secret;
-            console.log('darkMode', isDarkMode);
+            let errorElement{{ $key }} = document.getElementById('card-errors');
 
             // Create an instance of the card Element.
             let card{{ $key }} = elements{{ $key }}.create('card', {
@@ -471,11 +469,11 @@
 
                     if (error) {
                         // Inform the customer that there was an error.
-                        let errorElement{{ $key }} = document.getElementById('card-errors');
-                        let notifications{{ $key }} = document.getElementById('notifications');
                         errorElement{{ $key }}.innerText = `{{ __('Oops!') }} ${error.message}`;
                     } else {
                         // The card has been verified successfully...
+                        errorElement{{ $key }}.innerText = ``;
+                        console.log('setupIntent', setupIntent)
                     }
                 });
 
