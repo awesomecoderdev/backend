@@ -29,7 +29,7 @@
 
 <div
     class="relative bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 flex mx-auto justify-between w-full h-fit z-0">
-    <div
+    <div {{-- class="md:block hidden relative overflow-x-hidden w-72 h-[calc(100vh-64px)] border-r border-gray-100 dark:border-slate-800"> --}}
         class="md:block hidden relative overflow-x-hidden w-72 h-auto max-h-[90vh] border-r border-gray-100 dark:border-slate-800">
         {{-- fixed w-60  --}}
         <div class=" md:min-h-[90vh] md:max-h-[90vh] h-auto overflow-x-hidden overflow-y-scroll">

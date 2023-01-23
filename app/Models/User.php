@@ -12,6 +12,7 @@ use App\Notifications\ResendVerificationEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -142,6 +143,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function chats()
     {
         return $this->hasOne(Chat::class)->orderBy('created_at', 'desc')->orderBy('id', 'desc');
+        // return $this->hasOne(Chat::class)->where("receiver_id", "=", Auth::user()->id)->orderBy('created_at', 'desc')->orderBy('id', 'desc');
     }
 
     /**
