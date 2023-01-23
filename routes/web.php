@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\SendMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
@@ -99,4 +100,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('profile', [FrontendController::class, "updateProfile"])->name('client.profile.update');
     // chat
     Route::get('chat', [FrontendController::class, "chat"])->name('client.chat');
+});
+
+Route::any("event", function () {
+    event(new SendMessage(fake()->text()));
 });

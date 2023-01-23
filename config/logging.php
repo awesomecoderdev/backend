@@ -135,6 +135,12 @@ return [
             'path' => storage_path('logs/user.log'),
             'level' => 'info',
         ],
+
+        'chat' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/chat.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];
