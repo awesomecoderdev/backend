@@ -404,122 +404,127 @@
                         </label>
                     </div>
                 </div>
-
-                <div class="grid w-full gap-6 lg:grid-cols-3">
-                    <div class="lg:col-span-2 relative">
-                    </div>
-                    <div class="relative lg:my-5 p-1 text-gray-900 dark:text-white">
-                        <div class="relative py-2">
-                            <label for="card-holder-name"
-                                class="block text-sm mb-1.5 font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
-                            <input type="text" name="card-holder-name" id="card-holder-name"
-                                placeholder="{{ __('Cardholder\'s name') }}"
-                                value="{{ old('card-holder-name') ?? Auth::user()->fullname() }}"
-                                class="my-1 p-2 block w-full rounded-md @error('card-holder-name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
+                @can('notSubscribedUser')
+                    <div class="grid w-full gap-6 lg:grid-cols-3">
+                        <div class="lg:col-span-2 relative">
                         </div>
-
-                        <div class="relative  py-2">
-                            <label for="card" class="block text-sm font-medium text-gray-700 dark:text-white">
-                                {{ __('Credit or debit card') }}
-                            </label>
-                            <div id="card"
-                                class=" bg-white dark:bg-slate-800 border text-red p-2.5 mt-2 block w-full rounded-md focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 shadow-sm sm:text-sm">
-                                <!-- A Stripe Element will be inserted here. -->
+                        <div class="relative lg:my-5 p-1 text-gray-900 dark:text-white">
+                            <div class="relative py-2">
+                                <label for="card-holder-name"
+                                    class="block text-sm mb-1.5 font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
+                                <input type="text" name="card-holder-name" id="card-holder-name"
+                                    placeholder="{{ __('Cardholder\'s name') }}"
+                                    value="{{ old('card-holder-name') ?? Auth::user()->fullname() }}"
+                                    class="my-1 p-2 block w-full rounded-md @error('card-holder-name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
                             </div>
-                            <p class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                <span id="card-errors" class="font-medium">
-                                </span>
-                            </p>
+
+                            <div class="relative  py-2">
+                                <label for="card" class="block text-sm font-medium text-gray-700 dark:text-white">
+                                    {{ __('Credit or debit card') }}
+                                </label>
+                                <div id="card"
+                                    class=" bg-white dark:bg-slate-800 border text-red p-2.5 mt-2 block w-full rounded-md focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 shadow-sm sm:text-sm">
+                                    <!-- A Stripe Element will be inserted here. -->
+                                </div>
+                                <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                    <span id="card-errors" class="font-medium">
+                                    </span>
+                                </p>
+
+                            </div>
+                            <div class="relative  py-2">
+                                <button type="submit" id="checkoutBtn"
+                                    class="w-full px-4 py-2 mt-2 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80"
+                                    data-secret="{{ $intent->client_secret }}">{{ __('Subscribe Now') }}</button>
+                            </div>
 
                         </div>
-                        <div class="relative  py-2">
-                            <button type="submit" id="checkoutBtn"
-                                class="w-full px-4 py-2 mt-2 tracking-wide text-white capitalize transition-colors duration-300 transform bg-primary-600 rounded-md hover:bg-primary-500 focus:outline-none focus:bg-primary-500 focus:ring focus:ring-primary-300 focus:ring-opacity-80"
-                                data-secret="{{ $intent->client_secret }}">{{ __('Subscribe Now') }}</button>
-                        </div>
-
                     </div>
-                </div>
+                @endcan
+
             </form>
         </div>
-        <script>
-            var stripe{{ $key }} = Stripe("{{ config('cashier.key') }}");
-            var elements{{ $key }} = stripe{{ $key }}.elements();
-            var cardHolderName = document.getElementById('card-holder-name');
-            var clientSecret = document.getElementById('checkoutBtn').dataset.secret;
-            var errorElement{{ $key }} = document.getElementById('card-errors');
+        @can('notSubscribedUser')
+            <script>
+                var stripe{{ $key }} = Stripe("{{ config('cashier.key') }}");
+                var elements{{ $key }} = stripe{{ $key }}.elements();
+                var cardHolderName = document.getElementById('card-holder-name');
+                var clientSecret = document.getElementById('checkoutBtn').dataset.secret;
+                var errorElement{{ $key }} = document.getElementById('card-errors');
 
-            // Create an instance of the card Element.
-            var card{{ $key }} = elements{{ $key }}.create('card', {
-                style: {
-                    base: {
-                        iconColor: isDarkMode ? '#fff' : "#1e293b",
-                        color: isDarkMode ? '#fff' : "#1e293b",
-                        fontWeight: '500',
-                        fontFamily: '"Poppins",Roboto, Open Sans, Segoe UI, sans-serif',
-                        fontSize: '14px',
-                        fontSmoothing: 'antialiased',
-                        ':-webkit-autofill': {
-                            color: isDarkMode ? '#fff' : "#fce883",
-                        },
-                        '::placeholder': {
+                // Create an instance of the card Element.
+                var card{{ $key }} = elements{{ $key }}.create('card', {
+                    style: {
+                        base: {
+                            iconColor: isDarkMode ? '#fff' : "#1e293b",
                             color: isDarkMode ? '#fff' : "#1e293b",
+                            fontWeight: '500',
+                            fontFamily: '"Poppins",Roboto, Open Sans, Segoe UI, sans-serif',
+                            fontSize: '14px',
+                            fontSmoothing: 'antialiased',
+                            ':-webkit-autofill': {
+                                color: isDarkMode ? '#fff' : "#fce883",
+                            },
+                            '::placeholder': {
+                                color: isDarkMode ? '#fff' : "#1e293b",
+                            },
+                        },
+                        invalid: {
+                            // iconColor: '#FFC7EE',
+                            // color: '#FFC7EE',
                         },
                     },
-                    invalid: {
-                        // iconColor: '#FFC7EE',
-                        // color: '#FFC7EE',
-                    },
-                },
-            });
-            // Add an instance of the card Element into the `card` <div>.
-            card{{ $key }}.mount('#card');
+                });
+                // Add an instance of the card Element into the `card` <div>.
+                card{{ $key }}.mount('#card');
 
-            // Create a token or display an error when the form is submitted.
-            var form{{ $key }} = document.getElementById('checkout');
-            form{{ $key }}
-                .addEventListener('submit', async (event) => {
-                    event.preventDefault();
+                // Create a token or display an error when the form is submitted.
+                var form{{ $key }} = document.getElementById('checkout');
+                form{{ $key }}
+                    .addEventListener('submit', async (event) => {
+                        event.preventDefault();
 
-                    const {
-                        setupIntent,
-                        error
-                    } = await stripe{{ $key }}.confirmCardSetup(
-                        clientSecret, {
-                            payment_method: {
-                                card: card{{ $key }},
-                                billing_details: {
-                                    name: cardHolderName.value
+                        const {
+                            setupIntent,
+                            error
+                        } = await stripe{{ $key }}.confirmCardSetup(
+                            clientSecret, {
+                                payment_method: {
+                                    card: card{{ $key }},
+                                    billing_details: {
+                                        name: cardHolderName.value
+                                    }
                                 }
                             }
+                        );
+
+                        if (error) {
+                            // Inform the customer that there was an error.
+                            errorElement{{ $key }}.innerText = `{{ __('Oops!') }} ${error.message}`;
+                        } else {
+                            // The card has been verified successfully...
+                            errorElement{{ $key }}.innerText = ``;
+                            console.log('setupIntent', setupIntent);
+                            stripe{{ $key }}TokenHandler(setupIntent);
                         }
-                    );
-
-                    if (error) {
-                        // Inform the customer that there was an error.
-                        errorElement{{ $key }}.innerText = `{{ __('Oops!') }} ${error.message}`;
-                    } else {
-                        // The card has been verified successfully...
-                        errorElement{{ $key }}.innerText = ``;
-                        console.log('setupIntent', setupIntent);
-                        stripe{{ $key }}TokenHandler(setupIntent);
-                    }
-                });
+                    });
 
 
-            var stripe{{ $key }}TokenHandler = (setupIntent) => {
-                // Insert the token ID into the form so it gets submitted to the server
-                var form{{ $key }} = document.getElementById('checkout');
-                var hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'paymentMethod');
-                hiddenInput.setAttribute('value', setupIntent.payment_method);
-                form{{ $key }}.appendChild(hiddenInput);
+                var stripe{{ $key }}TokenHandler = (setupIntent) => {
+                    // Insert the token ID into the form so it gets submitted to the server
+                    var form{{ $key }} = document.getElementById('checkout');
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.setAttribute('type', 'hidden');
+                    hiddenInput.setAttribute('name', 'paymentMethod');
+                    hiddenInput.setAttribute('value', setupIntent.payment_method);
+                    form{{ $key }}.appendChild(hiddenInput);
 
-                // Submit the form
-                form{{ $key }}.submit();
-            }
-        </script>
+                    // Submit the form
+                    form{{ $key }}.submit();
+                }
+            </script>
+        @endcan
+
     </x-client>
 
 </x-client-layout>

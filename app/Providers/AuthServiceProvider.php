@@ -29,5 +29,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('isAdmin', fn (User $user) => $user->isAdmin);
         Gate::define('isSupperAdmin', fn (User $user) => $user->isSupperAdmin);
+        Gate::define('isSubscribedUser', fn (User $user) => $user->subscribed('Plagiarism'));
+        Gate::define('notSubscribedUser', fn (User $user) => !$user->subscribed('Plagiarism'));
     }
 }
