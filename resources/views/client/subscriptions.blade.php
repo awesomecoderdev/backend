@@ -10,17 +10,26 @@
         <div class="relative">
             <form action="{{ route('client.subscriptions.payment') }}" id="checkout" method="post">
                 @csrf
-                <div class="grid w-full gap-6 md:grid-cols-3">
+                <div class="grid w-full gap-6 lg:grid-cols-3 md:grid-cols-4">
 
-                    <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                    <div class="lg:col-span-1 md:col-span-2" x-data="{ open: false }" @click.outside="open = false"
+                        @close.stop="open = false">
 
                         <input type="radio" id="essential" @checked(true) name="plan"
                             value="price_1MTSfvIX4CRni5u3wdGvV2c2" class="hidden peer">
                         <label for="essential"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
+                            class="inline-flex  mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
 
-                            <div class="relative" @click="open = !open">
+                            <div class="relative">
                                 <div class="p-3">
+                                    <span class="absolute right-0 top-0" @click="open = !open">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-8 h-8 pointer-events-none">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                        </svg>
+                                    </span>
                                     <h1
                                         class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                                         {{ __('Essential') }}
@@ -134,15 +143,22 @@
                             </div>
                         </label>
                     </div>
-                    <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                    <div class="lg:col-span-1 md:col-span-2" x-data="{ open: false }" @click.outside="open = false"
+                        @close.stop="open = false">
                         <input type="radio" id="premium" name="plan" value="price_1MTSfvIX4CRni5u37Kpj3wLK"
                             class="hidden peer">
                         <label for="premium"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
-
-                            <div class="relative" @click="open = !open">
-
-                                <div class="p-3 hi">
+                            class="inline-flex  mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
+                            <div class="relative">
+                                <div class="p-3">
+                                    <span class="absolute right-0 top-0" @click="open = !open">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-8 h-8 pointer-events-none">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                        </svg>
+                                    </span>
                                     <h1
                                         class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                                         <h1
@@ -258,13 +274,22 @@
                             </div>
                         </label>
                     </div>
-                    <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                    <div class="lg:col-span-1 md:col-span-4" x-data="{ open: false }" @click.outside="open = false"
+                        @close.stop="open = false">
                         <input type="radio" id="business" name="plan" value="price_1MThMeIX4CRni5u3edqcEtWj"
                             class="hidden peer">
                         <label for="business"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
-                            <div class="relative" @click="open = !open">
+                            class="inline-flex  mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
+                            <div class="relative">
                                 <div class="p-3">
+                                    <span class="absolute right-0 top-0" @click="open = !open">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor"
+                                            class="w-8 h-8 pointer-events-none">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                        </svg>
+                                    </span>
                                     <h1
                                         class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                                         {{ __('Business') }}
@@ -276,7 +301,7 @@
                                     </p>
 
                                     <h2 class="mt-4 text-2xl font-medium text-gray-700 sm:text-4xl dark:text-gray-300">
-                                        $0.00
+                                        $199.00
                                         <span class="text-base font-medium">/Month</span>
                                     </h2>
 
@@ -380,10 +405,10 @@
                     </div>
                 </div>
 
-                <div class="grid w-full gap-6 md:grid-cols-3">
-                    <div class="col-span-2 relative p-5">
+                <div class="grid w-full gap-6 lg:grid-cols-3">
+                    <div class="lg:col-span-2 relative">
                     </div>
-                    <div class="relative my-5 p-1 text-gray-900 dark:text-white">
+                    <div class="relative lg:my-5 p-1 text-gray-900 dark:text-white">
                         <div class="relative py-2">
                             <label for="card-holder-name"
                                 class="block text-sm mb-1.5 font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
@@ -414,7 +439,6 @@
                         </div>
 
                     </div>
-
                 </div>
             </form>
         </div>

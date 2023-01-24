@@ -27,6 +27,8 @@ class SubscriptionsController extends Controller
      */
     public function payment(Request $request)
     {
+        // dd($request->all());
+
         try {
             Auth::user()->newSubscription(
                 'Plagiarism',
@@ -42,9 +44,5 @@ class SubscriptionsController extends Controller
                 "warning" => $e->getMessage(),
             ]);
         }
-
-
-        dd($request->all());
-        return view("client.subscriptions");
     }
 }
