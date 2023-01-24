@@ -55,17 +55,17 @@ class PlanController extends Controller
         try {
             DB::beginTransaction(); // start db
 
-            Auth::user()->newSubscription(
-                $plan->name,
-                $plan->stripe_plan,
-            )->create($request->paymentMethod);
+            // Auth::user()->newSubscription(
+            //     $plan->name,
+            //     $plan->stripe_plan,
+            // )->create($request->paymentMethod);
 
             // create order after payments
 
             DB::commit(); // end db
 
             return redirect()->route("client.subscriptions")->with([
-                "success" => __("Plan successfully created.")
+                "success" => __("Your subscription has been successfully activated.")
             ]);
         } catch (\Exception $e) {
             DB::rollback(); // rollback db
