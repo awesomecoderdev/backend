@@ -35,6 +35,7 @@ class PlanController extends Controller
         //     "name" => "ibrahim",
         // ];
         // $plan->save();
+        // return $timestamp = Auth::user()->subscription("Business Plan")->asStripeSubscription()->current_period_end;
 
         $intent = Auth::user()->createSetupIntent();
         $user = Auth::user();
