@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,8 @@ class SubscriptionsController extends Controller
      */
     public function subscriptions(Request $request)
     {
-        $intent = Auth::user()->createSetupIntent();
-
-        return view("client.subscriptions", compact("intent"));
+        $plans = Plan::all();
+        return view("client.subscriptions", compact("plans"));
     }
 
     /**
@@ -27,7 +27,7 @@ class SubscriptionsController extends Controller
      */
     public function payment(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
 
         try {
             Auth::user()->newSubscription(
