@@ -120,8 +120,9 @@
             </div> --}}
         </div>
         <div class="relative">
-            <form action="{{ route('client.subscriptions.payment') }}" id="checkout" method="post">
+            <form action="{{ route('client.plans.update', $plan) }}" id="checkout" method="post">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="plan" id="plan" value="{{ $plan->id }}">
                 {{-- @can('notSubscribedUser') --}}
                 <div class="grid w-full gap-6 lg:grid-cols-3 ">
