@@ -31,6 +31,11 @@ class PlanController extends Controller
      */
     public function show(Plan $plan)
     {
+        // $plan->meta = [
+        //     "name" => "ibrahim",
+        // ];
+        // $plan->save();
+
         $intent = Auth::user()->createSetupIntent();
         $user = Auth::user();
         return view("client.plans.show", compact("plan", "intent", "user"));
