@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
         'client' =>   \App\Http\Middleware\OnlyClientRoute::class, // only client
         'admin' =>  \App\Http\Middleware\IsAdmin::class,
         'oauth' =>  \App\Http\Middleware\OauthMiddleware::class,
+        'subscribed' =>  \App\Http\Middleware\EnsureUserIsSubscribed::class,
     ];
 }

@@ -103,7 +103,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('profile', [FrontendController::class, "profile"])->name('client.profile');
     Route::post('profile', [FrontendController::class, "updateProfile"])->name('client.profile.update');
     // chat
-    Route::get('chat', [FrontendController::class, "chat"])->name('client.chat');
+    Route::get('chat', [FrontendController::class, "chat"])->middleware(["subscribed"])->name('client.chat');
 });
 
 Route::any("event", function () {

@@ -58,6 +58,13 @@
             @endif
         </x-notification>
         {{-- end::notifications --}}
+        @if (Session::has('redirect'))
+            <script>
+                window.history.pushState({
+                    page: "another"
+                }, null, "{{ Session::get('redirect') }}");
+            </script>
+        @endif
 
         {{-- start::navigation --}}
         <nav x-data="{ open: false }"
