@@ -31,6 +31,7 @@ class PlanController extends Controller
      */
     public function show(Plan $plan)
     {
+        // return $plan;
         // $plan->meta = [
         //     "name" => "ibrahim",
         // ];
