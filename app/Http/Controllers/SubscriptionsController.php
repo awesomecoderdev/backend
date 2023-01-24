@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Laravel\Cashier\Subscription;
 use Illuminate\Support\Facades\Auth;
 
 class SubscriptionsController extends Controller
@@ -17,7 +18,8 @@ class SubscriptionsController extends Controller
     public function subscriptions(Request $request)
     {
         $plans = Plan::all();
-        return view("client.subscriptions", compact("plans"));
+        $subscriptions = Subscription::where("user_id", "=", Auth::user()->id)->orderBy("id", "DESC")->get();
+        return view("client.subscriptions", compact("plans", "subscriptions"));
     }
 
     /**
