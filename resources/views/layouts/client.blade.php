@@ -20,7 +20,7 @@
         href="{{ base(route('alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))])) }}"
         as="script" type="text/javascript" />
     <script>
-        const isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)") && window.matchMedia(
+        var isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)") && window.matchMedia(
             "(prefers-color-scheme:dark)").matches ? true : false;
     </script>
     {{-- <link rel="preload" href="{{ route('alpine', ['time' => time()]) }}" as="script" type="text/javascript" /> --}}

@@ -34,13 +34,13 @@ class UpdateProfileRequest extends FormRequest
             // "email" => "required|email|unique:users,email",
             // "password" => "required|min:8|max:12",
             // "confirmed" => "required|same:password",
-            "about" => "required",
+            // "about" => "required",
             // "avatar" => "required",
-            "address" => "required",
-            "country" => "required",
-            "state" => "required",
-            "city" => "required",
-            "zip" => "required",
+            // "address" => "required",
+            // "country" => "required",
+            // "state" => "required",
+            // "city" => "required",
+            // "zip" => "required",
         ];
     }
 

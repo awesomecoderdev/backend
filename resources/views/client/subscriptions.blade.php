@@ -11,16 +11,19 @@
             <form action="{{ route('client.subscriptions.payment') }}" id="checkout" method="post">
                 @csrf
                 <div class="grid w-full gap-6 md:grid-cols-3">
+
                     <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-                        <input type="radio" id="free" name="plan" @checked(true) value="free"
-                            class="hidden peer">
-                        <label for="free"
+
+                        <input type="radio" id="essential" @checked(true) name="plan"
+                            value="price_1MTSfvIX4CRni5u3wdGvV2c2" class="hidden peer">
+                        <label for="essential"
                             class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
+
                             <div class="relative" @click="open = !open">
                                 <div class="p-3">
                                     <h1
                                         class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
-                                        {{ __('Free') }}
+                                        {{ __('Essential') }}
                                     </h1>
 
                                     <p class="mt-4 text-gray-500 dark:text-gray-300">
@@ -29,13 +32,14 @@
                                     </p>
 
                                     <h2 class="mt-4 text-2xl font-medium text-gray-700 sm:text-4xl dark:text-gray-300">
-                                        $0.00
+                                        $29.00
                                         <span class="text-base font-medium">/Month</span>
                                     </h2>
 
                                     <p class="mt-1 text-gray-500 dark:text-gray-300">
                                         Monthly payment
                                     </p>
+
                                 </div>
 
                                 <hr class="border-gray-200 dark:border-gray-700" style="display: none;" x-show="open"
@@ -54,127 +58,6 @@
                                     x-transition:leave-start="transform opacity-100 scale-100"
                                     x-transition:leave-end="transform opacity-0 scale-95">
                                     <h1 class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
-                                        What’s included:</h1>
-
-                                    <div class="mt-8 space-y-4">
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-
-                                            <span class="mx-4 text-gray-700 dark:text-gray-300">All limited links</span>
-                                        </div>
-
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-
-                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Own analytics
-                                                platform</span>
-                                        </div>
-
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-
-                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Chat support</span>
-                                        </div>
-
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-
-                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Optimize hashtags</span>
-                                        </div>
-
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-
-                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Mobile app</span>
-                                        </div>
-
-                                        <div class="flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-
-                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Unlimited users</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </label>
-                    </div>
-                    <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
-
-                        <input type="radio" id="essential" name="plan" value="price_1MTSfvIX4CRni5u3wdGvV2c2"
-                            class="hidden peer">
-                        <label for="essential"
-                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
-
-                            <div class="relative" @click="open = !open">
-                                <div class="p-3">
-                                    <h1
-                                        class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
-                                        {{ __('Essential') }}
-                                    </h1>
-
-                                    <p class="mt-4 text-gray-500 dark:text-gray-300">
-                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam
-                                        voluptatibus
-                                    </p>
-
-                                    <h2 class="mt-4 text-2xl font-medium text-gray-700 sm:text-4xl dark:text-gray-300">
-                                        $30.00
-                                        <span class="text-base font-medium">/Month</span>
-                                    </h2>
-
-                                    <p class="mt-1 text-gray-500 dark:text-gray-300">
-                                        Monthly payment
-                                    </p>
-
-                                </div>
-
-                                <hr class="border-gray-200 dark:border-gray-700" style="display: none;"
-                                    x-show="open" x-transition:enter="transition ease-out duration-100"
-                                    x-transition:enter-start="transform opacity-0 scale-95"
-                                    x-transition:enter-end="transform opacity-100 scale-100"
-                                    x-transition:leave="transition ease-in duration-75"
-                                    x-transition:leave-start="transform opacity-100 scale-100"
-                                    x-transition:leave-end="transform opacity-0 scale-95">
-
-                                <div class="p-3 " style="display: none;" x-show="open"
-                                    x-transition:enter="transition ease-out duration-100"
-                                    x-transition:enter-start="transform opacity-0 scale-95"
-                                    x-transition:enter-end="transform opacity-100 scale-100"
-                                    x-transition:leave="transition ease-in duration-75"
-                                    x-transition:leave-start="transform opacity-100 scale-100"
-                                    x-transition:leave-end="transform opacity-0 scale-95">
-                                    <h1
-                                        class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
                                         What’s included:</h1>
 
                                     <div class="mt-8 space-y-4">
@@ -375,6 +258,126 @@
                             </div>
                         </label>
                     </div>
+                    <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+                        <input type="radio" id="business" name="plan" value="price_1MThMeIX4CRni5u3edqcEtWj"
+                            class="hidden peer">
+                        <label for="business"
+                            class="inline-flex max-w-sm mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-primary-500 peer-checked:border-primary-600 peer-checked:text-primary-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700">
+                            <div class="relative" @click="open = !open">
+                                <div class="p-3">
+                                    <h1
+                                        class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
+                                        {{ __('Business') }}
+                                    </h1>
+
+                                    <p class="mt-4 text-gray-500 dark:text-gray-300">
+                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nostrum quam
+                                        voluptatibus
+                                    </p>
+
+                                    <h2 class="mt-4 text-2xl font-medium text-gray-700 sm:text-4xl dark:text-gray-300">
+                                        $0.00
+                                        <span class="text-base font-medium">/Month</span>
+                                    </h2>
+
+                                    <p class="mt-1 text-gray-500 dark:text-gray-300">
+                                        Monthly payment
+                                    </p>
+                                </div>
+
+                                <hr class="border-gray-200 dark:border-gray-700" style="display: none;"
+                                    x-show="open" x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
+
+                                <div class="p-3 " style="display: none;" x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                    x-transition:leave-end="transform opacity-0 scale-95">
+                                    <h1
+                                        class="text-lg font-medium text-gray-700 capitalize lg:text-xl dark:text-white">
+                                        What’s included:</h1>
+
+                                    <div class="mt-8 space-y-4">
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+
+                                            <span class="mx-4 text-gray-700 dark:text-gray-300">All limited
+                                                links</span>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+
+                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Own analytics
+                                                platform</span>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+
+                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Chat support</span>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+
+                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Optimize
+                                                hashtags</span>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+
+                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Mobile app</span>
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-red-400"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+
+                                            <span class="mx-4 text-gray-700 dark:text-gray-300">Unlimited users</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="grid w-full gap-6 md:grid-cols-3">
@@ -386,6 +389,7 @@
                                 class="block text-sm mb-1.5 font-medium text-gray-700 dark:text-white">{{ __('Cardholder\'s name') }}</label>
                             <input type="text" name="card-holder-name" id="card-holder-name"
                                 placeholder="{{ __('Cardholder\'s name') }}"
+                                value="{{ old('card-holder-name') ?? Auth::user()->fullname() }}"
                                 class="my-1 p-2 block w-full rounded-md @error('card-holder-name') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-500 @enderror  dark:bg-gray-800 shadow-sm  sm:text-sm">
                         </div>
 
@@ -415,14 +419,14 @@
             </form>
         </div>
         <script>
-            let stripe{{ $key }} = Stripe("{{ config('cashier.key') }}");
-            let elements{{ $key }} = stripe{{ $key }}.elements();
+            var stripe{{ $key }} = Stripe("{{ config('cashier.key') }}");
+            var elements{{ $key }} = stripe{{ $key }}.elements();
             var cardHolderName = document.getElementById('card-holder-name');
             var clientSecret = document.getElementById('checkoutBtn').dataset.secret;
-            let errorElement{{ $key }} = document.getElementById('card-errors');
+            var errorElement{{ $key }} = document.getElementById('card-errors');
 
             // Create an instance of the card Element.
-            let card{{ $key }} = elements{{ $key }}.create('card', {
+            var card{{ $key }} = elements{{ $key }}.create('card', {
                 style: {
                     base: {
                         iconColor: isDarkMode ? '#fff' : "#1e293b",
@@ -448,7 +452,7 @@
             card{{ $key }}.mount('#card');
 
             // Create a token or display an error when the form is submitted.
-            let form{{ $key }} = document.getElementById('checkout');
+            var form{{ $key }} = document.getElementById('checkout');
             form{{ $key }}
                 .addEventListener('submit', async (event) => {
                     event.preventDefault();
@@ -479,10 +483,10 @@
                 });
 
 
-            let stripe{{ $key }}TokenHandler = (setupIntent) => {
+            var stripe{{ $key }}TokenHandler = (setupIntent) => {
                 // Insert the token ID into the form so it gets submitted to the server
-                let form{{ $key }} = document.getElementById('checkout');
-                let hiddenInput = document.createElement('input');
+                var form{{ $key }} = document.getElementById('checkout');
+                var hiddenInput = document.createElement('input');
                 hiddenInput.setAttribute('type', 'hidden');
                 hiddenInput.setAttribute('name', 'paymentMethod');
                 hiddenInput.setAttribute('value', setupIntent.payment_method);
@@ -500,15 +504,15 @@
     return false;
 @endphp
 <script>
-    // let {
+    // var {
     //     token,
     //     error
     // } = await stripe{{ $key }}.createToken(card{{ $key }});
 
     // if (error) {
     //     // Inform the customer that there was an error.
-    //     let errorElement{{ $key }} = document.getElementById('card-errors');
-    //     let notifications{{ $key }} = document.getElementById('notifications');
+    //     var errorElement{{ $key }} = document.getElementById('card-errors');
+    //     var notifications{{ $key }} = document.getElementById('notifications');
     //     errorElement{{ $key }}.innerText = `{{ __('Oops!') }} ${error.message}`;
     //     notifications{{ $key }}.innerHTML =
     //         `<x-alert delay="4" end="4" autoclose='true' type="error" title="Error!" message="${error.message}" />`;
@@ -534,8 +538,8 @@
 
     // if (error) {
     //     // Inform the customer that there was an error.
-    //     let errorElement{{ $key }} = document.getElementById('card-errors');
-    //     let notifications{{ $key }} = document.getElementById('notifications');
+    //     var errorElement{{ $key }} = document.getElementById('card-errors');
+    //     var notifications{{ $key }} = document.getElementById('notifications');
     //     errorElement{{ $key }}.innerText = `{{ __('Oops!') }} ${error.message}`;
     //     notifications{{ $key }}.innerHTML =
     //         `<x-alert delay="4" end="4" autoclose='true' type="error" title="Error!" message="${error.message}" />`;

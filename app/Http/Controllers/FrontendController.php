@@ -158,6 +158,10 @@ class FrontendController extends Controller
     {
         abort_if(!Auth::user(), \Illuminate\Http\Response::HTTP_NOT_FOUND, __("Not Found."));
         try {
+            $user = Auth::user();
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->save();
             return redirect()->route("client.profile")->with([
                 "success" => __("Profile successfully updated.")
             ]);
