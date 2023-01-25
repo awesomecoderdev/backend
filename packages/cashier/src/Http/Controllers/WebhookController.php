@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\WebHook;
+namespace Laravel\Cashier\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;

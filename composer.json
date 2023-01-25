@@ -10,7 +10,6 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
-        "laravel/cashier": "^14.7",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.5",
@@ -18,7 +17,22 @@
         "laravelcollective/html": "^6.3",
         "mpdf/mpdf": "^8.1",
         "psr/log": "^2.0",
-        "stripe/stripe-php": "^10.1"
+        "stripe/stripe-php": "^10.1",
+        "ext-json": "*",
+        "illuminate/console": "^9.21|^10.0",
+        "illuminate/contracts": "^9.21|^10.0",
+        "illuminate/database": "^9.21|^10.0",
+        "illuminate/http": "^9.21|^10.0",
+        "illuminate/log": "^9.21|^10.0",
+        "illuminate/notifications": "^9.21|^10.0",
+        "illuminate/pagination": "^9.21|^10.0",
+        "illuminate/routing": "^9.21|^10.0",
+        "illuminate/support": "^9.21|^10.0",
+        "illuminate/view": "^9.21|^10.0",
+        "moneyphp/money": "^4.0",
+        "nesbot/carbon": "^2.0",
+        "symfony/http-kernel": "^6.0",
+        "symfony/polyfill-intl-icu": "^1.22.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -35,7 +49,9 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "AwesomeCoder\\ShoppingCart\\": "cart/",
-            "AwesomeCoder\\": "core/"
+            "AwesomeCoder\\": "core/",
+            "Laravel\\Cashier\\": "packages/cashier/src/",
+            "Laravel\\Cashier\\Database\\Factories\\": "packages/cashier/factories/"
         },
         "files": [
             "core/Helpers.php"
@@ -43,7 +59,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Laravel\\Cashier\\Tests\\": "packages/cashier/tests/"
         }
     },
     "scripts": {
@@ -62,8 +79,14 @@
         ]
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "14.x-dev"
+        },
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [],
+            "providers": [
+                "Laravel\\Cashier\\CashierServiceProvider"
+            ]
         }
     },
     "config": {

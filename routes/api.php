@@ -7,7 +7,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\WebHook\WebHookController;
+use Laravel\Cashier\Http\Controllers\WebhookController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
@@ -67,7 +67,7 @@ Route::group(['prefix' => 'v1/cart', "controller" => CartController::class,], fu
 });
 
 // webhook routes
-Route::any("v1/webhook/stripe", [WebHookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("api.stripe.webhook");
+Route::any("v1/webhook/stripe", [WebhookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("cashier.webhook");
 
 // charts routes
 Route::group(['prefix' => 'v1/chart', 'as' => 'chart', "controller" => ChartController::class,], function () {
