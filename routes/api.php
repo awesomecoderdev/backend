@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChartController;
 use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\FrontendController;
-use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LanguageController;
-use Laravel\Cashier\Http\Controllers\WebhookController;
+use App\Http\Controllers\API\FrontendController;
+use App\Http\Controllers\Webhook\WebhookController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
@@ -67,7 +67,7 @@ Route::group(['prefix' => 'v1/cart', "controller" => CartController::class,], fu
 });
 
 // webhook routes
-Route::any("v1/webhook/stripe", [WebhookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("cashier.webhook");
+Route::post("v1/webhook/stripe", [WebhookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("api.cashier.webhook");
 
 // charts routes
 Route::group(['prefix' => 'v1/chart', 'as' => 'chart', "controller" => ChartController::class,], function () {

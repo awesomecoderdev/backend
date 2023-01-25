@@ -31,6 +31,7 @@ class PlanController extends Controller
      */
     public function show(Plan $plan)
     {
+        // return Auth::user()->subscription($plan->name)->name;
         // return $plan;
         // $plan->meta = [
         //     "name" => "ibrahim",
@@ -60,7 +61,7 @@ class PlanController extends Controller
                 $plan->stripe_plan,
             )->create($request->paymentMethod);
 
-            dd($subscriptions);
+            // dd($subscriptions);
 
             // create order after payments
 
