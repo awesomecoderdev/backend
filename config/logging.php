@@ -141,6 +141,12 @@ return [
             'path' => storage_path('logs/chat.log'),
             'level' => 'info',
         ],
+
+        'stripe' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/stripe.log'),
+            'level' => 'info',
+        ],
     ],
 
 ];

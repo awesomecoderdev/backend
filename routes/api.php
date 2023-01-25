@@ -67,7 +67,7 @@ Route::group(['prefix' => 'v1/cart', "controller" => CartController::class,], fu
 });
 
 // webhook routes
-Route::any("v1/webhook", [WebHookController::class, "handle"])->middleware("throttle:60,1")->name("api.webhook");
+Route::any("v1/webhook/stripe", [WebHookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("api.stripe.webhook");
 
 // charts routes
 Route::group(['prefix' => 'v1/chart', 'as' => 'chart', "controller" => ChartController::class,], function () {

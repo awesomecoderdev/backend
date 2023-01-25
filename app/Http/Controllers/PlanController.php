@@ -55,10 +55,12 @@ class PlanController extends Controller
         try {
             DB::beginTransaction(); // start db
 
-            // Auth::user()->newSubscription(
-            //     $plan->name,
-            //     $plan->stripe_plan,
-            // )->create($request->paymentMethod);
+            $subscriptions = Auth::user()->newSubscription(
+                $plan->name,
+                $plan->stripe_plan,
+            )->create($request->paymentMethod);
+
+            dd($subscriptions);
 
             // create order after payments
 
