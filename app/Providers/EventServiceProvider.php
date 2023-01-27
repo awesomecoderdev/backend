@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Observers\UserObserver;
 use App\Observers\OrderObserver;
 use Illuminate\Support\Facades\Event;
+use App\Listeners\StripeEventListener;
 use Illuminate\Auth\Events\Registered;
 use Laravel\Cashier\Events\WebhookReceived;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
