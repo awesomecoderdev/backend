@@ -114,3 +114,52 @@ Route::any("event", function () {
     // event(new SendMessage(fake()->text()));
 
 });
+
+// {
+//     "users": [
+//         {
+//             "username": "string",
+//             "email": "string",
+//             "password": "string"
+//         }
+//     ],
+//     "posts": [
+//         {
+//             "title": "string",
+//             "content": "string",
+//             "author": "string",
+//             "date": "datetime",
+//             "categories": [
+//                 "string"
+//             ],
+//             "tags": [
+//                 "string"
+//             ],
+//             "media": [
+//                 {
+//                     "type": "string",
+//                     "url": "string"
+//                 }
+//             ]
+//         }
+//     ],
+//     "comments": [
+//         {
+//             "text": "string",
+//             "author": "string",
+//             "date": "datetime"
+//         }
+//     ],
+//     "categories": [
+//         {
+//             "name": "string",
+//             "description": "string"
+//         }
+//     ],
+//     "tags": [
+//         {
+//             "name": "string",
+//             "description": "string"
+//         }
+//     ]
+// }

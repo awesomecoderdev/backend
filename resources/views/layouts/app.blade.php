@@ -13,10 +13,14 @@
     <link rel="preload"
         href="{{ route('admin.alpine', ['time' => Cache::get('alpine', md5(strtotime('+10 minutes')))]) }}"
         as="script" type="text/javascript" />
+    <script>
+        var isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)") && window.matchMedia(
+            "(prefers-color-scheme:dark)").matches ? true : false;
+        var breackdown = window.screen.width > 786 ? 'lg' : (window.screen.width > 640 ? 'md' : 'sm');
+    </script>
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
-    {{-- <script src="{{ asset('js/chunk.js') }}"></script> --}}
-    {{-- <script src="{{ asset('js/chart.js') }}"></script> --}}
+
     {{-- start::chunk --}}
     <script src="{{ route('admin.chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script>
     {{-- end::chunk --}}

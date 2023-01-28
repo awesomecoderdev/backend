@@ -27,6 +27,9 @@
 </x-slot>
 {{-- end::notifications --}}
 
+{{-- chartjs --}}
+<script src="{{ asset('js/chartjs.min.js') }}"></script>
+
 <div
     class="relative bg-white text-slate-500 dark:text-slate-400 dark:bg-slate-900 flex mx-auto justify-between w-full h-fit z-0">
     <div

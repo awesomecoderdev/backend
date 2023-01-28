@@ -22,13 +22,12 @@
     <script>
         var isDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)") && window.matchMedia(
             "(prefers-color-scheme:dark)").matches ? true : false;
+        var breackdown = window.screen.width > 786 ? 'lg' : (window.screen.width > 640 ? 'md' : 'sm');
     </script>
-    {{-- <link rel="preload" href="{{ route('alpine', ['time' => time()]) }}" as="script" type="text/javascript" /> --}}
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
 
     {{-- start::chunk --}}
-    {{-- <script src="{{ route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))]) }}"></script> --}}
     <script src="{{ base(route('chunk', ['time' => Cache::get('chunk', md5(strtotime('+5 minutes')))])) }}"></script>
     {{-- end::chunk --}}
     <!-- Node.js -->
