@@ -338,6 +338,12 @@
         <script>
             if (typeof Chart !== 'undefined') {
 
+                if (document.getElementById("chart")) {
+                    document.getElementById("chart").innerHTML = '<canvas id="chart-line" height="600"
+                    style = "display: block; box-sizing: border-box; height: var(--canvas-height); width: 610.2px;"
+                    width = "1220" > < /canvas > ';
+                }
+
                 var ctx = document.getElementById("chart-bars").getContext("2d");
                 new Chart(ctx, {
                     type: "bar",
@@ -403,101 +409,92 @@
                     },
                 });
 
-                setTimeout(() => {
-                    if (document.getElementById("chart")) {
-                        document.getElementById("chart").innerHTML = '<canvas id="chart-line" height="600"
-                        style = "display: block; box-sizing: border-box; height: var(--canvas-height); width: 610.2px;"
-                        width = "1220" > < /canvas > ';
-                    }
+                var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+                var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+                gradientStroke1.addColorStop(1, "rgba(99,102,241,0.1)");
+                gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
+                gradientStroke1.addColorStop(0, "rgba(203,12,159,0)");
+
+                var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+                gradientStroke2.addColorStop(1, "rgba(20,23,39,0.1)");
+                gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
+                gradientStroke2.addColorStop(0, "rgba(20,23,39,0)");
 
 
-                    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-                    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-                    gradientStroke1.addColorStop(1, "rgba(99,102,241,0.1)");
-                    gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
-                    gradientStroke1.addColorStop(0, "rgba(203,12,159,0)");
-
-                    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-                    gradientStroke2.addColorStop(1, "rgba(20,23,39,0.1)");
-                    gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
-                    gradientStroke2.addColorStop(0, "rgba(20,23,39,0)");
-
-
-                    new Chart(ctx2, {
-                        type: "line",
-                        data: {
-                            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                            datasets: [{
-                                label: "Mobile apps",
-                                tension: 0.4,
-                                borderWidth: 0,
-                                pointRadius: 0,
-                                borderColor: "#6366f1",
-                                borderWidth: 3,
-                                backgroundColor: gradientStroke1,
-                                fill: true,
-                                data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                                maxBarThickness: 6,
-                            }, ],
+                new Chart(ctx2, {
+                    type: "line",
+                    data: {
+                        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        datasets: [{
+                            label: "Mobile apps",
+                            tension: 0.4,
+                            borderWidth: 0,
+                            pointRadius: 0,
+                            borderColor: "#6366f1",
+                            borderWidth: 3,
+                            backgroundColor: gradientStroke1,
+                            fill: true,
+                            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                            maxBarThickness: 6,
+                        }, ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
                         },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
+                        interaction: {
+                            intersect: false,
+                            mode: "index",
+                        },
+                        scales: {
+                            y: {
+                                grid: {
+                                    drawBorder: false,
+                                    display: true,
+                                    drawOnChartArea: true,
+                                    drawTicks: false,
+                                    borderDash: [5, 5],
+                                },
+                                ticks: {
+                                    display: true,
+                                    padding: 0,
+                                    color: isDarkMode ? "#b2b9bf" : "#3A416F",
+                                    font: {
+                                        size: 11,
+                                        family: "'Poppins', sans-serif",
+                                        style: "normal",
+                                        lineHeight: 2,
+                                    },
+                                },
+                            },
+                            x: {
+                                grid: {
+                                    drawBorder: false,
                                     display: false,
+                                    drawOnChartArea: false,
+                                    drawTicks: false,
+                                    borderDash: [5, 5],
                                 },
-                            },
-                            interaction: {
-                                intersect: false,
-                                mode: "index",
-                            },
-                            scales: {
-                                y: {
-                                    grid: {
-                                        drawBorder: false,
-                                        display: true,
-                                        drawOnChartArea: true,
-                                        drawTicks: false,
-                                        borderDash: [5, 5],
-                                    },
-                                    ticks: {
-                                        display: true,
-                                        padding: 0,
-                                        color: isDarkMode ? "#b2b9bf" : "#3A416F",
-                                        font: {
-                                            size: 11,
-                                            family: "'Poppins', sans-serif",
-                                            style: "normal",
-                                            lineHeight: 2,
-                                        },
-                                    },
-                                },
-                                x: {
-                                    grid: {
-                                        drawBorder: false,
-                                        display: false,
-                                        drawOnChartArea: false,
-                                        drawTicks: false,
-                                        borderDash: [5, 5],
-                                    },
-                                    ticks: {
-                                        display: true,
-                                        color: isDarkMode ? "#b2b9bf" : "#3A416F",
-                                        padding: 0,
-                                        font: {
-                                            size: 11,
-                                            family: "'Poppins', sans-serif",
-                                            style: "normal",
-                                            lineHeight: 2,
-                                        },
+                                ticks: {
+                                    display: true,
+                                    color: isDarkMode ? "#b2b9bf" : "#3A416F",
+                                    padding: 0,
+                                    font: {
+                                        size: 11,
+                                        family: "'Poppins', sans-serif",
+                                        style: "normal",
+                                        lineHeight: 2,
                                     },
                                 },
                             },
                         },
-                    });
-                }, 1000);
+                    },
+                });
             };
         </script>
     </x-client>
