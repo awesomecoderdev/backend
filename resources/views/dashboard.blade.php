@@ -301,7 +301,7 @@
                         </div>
                         <div class="flex-auto p-4 ">
                             <div id="chart">
-                                <div class="relative opacity-30 animate-pulse ">
+                                <div class="relative opacity-30 animate-pulse " style="height: var(--canvas-height);">
                                     <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
                                     <div class="mb-5 w-2/5 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
                                     <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-4/6 mb-2.5"></div>
