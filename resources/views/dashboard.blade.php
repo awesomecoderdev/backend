@@ -11,7 +11,6 @@
             var tday = new Date(order.year + "-" + order.month + "-1");
             return tday.toLocaleDateString('en-us', {
                 /* year: "numeric", */
-                year: "numeric",
                 month: "short",
             });
         });
