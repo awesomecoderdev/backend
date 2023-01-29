@@ -38,7 +38,7 @@ class ChartController extends Controller
             return $orders_chart;
         });
 
-        $startPoint = cache::remember("chart_start", 60 * $cache_ttl, function () {
+        $startPoint = Cache::remember("chart_start", 60 * $cache_ttl, function () {
             return Order::select('created_at')->orderBy('created_at', 'asc')->first();
         });
 

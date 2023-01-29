@@ -32,7 +32,6 @@ class Order extends Model
         return $this->hasOne(Invoice::class, 'order_id');
     }
 
-
     // public static function boot()
     // {
     //     parent::boot();

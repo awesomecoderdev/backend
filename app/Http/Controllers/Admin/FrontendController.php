@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Chat;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -22,11 +24,44 @@ class FrontendController extends Controller
      */
     public function index(Request $request)
     {
-        // $users = User::whereNot("id", "=", Auth::user()->id)->delete();
-        // dd($users);
-        // Cache::forget("chunk"); // clear chunk
+        // return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+        //     ->whereBetween(
+        //         'created_at',
+        //         [Carbon::now()->subMonth(12), Carbon::now()]
+        //     )
+        //     ->groupBy('year', 'month')
+        //     ->orderBy("month")
+        //     ->get();
+        $cache_ttl = 1; // cache timer
+        $orders = Cache::remember('orders_chart', 60 * $cache_ttl, function () {
+            return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+                ->whereBetween(
+                    'created_at',
+                    [Carbon::now()->subMonth(12), Carbon::now()]
+                )
+                ->orderBy("month")
+                ->groupBy('year', 'month')
+                ->get();
+        });
 
-        return view("dashboard");
+        $users = Cache::remember('users_chart', 60 * $cache_ttl, function () {
+            return User::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+                ->whereBetween(
+                    'created_at',
+                    [Carbon::now()->subMonth(12), Carbon::now()]
+                )
+                ->groupBy('year', 'month')
+                ->orderBy("month")
+                ->get();
+        });
+
+
+        $ordersArr =  $orders->pluck("count");
+        $totalOrders = $orders->sum('count');
+
+        $totalUsers = $users->sum('count');
+
+        return view("dashboard", compact("orders", "ordersArr", "totalOrders", "users", "totalUsers"));
     }
 
     /**

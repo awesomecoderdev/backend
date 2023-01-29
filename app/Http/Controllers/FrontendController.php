@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use App\Models\Plan;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -64,7 +67,29 @@ class FrontendController extends Controller
      */
     public function dashboard(Request $request)
     {
-        return view("client.dashboard");
+
+        $cache_ttl = 1; // cache timer
+        // $orders = Cache::remember('orders_chart', 60 * $cache_ttl, function () {
+        //     return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+        //         ->whereBetween(
+        //             'created_at',
+        //             [Carbon::now()->subMonth(12), Carbon::now()]
+        //         )
+        //         ->groupBy('year', 'month')
+        //         ->get();
+        // });
+
+        $orders = Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+            ->whereBetween(
+                'created_at',
+                [Carbon::now()->subMonth(12), Carbon::now()]
+            )
+            ->groupBy('year', 'month')
+            ->get();
+        $ordersArr =  $orders->pluck("count");
+        $totalOrders = $orders->sum('count');
+
+        return view("client.dashboard", compact("orders", "ordersArr", "totalOrders"));
     }
 
     /**
