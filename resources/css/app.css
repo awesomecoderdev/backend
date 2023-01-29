@@ -8,12 +8,12 @@ html {
 }
 
 :root {
-    --canvas-height: 330px;
+    --canvas-height: 230px;
 }
 
 @media (max-width: 768px) {
     :root {
-        --canvas-height: 310px;
+        --canvas-height: 240px;
     }
 }
 
