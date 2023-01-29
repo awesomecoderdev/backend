@@ -4,6 +4,7 @@
             {{ __(config('settings.title')) }}</title>
     @endsection
     <x-client>
+
         <div class="w-full relative mx-auto">
 
             <div class="flex flex-wrap -mx-3">
@@ -339,9 +340,8 @@
             if (typeof Chart !== 'undefined') {
 
                 if (document.getElementById("chart")) {
-                    document.getElementById("chart").innerHTML = '<canvas id="chart-line" height="600"
-                    style = "display: block; box-sizing: border-box; height: var(--canvas-height); width: 610.2px;"
-                    width = "1220" > < /canvas > ';
+                    document.getElementById("chart").innerHTML =
+                        '<canvas id="chart-line" height="600" style = "display: block; box-sizing: border-box; height: var(--canvas-height); width: 610.2px;" width = "1220" > < /canvas > ';
                 }
 
                 var ctx = document.getElementById("chart-bars").getContext("2d");

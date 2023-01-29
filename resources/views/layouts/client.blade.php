@@ -34,9 +34,6 @@
     {{-- @viteReactRefresh --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- stripe --}}
-    <script src="https://js.stripe.com/v3/"></script>
-
 </head>
 
 <body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">

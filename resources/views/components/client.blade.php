@@ -27,6 +27,9 @@
 </x-slot>
 {{-- end::notifications --}}
 
+{{-- stripe --}}
+{{-- <script src="https://js.stripe.com/v3/"></script> --}}
+
 {{-- chartjs --}}
 <script src="{{ asset('js/chartjs.min.js') }}"></script>
 
