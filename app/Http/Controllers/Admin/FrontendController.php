@@ -28,6 +28,41 @@ class FrontendController extends Controller
         $newUsers = Cache::remember('new_users_today', 60 * $cache_ttl, fn () => number_format(User::whereNot("isAdmin", true)->whereDate('created_at', Carbon::today())->count()));
         $totalUsers = Cache::remember('total_users', 60 * $cache_ttl, fn () => number_format(User::whereNot("isAdmin", true)->count()));
 
+        $currentWeekOrders =  Cache::remember('currentWeekOrders', 60 * $cache_ttl, function () {
+            return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+                ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+                ->groupBy('year', 'month')
+                ->orderBy("month")
+                ->get();
+        });
+        $currentWeekOrders =  $currentWeekOrders->sum("count");
+
+        $lastWeekOrders =  Cache::remember('lastWeekOrders', 60 * $cache_ttl, function () {
+            return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
+                ->whereBetween('created_at', [now()->subWeek()->startOfWeek(), now()->subWeek()->endOfWeek()])
+                ->groupBy('year', 'month')
+                ->orderBy("month")
+                ->get();
+        });
+        $lastWeekOrders =  $lastWeekOrders->sum("count");
+
+        try {
+            $difference = $currentWeekOrders - $lastWeekOrders;
+            $orderPercentageIncrease = ($difference / $lastWeekOrders) * 100;
+            // $difference = 0;
+            // $lastWeekOrders = 0;
+            if ($difference != 0 && $lastWeekOrders !== 0) {
+                $orderPercentageIncrease = ($difference / $lastWeekOrders) * 100;
+            } else {
+                $orderPercentageIncrease = 0;
+            }
+        } catch (\Exception $e) {
+            $orderPercentageIncrease = 0;
+        }
+
+        $orderPercentageIncrease = round($orderPercentageIncrease, 2);
+        $orderPercentageIncrease = number_format($orderPercentageIncrease, 2);
+
         $cache_ttl = 1; // cache timer
 
         $orders = Cache::remember('order_charts', 60 * $cache_ttl, function () {
@@ -36,8 +71,8 @@ class FrontendController extends Controller
                     'created_at',
                     [Carbon::now()->subMonth(12), Carbon::now()]
                 )
-                ->orderBy("month")
                 ->groupBy('year', 'month')
+                ->orderBy("year")
                 ->get();
         });
 
@@ -49,7 +84,7 @@ class FrontendController extends Controller
                 )
                 ->whereNot("isAdmin", true)
                 ->groupBy('year', 'month')
-                ->orderBy("month")
+                ->orderBy("year")
                 ->get();
         });
 
@@ -58,7 +93,17 @@ class FrontendController extends Controller
 
         $totalUsersLast12Months =  $users->sum('count');
 
-        return view("dashboard", compact("orders", "ordersArr", "totalOrders", "users", "totalUsers", "newUsers", "totalUsersLast12Months"));
+        return view("dashboard", compact(
+            "orders",
+            "ordersArr",
+            "totalOrders",
+            "users",
+            "totalUsers",
+            "newUsers",
+            "totalUsersLast12Months",
+            "orderPercentageIncrease",
+            "lastWeekOrders"
+        ));
     }
 
     /**

@@ -11,6 +11,7 @@
             var tday = new Date(order.year + "-" + order.month + "-1");
             return tday.toLocaleDateString('en-us', {
                 /* year: "numeric", */
+                year: "numeric",
                 month: "short",
             });
         });
@@ -185,17 +186,22 @@
                     <div
                         class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
                         <div class="relative overflow-hidden rounded-xl p-6">
+                            <span
+                                class="absolute {{ $orderPercentageIncrease >= 0 ? 'text-emerald-400' : 'text-red-400' }} right-3 top-3 text-2xl font-bold">
+                                {{ $orderPercentageIncrease >= 0 ? "+$orderPercentageIncrease%" : "$orderPercentageIncrease%" }}
+                            </span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="2" stroke="currentColor" class="w-8 h-8 text-[#0EA5E9]">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
                             </svg>
 
+
                             <h2 class="mt-4 font-display text-base font-semibold text-slate-900 dark:text-white">
-                                {{ __("Today's Orders") }}
+                                {{ __('Orders') }}
                             </h2>
                             <p class="mt-1 text-2xl font-bold text-slate-700 dark:text-slate-400">
-                                {{ number_format(2300) }}
+                                {{ number_format($lastWeekOrders, 0) }}
                             </p>
                         </div>
                     </div>
