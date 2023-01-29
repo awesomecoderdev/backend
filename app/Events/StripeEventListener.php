@@ -1,23 +1,40 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Events;
 
-use Illuminate\Support\Facades\Log;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
 use Laravel\Cashier\Events\WebhookReceived;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class StripeEventListener
+class StripeEventListener implements ShouldBroadcast
 {
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
     /**
-     * Handle received Stripe webhooks.
+     * Create a new event instance.
      *
-     * @param  \Laravel\Cashier\Events\WebhookReceived  $event
      * @return void
      */
-    public function handle(WebhookReceived $event)
+    public function __construct(public $message = "This is message.")
     {
-        Log::channel("stripe")->info(json_encode($event->payload, JSON_PRETTY_PRINT));
-        if ($event->payload['type'] === 'invoice.payment_succeeded') {
-            // Handle the incoming event...
-        }
+        //
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
+    public function broadcastOn()
+    {
+        Log::channel("chat")->info("Send message {$this->message}");
+        return new Channel('message');
+        // return new PrivateChannel('message');
     }
 }
