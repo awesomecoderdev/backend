@@ -131,14 +131,6 @@
                             class=" inline-flex mx-auto items-center justify-between w-full p-5 text-gray-500 bg-white hover:bg-gray-100 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700  hover:text-gray-600  dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-800">
                             <div class="relative">
                                 <div class="p-3">
-                                    <span class="absolute right-0 top-0" @click="open = !open">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor"
-                                            class="w-8 h-8 pointer-events-none">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                                        </svg>
-                                    </span>
                                     <h1
                                         class="text-xl font-medium text-gray-700 capitalize lg:text-3xl dark:text-white">
                                         {{ __($plan->name) }}
@@ -333,84 +325,88 @@
         </div>
         {{-- @can('notSubscribedUser') --}}
         <script>
-            var stripe{{ md5($plan->stripe_plan . time()) }} = Stripe("{{ config('cashier.key') }}");
-            var elements{{ md5($plan->stripe_plan . time()) }} = stripe{{ md5($plan->stripe_plan . time()) }}.elements();
-            var cardHolderName = document.getElementById('card-holder-name');
-            var clientSecret = document.getElementById('checkoutBtn').dataset.secret;
-            var errorElement{{ md5($plan->stripe_plan . time()) }} = document.getElementById('card-errors');
+            if (typeof Stripe !== "undefined") {
 
-            // Create an instance of the card Element.
-            var card{{ md5($plan->stripe_plan . time()) }} = elements{{ md5($plan->stripe_plan . time()) }}.create('card', {
-                style: {
-                    base: {
-                        iconColor: isDarkMode ? '#fff' : "#1e293b",
-                        color: isDarkMode ? '#fff' : "#1e293b",
-                        fontWeight: '500',
-                        fontFamily: '"Poppins",Roboto, Open Sans, Segoe UI, sans-serif',
-                        fontSize: '14px',
-                        fontSmoothing: 'antialiased',
-                        ':-webkit-autofill': {
-                            color: isDarkMode ? '#fff' : "#fce883",
-                        },
-                        '::placeholder': {
+                var stripe{{ md5($plan->stripe_plan . time()) }} = Stripe("{{ config('cashier.key') }}");
+                var elements{{ md5($plan->stripe_plan . time()) }} = stripe{{ md5($plan->stripe_plan . time()) }}.elements();
+                var cardHolderName = document.getElementById('card-holder-name');
+                var clientSecret = document.getElementById('checkoutBtn').dataset.secret;
+                var errorElement{{ md5($plan->stripe_plan . time()) }} = document.getElementById('card-errors');
+
+                // Create an instance of the card Element.
+                var card{{ md5($plan->stripe_plan . time()) }} = elements{{ md5($plan->stripe_plan . time()) }}.create(
+                'card', {
+                    style: {
+                        base: {
+                            iconColor: isDarkMode ? '#fff' : "#1e293b",
                             color: isDarkMode ? '#fff' : "#1e293b",
+                            fontWeight: '500',
+                            fontFamily: '"Poppins",Roboto, Open Sans, Segoe UI, sans-serif',
+                            fontSize: '14px',
+                            fontSmoothing: 'antialiased',
+                            ':-webkit-autofill': {
+                                color: isDarkMode ? '#fff' : "#fce883",
+                            },
+                            '::placeholder': {
+                                color: isDarkMode ? '#fff' : "#1e293b",
+                            },
+                        },
+                        invalid: {
+                            // iconColor: '#FFC7EE',
+                            // color: '#FFC7EE',
                         },
                     },
-                    invalid: {
-                        // iconColor: '#FFC7EE',
-                        // color: '#FFC7EE',
-                    },
-                },
-            });
-            // Add an instance of the card Element into the `card` <div>.
-            card{{ md5($plan->stripe_plan . time()) }}.mount('#card-element');
+                });
+                // Add an instance of the card Element into the `card` <div>.
+                card{{ md5($plan->stripe_plan . time()) }}.mount('#card-element');
 
-            // Create a token or display an error when the form is submitted.
-            var form{{ md5($plan->stripe_plan . time()) }} = document.getElementById('checkout');
-            form{{ md5($plan->stripe_plan . time()) }}
-                .addEventListener('submit', async (event) => {
-                    event.preventDefault();
+                // Create a token or display an error when the form is submitted.
+                var form{{ md5($plan->stripe_plan . time()) }} = document.getElementById('checkout');
+                form{{ md5($plan->stripe_plan . time()) }}
+                    .addEventListener('submit', async (event) => {
+                        event.preventDefault();
 
-                    const {
-                        setupIntent,
-                        error
-                    } = await stripe{{ md5($plan->stripe_plan . time()) }}.confirmCardSetup(
-                        clientSecret, {
-                            payment_method: {
-                                card: card{{ md5($plan->stripe_plan . time()) }},
-                                billing_details: {
-                                    name: cardHolderName.value
+                        const {
+                            setupIntent,
+                            error
+                        } = await stripe{{ md5($plan->stripe_plan . time()) }}.confirmCardSetup(
+                            clientSecret, {
+                                payment_method: {
+                                    card: card{{ md5($plan->stripe_plan . time()) }},
+                                    billing_details: {
+                                        name: cardHolderName.value
+                                    }
                                 }
                             }
+                        );
+
+                        if (error) {
+                            // Inform the customer that there was an error.
+                            errorElement{{ md5($plan->stripe_plan . time()) }}.style.opacity = 1;
+                            errorElement{{ md5($plan->stripe_plan . time()) }}.innerText =
+                                `{{ __('Oops!') }} ${error.message}`;
+                        } else {
+                            // The card has been verified successfully...
+                            errorElement{{ md5($plan->stripe_plan . time()) }}.style.opacity = 0;
+                            errorElement{{ md5($plan->stripe_plan . time()) }}.innerText = ``;
+                            console.log('setupIntent', setupIntent);
+                            stripe{{ md5($plan->stripe_plan . time()) }}TokenHandler(setupIntent);
                         }
-                    );
-
-                    if (error) {
-                        // Inform the customer that there was an error.
-                        errorElement{{ md5($plan->stripe_plan . time()) }}.style.opacity = 1;
-                        errorElement{{ md5($plan->stripe_plan . time()) }}.innerText =
-                            `{{ __('Oops!') }} ${error.message}`;
-                    } else {
-                        // The card has been verified successfully...
-                        errorElement{{ md5($plan->stripe_plan . time()) }}.style.opacity = 0;
-                        errorElement{{ md5($plan->stripe_plan . time()) }}.innerText = ``;
-                        console.log('setupIntent', setupIntent);
-                        stripe{{ md5($plan->stripe_plan . time()) }}TokenHandler(setupIntent);
-                    }
-                });
+                    });
 
 
-            var stripe{{ md5($plan->stripe_plan . time()) }}TokenHandler = (setupIntent) => {
-                // Insert the token ID into the form so it gets submitted to the server
-                var form{{ md5($plan->stripe_plan . time()) }} = document.getElementById('checkout');
-                var hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'paymentMethod');
-                hiddenInput.setAttribute('value', setupIntent.payment_method);
-                form{{ md5($plan->stripe_plan . time()) }}.appendChild(hiddenInput);
+                var stripe{{ md5($plan->stripe_plan . time()) }}TokenHandler = (setupIntent) => {
+                    // Insert the token ID into the form so it gets submitted to the server
+                    var form{{ md5($plan->stripe_plan . time()) }} = document.getElementById('checkout');
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.setAttribute('type', 'hidden');
+                    hiddenInput.setAttribute('name', 'paymentMethod');
+                    hiddenInput.setAttribute('value', setupIntent.payment_method);
+                    form{{ md5($plan->stripe_plan . time()) }}.appendChild(hiddenInput);
 
-                // Submit the form
-                form{{ md5($plan->stripe_plan . time()) }}.submit();
+                    // Submit the form
+                    form{{ md5($plan->stripe_plan . time()) }}.submit();
+                }
             }
         </script>
         {{-- @endcan --}}

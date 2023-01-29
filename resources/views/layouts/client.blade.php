@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="font-sans relative w-full antialiased bg-gray-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">
+<body class="font-sans relative w-full antialiased bg-zinc-50 dark:bg-gray-800 border-gray-100 dark:border-slate-800">
     <div id="__next" data-reactroot="">
         {{-- start::notifications --}}
         <x-notification>

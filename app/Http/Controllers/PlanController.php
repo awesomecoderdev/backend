@@ -6,7 +6,6 @@ use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StorePlanRequest;
 use App\Http\Requests\UpdatePlanRequest;
 
 class PlanController extends Controller
@@ -47,19 +46,19 @@ class PlanController extends Controller
     /**
      * Process Payments.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\UpdatePlanRequest  $request
      * @param  \App\Models\Plan $plan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Plan $plan)
+    public function update(UpdatePlanRequest $request, Plan $plan)
     {
         try {
             DB::beginTransaction(); // start db
 
-            $subscriptions = Auth::user()->newSubscription(
-                $plan->name,
-                $plan->stripe_plan,
-            )->create($request->paymentMethod);
+            // $subscriptions = Auth::user()->newSubscription(
+            //     $plan->name,
+            //     $plan->stripe_plan,
+            // )->create($request->paymentMethod);
 
             // dd($subscriptions);
 

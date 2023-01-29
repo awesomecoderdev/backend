@@ -82,6 +82,4 @@
             </div>
         </div>
     </x-client>
-    <x-popup />
-
 </x-client-layout>

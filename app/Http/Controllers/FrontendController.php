@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateProfileRequest;
-use App\Http\Requests\UpdateSettingsRequest;
 use App\Models\Chat;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\UpdateSettingsRequest;
 
 class FrontendController extends Controller
 {
@@ -104,7 +105,9 @@ class FrontendController extends Controller
      */
     public function pricing(Request $request)
     {
-        return view("client.pricing");
+        // $plans = Plan::limit(2)->get();
+        $plans = Plan::all();
+        return view("client.pricing", compact("plans"));
     }
 
     /**
