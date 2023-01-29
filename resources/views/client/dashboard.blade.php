@@ -335,10 +335,8 @@
         </div>
 
 
-        {{-- for charts --}}
         <script>
             if (typeof Chart !== 'undefined') {
-
                 if (document.getElementById("chart")) {
                     document.getElementById("chart").innerHTML =
                         '<canvas id="chart-line" height="600" style = "display: block; box-sizing: border-box; height: var(--canvas-height); width: 610.2px;" width = "1220" > < /canvas > ';
@@ -409,6 +407,7 @@
                     },
                 });
 
+
                 var ctx2 = document.getElementById("chart-line").getContext("2d");
 
                 var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
@@ -420,6 +419,8 @@
                 gradientStroke2.addColorStop(1, "rgba(20,23,39,0.1)");
                 gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
                 gradientStroke2.addColorStop(0, "rgba(20,23,39,0)");
+
+
 
 
                 new Chart(ctx2, {
@@ -495,6 +496,10 @@
                         },
                     },
                 });
+
+
+            } else {
+                window.location.reload();
             };
         </script>
     </x-client>
