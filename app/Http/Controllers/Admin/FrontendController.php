@@ -24,16 +24,14 @@ class FrontendController extends Controller
      */
     public function index(Request $request)
     {
-        // return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
-        //     ->whereBetween(
-        //         'created_at',
-        //         [Carbon::now()->subMonth(12), Carbon::now()]
-        //     )
-        //     ->groupBy('year', 'month')
-        //     ->orderBy("month")
-        //     ->get();
+        $cache_ttl = 60; // cache timer
+        $newUsers = Cache::remember('new_users_today', 60 * $cache_ttl, fn () => number_format(User::whereDate('created_at', Carbon::today())->count()));
+        $totalUsers = Cache::remember('total_users', 60 * $cache_ttl, fn () => number_format(User::count()));
+
+
         $cache_ttl = 1; // cache timer
-        $orders = Cache::remember('orders_chart', 60 * $cache_ttl, function () {
+
+        $orders = Cache::remember('order_charts', 60 * $cache_ttl, function () {
             return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
                 ->whereBetween(
                     'created_at',
@@ -44,7 +42,7 @@ class FrontendController extends Controller
                 ->get();
         });
 
-        $users = Cache::remember('users_chart', 60 * $cache_ttl, function () {
+        $users = Cache::remember('user_charts', 60 * $cache_ttl, function () {
             return User::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
                 ->whereBetween(
                     'created_at',
@@ -59,9 +57,9 @@ class FrontendController extends Controller
         $ordersArr =  $orders->pluck("count");
         $totalOrders = $orders->sum('count');
 
-        $totalUsers = $users->sum('count');
+        $totalUsersLast12Months =  $users->sum('count');
 
-        return view("dashboard", compact("orders", "ordersArr", "totalOrders", "users", "totalUsers"));
+        return view("dashboard", compact("orders", "ordersArr", "totalOrders", "users", "totalUsers", "newUsers", "totalUsersLast12Months"));
     }
 
     /**
