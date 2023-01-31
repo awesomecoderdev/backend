@@ -24,6 +24,30 @@
             "(prefers-color-scheme:dark)").matches ? true : false;
         var breackdown = window.screen.width > 786 ? 'lg' : (window.screen.width > 640 ? 'md' : 'sm');
     </script>
+    {{-- start::seo --}}
+    <meta name="description"
+        content="Get detailed information on the latest products available on the market. Our website offers in-depth analysis, reviews and comparisons.">
+    <meta name="keywords" content="products, information, reviews, comparisons, analysis">
+
+    <!-- Schema.org markup for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://www.example.com/",
+      "name": "My Website",
+      "description": "Get detailed information on the latest products available on the market. Our website offers in-depth analysis, reviews and comparisons.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.example.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    {{-- end::seo --}}
+
+
+
     {{-- <link rel="preload" href="{{ secure_asset('js/jquery.min.js') }}" as="script" type="text/javascript" /> --}}
     {{-- end::preload:js --}}
 

@@ -109,57 +109,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('chat', [FrontendController::class, "chat"])->middleware(["subscribed"])->name('client.chat');
 });
 
-Route::any("event", function () {
-    return auth()->user()->invoices();
+Route::any("schema", function () {
+    // return auth()->user()->invoices();
     // event(new SendMessage(fake()->text()));
-
+    return view("schema");
 });
-
-// {
-//     "users": [
-//         {
-//             "username": "string",
-//             "email": "string",
-//             "password": "string"
-//         }
-//     ],
-//     "posts": [
-//         {
-//             "title": "string",
-//             "content": "string",
-//             "author": "string",
-//             "date": "datetime",
-//             "categories": [
-//                 "string"
-//             ],
-//             "tags": [
-//                 "string"
-//             ],
-//             "media": [
-//                 {
-//                     "type": "string",
-//                     "url": "string"
-//                 }
-//             ]
-//         }
-//     ],
-//     "comments": [
-//         {
-//             "text": "string",
-//             "author": "string",
-//             "date": "datetime"
-//         }
-//     ],
-//     "categories": [
-//         {
-//             "name": "string",
-//             "description": "string"
-//         }
-//     ],
-//     "tags": [
-//         {
-//             "name": "string",
-//             "description": "string"
-//         }
-//     ]
-// }
