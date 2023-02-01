@@ -77,15 +77,6 @@ class Handler extends ExceptionHandler
                     'success'   => false,
                     'status'    => JsonResponse::HTTP_NOT_FOUND,
                     'message'   =>  "Not Found.",
-                    'request' =>  $subdomain,
-                ], JsonResponse::HTTP_NOT_FOUND);
-            }
-
-            if ($e instanceof MethodNotAllowedHttpException) {
-                return Response::json([
-                    'success'   => false,
-                    'status'    => JsonResponse::HTTP_NOT_FOUND,
-                    'message'   =>  "Not Found.",
                 ], JsonResponse::HTTP_NOT_FOUND);
             }
 
