@@ -57,7 +57,7 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'domain' => preg_replace('#^https?://#', '', rtrim(env('APP_URL', 'http://localhost'), '/')),
-    'subdomains' => ["www", "oauth", "admin", "api", "wpplagiarism",],
+    'subdomains' => ["www", "oauth", "admin", "api", "wpplagiarism", "localhost"],
 
     'asset_url' => env('ASSET_URL'),
 

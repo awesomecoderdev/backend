@@ -67,9 +67,11 @@ Route::group(['prefix' => 'v1/cart', "controller" => CartController::class,], fu
 });
 
 // webhook routes
-Route::post("v1/webhook/stripe", [WebhookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("api.cashier.webhook");
+Route::any("v1/webhook/stripe", [WebhookController::class, "handleWebhook"])->middleware("throttle:60,1")->name("api.cashier.webhook");
 
 // charts routes
 Route::group(['prefix' => 'v1/chart', 'as' => 'chart', "controller" => ChartController::class,], function () {
     Route::post("orders", "orders")->name('api.orders');
 });
+
+// stripe listen --forward-to http://localhost:8000/webhook/stripe

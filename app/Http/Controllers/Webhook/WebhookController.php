@@ -28,7 +28,7 @@ class WebhookController extends StripeWebhookController
     public function __construct()
     {
         if (config('cashier.webhook.secret')) {
-            // $this->middleware(VerifyWebhookSignature::class);
+            $this->middleware(VerifyWebhookSignature::class);
         }
     }
 
@@ -41,12 +41,13 @@ class WebhookController extends StripeWebhookController
     public function handleWebhook(Request $request)
     {
 
-        Log::channel("stripe")->info("Hello world");
-        dd($request->all());
+
         $payload = json_decode($request->getContent(), true);
         $method = 'handle' . Str::studly(str_replace('.', '_', $payload['type']));
-
         WebhookReceived::dispatch($payload);
+
+        // Log::channel("stripe")->info("Payload : " . $request->getContent());
+
 
         if (method_exists($this, $method)) {
             $this->setMaxNetworkRetries();

@@ -23,7 +23,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \App\Http\Middleware\EncryptCookies::class,
-        \App\Http\Middleware\ValidSubDomain::class,
+        // \App\Http\Middleware\ValidSubDomain::class,
         \App\Http\Middleware\OauthMiddleware::class,
         \App\Http\Middleware\SpeedBooster::class, // speed booster
     ];

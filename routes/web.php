@@ -4,15 +4,18 @@ use App\Events\SendMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\InvoiceController;
 
 //auth
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\Webhook\WebhookController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -22,8 +25,6 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\InvoiceController as ClientInvoiceController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\SubscriptionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,3 +123,6 @@ Route::any("schema", function (Request $request) {
     // event(new SendMessage(fake()->text()));
     return view("schema");
 });
+
+Route::any("webhook/stripe",  [WebhookController::class, "handleWebhook"]);
+// stripe listen --forward-to http://localhost:8000/webhook/stripe
