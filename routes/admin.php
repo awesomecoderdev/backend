@@ -42,6 +42,7 @@ Route::any('paginator/{per_page?}', [FrontendController::class, "paginator"])->n
 
 // index route
 Route::get('/', [FrontendController::class, "index"])->name('admin.index');
+Route::get('dashboard', [FrontendController::class, "index"])->name('admin.dashboard');
 
 // users
 Route::resource("users", UserController::class);

@@ -75,10 +75,10 @@
     <x-content>
         <div class="w-full relative mx-auto">
             <div class="relative">
-                <div class=" grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6 ">
+                <div class=" grid xl:grid-cols-6 lg:grid-cols-3 md:grid-cols-2 gap-6 ">
                     <div
                         class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <div class="relative overflow-hidden rounded-xl p-6">
+                        <div class="relative overflow-hidden rounded-xl xl:p-3 lg:p-4 p-6">
                             <span class="absolute text-emerald-400 right-3 top-3 text-2xl font-bold">
                                 +42%
                             </span>
@@ -106,7 +106,7 @@
                             </svg>
 
                             <h2 class="mt-4 font-display text-base font-semibold text-slate-900 dark:text-white">
-                                {{ __('Total Clients') }}
+                                {{ __('Clients') }}
                             </h2>
                             <p class="mt-1 text-2xl font-bold text-slate-700 dark:text-slate-400">
                                 {{ $totalUsers }}
@@ -115,7 +115,7 @@
                     </div>
                     <div
                         class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <div class="relative overflow-hidden rounded-xl p-6">
+                        <div class="relative overflow-hidden rounded-xl xl:p-3 lg:p-4 p-6">
                             <span class="absolute text-red-500 right-3 top-3 text-2xl font-bold">
                                 -22%
                             </span>
@@ -141,7 +141,7 @@
                                     d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
                             </svg>
                             <h2 class="mt-4 font-display text-base font-semibold text-slate-900 dark:text-white">
-                                {{ __('New Clients') }}
+                                {{ __('New') }}
                             </h2>
                             <p class="mt-1 text-2xl font-bold text-slate-700 dark:text-slate-400">
                                 {{ $newUsers }}
@@ -150,7 +150,80 @@
                     </div>
                     <div
                         class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <div class="relative overflow-hidden rounded-xl p-6">
+                        <div class="relative overflow-hidden rounded-xl xl:p-3 lg:p-4 p-6">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-transparent">
+                                <defs>
+                                    <radialGradient cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse" id=":r4:-gradient"
+                                        gradientTransform="matrix(0 21 -21 0 12 11)">
+                                        <stop stop-color="#0EA5E9"></stop>
+                                        <stop stop-color="#22D3EE" offset=".527"></stop>
+                                        <stop stop-color="#818CF8" offset="1"></stop>
+                                    </radialGradient>
+                                    <radialGradient cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse" id=":r4:-gradient-dark"
+                                        gradientTransform="matrix(0 24.5 -24.5 0 16 5.5)">
+                                        <stop stop-color="#0EA5E9"></stop>
+                                        <stop stop-color="#22D3EE" offset=".527"></stop>
+                                        <stop stop-color="#818CF8" offset="1"></stop>
+                                    </radialGradient>
+                                </defs>
+                                <path stroke-linecap="round" stroke-linejoin="round" fill="url(#:r4:-gradient)"
+                                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                            </svg>
+                            <h2 class="mt-4 font-display text-base font-semibold text-slate-900 dark:text-white">
+                                {{ __('Admins') }}
+                            </h2>
+                            <p class="mt-1 text-2xl font-bold text-slate-700 dark:text-slate-400">
+                                {{ $newUsers }}
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="relative overflow-hidden rounded-xl xl:p-3 lg:p-4 p-6">
+                            <span class="absolute text-emerald-400 right-3 top-3 text-2xl font-bold">
+                                +42%
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-transparent">
+                                <defs>
+                                    <radialGradient cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse" id=":r4:-gradient"
+                                        gradientTransform="matrix(0 21 -21 0 12 11)">
+                                        <stop stop-color="#0EA5E9"></stop>
+                                        <stop stop-color="#22D3EE" offset=".527"></stop>
+                                        <stop stop-color="#818CF8" offset="1"></stop>
+                                    </radialGradient>
+                                    <radialGradient cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse" id=":r4:-gradient-dark"
+                                        gradientTransform="matrix(0 24.5 -24.5 0 16 5.5)">
+                                        <stop stop-color="#0EA5E9"></stop>
+                                        <stop stop-color="#22D3EE" offset=".527"></stop>
+                                        <stop stop-color="#818CF8" offset="1"></stop>
+                                    </radialGradient>
+                                </defs>
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    stroke="url(#:r4:-gradient-dark)"
+                                    d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+
+                            </svg>
+
+
+
+                            <h2 class="mt-4 font-display text-base font-semibold text-slate-900 dark:text-white">
+                                {{ __('Websites') }}
+                            </h2>
+                            <p class="mt-1 text-2xl font-bold text-slate-700 dark:text-slate-400">
+                                {{ $totalUsers }}
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="relative overflow-hidden rounded-xl xl:p-3 lg:p-4 p-6">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-transparent">
                                 <defs>
@@ -184,7 +257,7 @@
                     </div>
                     <div
                         class=" relative transition-all cursor-pointer bg-white dark:bg-gray-900 hover:bg-zinc-50 dark:hover:bg-gray-800 rounded-xl border border-slate-200 dark:border-slate-800">
-                        <div class="relative overflow-hidden rounded-xl p-6">
+                        <div class="relative overflow-hidden rounded-xl xl:p-3 lg:p-4 p-6">
                             <span
                                 class="absolute {{ $orderPercentageIncrease >= 0 ? 'text-emerald-400' : 'text-red-400' }} right-3 top-3 text-2xl font-bold">
                                 {{ $orderPercentageIncrease >= 0 ? "+$orderPercentageIncrease%" : "$orderPercentageIncrease%" }}
@@ -204,76 +277,80 @@
                             </p>
                         </div>
                     </div>
+
                 </div>
-            </div>
-
-            {{-- charts --}}
-            <div class="relative w-full h-full grid xl:grid-cols-2 md:grid-cols-1 grid-cols-1 mt-6 gap-6">
+                {{-- charts --}}
                 <div
-                    class="border border-slate-200 dark:border-slate-800 relative w-full h-full rounded-2xl border-solid bg-gradient-to-tl from-[rgba(155,102,255,0.3)] to-[rgba(89,216,210,0.3)] dark:from-[rgba(156,102,255,0.1)] dark:to-[rgba(17,239,228,0.1)] bg-clip-border">
+                    class="relative w-full h-full grid xl:grid-cols-2 md:grid-cols-1 grid-cols-1 py-6 gap-6 dark:text-zinc-100">
+                    <div
+                        class="border border-slate-200 dark:border-slate-800 relative w-full h-full rounded-2xl border-solid bg-gradient-to-tl from-[rgba(155,102,255,0.03)] to-[rgba(89,216,210,0.03)] dark:from-[rgba(156,102,255,0.01)] dark:to-[rgba(17,239,228,0.01)] bg-clip-border ">
 
-                    <div class=" relative gird break-words ">
-                        <div class=" border-slate-600 rounded-t-2xl border-b-0 border-solid p-4 pb-8">
-                            <h4 class="font-semibold text-lg">{{ __('Users overview') }}</h4>
-                            <p class="leading-normal text-xs font-medium">
-                                <i class="fa fa-arrow-up text-emerald-400" aria-hidden="true"></i>
-                                <span class="font-semibold ">{{ $totalUsersLast12Months }}</span>
-                                {{ __('users in last 12 months') }}
-                            </p>
-                        </div>
-                        <div class="relative">
-                            <div class=" pr-1  rounded-b-xl">
-                                <div>
-                                    <canvas id="chart-bars" height="340"
-                                        style="display: block; box-sizing: border-box;height: var(--canvas-height); width: 415.8px;"
-                                        width="831"></canvas>
+                        <div class=" relative gird break-words ">
+                            <div class=" border-slate-600 rounded-t-2xl border-b-0 border-solid p-4 pb-8">
+                                <h4 class="font-semibold text-lg">{{ __('Users overview') }}</h4>
+                                <p class="leading-normal text-xs font-medium">
+                                    <i class="fa fa-arrow-up text-emerald-400" aria-hidden="true"></i>
+                                    <span class="font-semibold ">{{ $totalUsersLast12Months }}</span>
+                                    {{ __('users in last 12 months') }}
+                                </p>
+                            </div>
+                            <div class="relative">
+                                <div class=" pr-1  rounded-b-xl">
+                                    <div>
+                                        <canvas id="chart-bars" height="340"
+                                            style="display: block; box-sizing: border-box;height: var(--canvas-height); width: 415.8px;"
+                                            width="831"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div
-                    class="border border-slate-200 dark:border-slate-800 relative w-full h-full rounded-2xl border-solid bg-gradient-to-tl from-[rgba(155,102,255,0.3)] to-[rgba(89,216,210,0.3)] dark:from-[rgba(156,102,255,0.1)] dark:to-[rgba(17,239,228,0.1)] bg-clip-border">
+                    <div
+                        class="border border-slate-200 dark:border-slate-800 relative w-full h-full rounded-2xl border-solid bg-gradient-to-tl from-[rgba(155,102,255,0.03)] to-[rgba(89,216,210,0.03)] dark:from-[rgba(156,102,255,0.01)] dark:to-[rgba(17,239,228,0.01)] bg-clip-border">
 
-                    <div class=" relative flex min-w-0 flex-col break-words z-50 ">
-                        <div class="border-slate-600 mb-0 rounded-t-2xl border-b-0 border-solid p-4 pb-0">
-                            <h4 class="font-semibold text-lg">{{ __('Orders overview') }}</h4>
-                            <p class="leading-normal text-xs font-medium">
-                                <i class="fa fa-arrow-up text-emerald-400" aria-hidden="true"></i>
-                                <span class="font-semibold ">{{ $totalOrders }}</span>
-                                {{ __('orders in last 12 months') }}
-                            </p>
-                        </div>
-                        <div class="flex-auto p-4 ">
-                            <div id="chart">
-                                <div class="relative opacity-30 animate-pulse " style="height: var(--canvas-height);">
-                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
-                                    <div class="mb-5 w-2/5 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-4/6 mb-2.5"></div>
-                                    <div class="mb-5 w-4/5 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
-                                    <div class="mb-10 w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-                                    <div class="flex items-baseline mt-4 space-x-6">
-                                        <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-28 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-30 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-28 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-30 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
-                                        <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                        <div class=" relative flex min-w-0 flex-col break-words z-50 ">
+                            <div class="border-slate-600 mb-0 rounded-t-2xl border-b-0 border-solid p-4 pb-0">
+                                <h4 class="font-semibold text-lg">{{ __('Orders overview') }}</h4>
+                                <p class="leading-normal text-xs font-medium">
+                                    <i class="fa fa-arrow-up text-emerald-400" aria-hidden="true"></i>
+                                    <span class="font-semibold ">{{ $totalOrders }}</span>
+                                    {{ __('orders in last 12 months') }}
+                                </p>
+                            </div>
+                            <div class="flex-auto p-4 ">
+                                <div id="chart">
+                                    <div class="relative opacity-30 animate-pulse "
+                                        style="height: var(--canvas-height);">
+                                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
+                                        <div class="mb-5 w-2/5 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-4/6 mb-2.5">
+                                        </div>
+                                        <div class="mb-5 w-4/5 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2.5"></div>
+                                        <div class="mb-10 w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+                                        <div class="flex items-baseline mt-4 space-x-6">
+                                            <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-28 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-30 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-28 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-30 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-40 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                            <div class="w-full h-24 bg-gray-200 rounded-t-lg dark:bg-gray-700"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -296,6 +373,7 @@
                             borderRadius: 4,
                             borderSkipped: false,
                             backgroundColor: isDarkMode ? "#6366f1" : "#3A416F",
+                            backgroundColor: isDarkMode ? "#a5b4fc" : "#818cf8",
                             data: usersData,
                             maxBarThickness: 6,
                         }, ],
@@ -367,10 +445,30 @@
                 gradientStroke1.addColorStop(0.2, "rgba(72,72,176,0.0)");
                 gradientStroke1.addColorStop(0, "rgba(203,12,159,0)");
 
-                var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-                gradientStroke2.addColorStop(1, "rgba(20,23,39,0.1)");
-                gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
-                gradientStroke2.addColorStop(0, "rgba(20,23,39,0)");
+                var color = ctx2.createLinearGradient(0, 230, 0, 50);
+                color.addColorStop(1, "rgba(129,140,248,0.2)");
+                color.addColorStop(0.2, "rgba(129,140,248,0.1)");
+                color.addColorStop(0, "rgba(129,140,248,0.05)");
+
+                /*
+                ordersArr = [
+                    1, 2, 3, 2, 5, 6, 7, 5, 8, 10, 11, 30,
+                    1, 2, 3, 2, 3, 2, 1, 2, 3, 4, 2, 3,
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+
+                ];
+                ordersArr = [
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+                ];
+
+                last12MonthsOrders = [
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+                    30, 40, 45, 50, 55, 50, 40, 35, 45, 60, 55, 65,
+                ];
+                */
 
 
                 new Chart(ctx2, {
@@ -382,9 +480,9 @@
                             tension: 0.4,
                             borderWidth: 0,
                             pointRadius: 0,
-                            borderColor: "#6366f1",
-                            borderWidth: 3,
-                            backgroundColor: gradientStroke2,
+                            borderColor: isDarkMode ? "#a5b4fc" : "#818cf8",
+                            borderWidth: 2,
+                            backgroundColor: color,
                             fill: true,
                             data: ordersArr,
                             maxBarThickness: 6,

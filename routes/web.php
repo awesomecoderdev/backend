@@ -109,7 +109,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('chat', [FrontendController::class, "chat"])->middleware(["subscribed"])->name('client.chat');
 });
 
-Route::any("schema", function () {
+Route::any("schema", function (Request $request) {
+    // $referrer = $request->headers->get('referer');
+    // dd($referrer);
+    // // Use the referrer URL to determine where the user is coming from
+    // // For example, you can check if the referrer contains a certain string
+    // if (strpos($referrer, 'google.com') !== false) {
+    //     // User came from Google
+    // }
+
     // return auth()->user()->invoices();
     // event(new SendMessage(fake()->text()));
     return view("schema");

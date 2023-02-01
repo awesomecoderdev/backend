@@ -3,11 +3,40 @@
         <title>{{ __('Schema') }} {{ config('settings.separator') }}
             {{ __(config('settings.title')) }}</title>
     @endsection
+    <div class="group dark:bg-white/2.5">
+        <div class="relative">
+            <pre class="overflow-x-auto p-4 text-xs text-white"><code class="language-json"><span><span style="color: var(--shiki-color-text)">{</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"id"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-string-expression)">"WAz8eIbvDR60rouK"</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"username"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-string-expression)">"FrankMcCallister"</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"phone_number"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-string-expression)">"1-800-759-3000"</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"avatar_url"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-string-expression)">"https://assets.protocol.chat/avatars/frank.jpg"</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"display_name"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-string-expression)">"UncleFrank"</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"conversation_id"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-string-expression)">"xgQQXg3hrtjh7AvZ"</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"last_active_at"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-constant)">705103200</span><span style="color: var(--shiki-token-punctuation)">,</span></span>
+        <span><span style="color: var(--shiki-color-text)">  </span><span style="color: var(--shiki-token-keyword)">"created_at"</span><span style="color: var(--shiki-token-punctuation)">:</span><span style="color: var(--shiki-color-text)"> </span><span style="color: var(--shiki-token-constant)">692233200</span></span>
+        <span><span style="color: var(--shiki-color-text)">}</span></span>
+        <span></span></code></pre><button type="button"
+                class="group/button absolute top-3.5 right-4 overflow-hidden rounded-full py-1 pl-2 pr-3 text-2xs font-medium opacity-0 backdrop-blur transition focus:opacity-100 group-hover:opacity-100 bg-white/5 hover:bg-white/7.5 dark:bg-white/2.5 dark:hover:bg-white/5"><span
+                    aria-hidden="false"
+                    class="pointer-events-none flex items-center gap-0.5 text-zinc-400 transition duration-300"><svg
+                        viewBox="0 0 20 20" aria-hidden="true"
+                        class="h-5 w-5 fill-zinc-500/20 stroke-zinc-500 transition-colors group-hover/button:stroke-zinc-400">
+                        <path stroke-width="0"
+                            d="M5.5 13.5v-5a2 2 0 0 1 2-2l.447-.894A2 2 0 0 1 9.737 4.5h.527a2 2 0 0 1 1.789 1.106l.447.894a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2Z">
+                        </path>
+                        <path fill="none" stroke-linejoin="round"
+                            d="M12.5 6.5a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2m5 0-.447-.894a2 2 0 0 0-1.79-1.106h-.527a2 2 0 0 0-1.789 1.106L7.5 6.5m5 0-1 1h-3l-1-1">
+                        </path>
+                    </svg>Copy</span><span aria-hidden="true"
+                    class="pointer-events-none absolute inset-0 flex items-center justify-center text-emerald-400 transition duration-300 translate-y-1.5 opacity-0">Copied!</span></button>
+        </div>
+    </div>
 
     <div class="flex flex-col items-center text-sm h-full dark:bg-gray-800">
         <div
             class="w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800">
-            <div class="text-base gap-4 md:gap-6 m-auto md:max-w-2xl lg:max-w-2xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0">
+            <div
+                class="text-base gap-4 md:gap-6 m-auto md:max-w-2xl lg:max-w-2xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0">
                 <div class="w-[30px] flex flex-col relative items-end">
                     <div class="relative flex"><span
                             style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"><span
@@ -641,16 +670,16 @@
                             <button
                                 class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400"><svg
                                     stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em"
-                                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"
+                                    height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
                                     </path>
                                 </svg></button><button
                                 class="p-1 rounded-md hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 disabled:dark:hover:text-gray-400"><svg
                                     stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4" height="1em"
-                                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"
+                                    height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17">
                                     </path>

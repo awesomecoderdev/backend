@@ -25,8 +25,8 @@ class FrontendController extends Controller
     public function index(Request $request)
     {
         $cache_ttl = 60; // cache timer
-        $newUsers = Cache::remember('new_users_today', 60 * $cache_ttl, fn () => number_format(User::whereNot("isAdmin", true)->whereDate('created_at', Carbon::today())->count()));
-        $totalUsers = Cache::remember('total_users', 60 * $cache_ttl, fn () => number_format(User::whereNot("isAdmin", true)->count()));
+        $newUsers = Cache::remember('new_users_today', 60 * $cache_ttl, fn () => number_format(User::whereNot("isAdmin", true)->whereDate('created_at', Carbon::today())->count(), 0));
+        $totalUsers = Cache::remember('total_users', 60 * $cache_ttl, fn () => number_format(User::whereNot("isAdmin", true)->count(), 0));
 
         $currentWeekOrders =  Cache::remember('currentWeekOrders', 60 * $cache_ttl, function () {
             return Order::selectRaw('year(created_at) year, month(created_at) month, count(*) count')
@@ -60,8 +60,8 @@ class FrontendController extends Controller
             $orderPercentageIncrease = 0;
         }
 
-        $orderPercentageIncrease = round($orderPercentageIncrease, 2);
-        $orderPercentageIncrease = number_format($orderPercentageIncrease, 2);
+        $orderPercentageIncrease = round($orderPercentageIncrease, 0);
+        $orderPercentageIncrease = number_format($orderPercentageIncrease, 0);
 
         $cache_ttl = 1; // cache timer
 
