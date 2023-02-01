@@ -18,6 +18,7 @@ class ValidSubDomain
     public function handle(Request $request, Closure $next)
     {
         $subdomain = strtok(preg_replace('#^https?://#', '', rtrim($request->url(), '/')), '.');
+        $subdomain = strtok($subdomain, ':'); // for localhost
         abort_if(!in_array($subdomain, config("app.subdomains")), \Illuminate\Http\Response::HTTP_NOT_FOUND);
         abort_if($subdomain == "admin" && (!Auth::user() || !Auth::user()->admin()), \Illuminate\Http\Response::HTTP_NOT_FOUND);
 

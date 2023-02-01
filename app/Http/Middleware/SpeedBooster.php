@@ -19,6 +19,10 @@ class SpeedBooster
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->wantsJson()) {
+            return $next($request);
+        }
+
         $output = $next($request);
         $excerpt = $request->route() != null ? $request->route()->getName() : "";
         if (config("speedbooster.enable") && !in_array($excerpt, config("speedbooster.excerpt")) && $output->status() != 500) { // env("APP_DEBUG") == true

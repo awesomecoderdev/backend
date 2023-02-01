@@ -68,6 +68,7 @@ return [
     'excerpt' => [
         'alpine',
         'admin.alpine',
+        'client.webhook.stripe'
     ],
 
 
