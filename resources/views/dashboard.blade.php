@@ -250,8 +250,8 @@
                             <h2 class="mt-4 font-display text-base font-semibold text-slate-900 dark:text-white">
                                 {{ __('Sales') }}
                             </h2>
-                            <p class="mt-1 text-2xl font-bold text-slate-700 dark:text-slate-400">
-                                ${{ number_format(2300.5454, 2) }}
+                            <p class="mt-1 text-lg font-bold text-slate-700 dark:text-slate-400">
+                                <span class="text-2xl">$</span>{{ number_format(2300.5454, 2) }}
                             </p>
                         </div>
                     </div>
