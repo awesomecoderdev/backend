@@ -23,6 +23,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\InvoiceController as ClientInvoiceController;
 
 /*
@@ -48,6 +49,7 @@ Route::any('paginator/{per_page?}', [FrontendController::class, "paginator"])->n
 
 // Index route
 Route::any('/', [FrontendController::class, "index"])->name("index");
+Route::any("stripe/webhook", [ErrorController::class, "abort"]); // remove route
 
 // scripts
 Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('chunk');
@@ -123,5 +125,8 @@ Route::any("schema", function (Request $request) {
     return view("schema");
 });
 
+// webhook testing route
 Route::any("webhook/stripe",  [WebhookController::class, "handleWebhook"])->name("client.webhook.stripe");
+
+
 // stripe listen --forward-to http://localhost:8000/webhook/stripe
