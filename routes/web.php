@@ -2,12 +2,16 @@
 
 use App\Events\SendMessage;
 use Illuminate\Http\Request;
+use App\Jobs\ProcessDataScraperAI;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\OrderController;
 
 //auth
+use App\Http\Controllers\PlagiarismAI;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\ErrorController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\WebsiteController;
@@ -23,7 +27,6 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\InvoiceController as ClientInvoiceController;
 
 /*
@@ -50,6 +53,9 @@ Route::any('paginator/{per_page?}', [FrontendController::class, "paginator"])->n
 // Index route
 Route::any('/', [FrontendController::class, "index"])->name("index");
 Route::any("stripe/webhook", [ErrorController::class, "abort"]); // remove route
+
+// webhook testing route
+Route::post("webhook/stripe",  [WebhookController::class, "handleWebhook"])->name("client.webhook.stripe"); // stripe listen --forward-to http://localhost:8000/webhook/stripe
 
 // scripts
 Route::any('js/chunk_{time}.js', [FrontendController::class, "chunk"])->name('chunk');
@@ -120,13 +126,21 @@ Route::any("schema", function (Request $request) {
     //     // User came from Google
     // }
 
+    // $ai = new PlagiarismAI("ai world");
+    // $ai->run();
+    // $ai->process();
+    // $data = Cache::get("linkss");
+    // ProcessDataScraperAI::dispatch($data);
+    // dd($data);
+
+    $links = "plagiarism/json/links.json";
+    $links_path = resource_path($links);
+    $data = Illuminate\Support\Facades\File::get($links_path);
+    ProcessDataScraperAI::dispatch($data);
+
+    return $data;
+
     // return auth()->user()->invoices();
     // event(new SendMessage(fake()->text()));
     return view("schema");
 });
-
-// webhook testing route
-Route::post("webhook/stripe",  [WebhookController::class, "handleWebhook"])->name("client.webhook.stripe");
-
-
-// stripe listen --forward-to http://localhost:8000/webhook/stripe
