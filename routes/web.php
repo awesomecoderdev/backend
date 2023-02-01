@@ -126,7 +126,7 @@ Route::any("schema", function (Request $request) {
 });
 
 // webhook testing route
-Route::any("webhook/stripe",  [WebhookController::class, "handleWebhook"])->name("client.webhook.stripe");
+Route::post("webhook/stripe",  [WebhookController::class, "handleWebhook"])->name("client.webhook.stripe");
 
 
 // stripe listen --forward-to http://localhost:8000/webhook/stripe
