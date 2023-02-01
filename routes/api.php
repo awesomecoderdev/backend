@@ -7,7 +7,7 @@ use AwesomeCoder\ShoppingCart\Facades\Cart;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\API\FrontendController;
-use App\Http\Controllers\Webhook\WebhookController;
+use Laravel\Cashier\Http\Controllers\WebhookController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 
 /*
