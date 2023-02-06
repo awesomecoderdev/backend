@@ -102,8 +102,8 @@
                             <span class="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
                             </span>
                         </div>
-                        <div class="relative w-full p-6 overflow-y-auto h-auto max-h-[65vh]">
-                            <div class="space-y-4" id="inbox{{ $receiver->id }}">
+                        <div class="relative w-full overflow-y-auto h-auto max-h-[65vh]">
+                            <div class="space-y-4  p-6" id="inbox{{ $receiver->id }}">
                                 @foreach ($chats as $msg)
                                     <div
                                         class="relative group cursor-text w-full flex {{ $msg->user_id == Auth::user()->id ? 'justify-end' : 'justify-start' }}">
