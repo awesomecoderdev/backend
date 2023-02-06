@@ -48,7 +48,7 @@ class FrontendController extends Controller
 
         try {
             $difference = $currentWeekOrders - $lastWeekOrders;
-            $orderPercentageIncrease = ($difference / $lastWeekOrders) * 100;
+            // $orderPercentageIncrease = ($difference / $lastWeekOrders) * 100;
             // $difference = 0;
             // $lastWeekOrders = 0;
             if ($difference != 0 && $lastWeekOrders !== 0) {

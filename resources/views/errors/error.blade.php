@@ -63,7 +63,7 @@
                             transform="translate(-205 -193.89598)" fill="#6c63ff" />
                     </svg>
                     <div class="flex justify-center text-sm text-center text-gray-600 dark:text-white">
-                        <a href="{{ route('index') }}"
+                        <a onclick="history.back()"
                             class="relative cursor-pointer rounded-md bg-white font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                             <span>{{ __('Go back') }}</span>
                         </a>

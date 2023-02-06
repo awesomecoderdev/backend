@@ -52,12 +52,12 @@
                                             class="block ml-2 text-sm text-gray-600 dark:text-slate-50">{{ Str::limit($user->chats->message, 18) }}</span>
                                     </div>
                                     <span
-                                        class="block ml-2 text-xs text-gray-600 dark:text-slate-500 absolute bottom-0 right-0 p-2">{{ Str::limit(
+                                        class="block ml-2 text-xs text-[10px] text-gray-600 dark:text-slate-500 absolute bottom-0 right-0 p-2">{{ Str::limit(
                                             $user->chats->created_at->diffForHumans([
                                                 // 'parts' => 2,
                                                 // 'parts' => 3,
                                                 // 'join' => ', ',
-                                                // 'short' => true,
+                                                'short' => true,
                                             ]),
                                             10,
                                             '...',
@@ -103,7 +103,7 @@
                             </span>
                         </div>
                         <div class="relative w-full p-6 overflow-y-auto h-auto max-h-[65vh]">
-                            <div class="space-y-4">
+                            <div class="space-y-4" id="inbox{{ $receiver->id }}">
                                 @foreach ($chats as $msg)
                                     <div
                                         class="relative group cursor-text w-full flex {{ $msg->user_id == Auth::user()->id ? 'justify-end' : 'justify-start' }}">
@@ -129,8 +129,15 @@
                             </div>
                         </div>
 
+
+                        <script>
+                            document.getElementById('inbox{{ $receiver->id }}').scrollIntoView({
+                                block: 'end'
+                            });
+                        </script>
+
                         <div
-                            class="absolute bottom-0 w-full flex items-center justify-between p-3 border-y border-gray-200 dark:border-slate-800">
+                            class="absolute bottom-0 w-full flex items-center justify-between p-3 border-y bg-gray-100 dark:bg-slate-800 border-gray-200 dark:border-slate-800">
                             <input type="text" placeholder="Message"
                                 class="block w-full py-2 pl-4 text-sm mx-3 bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-white placeholder:text-gray-500 dark:placeholder:text-slate-100 rounded-full outline-none focus:text-gray-700"
                                 name="message" required />

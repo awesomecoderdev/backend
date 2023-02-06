@@ -109,7 +109,7 @@
     }
 </script>
 
-<div id="popup" class="relative hidden z-10  " aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div id="popup" class="relative hidden z-[100]  " aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div id="backdrop" class="fixed inset-0 bg-slate-900/30 dark:bg-black/50 transition-all duration-300 ">
     </div>
     <div class="fixed inset-0 z-10 overflow-y-auto">

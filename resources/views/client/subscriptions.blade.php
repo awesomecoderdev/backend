@@ -160,7 +160,7 @@
                             <circle cx="433.63626" cy="105.17383" r="12.18187" fill="#fff" />
                         </svg>
                         <div class=" text-sm text-center text-gray-600">
-                            <a href="{{ route('orders.index') }}"
+                            <a onclick="history.back()"
                                 class="relative cursor-pointer rounded-md  font-medium text-primary-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2 hover:text-primary-500">
                                 <span>{{ __('Go back') }}</span>
                             </a>
