@@ -23,7 +23,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \App\Http\Middleware\EncryptCookies::class,
-        \App\Http\Middleware\ValidSubDomain::class,
+        // \App\Http\Middleware\ValidSubDomain::class,
         \App\Http\Middleware\OauthMiddleware::class,
         \App\Http\Middleware\SpeedBooster::class, // speed booster
     ];
@@ -46,9 +46,10 @@ class Kernel extends HttpKernel
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \App\Http\Middleware\ForceApiAcceptJSON::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            // \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];

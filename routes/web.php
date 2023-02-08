@@ -133,12 +133,12 @@ Route::any("schema", function (Request $request) {
     // ProcessDataScraperAI::dispatch($data);
     // dd($data);
 
-    $links = "plagiarism/json/links.json";
-    $links_path = resource_path($links);
-    $data = Illuminate\Support\Facades\File::get($links_path);
-    ProcessDataScraperAI::dispatch($data);
+    // $links = "plagiarism/json/links.json";
+    // $links_path = resource_path($links);
+    // $data = Illuminate\Support\Facades\File::get($links_path);
+    // ProcessDataScraperAI::dispatch($data);
 
-    return $data;
+    // return $data;
 
     // return auth()->user()->invoices();
     // event(new SendMessage(fake()->text()));
