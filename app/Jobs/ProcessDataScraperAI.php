@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 
 class ProcessDataScraperAI implements ShouldQueue
@@ -69,7 +70,7 @@ class ProcessDataScraperAI implements ShouldQueue
                             File::makeDirectory($path, 0777, true, true);
                         }
                         try {
-                            $response = Http::get($link);
+                            $response = Http::timeout(5)->get($link);
                             if ($response->successful() && $response->status() == 200) {
                                 $name = md5($link);
                                 $htmlDom = new DOMDocument();
@@ -91,6 +92,9 @@ class ProcessDataScraperAI implements ShouldQueue
                         } catch (Throwable $e) {
                             continue;
                         } catch (Exception $e) {
+                            continue;
+                        } catch (RequestException $e) {
+                            // Handle timeout or other request errors here
                             continue;
                         }
                     }
