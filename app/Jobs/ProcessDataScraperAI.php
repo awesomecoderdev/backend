@@ -18,6 +18,14 @@ class ProcessDataScraperAI implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+
+    /**
+     * Retry job instance $tries times if failed.
+     *
+     * @return int
+     */
+    // public $tries = 3;
+
     /**
      * Create a new job instance.
      *
@@ -89,5 +97,17 @@ class ProcessDataScraperAI implements ShouldQueue
                 }
             }
         }
+    }
+
+
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function failed(\Throwable $e)
+    {
+        info("The job is canceled.");
     }
 }

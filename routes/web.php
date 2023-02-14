@@ -126,7 +126,7 @@ Route::any("schema", function (Request $request) {
     //     // User came from Google
     // }
 
-    // $ai = new PlagiarismAI("ai world");
+    // $ai = new PlagiarismAI("top 10 laptop brands");
     // $ai->run();
     // $ai->process();
     // $data = Cache::get("linkss");
@@ -142,5 +142,6 @@ Route::any("schema", function (Request $request) {
 
     // return auth()->user()->invoices();
     // event(new SendMessage(fake()->text()));
+
     return view("schema");
 });
