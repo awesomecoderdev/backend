@@ -29,6 +29,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        return redirect()->to(base(route("client.dashboard")))->with([
+            "success" => __("You have successfully logged in.")
+        ]);
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
