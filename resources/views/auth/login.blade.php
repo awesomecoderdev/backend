@@ -125,7 +125,7 @@
                                             for="email">{{ __('Email Address') }}</label>
                                         <input type="text" name="email" id="email" autocomplete="email"
                                             value="{{ old('email') }}" placeholder="{{ __('Email Address') }}"
-                                            class="px-4 py-3 block w-full rounded-lg border-spacing-1 border-2 @error('email') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-primary-300">
+                                            class="dark:placeholder-zinc-400 dark:text-white px-4 py-3 block w-full rounded-lg border-spacing-1 border-2 @error('email') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-primary-300">
                                     </div>
 
                                     <div class="mt-4">
@@ -139,7 +139,7 @@
 
                                         <input id="password" name="password" value="{{ old('password') }}"
                                             placeholder="{{ __('Enter Password') }}"
-                                            class="px-4 py-3 block w-full rounded-lg border-spacing-1 border-2 @error('password') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-primary-300"
+                                            class="dark:placeholder-zinc-400 dark:text-white  px-4 py-3 block w-full rounded-lg border-spacing-1 border-2 @error('password') border-red-200 ring-1 ring-red-500 focus:border-red-500 focus:ring-red-500 @else focus:border-primary-500 focus:ring-primary-500 border-gray-200 dark:border-slate-800 @enderror  dark:bg-gray-800  shadow-sm  sm:text-sm focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-primary-300"
                                             type="password" placeholder="{{ __('Password') }}" />
                                     </div>
 
@@ -151,12 +151,12 @@
                                     </div>
 
                                 </form>
-                                <div class="flex items-center justify-between mt-4">
-                                    <span class="w-1/5 border-b dark:border-primary-600 md:w-1/4"></span>
-                                    <a href="{{ route('register') }}"
-                                        class="text-xs text-slate-500 uppercase dark:text-slate-400 hover:underline">{{ __('or sign up') }}</a>
-
-                                    <span class="w-1/5 border-b dark:border-primary-600 md:w-1/4"></span>
+                                <div class="flex items-center justify-center mt-4">
+                                    <p class=" text-xs font-light text-center text-gray-400">
+                                        Don't have an account?
+                                        <a href="{{ route('register') }}"
+                                            class="font-medium text-gray-700 dark:text-gray-200 hover:underline">{{ __('Create One') }}</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

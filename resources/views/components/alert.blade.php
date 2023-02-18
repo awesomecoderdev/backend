@@ -26,7 +26,17 @@
     {{ $alertKey }} = true;
 }, {{ $open }});
 @if($autoclose == 'true')
-setTimeout(() => { {{ $alertKey }} = false; }, {{ $close }});
+setTimeout(() => {
+    {{ $alertKey }} = false;
+    setTimeout(() => {
+        document.getElementById('{{ $alertKey }}').remove();
+        if (document.getElementById('notifications').innerText == '') {
+            document.getElementById('notificationContainer').classList.add('pointer-events-none');
+        } else {
+            document.getElementById('notificationContainer').classList.remove('pointer-events-none');
+        }
+    }, 1000);
+}, {{ $close }});
 @endif" x-show="{{ $alertKey }}"
     x-transition:enter="transform ease-in-out duration-200 transition"
     x-transition:enter-start="translate-y-2 opacity-0 md:translate-y-0 md:translate-x-2"
