@@ -155,7 +155,7 @@
                                     <p class=" text-xs font-light text-center text-gray-400">
                                         Don't have an account?
                                         <a href="{{ route('register') }}"
-                                            class="font-medium text-gray-700 dark:text-gray-200 hover:underline">{{ __('Create One') }}</a>
+                                            class="font-medium text-gray-700 dark:text-gray-200 hover:underline">{{ __('Sign Up') }}</a>
                                     </p>
                                 </div>
                             </div>

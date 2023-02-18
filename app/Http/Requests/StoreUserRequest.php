@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -31,6 +32,7 @@ class StoreUserRequest extends FormRequest
         return [
             "first_name" => "required|string|min:2",
             "last_name" => "required|string|min:2",
+            // "phone" => "required|numeric",
             "email" => "required|email|unique:users,email",
             "password" => "required|min:8|max:12",
             "confirmed" => "required|same:password",
@@ -74,7 +76,9 @@ class StoreUserRequest extends FormRequest
      */
     public function failedValidation(Validator $validator)
     {
-        if (!Auth::user()->admin()) {
+        $subdomain = strtok(preg_replace('#^https?://#', '', rtrim($this->url(), '/')), '.');
+        $error = $subdomain == "api";
+        if ($error) {
             throw new HttpResponseException(response()->json([
                 'success'   => false,
                 'message'   => 'Validation errors',
