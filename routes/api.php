@@ -75,3 +75,36 @@ Route::group(['prefix' => 'v1/chart', 'as' => 'chart', "controller" => ChartCont
 });
 
 // stripe listen --forward-to http://localhost:8000/webhook/stripe
+
+
+// function lcs($X, $Y)
+// {
+//     $m = strlen($X);
+//     $n = strlen($Y);
+//     $L = array();
+
+//     for ($i = 0; $i <= $m; $i++) {
+//         for ($j = 0; $j <= $n; $j++) {
+//             if ($i == 0 || $j == 0)
+//                 $L[$i][$j] = 0;
+//             else if ($X[$i - 1] == $Y[$j - 1])
+//                 $L[$i][$j] = $L[$i - 1][$j - 1] + 1;
+//             else
+//                 $L[$i][$j] = max($L[$i - 1][$j], $L[$i][$j - 1]);
+//         }
+//     }
+//     return $L[$m][$n];
+// }
+
+// function similarity_score($X, $Y)
+// {
+//     $lcs_length = lcs($X, $Y);
+//     $max_length = max(strlen($X), strlen($Y));
+//     return $lcs_length / $max_length;
+// }
+
+// // Test
+// $X = "This is a test string, I love you";
+// $Y = "This I is another love test you string ";
+// $score = similarity_score($X, $Y);
+// echo "Similarity Score: " . $score;

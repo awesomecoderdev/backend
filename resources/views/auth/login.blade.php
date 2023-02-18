@@ -3,15 +3,15 @@
         <title>{{ __('Log in') }} {{ config('settings.separator') }}
             {{ __(config('settings.title')) }}</title>
     @endsection
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <section class="min-h-screen bg-cover "
+    {{-- <x-auth-session-status class="mb-4" :status="session('status')" /> --}}
+
+    <section class="min-h-screen bg-cover"
         style="background-image: url('https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')">
         <div class="flex flex-col min-h-screen bg-black/60">
-            <x-container class=" flex flex-col flex-1 px-6 py-12 mx-auto">
-                <div class="flex-1 lg:flex lg:items-center lg:-mx-6">
-                    <div class="text-white lg:w-1/2 lg:mx-6">
+            <x-container class=" flex flex-col flex-1 lg:px-6 px-4 lg:py-12 mx-auto">
+                <div class="flex-1 flex lg:items-center justify-between lg:-mx-6 max-lg:flex-col-reverse">
+                    <div class="text-white lg:w-1/2 lg:mx-6 py-10">
                         <h1 class="text-3xl font-semibold capitalize lg:text-4xl">
                             {{ __('AI assistant for check plagiarism') }}</h1>
 
@@ -75,9 +75,9 @@
                         </div>
                     </div>
 
-                    <div class="mt-8 lg:w-1/2 lg:mx-6">
+                    <div class="md:mt-8 lg:w-1/2 lg:mx-6 md:px-5 -mx-4 ">
                         <div
-                            class="w-full px-8 py-10 mx-auto overflow-hidden bg-white shadow-2xl rounded-xl dark:bg-slate-900 lg:max-w-xl">
+                            class="w-full p-4 lg:px-8 md:px-6 lg:py-10 md:py-8 py-10 mx-auto overflow-hidden bg-white shadow-2xl md:rounded-xl dark:bg-slate-900 lg:max-w-xl">
                             <a href="{{ route('index') }}"
                                 class="relative flex justify-center mb-4 transform scale-125">
                                 <x-application-logo />
