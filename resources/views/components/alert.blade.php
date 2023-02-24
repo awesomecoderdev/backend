@@ -23,18 +23,23 @@
 {{-- :class="{ 'block': {{ $alertKey }}, 'hidden': !{{ $alertKey }} }" --}}
 <div x-data="{ '{{ $alertKey }}': false }" id="{{ $alertKey }}" x-init="setTimeout(() => {
     document.getElementById('{{ $alertKey }}').classList.remove('hidden');
+    if (document.getElementById('notifications').innerText == '') {
+        document.getElementById('notificationContainer').classList.add('pointer-events-none');
+    } else {
+        document.getElementById('notificationContainer').classList.remove('pointer-events-none');
+    }
     {{ $alertKey }} = true;
 }, {{ $open }});
 @if($autoclose == 'true')
 setTimeout(() => {
     {{ $alertKey }} = false;
     setTimeout(() => {
-        document.getElementById('{{ $alertKey }}').remove();
         if (document.getElementById('notifications').innerText == '') {
             document.getElementById('notificationContainer').classList.add('pointer-events-none');
         } else {
             document.getElementById('notificationContainer').classList.remove('pointer-events-none');
         }
+        document.getElementById('{{ $alertKey }}').remove();
     }, 1000);
 }, {{ $close }});
 @endif" x-show="{{ $alertKey }}"
