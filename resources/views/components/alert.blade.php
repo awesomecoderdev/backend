@@ -23,25 +23,21 @@
 {{-- :class="{ 'block': {{ $alertKey }}, 'hidden': !{{ $alertKey }} }" --}}
 <div x-data="{ '{{ $alertKey }}': false }" id="{{ $alertKey }}" x-init="setTimeout(() => {
     document.getElementById('{{ $alertKey }}').classList.remove('hidden');
-    if (document.getElementById('notifications').innerText == '') {
-        document.getElementById('notificationContainer').classList.add('pointer-events-none');
-    } else {
-        document.getElementById('notificationContainer').classList.remove('pointer-events-none');
-    }
+    document.getElementById('notificationContainer').classList.remove('pointer-events-none');
     {{ $alertKey }} = true;
 }, {{ $open }});
 @if($autoclose == 'true')
 setTimeout(() => {
     {{ $alertKey }} = false;
-    setTimeout(() => {
-        if (document.getElementById('notifications').innerText == '') {
-            document.getElementById('notificationContainer').classList.add('pointer-events-none');
-        } else {
-            document.getElementById('notificationContainer').classList.remove('pointer-events-none');
-        }
-        document.getElementById('{{ $alertKey }}').remove();
-    }, 1000);
+    document.getElementById('{{ $alertKey }}').remove();
 }, {{ $close }});
+setInterval(() => {
+    if (document.getElementById('notifications').innerText == '') {
+        document.getElementById('notificationContainer').classList.add('pointer-events-none');
+    } else {
+        document.getElementById('notificationContainer').classList.remove('pointer-events-none');
+    }
+});
 @endif" x-show="{{ $alertKey }}"
     x-transition:enter="transform ease-in-out duration-200 transition"
     x-transition:enter-start="translate-y-2 opacity-0 md:translate-y-0 md:translate-x-2"
