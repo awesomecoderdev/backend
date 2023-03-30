@@ -72,35 +72,34 @@
             </div>
 
 
-            <p class="mt-6 text-gray-500 dark:text-gray-400">
+            <p class="mt-6 text-gray-500 dark:text-gray-400 max-w-md w-full">
                 {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
             </p>
 
             <div class="w-full max-w-md mx-auto mt-6">
+                {{--
                 <form>
-                    {{--
                     <button
                         class="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                         “Continue”
                     </button> --}}
-                    <form method="POST" action="{{ route('verification.send') }}">
-                        @csrf
+                <form method="POST" class="relative flex justify-center" action="{{ route('verification.send') }}">
+                    @csrf
 
-                        <div>
-                            <button
-                                class="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                                {{ __('Resend Verification Email') }}
-                            </button>
-                        </div>
-                    </form>
+                    <button
+                        class="w-auto mx-auto px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        {{ __('Resend Verification Email') }}
+                    </button>
+                </form>
 
-                    {{-- <p class="mt-6 text-gray-500 dark:text-gray-400">
+                {{-- <p class="mt-6 text-gray-500 dark:text-gray-400">
                         By clicking “Continue” above, you acknowledge that you have read and
                         understood, and agree to Our <a href="#" class="text-gray-700 dark:text-white">Term &
                             Conditions</a>
                         and<a href="#" class="text-gray-700 dark:text-white"> Privacy Policy.</a>
-                    </p> --}}
+                    </p>
                 </form>
+                --}}
             </div>
         </div>
     </section>
