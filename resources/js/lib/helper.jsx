@@ -5,7 +5,7 @@ import React from "react";
 const Helper = () => {
     // request
     const request = axios.create({
-        baseURL: "https://api.wpplagiarism.one/v1/",
+        baseURL: "https://api.wpplagiarism.co.bd/v1/",
         withCredentials: true,
         headers: {
             "X-Requested-With": "XMLHttpRequest",

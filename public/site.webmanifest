@@ -2,31 +2,31 @@
     "name": "AI plagiarism checker for wordpress",
     "short_name": "WP Plagiarism",
     "display": "standalone",
-    "start_url": "https://wpplagiarism.one/",
+    "start_url": "https://wpplagiarism.co.bd/",
     "Scope": "/",
     "icons": [
         {
-            "src": "https://wpplagiarism.one/fabicon.svg",
+            "src": "https://wpplagiarism.co.bd/fabicon.svg",
             "sizes": "16x16",
             "type": "image/png"
         },
         {
-            "src": "https://wpplagiarism.one/fabicon.svg",
+            "src": "https://wpplagiarism.co.bd/fabicon.svg",
             "sizes": "32x32",
             "type": "image/png"
         },
         {
-            "src": "https://wpplagiarism.one/fabicon.svg",
+            "src": "https://wpplagiarism.co.bd/fabicon.svg",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "https://wpplagiarism.one/fabicon.svg",
+            "src": "https://wpplagiarism.co.bd/fabicon.svg",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "https://wpplagiarism.one/fabicon.svg",
+            "src": "https://wpplagiarism.co.bd/fabicon.svg",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"

@@ -176,7 +176,7 @@ class PlagiarismAI extends Controller
             //     "https://www.lords.org/",
             //     "https://www.ecn.cricket/",
             //     "https://wwos.nine.com.au/cricket",
-            //     "https://cricket.one/",
+            //     "https://cricket.co.bd/",
             //     "https://betway.com/en/sports/cat/cricket",
             //     "https://betway.com/en/sports/evt/10208899",
             //     "https://betway.com/en/sports/evt/10204883",

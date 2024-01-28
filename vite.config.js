@@ -4,15 +4,15 @@ import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
     server: {
-        host: "wpplagiarism.one",
-        // host: "api.wpplagiarism.one",
+        host: "wpplagiarism.co.bd",
+        // host: "api.wpplagiarism.co.bd",
     },
     plugins: [
         laravel({
             input: ["resources/css/app.css", "resources/js/app.js"],
             refresh: true,
-            valetTls: "wpplagiarism.one",
-            // valetTls: "api.wpplagiarism.one",
+            valetTls: "wpplagiarism.co.bd",
+            // valetTls: "api.wpplagiarism.co.bd",
         }),
         // react(),
     ],
